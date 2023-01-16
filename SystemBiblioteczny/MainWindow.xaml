@@ -18,7 +18,7 @@
         <TextBox HorizontalAlignment="Left" Margin="493,200,0,0" TextWrapping="Wrap" Text="Imię" VerticalAlignment="Top" Width="120" Grid.Column="4" Height="18"/>
         <TextBox HorizontalAlignment="Left" Margin="493,235,0,0" TextWrapping="Wrap" Text="Nazwisko" VerticalAlignment="Top" Width="120" Grid.Column="4" Height="18"/>
         <TextBox HorizontalAlignment="Left" Margin="493,269,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="120" Grid.Column="4" Height="18"/>
-        <TextBox HorizontalAlignment="Left" Margin="493,306,0,0" TextWrapping="Wrap" Text="Numer Telefonu (opcjonalnie)" VerticalAlignment="Top" Width="120" Grid.Column="4" Height="34"/>
+        <TextBox HorizontalAlignment="Left" Margin="493,306,0,0" TextWrapping="Wrap" Text="Numer Telefonu (opcjonalnie)..." VerticalAlignment="Top" Width="120" Grid.Column="4" Height="34"/>
         <PasswordBox HorizontalAlignment="Left" Margin="47,199,0,0" VerticalAlignment="Top" Width="120" Password="" Height="18"/>
         <PasswordBox HorizontalAlignment="Left" Margin="493,112,0,0" VerticalAlignment="Top" Width="120" Password="" Grid.Column="4" Height="18"/>
         <PasswordBox HorizontalAlignment="Left" Margin="493,161,0,0" VerticalAlignment="Top" Width="120" Password="" Grid.Column="4" Height="18"/>
