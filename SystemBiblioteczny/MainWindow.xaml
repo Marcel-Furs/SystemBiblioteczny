@@ -8,7 +8,7 @@
         Title="Logowanie" Height="450" Width="800">
     <Grid>
         <Button Content="Zaloguj " HorizontalAlignment="Left" Margin="47,336,0,0" VerticalAlignment="Top" Height="44" Width="98" Click="Sign_Client" Grid.Column="4" />
-        <Button Content="Zarejestruj " HorizontalAlignment="Left" Margin="613,354,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.191,0.298" Width="98" Height="42" Click="Register_Client"/>
+        <Button Content="Zarejestruj " HorizontalAlignment="Left" Margin="504,372,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.191,0.298" Width="98" Height="42" Click="Register_Client"/>
 
         <TextBox x:Name="Nazwa_Użytkownika" HorizontalAlignment="Left" Margin="44,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Height="33" TextChanged="TextBox_TextChanged" UndoLimit="98" Visibility="Visible" Text="Nazwa Użytkownika" Grid.Column="4"/>
 
@@ -28,6 +28,7 @@
         <Label Content="Powtórz hasło:" HorizontalAlignment="Left" Margin="379,159,0,0" VerticalAlignment="Top" Grid.Column="4" Height="26" Width="87"/>
         <Label Content="Pozdrawiam Mądre Głowy" HorizontalAlignment="Left" Margin="94,398,0,0" VerticalAlignment="Top"/>
         <Label Content="jak Magda to ja też" HorizontalAlignment="Left" Margin="266,401,0,0" VerticalAlignment="Top"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="713,325,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
