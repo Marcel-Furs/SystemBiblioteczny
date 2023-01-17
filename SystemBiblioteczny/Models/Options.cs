@@ -18,6 +18,7 @@ namespace SystemBiblioteczny.Models
 {
     public class Options
     {
+        MainWindow m = new();
         private string login;
         private string password;
 
@@ -27,22 +28,24 @@ namespace SystemBiblioteczny.Models
             person.UserName = "m";
             person.Password = "123";
 
-            if (name == null || password1 == null)
+            if (name == "" || password1 == "")
             {
                 MessageBox.Show("Nie moga byc puste pola!");
-                return;
-            }
-
-            if (name == person.UserName && password1 == person.Password)
-            {
-                MessageBox.Show("Zalogowano!");
-                ClientWindow clientwindow = new ClientWindow();
-                clientwindow.Show();
+                m.Show();
             }
             else
             {
-                MessageBox.Show("Niepoprawne haslo lub login");
-                return;
+                if (name == person.UserName && password1 == person.Password)
+                {
+                    MessageBox.Show("Zalogowano!");
+                    ClientWindow clientwindow = new ClientWindow();
+                    clientwindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Niepoprawne haslo lub login");
+                    return;
+                }
             }
         }
 
@@ -52,22 +55,24 @@ namespace SystemBiblioteczny.Models
             person.UserName = "m";
             person.Password = "123";
 
-            if (name == null || password1 == null)
+            if (name == "" || password1 == "")
             {
                 MessageBox.Show("Nie moga byc puste pola!");
-                return;
-            }
-
-            if (name == person.UserName && password1 == person.Password)
-            {
-                MessageBox.Show("Zalogowano!");
-                Admin_LocalWindow admin_localwindow = new();
-                admin_localwindow.Show();
+                m.Show();
             }
             else
             {
-                MessageBox.Show("Niepoprawne haslo lub login");
-                return;
+                if (name == person.UserName && password1 == person.Password)
+                {
+                    MessageBox.Show("Zalogowano!");
+                    Admin_LocalWindow admin_localwindow = new();
+                    admin_localwindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Niepoprawne haslo lub login");
+                    return;
+                }
             }
         }
 
@@ -80,19 +85,21 @@ namespace SystemBiblioteczny.Models
             if (name == null || password1 == null)
             {
                 MessageBox.Show("Nie moga byc puste pola!");
-                return;
-            }
-
-            if (name == person.UserName && password1 == person.Password)
-            {
-                MessageBox.Show("Zalogowano!");
-                Admin_NetworkWindow admin_networkwindow = new();
-                admin_networkwindow.Show();
+                m.Show();
             }
             else
             {
-                MessageBox.Show("Niepoprawne haslo lub login");
-                return;
+                if (name == person.UserName && password1 == person.Password)
+                {
+                    MessageBox.Show("Zalogowano!");
+                    Admin_NetworkWindow admin_networkwindow = new();
+                    admin_networkwindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Niepoprawne haslo lub login");
+                    return;
+                }
             }
         }
 
@@ -105,19 +112,21 @@ namespace SystemBiblioteczny.Models
             if (name == null || password1 == null)
             {
                 MessageBox.Show("Nie moga byc puste pola!");
-                return;
-            }
-
-            if (name == person.UserName && password1 == person.Password)
-            {
-                MessageBox.Show("Zalogowano!");
-                LibrarianWindow librarianwindow = new();
-                librarianwindow.Show();
+                m.Show();
             }
             else
             {
-                MessageBox.Show("Niepoprawne haslo lub login");
-                return;
+                if (name == person.UserName && password1 == person.Password)
+                {
+                    MessageBox.Show("Zalogowano!");
+                    LibrarianWindow librarianwindow = new();
+                    librarianwindow.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Niepoprawne haslo lub login");
+                    return;
+                }
             }
         }
 
