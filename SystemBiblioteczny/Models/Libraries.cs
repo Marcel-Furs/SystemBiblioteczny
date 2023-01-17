@@ -20,7 +20,7 @@ namespace SystemBiblioteczny.Models
           
             List<Library> list = new();
 
-            string path = System.IO.Path.Combine(Environment.CurrentDirectory, @"SystemBiblioteczny\Libraries.txt");
+            string path = System.IO.Path.Combine(Environment.CurrentDirectory, "../../../DataBases/Libraries.txt");
 
 
             List<string> lines = new();

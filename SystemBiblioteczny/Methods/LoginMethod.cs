@@ -73,7 +73,7 @@ namespace SystemBiblioteczny.Methods
                         switch (role)
                         {
                             case (AccountBase.RoleTypeEnum.Client): {
-                                    ClientWindow clientwindow = new ClientWindow();
+                                    ClientWindow clientwindow = new();
                                     clientwindow.Show();
                                 } break;
                             case (AccountBase.RoleTypeEnum.Librarian): {
