@@ -12,7 +12,7 @@ namespace SystemBiblioteczny.Models
     {
        
        public List<Library> GetLibrariesList()
-        {
+       {
             List<Library> list = new List<Library>();
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"DataBases\Libraries.txt");
             string[] lines = File.ReadAllLines(path);
@@ -29,7 +29,8 @@ namespace SystemBiblioteczny.Models
             System.Console.ReadKey();
 
             return list;
-        }
+       }
+
         public async Task AddLibraryToDB(Library library)
         {
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"DataBases\Libraries.txt");
@@ -40,7 +41,7 @@ namespace SystemBiblioteczny.Models
                 await File.WriteAllTextAsync("Libraries.txt", line);
             }
 
-            await File.WriteAllTextAsync("Libraries.txt", library.Id.ToString() + " " + library.Name + " " + library.Admin.UserName + " " + library.Address);
+            await File.WriteAllTextAsync("Libraries.txt", library?.Id.ToString() + " " + library?.Name + " " + library?.Admin?.UserName + " " + library?.Address);
 
             System.Console.ReadKey();
         }
