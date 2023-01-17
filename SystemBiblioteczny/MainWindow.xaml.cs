@@ -32,8 +32,7 @@ namespace SystemBiblioteczny
 
         private void Sign_Client(object sender, RoutedEventArgs e)
         {
-            Libraries lib = new Libraries();
-            List<Library> libraries = lib.GetLibrariesList();
+           
 
             User user = new User();
             var username = LoginEmail.Text;
@@ -53,6 +52,7 @@ namespace SystemBiblioteczny
                 MessageBox.Show("Zalogowano!");
                 ClientWindow clientwindow = new ClientWindow(user);
                 clientwindow.Show();
+                this.Close();
             }
             else
             {
