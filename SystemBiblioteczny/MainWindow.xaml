@@ -29,6 +29,10 @@
             <Label Grid.Row="2" Margin="0,72,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" Width="195" FontSize="16" Content="Hasło" />
             <PasswordBox Grid.Row="2" x:Name="LoginPassword" VerticalAlignment="Top" Margin="195,72,0,0" Grid.RowSpan="2" Height="27"/>
             <Button Grid.Row="5" Click="Sign_Client" VerticalAlignment="Top" Height="48" Margin="0,24,0,0" FontSize="20">Login</Button>
+            <RadioButton x:Name="clientOption"  Content="Klient" HorizontalAlignment="Left" Margin="13,72,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.RowSpan="2"/>
+            <RadioButton x:Name="admin_localOption" Content="Admin Biblioteki" HorizontalAlignment="Left" Margin="13,40,0,12" Grid.Row="4"/>
+            <RadioButton x:Name="admin_networkOption" Content="Admin Sieci" HorizontalAlignment="Left" Margin="13,61,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.RowSpan="2"/>
+            <RadioButton x:Name="librarianOption" Content="Bibliotekarz" HorizontalAlignment="Left" Margin="13,20,0,0" Grid.Row="4" VerticalAlignment="Top"/>
         </Grid>
 
         <Grid Grid.Column="2" HorizontalAlignment="Stretch">

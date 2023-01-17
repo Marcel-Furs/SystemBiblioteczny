@@ -32,32 +32,43 @@ namespace SystemBiblioteczny
 
         private void Sign_Client(object sender, RoutedEventArgs e)
         {
-           
 
-            Person person = new Person();
+            Options option = new();
+
             var username = LoginEmail.Text;
             var password = LoginPassword.Password;
 
-            person.UserName = "m";
-            person.Password = "123";
+            int opt = 1;
+            bool opt1 = false;
+            //to trzeba zoptymalizować, nie wiem jak do switch'a dac te opcje
+            if(clientOption.IsChecked == true) opt = 1;
+            if(admin_localOption.IsChecked == true) opt = 2;
+            if(admin_networkOption.IsChecked == true) opt = 3;
+            if(librarianOption.IsChecked ==true) opt = 4;
 
-            if (username == null || password == null)
+            switch (opt)
             {
-                MessageBox.Show("Nie moga byc puste pola!");
-                return;
+                case 1:
+                    option.ClientOpt(username, password);
+                    this.Close();
+                    break;
+                case 2:
+                    option.Admin_localOpt(username, password);
+                    this.Close();
+                    break;
+                case 3:
+                    option.Admin_networklOpt(username, password);
+                    this.Close();
+                    break;
+                case 4:
+                    option.LibrarianOpt(username, password);
+                    this.Close();
+                    break;
+                default:
+                    MessageBox.Show("Proszę wybrać opcje logowania");
+                    break;
             }
 
-            if(username == person.UserName && password == person.Password)
-            {
-                MessageBox.Show("Zalogowano!");
-                ClientWindow clientwindow = new ClientWindow();
-                clientwindow.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Niepoprawne haslo");
-            }
         }
 
         private void Hint(object sender, RoutedEventArgs e)
@@ -69,5 +80,6 @@ namespace SystemBiblioteczny
         {
             base.OnClosing(e);
         }
+
     }
 }

@@ -15,13 +15,20 @@ using System.Windows.Shapes;
 namespace SystemBiblioteczny
 {
     /// <summary>
-    /// Logika interakcji dla klasy Admin_Local.xaml
+    /// Logika interakcji dla klasy LibrarianWindow.xaml
     /// </summary>
-    public partial class Admin_Local : Window
+    public partial class LibrarianWindow : Window
     {
-        public Admin_Local()
+        public LibrarianWindow()
         {
             InitializeComponent();
+        }
+
+        private void Return(object sender, RoutedEventArgs e)
+        {
+            MainWindow m = new();
+            m.Show();
+            this.Close();
         }
     }
 }

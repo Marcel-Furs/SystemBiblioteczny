@@ -11,18 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
 {
-    public partial class ClientWindow : Window
+    /// <summary>
+    /// Logika interakcji dla klasy Admin_NetworkWindow.xaml
+    /// </summary>
+    public partial class Admin_NetworkWindow : Window
     {
-       
-
-        public ClientWindow()
+        public Admin_NetworkWindow()
         {
             InitializeComponent();
-           
         }
 
         private void Return(object sender, RoutedEventArgs e)
