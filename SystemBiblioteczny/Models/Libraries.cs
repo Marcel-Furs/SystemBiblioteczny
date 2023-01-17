@@ -30,7 +30,22 @@ namespace SystemBiblioteczny.Models
 
             return list;
         }
-           
+        public async Task AddLibraryToDB(Library library)
+        {
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"DataBases\Libraries.txt");
+            string[] lines = File.ReadAllLines(path);
+            foreach (string line in lines)
+            {
+                Console.WriteLine("\t" + line);
+                await File.WriteAllTextAsync("Libraries.txt", line);
+            }
+
+            await File.WriteAllTextAsync("Libraries.txt", library.Id.ToString() + " " + library.Name + " " + library.Admin.UserName + " " + library.Address);
+
+            System.Console.ReadKey();
+        }
+       
+
     }
     }
 
