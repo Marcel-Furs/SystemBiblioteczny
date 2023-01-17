@@ -16,5 +16,9 @@ namespace SystemBiblioteczny.Models
 
         public string? Password { get; set; }
 
+        public int? Email { get; set; }
+
+        public int? Phone { get; set; }
+
     }
 }
