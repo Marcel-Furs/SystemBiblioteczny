@@ -18,7 +18,6 @@ namespace SystemBiblioteczny.Models
 {
     public class Options
     {
-        public MainWindow mainwwindow = new();
         private string login;
         private string password;
 
@@ -39,11 +38,11 @@ namespace SystemBiblioteczny.Models
                 MessageBox.Show("Zalogowano!");
                 ClientWindow clientwindow = new ClientWindow();
                 clientwindow.Show();
-                mainwwindow.Close();
             }
             else
             {
                 MessageBox.Show("Niepoprawne haslo lub login");
+                return;
             }
         }
 
@@ -64,11 +63,11 @@ namespace SystemBiblioteczny.Models
                 MessageBox.Show("Zalogowano!");
                 Admin_LocalWindow admin_localwindow = new();
                 admin_localwindow.Show();
-                mainwwindow.Close();
             }
             else
             {
                 MessageBox.Show("Niepoprawne haslo lub login");
+                return;
             }
         }
 
@@ -89,11 +88,11 @@ namespace SystemBiblioteczny.Models
                 MessageBox.Show("Zalogowano!");
                 Admin_NetworkWindow admin_networkwindow = new();
                 admin_networkwindow.Show();
-                mainwwindow.Close();
             }
             else
             {
                 MessageBox.Show("Niepoprawne haslo lub login");
+                return;
             }
         }
 
@@ -114,11 +113,11 @@ namespace SystemBiblioteczny.Models
                 MessageBox.Show("Zalogowano!");
                 LibrarianWindow librarianwindow = new();
                 librarianwindow.Show();
-                mainwwindow.Close();
             }
             else
             {
                 MessageBox.Show("Niepoprawne haslo lub login");
+                return;
             }
         }
 

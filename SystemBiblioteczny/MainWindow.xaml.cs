@@ -38,7 +38,7 @@ namespace SystemBiblioteczny
             var username = LoginEmail.Text;
             var password = LoginPassword.Password;
 
-            int opt = 1;
+            int opt = 0;
             bool opt1 = false;
             //to trzeba zoptymalizować, nie wiem jak do switch'a dac te opcje
             if(clientOption.IsChecked == true) opt = 1;
