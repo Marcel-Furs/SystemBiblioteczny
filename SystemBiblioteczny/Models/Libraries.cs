@@ -64,12 +64,12 @@ namespace SystemBiblioteczny.Models
 
         public async Task AddLibraryToDB(Library library)
         {
+            //brak testowania
             string path = System.IO.Path.Combine(Environment.CurrentDirectory, @"SystemBiblioteczny\DataBases\Libraries.txt");
             string[] lines = File.ReadAllLines(path);
             foreach (string line in lines)
             {
-                Console.WriteLine("\t" + line);
-                await File.WriteAllTextAsync("Libraries.txt", line);
+                await File.WriteAllTextAsync("Libraries.txt", line + "\n");
             }
 
             await File.WriteAllTextAsync("Libraries.txt", library?.Id.ToString() + " " + library?.Name + " " + library?.Admin?.UserName + " " + library?.Address);
