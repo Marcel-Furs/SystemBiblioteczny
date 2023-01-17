@@ -13,9 +13,16 @@ namespace SystemBiblioteczny.Models
         public string? Address { get; set; }
         public int? Id { get; set; }
 
-        public List<Library>? Libraries; //TODO lista pobierana z bazy danych z pliku *.txt
+        public Library(string Name, LocalAdmin Admin, string Address, int Id) { 
+            this.Name = Name;
+            this.Admin = Admin;
+            this.Address = Address;
+            this.Id = Id;
+        }
 
-        public List<Library>? GetLibrariesList() { return Libraries; }
+        public List<Library>? LibrariesList = new Libraries().GetLibrariesList(); //TODO sprawdzic czy dziala lista pobierana z bazy danych z pliku *.txt
+
+        public List<Library>? GetDataList() { return LibrariesList; }
 
     }
 }

@@ -9,14 +9,11 @@ namespace SystemBiblioteczny.Models
     internal class NetworkAdmin : Person
     {
         public void AddLibrary(Library library) {
-            Library lib = new Library();
-            List<Library> Libraries = lib.GetLibrariesList();
-            Libraries.Add(library);}
+         //Dopisywanie do pliku tekstowego
+           }
 
         public void RemoveLibrary(Library library) {
-            Library lib = new Library();
-            List<Library> Libraries = lib.GetLibrariesList();
-            Libraries.Remove(library);
+           //Zmienianie pliku tekstowego
         }
         public void CreateRaport() { }
 

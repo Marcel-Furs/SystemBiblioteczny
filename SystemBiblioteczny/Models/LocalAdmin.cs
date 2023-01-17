@@ -8,6 +8,11 @@ namespace SystemBiblioteczny.Models
 {
     internal class LocalAdmin : Person
     {
+       public LocalAdmin(string UserName, string FirstName = "FirstName", string LastName = "LastName") {
+            this.UserName = UserName;
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+        }
         public void ManageEvent() { }
 
         public void ExchangeBooks() { }
