@@ -82,7 +82,7 @@ namespace SystemBiblioteczny.Models
             person.UserName = "m";
             person.Password = "123";
 
-            if (name == null || password1 == null)
+            if (name == "" || password1 == "")
             {
                 MessageBox.Show("Nie moga byc puste pola!");
                 m.Show();
@@ -109,7 +109,7 @@ namespace SystemBiblioteczny.Models
             person.UserName = "m";
             person.Password = "123";
 
-            if (name == null || password1 == null)
+            if (name == "" || password1 == "")
             {
                 MessageBox.Show("Nie moga byc puste pola!");
                 m.Show();
