@@ -2,12 +2,7 @@
   "profiles": {
     "SystemBiblioteczny": {
       "commandName": "Project",
-      "workingDirectory": "C:\\Users\\Lenovo\\Desktop\\roboczy"
-    },
-    "Profil 2": {
-      "commandName": "Executable",
-      "executablePath": "C:\\Users\\Lenovo\\Documents\\IOProjekt\\SystemBiblioteczny\\SystemBiblioteczny.sln",
-      "workingDirectory": "C:\\Users\\Lenovo\\Desktop\\roboczy"
+      "workingDirectory": "C:\\Users\\Lenovo\\Documents\\IOProjekt\\SystemBiblioteczny"
     }
   }
 }
