@@ -14,14 +14,14 @@ using System.Windows.Shapes;
 
 namespace SystemBiblioteczny
 {
-    /// <summary>
-    /// Logika interakcji dla klasy Client.xaml
-    /// </summary>
-    public partial class Client : Window
+    public partial class ClientWindow : Window
     {
-        public Client()
+        private readonly User loggedUser;
+
+        public ClientWindow(User loggedUser)
         {
             InitializeComponent();
+            this.loggedUser = loggedUser;
         }
     }
 }

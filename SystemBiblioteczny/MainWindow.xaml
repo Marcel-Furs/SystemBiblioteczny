@@ -5,30 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SystemBiblioteczny"
         mc:Ignorable="d"
-        Title="Logowanie" Height="450" Width="800">
+        Title="Logowanie" Height="432" Width="786" MaxWidth="800" MaxHeight="450" MinWidth="800" MinHeight="450">
     <Grid>
-        <Button Content="Zaloguj " HorizontalAlignment="Left" Margin="47,336,0,0" VerticalAlignment="Top" Height="44" Width="98" Click="Sign_Client" Grid.Column="4" />
-        <Button Content="Zarejestruj " HorizontalAlignment="Left" Margin="504,372,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.191,0.298" Width="98" Height="42" Click="Register_Client"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
 
-        <TextBox x:Name="Nazwa_Użytkownika" HorizontalAlignment="Left" Margin="44,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Height="33" TextChanged="TextBox_TextChanged" UndoLimit="98" Visibility="Visible" Text="Nazwa Użytkownika" Grid.Column="4"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock HorizontalAlignment="Left" Margin="62,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="76" Grid.Column="4"><Run Language="pl-pl" Text="Mam konto"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="504,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="98" Grid.Column="4"><Run Language="pl-pl" Text="Nie mam konta"/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Margin="493,49,0,0" TextWrapping="Wrap" Text="Nazwa Użytkownika" VerticalAlignment="Top" Width="120" Grid.Column="4" Height="18"/>
-        <TextBox HorizontalAlignment="Left" Margin="493,200,0,0" TextWrapping="Wrap" Text="Imię" VerticalAlignment="Top" Width="120" Grid.Column="4" Height="18"/>
-        <TextBox HorizontalAlignment="Left" Margin="493,235,0,0" TextWrapping="Wrap" Text="Nazwisko" VerticalAlignment="Top" Width="120" Grid.Column="4" Height="18"/>
-        <TextBox HorizontalAlignment="Left" Margin="493,269,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="120" Grid.Column="4" Height="18"/>
-        <TextBox HorizontalAlignment="Left" Margin="493,306,0,0" TextWrapping="Wrap" Text="Numer Telefonu (opcjonalnie)..." VerticalAlignment="Top" Width="120" Grid.Column="4" Height="34"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="47,199,0,0" VerticalAlignment="Top" Width="120" Password="" Height="18"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="493,112,0,0" VerticalAlignment="Top" Width="120" Password="" Grid.Column="4" Height="18"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="493,161,0,0" VerticalAlignment="Top" Width="120" Password="" Grid.Column="4" Height="18"/>
-        <TextBlock HorizontalAlignment="Left" Margin="77,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="4" Height="16" Width="0"/>
-        <Label Content="Hasło:" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.ColumnSpan="2" Height="52" Width="55"/>
-        <Label Content="Hasło:" HorizontalAlignment="Left" Margin="423,103,0,0" VerticalAlignment="Top" Grid.Column="4" Height="26" Width="43"/>
-        <Label Content="Powtórz hasło:" HorizontalAlignment="Left" Margin="379,159,0,0" VerticalAlignment="Top" Grid.Column="4" Height="26" Width="87"/>
-        <Label Content="Pozdrawiam Mądre Głowy" HorizontalAlignment="Left" Margin="94,398,0,0" VerticalAlignment="Top"/>
-        <Label Content="jak Magda to ja też" HorizontalAlignment="Left" Margin="266,401,0,0" VerticalAlignment="Top"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="713,325,0,0" VerticalAlignment="Top"/>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" HorizontalAlignment="Center" FontSize="24">Logowanie</Label>
+            <Label Height="72" VerticalAlignment="Center" Grid.Row="2" HorizontalAlignment="Left" Width="195" FontSize="16" Content="Nazwa użytkownika &#xD;&#xA;lub Email"/>
+            <TextBox x:Name="LoginEmail" VerticalAlignment="Top" Height="26" Margin="195,10,0,0" Grid.Row="2"/>
+            <Label Grid.Row="2" Margin="0,72,0,0" Grid.RowSpan="2" HorizontalAlignment="Left" Width="195" FontSize="16" Content="Hasło" />
+            <PasswordBox Grid.Row="2" x:Name="LoginPassword" VerticalAlignment="Top" Margin="195,72,0,0" Grid.RowSpan="2" Height="27"/>
+            <Button Grid.Row="5" Click="Sign_Client" VerticalAlignment="Top" Height="48" Margin="0,24,0,0" FontSize="20">Login</Button>
+        </Grid>
 
+        <Grid Grid.Column="2" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" FontSize="24" HorizontalAlignment="Center">Rejestracja</Label>
+            <Label Content="Nazwa użytkownika:" Margin="0,48,0,48" Grid.RowSpan="3" HorizontalAlignment="Left" Width="195" FontSize="16"/>
+            <TextBox x:Name="RegisterEmail" HorizontalAlignment="Left" Margin="195,48,0,24" Width="195" Grid.RowSpan="2"/>
+            <Label Grid.Row="1" Content="Hasło" Margin="0,48,0,48" Grid.RowSpan="3" HorizontalAlignment="Left" Width="195" FontSize="16" />
+            <PasswordBox Grid.Row="1" x:Name="RegisterPassword" Height="25" VerticalAlignment="Top" Margin="195,48,0,0" Grid.RowSpan="2"/>
+            <Label Grid.Row="2" Content="Powtórz hasło" HorizontalAlignment="Left" Margin="0,48,0,48" Grid.RowSpan="3" Width="195" FontSize="16" />
+            <PasswordBox Grid.Row="2" x:Name="RegisterPasswordConfirmation" HorizontalAlignment="Left" Margin="195,48,0,24" Grid.RowSpan="2" Width="195"/>
+
+            <Button Grid.Row="8" Click="Register_Client" FontSize="20">Register</Button>
+            <Label Grid.Row="4" Content="Imię" HorizontalAlignment="Left" Margin="0,0,0,46" Grid.RowSpan="2" Width="195" FontSize="16" />
+            <TextBox Grid.Row="4" x:Name="RegisterPasswordConfirmation_Copy" HorizontalAlignment="Left" Margin="195,0,0,24" Width="195"/>
+            <Label Grid.Row="4" Content="Nazwisko" HorizontalAlignment="Left" Margin="0,46,0,0" Grid.RowSpan="2" Width="195" FontSize="16" />
+            <Label Grid.Row="5" Content="Email" HorizontalAlignment="Left" Margin="0,48,0,46" Grid.RowSpan="3" Width="195" FontSize="16" />
+            <Label Grid.Row="7" Content="Numer telefonu" HorizontalAlignment="Left" Margin="0,0,0,46" Grid.RowSpan="2" Width="195" FontSize="16" />
+            <TextBox Grid.Row="4" x:Name="RegisterPasswordConfirmation_Copy1" HorizontalAlignment="Left" Margin="195,48,0,24" Width="195" Grid.RowSpan="2"/>
+            <TextBox Grid.Row="6" x:Name="RegisterPasswordConfirmation_Copy2" HorizontalAlignment="Left" Margin="195,1,0,24" Width="195"/>
+            <Button Content="*" HorizontalAlignment="Left" Margin="118,7,0,0" Grid.Row="7" VerticalAlignment="Top" Width="16" Height="12" Click="Hint"/>
+            <TextBox x:Name="RegisterPasswordConfirmation_Copy3" HorizontalAlignment="Left" Margin="195,0,0,23" Width="195" Grid.Row="7"/>
+        </Grid>
     </Grid>
 </Window>

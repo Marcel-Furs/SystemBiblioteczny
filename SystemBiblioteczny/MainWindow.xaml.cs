@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace SystemBiblioteczny
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -27,22 +26,44 @@ namespace SystemBiblioteczny
 
         private void Register_Client(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Jeszcze ten knefel nie dziala");
         }
 
         private void Sign_Client(object sender, RoutedEventArgs e)
         {
+            User user = new User();
+            var username = LoginEmail.Text;
+            var password = LoginPassword.Password;
 
+            user.UserName = "MarcelekFelek";
+            user.Password = "123";
+
+            if (username == null || password == null)
+            {
+                MessageBox.Show("Nie moga byc puste pola!");
+                return;
+            }
+
+            if(username == user.UserName && password == user.Password)
+            {
+                MessageBox.Show("Zalogowano!");
+                ClientWindow clientwindow = new ClientWindow(user);
+                clientwindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Niepoprawne haslo");
+            }
         }
 
-        private void Sign_Librarian(object sender, RoutedEventArgs e)
+        private void Hint(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Opcjonalnie");
         }
 
-        private void Sign_Admin(object sender, RoutedEventArgs e)
+        protected override void OnClosing(CancelEventArgs e) //nie wiem czemu ale nie dziala
         {
-
+            base.OnClosing(e);
         }
     }
 }
