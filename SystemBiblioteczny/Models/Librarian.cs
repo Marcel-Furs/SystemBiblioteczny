@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-    internal class Librarian : Person
+     class Librarian : Person
     {
         public void RentBook() { }
 

@@ -33,7 +33,7 @@ namespace SystemBiblioteczny
         private void Sign_Client(object sender, RoutedEventArgs e)
         {
             Libraries lib = new Libraries();
-            lib.GetLibrariesList();
+            List<Library> libraries = lib.GetLibrariesList();
 
             User user = new User();
             var username = LoginEmail.Text;

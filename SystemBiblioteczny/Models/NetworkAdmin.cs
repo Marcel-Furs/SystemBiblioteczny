@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-    internal class NetworkAdmin : Person
+     class NetworkAdmin : Person
     {
         public void AddLibrary(Library library) {
             Libraries lib = new Libraries();

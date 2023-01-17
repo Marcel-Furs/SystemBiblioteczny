@@ -6,47 +6,65 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace SystemBiblioteczny.Models
 {
-    internal class Libraries
+     class Libraries
     {
        
-       public List<Library> GetLibrariesList()
+       public  List<Library> GetLibrariesList()
        {
-            List<Library> list = new List<Library>();
-            try {
 
-                string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"DataBases\Libraries.txt");
-                // string path = Path.Combine(Environment.CurrentDirectory, @"Libraries.txt");
-                // "C:\Users\Lenovo\Documents\IOProjekt\SystemBiblioteczny\SystemBiblioteczny\DataBases\Libraries.txt"
-                Console.WriteLine(path);
-                string[] lines = File.ReadAllLines(path);
-                MessageBox.Show(lines.Length.ToString());
-                foreach (string line in lines)
+          
+            List<Library> list = new();
+
+            string path = System.IO.Path.Combine(Environment.CurrentDirectory, @"SystemBiblioteczny\Libraries.txt");
+
+
+            List<string> lines = new();
+
+            using (StreamReader reader = new(path))
+            {
+                var line = reader.ReadLine();
+
+                while (line != null)
                 {
-                    Console.WriteLine("\t" + line);
-                    string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                    int newId = int.Parse(splitted[0]);
-                    LocalAdmin newAdmin = new LocalAdmin(splitted[2]);
-                    list.Add(new Library(splitted[1], newAdmin, splitted[3], newId));
+                    lines.Add(line);
+                    line = reader.ReadLine();
+                   
                 }
-
-
-                System.Console.ReadKey();
-
+                reader.Close();
                
+             
+            }
 
 
-            } catch (Exception e) { MessageBox.Show(e.ToString()); }
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    string line = lines[i];
 
+                    string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+               
+                     int newId = int.Parse(splitted[0]);
+                     string newName = splitted[1];
+                     LocalAdmin newAdmin = new(splitted[2]);
+                     string newAddress = splitted[3];
+
+                  Library lib = new(newName, newAdmin, newAddress, newId);
+               
+                    list.Add(lib);
+              
+            }
+
+          
             return list;
 
         }
 
         public async Task AddLibraryToDB(Library library)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"DataBases\Libraries.txt");
+            string path = System.IO.Path.Combine(Environment.CurrentDirectory, @"SystemBiblioteczny\DataBases\Libraries.txt");
             string[] lines = File.ReadAllLines(path);
             foreach (string line in lines)
             {

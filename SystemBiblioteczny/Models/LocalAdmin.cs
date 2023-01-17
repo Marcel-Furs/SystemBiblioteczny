@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-    internal class LocalAdmin : Person
+     class LocalAdmin : Person
     {
        public LocalAdmin(string UserName, string FirstName = "FirstName", string LastName = "LastName") {
             this.UserName = UserName;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-    internal class Client : Person
+     class Client : Person
     {
         public string? Statistics { get; set; }
 
