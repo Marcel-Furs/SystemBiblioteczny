@@ -20,5 +20,10 @@ namespace SystemBiblioteczny.Models
 
         public int? Phone { get; set; }
 
+        //login data
+        public Person(string UserName =" ", String Password= " ") {
+        this.UserName = UserName;
+        this.Password = Password;
+        }
     }
 }

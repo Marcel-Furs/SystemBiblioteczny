@@ -8,6 +8,7 @@ namespace SystemBiblioteczny.Models
 {
     internal class Login
     {
+
         public void SignIn() { }
         public void SignUp() { }
     }

@@ -12,8 +12,9 @@ namespace SystemBiblioteczny.Models
 {
      class Libraries
     {
-       
-       public  List<Library> GetLibrariesList()
+
+
+        public List<Library> GetLibrariesList()
        {
 
           

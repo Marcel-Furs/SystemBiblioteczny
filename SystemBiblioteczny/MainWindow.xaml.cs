@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
@@ -23,6 +25,7 @@ namespace SystemBiblioteczny
         public MainWindow()
         {
             InitializeComponent();
+            clientOption.IsChecked = true;
         }
 
         private void Register_Client(object sender, RoutedEventArgs e)
@@ -32,43 +35,21 @@ namespace SystemBiblioteczny
 
         private void Sign_Client(object sender, RoutedEventArgs e)
         {
-
-            Options option = new();
-
             var username = LoginEmail.Text;
             var password = LoginPassword.Password;
 
-            int opt = 1;
-            bool opt1 = false;
-            //to trzeba zoptymalizować, nie wiem jak do switch'a dac te opcje
-            if(clientOption.IsChecked == true) opt = 1;
-            if(admin_localOption.IsChecked == true) opt = 2;
-            if(admin_networkOption.IsChecked == true) opt = 3;
-            if(librarianOption.IsChecked ==true) opt = 4;
+            AccountBase.RoleTypeEnum role = AccountBase.RoleTypeEnum.Client;
+            
+            if (clientOption.IsChecked == true)  role = AccountBase.RoleTypeEnum.Client; 
+            if (admin_localOption.IsChecked == true)  role = AccountBase.RoleTypeEnum.LocalAdmin; 
+            if (admin_networkOption.IsChecked == true)  role = AccountBase.RoleTypeEnum.NetworkAdmin; 
+            if (librarianOption.IsChecked == true) role = AccountBase.RoleTypeEnum.Librarian; 
 
-            switch (opt)
-            {
-                case 1:
-                    option.ClientOpt(username, password);
-                    this.Close();
-                    break;
-                case 2:
-                    option.Admin_localOpt(username, password);
-                    this.Close();
-                    break;
-                case 3:
-                    option.Admin_networklOpt(username, password);
-                    this.Close();
-                    break;
-                case 4:
-                    option.LibrarianOpt(username, password);
-                    this.Close();
-                    break;
-                default:
-                    MessageBox.Show("Proszę wybrać opcje logowania");
-                    break;
-            }
+            LoginMethod loginMethod = new LoginMethod();
+            bool logged = loginMethod.CheckLogin(username, password, role);
 
+            if(logged == true) { this.Close(); }
+       
         }
 
         private void Hint(object sender, RoutedEventArgs e)

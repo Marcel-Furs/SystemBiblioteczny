@@ -16,6 +16,6 @@ namespace SystemBiblioteczny.Models
 
         public List<LocalAdmin> localAdmins= new();
 
-
+        public enum RoleTypeEnum { Client, Librarian, LocalAdmin, NetworkAdmin }
     }
 }

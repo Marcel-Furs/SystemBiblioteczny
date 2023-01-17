@@ -1,8 +1,7 @@
 {
   "profiles": {
     "SystemBiblioteczny": {
-      "commandName": "Project",
-      "workingDirectory": "C:\\Users\\marcel.furs\\Desktop\\JA_Obrazki"
+      "commandName": "Project"
     }
   }
 }
