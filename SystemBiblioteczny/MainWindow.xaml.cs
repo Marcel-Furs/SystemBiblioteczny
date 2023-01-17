@@ -34,12 +34,12 @@ namespace SystemBiblioteczny
         {
            
 
-            User user = new User();
+            Person person = new Person();
             var username = LoginEmail.Text;
             var password = LoginPassword.Password;
 
-            user.UserName = "MarcelekFelek";
-            user.Password = "123";
+            person.UserName = "m";
+            person.Password = "123";
 
             if (username == null || password == null)
             {
@@ -47,10 +47,10 @@ namespace SystemBiblioteczny
                 return;
             }
 
-            if(username == user.UserName && password == user.Password)
+            if(username == person.UserName && password == person.Password)
             {
                 MessageBox.Show("Zalogowano!");
-                ClientWindow clientwindow = new ClientWindow(user);
+                ClientWindow clientwindow = new ClientWindow();
                 clientwindow.Show();
                 this.Close();
             }

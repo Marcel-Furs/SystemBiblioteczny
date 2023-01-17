@@ -8,5 +8,14 @@ namespace SystemBiblioteczny.Models
 {
     internal class AccountBase
     {
+        public List<Client> clients= new();
+
+        public List<Librarian> librarians= new();   
+
+        public List<NetworkAdmin> networkAdmins = new(); //owner? admin sieci?
+
+        public List<LocalAdmin> localAdmins= new();
+
+
     }
 }

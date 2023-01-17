@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-    public class Role
+    internal class Login
     {
-        public int Id { get; set; }
-
-        public string? Name { get; set; }
-
-        public List<User>? Users { get; set; }
-}
+        public void SignIn() { }
+        public void SignUp() { }
+    }
 }

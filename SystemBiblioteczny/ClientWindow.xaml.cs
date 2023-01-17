@@ -17,12 +17,12 @@ namespace SystemBiblioteczny
 {
     public partial class ClientWindow : Window
     {
-        private readonly User loggedUser;
+       
 
-        public ClientWindow(User loggedUser)
+        public ClientWindow()
         {
             InitializeComponent();
-            this.loggedUser = loggedUser;
+           
         }
     }
 }
