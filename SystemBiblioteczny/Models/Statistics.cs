@@ -9,6 +9,7 @@ namespace SystemBiblioteczny.Models
      class Statistics
     {
         //rentals = Clients
+        // asdasdasdasdasdsadasd
         public int NumberOfClients { get; set; }
         public int DaysOfClients { get; set;}
 
