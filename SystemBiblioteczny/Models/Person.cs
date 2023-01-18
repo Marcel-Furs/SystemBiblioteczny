@@ -16,9 +16,9 @@ namespace SystemBiblioteczny.Models
 
         public string? Password { get; set; }
 
-        public int? Email { get; set; }
+        public string? Email { get; set; }
 
-        public int? Phone { get; set; }
+        public string? Phone { get; set; }
 
         //login data
         public Person(string UserName =" ", String Password= " ") {

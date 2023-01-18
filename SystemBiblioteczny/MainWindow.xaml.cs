@@ -30,7 +30,18 @@ namespace SystemBiblioteczny
 
         private void Register_Client(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Jeszcze ten knefel nie dziala");
+            var username = RegisterUsername.Text;
+            var password = RegisterPassword.Password;
+            var confirmPassword = RegisterPasswordConfirmation.Password;
+            var name = RegisterName.Text;
+            var lastname = RegisterLastname.Text;
+            var email = RegisterEmailAddress.Text;
+            var phoneNumber = RegisterPhoneNumber.Text;
+            AccountBase.RoleTypeEnum role = AccountBase.RoleTypeEnum.Client;
+            LoginMethod c = new();
+            bool canProceed = c.CheckIfAllDataIsCorrectAndCanCreateAccount(username, password, confirmPassword, name, lastname, email);
+            if (canProceed == false) return;
+            Client newClient = new(username, password, name, lastname, email, phoneNumber);
         }
 
         private void Sign_Client(object sender, RoutedEventArgs e)
