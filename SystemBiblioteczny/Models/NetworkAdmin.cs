@@ -10,7 +10,7 @@ namespace SystemBiblioteczny.Models
     {
         public void AddLibrary(Library library) {
             Libraries lib = new Libraries();
-            _ = lib.AddLibraryToDB(library);
+            lib.AddLibraryToDB(library);
            }
 
         public void RemoveLibrary(Library library) {
