@@ -63,19 +63,34 @@ namespace SystemBiblioteczny.Models
 
         }
 
-        public async Task AddLibraryToDB(Library library)
+        public void AddLibraryToDB(Library library)
         {
-            //brak testowania
-            string path = System.IO.Path.Combine(Environment.CurrentDirectory, @"SystemBiblioteczny\DataBases\Libraries.txt");
-            string[] lines = File.ReadAllLines(path);
-            foreach (string line in lines)
+            string path = System.IO.Path.Combine("../../../DataBases/Libraries.txt");
+            List<string> lines = new();
+            using (StreamReader reader = new(path))
             {
-                await File.WriteAllTextAsync("Libraries.txt", line + "\n");
+                var line = reader.ReadLine();
+
+                while (line != null)
+                {
+                    lines.Add(line);
+                    line = reader.ReadLine();
+
+                }
+                reader.Close();
+
             }
+            using (StreamWriter writer = new StreamWriter(path))
+            {
 
-            await File.WriteAllTextAsync("Libraries.txt", library?.Id.ToString() + " " + library?.Name + " " + library?.Admin?.UserName + " " + library?.Address);
-
-            System.Console.ReadKey();
+                foreach (string line in lines)
+                {
+                    writer.WriteLine(line);
+                }
+                writer.WriteLine(library?.Id.ToString() + " " + library?.Name + " " + library?.Admin?.UserName + " " + library?.Address);
+                writer.Close();
+            }
+           
         }
        
 

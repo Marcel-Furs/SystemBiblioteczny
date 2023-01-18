@@ -129,24 +129,17 @@ namespace SystemBiblioteczny.Methods
 
                 string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
 
-                string newLogin = splitted[0];
-
-                var person = new Person(newLogin);
-                list.Add(person);
-            }
-
-            for (int j = 0; j < list.Count; j++)
-            {
-                string CheckLogin = list[j].UserName!;
+                string CheckLogin = splitted[0];
                 if (CheckLogin.CompareTo(Login) == 0)
                 {
                     return false;
                 }
             }
 
+
             return true;
         }
-       public void AddUserToDB(string username, string password)
+       public void AddUserToDB(Client newClient)
         {
             string path = System.IO.Path.Combine("../../../DataBases/ClientList.txt");
             List<string> lines = new();
@@ -170,7 +163,7 @@ namespace SystemBiblioteczny.Methods
                 {
                     writer.WriteLine(line);
                 }
-                writer.WriteLine(username + " " + password);
+                writer.WriteLine(newClient.UserName + " " + newClient.Password + " " + newClient.FirstName + " " + newClient.LastName + " " + newClient.Email + " " + newClient.Phone);
                 writer.Close();
             }
            
@@ -218,7 +211,7 @@ namespace SystemBiblioteczny.Methods
                 MessageBox.Show("Błędny format email!");
                 return false;
             }
-            AddUserToDB(username, password);
+            //AddUserToDB(username, password);
             MessageBox.Show("Użytkownik został utworzony");
             return true;
         }

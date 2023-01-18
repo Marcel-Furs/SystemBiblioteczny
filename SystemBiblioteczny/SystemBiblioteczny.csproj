@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="321129736_1808380326194625_600112344237609375_n.jpg" />
     <None Remove="DataBases\Libraries.txt" />
+    <None Remove="kot.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,9 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="321129736_1808380326194625_600112344237609375_n.jpg" />
     <Resource Include="DataBases\Libraries.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="kot.jpg" />
   </ItemGroup>
 
 </Project>

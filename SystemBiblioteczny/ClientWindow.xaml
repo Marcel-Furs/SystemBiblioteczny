@@ -9,7 +9,7 @@
     <Grid>
         <Label Content="Co chcesz zrobić?" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" Width="103"/>
         <Button Content="Zobacz dostępność  książek" HorizontalAlignment="Left" Margin="81,0,0,0" VerticalAlignment="Center" Height="68" Width="176"/>
-        <Button Content="Zaproponuj wieczorek autorski" HorizontalAlignment="Center" VerticalAlignment="Center" Height="68" Width="240"/>
+        <Button Content="Wieczorki autorskie" HorizontalAlignment="Center" VerticalAlignment="Center" Height="68" Width="240" Click="AuthorsEvening"/>
         <Button Content="Zobacz statystyki" HorizontalAlignment="Left" Margin="549,0,0,0" VerticalAlignment="Center" Height="68" Width="217"/>
         <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="710,385,0,0" VerticalAlignment="Top" Height="39" Width="80" Click="Return"/>
 

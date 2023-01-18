@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,12 @@ namespace SystemBiblioteczny
         {
             MainWindow m = new();
             m.Show();
+            this.Close();
+        }
+
+        private void AuthorsEvening(object sender, RoutedEventArgs e)
+        {
+            AuthorsEveningWindow m = new();
             this.Close();
         }
     }

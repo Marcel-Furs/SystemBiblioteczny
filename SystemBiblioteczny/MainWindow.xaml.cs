@@ -42,6 +42,7 @@ namespace SystemBiblioteczny
             bool canProceed = c.CheckIfAllDataIsCorrectAndCanCreateAccount(username, password, confirmPassword, name, lastname, email);
             if (canProceed == false) return;
             Client newClient = new(username, password, name, lastname, email, phoneNumber);
+            c.AddUserToDB(newClient);
         }
 
         private void Sign_Client(object sender, RoutedEventArgs e)
