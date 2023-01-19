@@ -35,7 +35,8 @@ namespace SystemBiblioteczny
 
         private void AuthorsEvening(object sender, RoutedEventArgs e)
         {
-            AuthorsEveningWindow m = new();
+            AuthorEveningEventWindow m = new();
+            m.Show();
             this.Close();
         }
     }
