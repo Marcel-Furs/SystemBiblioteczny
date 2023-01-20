@@ -30,6 +30,7 @@ namespace SystemBiblioteczny
                 TableBooks.Items.Add(e);
             }
             TableBooks.IsReadOnly = true;
+
         }
 
         private void Return(object sender, RoutedEventArgs e)
