@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ClientWindow" Height="432" Width="786" MaxWidth="800" MaxHeight="450" MinWidth="800" MinHeight="450">
     <Grid>
-        <TabControl SelectionChanged="TabControl_SelectionChanged_1">
+        <TabControl>
             <TabItem Header="Wypożycz Książkę" >
                 <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="410" Height="248" >
                 <DataGrid.Columns>
