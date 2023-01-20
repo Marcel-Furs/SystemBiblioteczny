@@ -54,8 +54,35 @@ namespace SystemBiblioteczny.Methods
                 string newLogin = splitted[0];
                 string newPassword = splitted[1];
 
-                var person = new Person(newLogin, newPassword);
-                list.Add(person);
+
+                switch (role)
+                {
+                    case (AccountBase.RoleTypeEnum.Client):
+                        {
+                            var person = new Person(newLogin, newPassword);
+                            list.Add(person);
+                        }
+                        break;
+                    case (AccountBase.RoleTypeEnum.Librarian):
+                        {
+                            var person = new Person(newLogin, newPassword);
+                            list.Add(person);
+                        }
+                        break;
+                    case (AccountBase.RoleTypeEnum.LocalAdmin):
+                        {
+                            int libraryId = int.Parse( splitted[2]);
+                            var person = new LocalAdmin(newLogin, newPassword, libraryId);
+                            list.Add(person);
+                        }
+                        break;
+                    case (AccountBase.RoleTypeEnum.NetworkAdmin):
+                        {
+                            var person = new Person(newLogin, newPassword);
+                            list.Add(person);
+                        }
+                        break;
+                }
             }
 
             bool wrongPassword = false;
@@ -72,6 +99,7 @@ namespace SystemBiblioteczny.Methods
                         MessageBox.Show("Poprawnie zalogowano");
                         correctLogin = true;
                         Logged = true;
+                       
                         switch (role)
                         {
                             case (AccountBase.RoleTypeEnum.Client): {
@@ -83,7 +111,8 @@ namespace SystemBiblioteczny.Methods
                                     librarianwindow.Show();
                                 } break;
                             case (AccountBase.RoleTypeEnum.LocalAdmin): {
-                                    Admin_LocalWindow admin_localwindow = new();
+                                    LocalAdmin userData = (LocalAdmin)list[j];
+                                    Admin_LocalWindow admin_localwindow = new(userData);
                                     admin_localwindow.Show();
                                 } break;
                             case (AccountBase.RoleTypeEnum.NetworkAdmin): {

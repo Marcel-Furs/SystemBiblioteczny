@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-     class Person
+     public class Person
     {
         public string? FirstName { get; set; }
 

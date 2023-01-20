@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
 {
@@ -19,9 +20,19 @@ namespace SystemBiblioteczny
     /// </summary>
     public partial class Admin_LocalWindow : Window
     {
-        public Admin_LocalWindow()
+        public Admin_LocalWindow(LocalAdmin userData)
         {
             InitializeComponent();
+            nazwaLabel.Content = userData.UserName;
+            numerLabel.Content = userData.LibraryId;
+
+            BookExchange books = new();
+            List<BookExchange> listofBooks = books.GetExchangeBooksList();
+            foreach (BookExchange e in listofBooks)
+            {
+                TableExchangeBooks.Items.Add(e);
+            }
+            TableExchangeBooks.IsReadOnly = true;
         }
         private void Return(object sender, RoutedEventArgs e)
         {
@@ -29,5 +40,8 @@ namespace SystemBiblioteczny
             m.Show();
             this.Close();
         }
+
+       
+        
     }
 }

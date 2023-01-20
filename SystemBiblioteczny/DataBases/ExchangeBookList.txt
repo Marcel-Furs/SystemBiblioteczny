@@ -1,0 +1,2 @@
+﻿1 3 madziunia milosz Adam_Mickiewicz Dziady_3 false 1 
+2 4 jakusko andymadryt Juliusz_Słowacki Lubi_wacki true 2 
