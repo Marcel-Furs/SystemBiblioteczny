@@ -43,6 +43,9 @@ namespace SystemBiblioteczny
             if (canProceed == false) return;
             Client newClient = new(username, password, name, lastname, email, phoneNumber);
             c.AddUserToDB(newClient);
+            ClientWindow clientwindow = new();
+            clientwindow.Show();
+            this.Close();
         }
 
         private void Sign_Client(object sender, RoutedEventArgs e)

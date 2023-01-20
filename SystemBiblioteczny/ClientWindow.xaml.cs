@@ -39,5 +39,17 @@ namespace SystemBiblioteczny
             m.Show();
             this.Close();
         }
+
+        private void Book_Available(object sender, RoutedEventArgs e)
+        {
+            BookAvalilableWindow w = new();
+            w.Show();
+            this.Close();
+        }
+
+        private void Register_Evening(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

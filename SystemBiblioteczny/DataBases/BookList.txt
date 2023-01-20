@@ -1,0 +1,3 @@
+﻿Adam Mickiewicz Dziady_3 100 50
+Juliusz Słowacki Lubi_wacki 90 40
+Jan Brzechwa Lokomotywa 80 30
