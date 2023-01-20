@@ -81,7 +81,6 @@
             <TabItem Header="Ustawienia">
                 <Button Content="Wyloguj" Height="39" Width="80" Click="Return" Margin="329,0,385,0"/>
             </TabItem>
-            <DataGrid Height="6" Width="258" d:ItemsSource="{d:SampleData ItemCount=5}"/>
         </TabControl>
 
     </Grid>
