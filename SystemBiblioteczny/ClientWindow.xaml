@@ -10,7 +10,7 @@
         <TabControl>
             <TabItem Header="Wypożycz Książkę" >
                 <Grid>
-                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="410" Height="248" >
+                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="418" Height="248" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120"/>
