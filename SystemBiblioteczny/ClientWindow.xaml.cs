@@ -23,7 +23,13 @@ namespace SystemBiblioteczny
         public ClientWindow()
         {
             InitializeComponent();
-           
+            Books books= new();
+            List<Book> listofBooks = books.GetBooksList();
+            foreach(Book e in listofBooks)
+            {
+                TableBooks.Items.Add(e);
+            }
+            TableBooks.IsReadOnly = true;
         }
 
         private void Return(object sender, RoutedEventArgs e)
@@ -51,5 +57,18 @@ namespace SystemBiblioteczny
         {
 
         }
+
+        private void Password_Changer(object sender, RoutedEventArgs e)
+        {
+            PasswordChangerWindow p = new();
+            p.Show();
+            this.Close();
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
     }
 }

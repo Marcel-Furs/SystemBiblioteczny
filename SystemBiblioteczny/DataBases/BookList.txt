@@ -1,6 +1,5 @@
-﻿//id Imie_Autora nazwisko_autora Tytyuł numer_biblioteki bool_dostepnosc
-1 Adam Mickiewicz Dziady_3 1 1
-2 Adam Mickiewicz Dziady_3 2 0
-3 Adam Mickiewicz Dziady_3 1 0
-4 Juliusz Słowacki Lubi_wacki 2 0
-5 Jan Brzechwa Lokomotywa 80 1 1
+﻿1 Adam_Mickiewicz Dziady_3 true 1 
+2 Adam_Mickiewicz Dziady_3 true 2 
+3 Adam_Mickiewicz Dziady_3 false 1 
+4 Juliusz_Słowacki Lubi_wacki true 2 
+5 Jan_Brzechwa Lokomotywa false 1 
