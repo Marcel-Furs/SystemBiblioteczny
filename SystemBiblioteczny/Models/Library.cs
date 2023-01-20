@@ -8,20 +8,20 @@ namespace SystemBiblioteczny.Models
 {
      class Library 
     {
-        public string Name { get; set; }
-        public LocalAdmin Admin { get; set; }
-        public string Address { get; set; }
-        public int Id { get; set; }
-
-        public Library(string Name, LocalAdmin Admin, string Address, int Id)  {
-            this.Name = Name;
-            this.Admin = Admin;
-            this.Address = Address;
-            this.Id = Id;
+        public int ID { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
+        public string Local { get; set; }
+   
+        public Library(int id, string city, string street, string local)  {
+            this.ID = id;
+            this.City = city;
+            this.Street = street;
+            this.Local = local;
         }
         public Libraries ListOfLibraries = new();
 
-        public List<Library>? GetListOfLibraries() { return ListOfLibraries.GetLibrariesList(); }
+        //public List<Library>? GetListOfLibraries() { return ListOfLibraries.GetLibrariesList(); }
 
     }
 }

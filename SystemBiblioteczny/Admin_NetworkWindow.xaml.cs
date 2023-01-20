@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
 {
@@ -29,6 +30,19 @@ namespace SystemBiblioteczny
             MainWindow m = new();
             m.Show();
             this.Close();
+        }
+
+        private void Add_Library(object sender, RoutedEventArgs e)
+        {
+            Libraries l = new();
+            if (!l.CheckIfCanAdd(City.Text, Street.Text, Number.Text)) return;
+            int newID = l.ReturnUniqueID();
+            Library library = new(newID, City.Text, Street.Text, Number.Text);
+            l.AddLibraryToDB(library);
+            MessageBox.Show("Dodano Bibliotekę! \nID: " + newID + "\nAdres: " + City.Text + " " + Street.Text + " " + Number.Text);
+            City.Text = "";
+            Street.Text = "";
+            Number.Text = "";
         }
     }
 }

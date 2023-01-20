@@ -30,5 +30,23 @@ namespace SystemBiblioteczny
             m.Show();
             this.Close();
         }
+
+        private void SendApplication(object sender, RoutedEventArgs e)
+        {
+            var title = TitleInput.Text;
+            var authorsName = NameInput.Text;
+            var authorsSurname = SurnameInput.Text;
+            var quantity = QuantityInput.Text;
+
+            if (title.Any() && authorsName.Any() && authorsSurname.Any() && quantity.Any())
+            {
+                MessageBox.Show("Wysłano zgłoszenie zapotrzebowania na: " + "\n" + authorsName + " " + authorsSurname + " " + title + " - ilość: " + quantity);
+            }
+            else
+            {
+                MessageBox.Show("Niewystarczająca ilość danych, uzupełnij wszystkie dane!");
+            }
+        }
+
     }
 }

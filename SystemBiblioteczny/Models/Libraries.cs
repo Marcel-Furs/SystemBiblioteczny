@@ -12,9 +12,7 @@ namespace SystemBiblioteczny.Models
 {
      class Libraries
     {
-
-
-        public List<Library> GetLibrariesList()
+        private List<Library> GetLibrariesList()
        {
 
           
@@ -48,11 +46,11 @@ namespace SystemBiblioteczny.Models
                     string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
                
                      int newId = int.Parse(splitted[0]);
-                     string newName = splitted[1];
-                     LocalAdmin newAdmin = new(splitted[2]);
-                     string newAddress = splitted[3];
+                     string newCity = splitted[1];
+                     string newStreet = splitted[2];
+                     string newLocal = splitted[3];
 
-                  Library lib = new(newName, newAdmin, newAddress, newId);
+                  Library lib = new(newId, newCity, newStreet, newLocal);
                
                     list.Add(lib);
               
@@ -87,13 +85,50 @@ namespace SystemBiblioteczny.Models
                 {
                     writer.WriteLine(line);
                 }
-                writer.WriteLine(library?.Id.ToString() + " " + library?.Name + " " + library?.Admin?.UserName + " " + library?.Address);
+                writer.WriteLine(library?.ID.ToString() + " " + library?.City + " " + library?.Street + " " + library?.Local);
                 writer.Close();
             }
            
         }
-       
 
+        public int ReturnUniqueID()
+        {
+            List<Library> list = this.GetLibrariesList();
+            int max = 0;
+            foreach (Library l in list)
+            {
+                if (l.ID > max) max = l.ID;
+            }
+            return max+1;
+        }
+
+        public bool CheckIfCanAdd(string city, string street, string local)
+        {
+            List<Library> list = this.GetLibrariesList();
+            foreach (Library l in list)
+            {
+                if (l.City == city && l.Street == street && l.Local == local) {
+                    MessageBox.Show("Biblioteka o takich danych już istnieje!");
+                    return false;
+                }
+            }
+            if (city.Length < 3)
+            {
+                MessageBox.Show("Miasto musi mieć przynajmniej 3 znaki!");
+                return false;
+            }
+            if (street.Length < 3)
+            {
+                MessageBox.Show("Ulica musi mieć przynajmniej 3 znaki!");
+                return false;
+            }
+            if (local.Length < 1)
+            {
+                MessageBox.Show("Numer lokalu nie może być pusty!");
+                return false;
+            }
+            return true;
+        }
     }
     }
 
