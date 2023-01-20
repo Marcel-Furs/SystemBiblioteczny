@@ -1,3 +1,6 @@
-﻿Adam Mickiewicz Dziady_3 100 50
-Juliusz Słowacki Lubi_wacki 90 40
-Jan Brzechwa Lokomotywa 80 30
+﻿//id Imie_Autora nazwisko_autora Tytyuł numer_biblioteki bool_dostepnosc
+1 Adam Mickiewicz Dziady_3 1 1
+2 Adam Mickiewicz Dziady_3 2 0
+3 Adam Mickiewicz Dziady_3 1 0
+4 Juliusz Słowacki Lubi_wacki 2 0
+5 Jan Brzechwa Lokomotywa 80 1 1

@@ -215,6 +215,17 @@ namespace SystemBiblioteczny.Methods
             MessageBox.Show("Użytkownik został utworzony");
             return true;
         }
+        public String EraseWhiteSpace(string s1) {
+            for (int i = 0; i < s1.Length; i++)
+            {
+                if (Char.IsWhiteSpace(s1[i]))
+                {
+                    MessageBox.Show("Nie używaj spacji! \n Zamist tego użyj _'");
+                    s1 = s1.Replace(" ", "");
+                }
+            }
+            return s1;
+        }
     }
     }
 

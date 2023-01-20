@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,11 +39,11 @@ namespace SystemBiblioteczny
             var email = RegisterEmailAddress.Text;
             var phoneNumber = RegisterPhoneNumber.Text;
             AccountBase.RoleTypeEnum role = AccountBase.RoleTypeEnum.Client;
-            LoginMethod c = new();
-            bool canProceed = c.CheckIfAllDataIsCorrectAndCanCreateAccount(username, password, confirmPassword, name, lastname, email);
+            LoginMethod l = new();
+            bool canProceed = l.CheckIfAllDataIsCorrectAndCanCreateAccount(username, password, confirmPassword, name, lastname, email);
             if (canProceed == false) return;
             Client newClient = new(username, password, name, lastname, email, phoneNumber);
-            c.AddUserToDB(newClient);
+            l.AddUserToDB(newClient);
             ClientWindow clientwindow = new();
             clientwindow.Show();
             this.Close();
@@ -54,17 +55,17 @@ namespace SystemBiblioteczny
             var password = LoginPassword.Password;
 
             AccountBase.RoleTypeEnum role = AccountBase.RoleTypeEnum.Client;
-            
-            if (clientOption.IsChecked == true)  role = AccountBase.RoleTypeEnum.Client; 
-            if (admin_localOption.IsChecked == true)  role = AccountBase.RoleTypeEnum.LocalAdmin; 
-            if (admin_networkOption.IsChecked == true)  role = AccountBase.RoleTypeEnum.NetworkAdmin; 
-            if (librarianOption.IsChecked == true) role = AccountBase.RoleTypeEnum.Librarian; 
+
+            if (clientOption.IsChecked == true) role = AccountBase.RoleTypeEnum.Client;
+            if (admin_localOption.IsChecked == true) role = AccountBase.RoleTypeEnum.LocalAdmin;
+            if (admin_networkOption.IsChecked == true) role = AccountBase.RoleTypeEnum.NetworkAdmin;
+            if (librarianOption.IsChecked == true) role = AccountBase.RoleTypeEnum.Librarian;
 
             LoginMethod loginMethod = new LoginMethod();
             bool logged = loginMethod.CheckLogin(username, password, role);
 
-            if(logged == true) { this.Close(); }
-       
+            if (logged == true) { this.Close(); }
+
         }
 
         private void Hint(object sender, RoutedEventArgs e)
@@ -77,5 +78,10 @@ namespace SystemBiblioteczny
             base.OnClosing(e);
         }
 
+        private void RegisterUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LoginMethod l = new();
+            RegisterUsername.Text = l.EraseWhiteSpace(RegisterUsername.Text);
+        }
     }
 }
