@@ -51,5 +51,17 @@ namespace SystemBiblioteczny
         {
 
         }
+
+        private void Password_Changer(object sender, RoutedEventArgs e)
+        {
+            PasswordChangerWindow p = new();
+            p.Show();
+            this.Close();
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

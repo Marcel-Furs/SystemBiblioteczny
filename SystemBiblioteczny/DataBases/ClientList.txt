@@ -4,3 +4,4 @@ zawada 1234 Toma Zaw tomazaw@brak.zasad 999
 ptasniemiec 1234 Wojt Pta wojtpta@polsl.de 112
 klient klient test test test@test 
 admin admin admin admin admin@admin 
+szczurwysyn szczuras1 Grzesiu Kolędra szczurwysyn@gmail.com 213 742 069
