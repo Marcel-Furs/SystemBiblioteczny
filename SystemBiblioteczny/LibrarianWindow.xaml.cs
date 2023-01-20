@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -38,9 +40,41 @@ namespace SystemBiblioteczny
             var authorsSurname = SurnameInput.Text;
             var quantity = QuantityInput.Text;
 
+            
+
+            
+
             if (title.Any() && authorsName.Any() && authorsSurname.Any() && quantity.Any())
             {
                 MessageBox.Show("Wysłano zgłoszenie zapotrzebowania na: " + "\n" + authorsName + " " + authorsSurname + " " + title + " - ilość: " + quantity);
+
+
+
+                string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
+                List<string> lines = new();
+                using (StreamReader reader = new(path))
+                {
+                    var line = reader.ReadLine();
+
+                    while (line != null)
+                    {
+                        lines.Add(line);
+                        line = reader.ReadLine();
+
+                    }
+                    reader.Close();
+
+                }
+                using (StreamWriter writer = new StreamWriter(path))
+                {
+
+                    foreach (string line in lines)
+                    {
+                        writer.WriteLine(line);
+                    }
+                    writer.WriteLine(NameInput.Text + " " + SurnameInput.Text + " " + TitleInput.Text + " " + QuantityInput.Text);
+                    writer.Close();
+                }
             }
             else
             {
