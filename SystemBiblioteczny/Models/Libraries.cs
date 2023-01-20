@@ -48,11 +48,11 @@ namespace SystemBiblioteczny.Models
                     string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
                
                      int newId = int.Parse(splitted[0]);
-                     string newName = splitted[1];
-                     LocalAdmin newAdmin = new(splitted[2]);
-                     string newAddress = splitted[3];
+                     string newCity = splitted[1];
+                     string newStreet = splitted[2];
+                     string newLocal = splitted[3];
 
-                  Library lib = new(newName, newAdmin, newAddress, newId);
+                  Library lib = new(newId, newCity, newStreet, newLocal);
                
                     list.Add(lib);
               
@@ -87,7 +87,7 @@ namespace SystemBiblioteczny.Models
                 {
                     writer.WriteLine(line);
                 }
-                writer.WriteLine(library?.Id.ToString() + " " + library?.Name + " " + library?.Admin?.UserName + " " + library?.Address);
+                writer.WriteLine(library?.ID.ToString() + " " + library?.City + " " + library?.Street + " " + library?.Local);
                 writer.Close();
             }
            
