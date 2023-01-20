@@ -17,6 +17,7 @@ namespace SystemBiblioteczny.Models
             this.LastName = LastName;
             this.LibraryId = LibraryId;
         }
+        public LocalAdmin() { }
         public void ManageEvent() { }
 
         public void ExchangeBooks() { }

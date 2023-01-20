@@ -36,12 +36,15 @@
                             </Style>
                         </DataGrid.Resources>
                     </DataGrid>
-                  
+
                     <Label Content="Twoje dane" HorizontalAlignment="Left" Margin="645,228,0,0" VerticalAlignment="Top"/>
                     <Label Content="Nazwa użytkownika" HorizontalAlignment="Left" Margin="560,271,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="nazwaLabel" Content="nazwa" HorizontalAlignment="Left" Margin="693,271,0,0" VerticalAlignment="Top" Width="80"/>
                     <Label Content="Numer biblioteki" HorizontalAlignment="Left" Margin="560,310,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="numerLabel" Content="numer" HorizontalAlignment="Left" Margin="693,310,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="SendBook" Content="Wyślij dostępną książkę" HorizontalAlignment="Left" Margin="176,308,0,0" VerticalAlignment="Top" Click="Button_Click" Height="40" Width="162" Background="#FFCCA2DC"/>
+                    <Label Content="Id wymiany" HorizontalAlignment="Left" Margin="176,235,0,0" VerticalAlignment="Top" Width="162"/>
+                    <TextBox x:Name="SendBookLabel" HorizontalAlignment="Left" Margin="176,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="162"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Wygeneruj raport">

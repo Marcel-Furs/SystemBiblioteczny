@@ -55,7 +55,7 @@ namespace SystemBiblioteczny.Models
 
                 string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
 
-                int echangeId = int.Parse(splitted[0]);
+                int exchangeId = int.Parse(splitted[0]);
                 int bookId = int.Parse(splitted[1]);
                 string newRequestor = splitted[2];
                 string newReciever = splitted[3];
@@ -64,7 +64,7 @@ namespace SystemBiblioteczny.Models
                 bool newAvailibility = bool.Parse(splitted[6]);
                 int newIdLibrary = int.Parse(splitted[7]);
 
-                BookExchange book = new (echangeId, newRequestor, newReciever, bookId, newAuthor, newTitle, newAvailibility, newIdLibrary);
+                BookExchange book = new (exchangeId, newRequestor, newReciever, bookId, newAuthor, newTitle, newAvailibility, newIdLibrary);
                 
                 list.Add(book);
 
