@@ -1,4 +1,3 @@
-﻿//id miasto ulica lokal
 1 Gliwice Przedszkolna Szkolna 32/15 
 2 Ruda_Śląska Polna 12/1
 3 Katowice Furs Ogrodowa 30/2
