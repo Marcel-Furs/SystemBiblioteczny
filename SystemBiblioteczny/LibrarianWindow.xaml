@@ -7,18 +7,17 @@
         mc:Ignorable="d"
         Title="LibrarianWindow" Height="432" Width="786" MaxWidth="800" MaxHeight="450" MinWidth="800" MinHeight="450">
     <Grid>
-        <Button Content="Rent Book" HorizontalAlignment="Left" Margin="122,166,0,0" VerticalAlignment="Top" Height="93" Width="123"/>
-        <Button Content="End Rental" HorizontalAlignment="Left" Margin="505,166,0,0" VerticalAlignment="Top" Height="93" Width="147" RenderTransformOrigin="0.5,0.5">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="0"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-        <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="710,381,0,0" VerticalAlignment="Top" Height="43" Width="80" Click="Return"/>
+        <TabControl>
+            <TabItem Header="Zwróć książkę">
+                <Label Content="Tutaj damy obsługę zwracania książki" />
+            </TabItem>
+            <TabItem Header="Wypożycz książkę" >
 
+                <Button Content="Rent Book" HorizontalAlignment="Left" Margin="122,166,0,0" VerticalAlignment="Top" Height="93" Width="123"/>
+
+
+            </TabItem>
+        </TabControl>
+        
     </Grid>
 </Window>
