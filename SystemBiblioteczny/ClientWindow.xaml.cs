@@ -23,7 +23,13 @@ namespace SystemBiblioteczny
         public ClientWindow()
         {
             InitializeComponent();
-           
+            Books books= new();
+            List<Book> listofBooks = books.GetBooksList();
+            foreach(Book e in listofBooks)
+            {
+                TableBooks.Items.Add(e);
+            }
+            TableBooks.IsReadOnly = true;
         }
 
         private void Return(object sender, RoutedEventArgs e)
@@ -51,5 +57,6 @@ namespace SystemBiblioteczny
         {
 
         }
+
     }
 }

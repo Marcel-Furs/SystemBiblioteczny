@@ -9,7 +9,22 @@
     <Grid>
         <TabControl>
             <TabItem Header="Wypożycz Książkę" >
-                <Label Content="Chłopaki czekamy na wyświetlanie bazy książek :/" />
+                <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="410" Height="248" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40"/>
+                        <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120"/>
+                        <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="120"/>
+                        <DataGridCheckBoxColumn Header ="Dostępność" Binding="{Binding Availability}" Width="65"/>
+                        <DataGridTextColumn Header ="Id biblioteki" Binding="{Binding Id_Library}" Width="65"/>
+                    </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="Turquoise"/>
+                            <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                            <Setter Property="BorderBrush" Value="Black"/>
+                        </Style>
+                    </DataGrid.Resources>
+                </DataGrid>
             </TabItem>
             <TabItem Header="Wieczorki Autorskie">
                 <Grid Background="White">
@@ -60,6 +75,7 @@
             <TabItem Header="Ustawienia">
                 <Button Content="Wyloguj" Height="39" Width="80" Click="Return" Margin="329,0,385,0"/>
             </TabItem>
+            <DataGrid Height="6" Width="258" d:ItemsSource="{d:SampleData ItemCount=5}"/>
         </TabControl>
 
     </Grid>
