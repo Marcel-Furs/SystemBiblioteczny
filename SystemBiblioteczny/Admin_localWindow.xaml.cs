@@ -42,6 +42,13 @@ namespace SystemBiblioteczny
                 TableExchangeBooks.Items.Add(e);
             }
             TableExchangeBooks.IsReadOnly = true;
+            Books books2 = new();
+            List<Book> listofBooks2 = books2.GetBooksList();
+            foreach (Book e in listofBooks2)
+            {
+                TableBooks.Items.Add(e);
+            }
+            TableBooks.IsReadOnly = true;
         }
         private void Return(object sender, RoutedEventArgs e)
         {
@@ -124,6 +131,79 @@ namespace SystemBiblioteczny
             }
             if (info == false) { MessageBox.Show("Nie istnieje zlecenie o podanym id"); }
 
+        }
+
+        private void RequestForABook(object sender, RoutedEventArgs e)
+        {
+            string bookId = RequestBookLabel.Text;
+            if (bookId == "") MessageBox.Show("Proszę podać wartość");
+            else {
+                if (SendBookLabel.Text == "") { SendBookLabel.Text = "-1"; }
+                Books books = new();
+                List<Book> listofBooks = books.GetBooksList();
+               
+                for (int i = 0; i < listofBooks.Count; i++)
+                {
+                    int idBookFromList = listofBooks[i].Id_Book;
+                    int idBookFromGui = int.Parse(bookId);
+                    if (idBookFromList.CompareTo(idBookFromGui) == 0)
+                    {
+                        
+                        if ((numerLabel.Content).ToString()!.CompareTo(listofBooks[i].Id_Library.ToString()) == 0)
+                        {
+                            MessageBox.Show("Możesz wysyłać prośby tylko do innych bibliotek");
+                        }
+                        else
+                        {
+                           
+                                
+                                string path = System.IO.Path.Combine("../../../DataBases/ExchangeBookList.txt");
+                                List<string> lines = new();
+                                using (StreamReader reader = new(path))
+                                {
+                                    var line = reader.ReadLine();
+
+                                    while (line != null)
+                                    {
+                                        lines.Add(line);
+                                        line = reader.ReadLine();
+
+                                    }
+                                    reader.Close();
+
+                                }
+                                using (StreamWriter writer = new StreamWriter(path))
+                                {
+                                foreach (string line in lines) {
+                                writer.WriteLine(line);
+                                }
+
+                                int echangeId = lines.Count+1;
+                                int bnewBookId = listofBooks[i].Id_Book;
+                                string newRequestor = nazwaLabel.Content.ToString()!;
+                                string newReciever = "test";
+                                string newAuthor = listofBooks[i].Author;
+                                string newTitle = listofBooks[i].Title;
+                                bool newAvailibility = listofBooks[i].Availability;
+                                int newIdLibrary = listofBooks[i].Id_Library;
+
+                                    writer.WriteLine(echangeId + " " + bnewBookId + " " + newRequestor + " " + newReciever + " " + newAuthor + " " + newTitle + " " + newAvailibility + " " + newIdLibrary);
+                                writer.Close();
+                                }
+
+                                MessageBox.Show("Wysłano prośbę");
+
+                                Admin_LocalWindow w = new(userDataFinal);
+                                w.Show();
+                                this.Close();
+
+
+                           
+                        }
+                    }
+                }
+               
+            }
         }
     }
 }
