@@ -52,7 +52,7 @@ namespace SystemBiblioteczny
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (SendBookLabel.Text == null) { SendBookLabel.Text = "10000000000000000000000000000000000"; }
+            if (SendBookLabel.Text == "") { SendBookLabel.Text = "-1"; }
             BookExchange books = new();
             List<BookExchange> listofBooks = books.GetExchangeBooksList();
             bool info = false;
