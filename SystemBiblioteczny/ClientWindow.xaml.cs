@@ -18,14 +18,13 @@ namespace SystemBiblioteczny
 {
     public partial class ClientWindow : Window
     {
-       
 
         public ClientWindow()
         {
             InitializeComponent();
-            Books books= new();
+            Books books = new();
             List<Book> listofBooks = books.GetBooksList();
-            foreach(Book e in listofBooks)
+            foreach (Book e in listofBooks)
             {
                 TableBooks.Items.Add(e);
             }
@@ -62,6 +61,29 @@ namespace SystemBiblioteczny
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+        }
+
+        private void Find(object sender, RoutedEventArgs e)
+        {
+            Books books = new();
+            List<Book> listofBooks = books.GetBooksList();
+            TableBooks.Items.Clear();
+            if (OptDostepnosc.IsChecked == true)
+            {
+                foreach (Book i in listofBooks)
+                {
+                    if (i.Availability == true) TableBooks.Items.Add(i);
+                }
+            }
+
+            if (OptWszystkie.IsChecked == true)
+            {
+                foreach (Book j in listofBooks)
+                {
+                    TableBooks.Items.Add(j);
+                }
+            }
 
         }
     }
