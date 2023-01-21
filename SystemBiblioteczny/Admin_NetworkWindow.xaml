@@ -43,12 +43,9 @@
             <TabItem Header="Usuń bibliotekę">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            <TabItem Header="Nadawaj uprawnienia">
+            <TabItem Header="Nadawa/Odbierz uprawnienia">
                 <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Odbierz uprawnienia">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
+            </TabItem>            
             <TabItem Header="Utwórz raport">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
