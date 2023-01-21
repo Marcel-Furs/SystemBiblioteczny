@@ -13,14 +13,14 @@ namespace SystemBiblioteczny.Models
 {
     public class AuthorsEvening
     {
-        public String FirstName { get; set; }
-        public String LastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public int LibraryID { get; set; }
         public DateTime? Date { get; set; }
         public int Hour { get; set; }
         public int Duration { get; set; }
-        public String PhoneNumber { get; set; }
-        public AuthorsEvening(string firstname, string lastName, int id, DateTime? date, int hour, int duration, String phoneNumber) {
+        public string PhoneNumber { get; set; }
+        public AuthorsEvening(string firstname, string lastName, int id, DateTime? date, int hour, int duration, string phoneNumber) {
             FirstName = firstname;
             LastName = lastName;
             LibraryID = id;

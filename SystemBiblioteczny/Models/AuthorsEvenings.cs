@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 
 namespace SystemBiblioteczny.Models
 {
@@ -61,9 +62,10 @@ namespace SystemBiblioteczny.Models
                 {
                     writer.WriteLine(line);
                 }
-                // TODO linijka niżej
+                string text = newAuthorsEvening.Date.Value.ToString();
+                string[] splitted = text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
                 writer.WriteLine(newAuthorsEvening.FirstName + " " + newAuthorsEvening.LastName 
-                    + " " + newAuthorsEvening.LibraryID + " " + newAuthorsEvening.Date + " " 
+                    + " " + newAuthorsEvening.LibraryID + " " + splitted + " " 
                     + " " + newAuthorsEvening.Hour + " " + newAuthorsEvening.Duration + " "
                     + " " + newAuthorsEvening.PhoneNumber);
 
