@@ -62,7 +62,11 @@ namespace SystemBiblioteczny.Models
                     writer.WriteLine(line);
                 }
                 // TODO linijka niżej
-                writer.WriteLine("");
+                writer.WriteLine(newAuthorsEvening.FirstName + " " + newAuthorsEvening.LastName 
+                    + " " + newAuthorsEvening.LibraryID + " " + newAuthorsEvening.Date + " " 
+                    + " " + newAuthorsEvening.Hour + " " + newAuthorsEvening.Duration + " "
+                    + " " + newAuthorsEvening.PhoneNumber);
+
                 writer.Close();
             }
         }
