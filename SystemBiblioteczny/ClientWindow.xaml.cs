@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControlzEx.Standard;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -41,24 +42,18 @@ namespace SystemBiblioteczny
             this.Close();
         }
 
-        private void AuthorsEvening(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void Book_Available(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Register_Evening(object sender, RoutedEventArgs e)
         {
+            String name = AuthorsName.Text;
+            String lastname = AuthorsLastname.Text;
+            int libraryID;
+            if (!int.TryParse(LibraryID.Text, out libraryID)) MessageBox.Show("Numer biblioteki podaj liczbą!");
+            DateTime? date = Date.SelectedDate;
+            String hour = EventTime.Text;
+            String duration = EventDuration.Text;
+            String phoneNumber = ContactNumber.Text;
 
-        }
-
-
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+            //AuthorsEvening newAuthorsEvening = new(name, lastname, libraryID, date, hour, duration, phoneNumber);
 
         }
 
@@ -121,5 +116,12 @@ namespace SystemBiblioteczny
                 });
             }
         }
+
+
+
     }
-}
+
+    
+    }
+
+

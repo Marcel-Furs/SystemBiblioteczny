@@ -61,19 +61,19 @@
                         <Label  Grid.Row="1" Content="Imię autora:" Margin="0,4,0,4" HorizontalAlignment="Left" Width="191" FontSize="16" />
                         <TextBox x:Name="AuthorsName" Grid.Row="1" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12" />
                         <Label Grid.Row="2" Content="Nazwisko autora:" Margin="0,4,0,4" HorizontalAlignment="Left" Width="191" FontSize="16" Grid.RowSpan="2" />
-                        <TextBox Grid.Row="2" x:Name="AuthotsLastname"  HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
+                        <TextBox Grid.Row="2" x:Name="AuthorsLastname"  HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
                         <Label Grid.Row="3" Content="Numer biblioteki:" HorizontalAlignment="Left" Margin="0,4,0,4" Width="191" FontSize="16" Grid.RowSpan="2" />
                         <TextBox Grid.Row="3" x:Name="LibraryID" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
 
                         <Button Grid.Row="8" Click="Register_Evening" FontSize="20" Content="Register" Margin="-7,0,15,3"/>
                         <Label Grid.Row="4" Content="Data:" HorizontalAlignment="Left" Margin="0,4,0,4" Grid.RowSpan="2" Width="191" FontSize="16" />
-                        <DatePicker Grid.Row="4" x:Name="Date" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12" Text="Kiedy wieczorer bq"/>
-                        <Label Grid.Row="5" Content="Godzina:" HorizontalAlignment="Left" Margin="0,4,0,4" Grid.RowSpan="2" Width="191" FontSize="16" />
+                        <DatePicker Grid.Row="4" x:Name="Date" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
+                        <Label Grid.Row="5" Content="Godzina (np: 17:30):" HorizontalAlignment="Left" Margin="0,4,0,4" Grid.RowSpan="2" Width="191" FontSize="16" />
                         <Label Grid.Row="6" Content="Czas trwania (w minutach):" HorizontalAlignment="Left" Margin="0,4,0,4" Width="199" FontSize="16" />
                         <Label Grid.Row="7" Content="Telefon kontaktowy:" HorizontalAlignment="Left" Margin="0,4,0,4" Width="191" FontSize="16" />
-                        <TextBox Grid.Row="5" x:Name="RegisterLastname" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
-                        <TextBox Grid.Row="6" x:Name="RegisterEmailAddress" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
-                        <TextBox x:Name="RegisterPhoneNumber" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12" Grid.Row="7"/>
+                        <TextBox Grid.Row="5" x:Name="EventTime" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
+                        <TextBox Grid.Row="6" x:Name="EventDuration" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
+                        <TextBox x:Name="ContactNumber" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12" Grid.Row="7"/>
                     </Grid>
 
                 </Grid>
