@@ -69,7 +69,7 @@
                         <Button Grid.Row="8" Click="Register_Evening" FontSize="20" Content="Register" Margin="-7,0,15,3"/>
                         <Label Grid.Row="4" Content="Data:" HorizontalAlignment="Left" Margin="0,4,0,4" Grid.RowSpan="2" Width="191" FontSize="16" />
                         <DatePicker Grid.Row="4" x:Name="Date" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
-                        <Label Grid.Row="5" Content="Godzina (np: 17:30):" HorizontalAlignment="Left" Margin="0,4,0,4" Grid.RowSpan="2" Width="191" FontSize="16" />
+                        <Label Grid.Row="5" Content="Godzina (8-22):" HorizontalAlignment="Left" Margin="0,4,0,4" Grid.RowSpan="2" Width="191" FontSize="16" />
                         <Label Grid.Row="6" Content="Czas trwania (w minutach):" HorizontalAlignment="Left" Margin="0,4,0,4" Width="199" FontSize="16" />
                         <Label Grid.Row="7" Content="Telefon kontaktowy:" HorizontalAlignment="Left" Margin="0,4,0,4" Width="191" FontSize="16" />
                         <TextBox Grid.Row="5" x:Name="EventTime" HorizontalAlignment="Left" Margin="210,12,0,12" Width="150" Height="20" FontSize="12"/>
