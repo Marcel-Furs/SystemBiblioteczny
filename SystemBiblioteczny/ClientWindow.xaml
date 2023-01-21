@@ -12,11 +12,11 @@
                 <Grid>
                     <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="418" Height="229" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40"/>
-                            <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120"/>
-                            <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="120"/>
-                            <DataGridCheckBoxColumn Header ="Dostępność" Binding="{Binding Availability}" Width="65"/>
-                            <DataGridTextColumn Header ="Id biblioteki" Binding="{Binding Id_Library}" Width="65"/>
+                            <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="120" IsReadOnly="True"/>
+                            <DataGridCheckBoxColumn Header ="Dostępność" Binding="{Binding Availability}" Width="65" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Id biblioteki" Binding="{Binding Id_Library}" Width="65" IsReadOnly="True"/>
                         </DataGrid.Columns>
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -37,7 +37,8 @@
                     <RadioButton x:Name="OptTitle" Content="Tytuł" HorizontalAlignment="Left" Margin="506,168,0,0" VerticalAlignment="Top" Checked="OptTitle_Checked"/>
                     <Label Content="Sortuj po autorze lub tytule:" HorizontalAlignment="Left" Margin="430,114,0,0" VerticalAlignment="Top" FontSize="22"/>
                     <Button Content="Wyszukaj" HorizontalAlignment="Left" Margin="718,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.13" Width="66" FontSize="14"/>
-                    <Button Content="Zarezerwuj" HorizontalAlignment="Left" Margin="142,270,0,0" VerticalAlignment="Top" Height="53" Width="134" FontSize="20"/>
+                    <Button Content="Zarezerwuj" HorizontalAlignment="Left" Margin="142,303,0,0" VerticalAlignment="Top" Height="53" Width="134" FontSize="20" Click="Book"/>
+                    <TextBox x:Name="RequestBookLabel" HorizontalAlignment="Left" Margin="59,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
                 </Grid>
             </TabItem>
