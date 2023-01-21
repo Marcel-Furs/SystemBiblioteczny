@@ -12,16 +12,16 @@ namespace SystemBiblioteczny.Models
     {
         public int ExchangeId { get; set; }
         public string RequestorUsername { get; set; }
-        public string ReceiverUsername { get; set; }
+        
 
-        public BookExchange(int ExchangeId, string RequestorUsername, string ReceiverUsername, int id_Book, string author, string title, bool availability, int id_Library) {
+        public BookExchange(int ExchangeId, string RequestorUsername, int id_Book, string author, string title,  int id_Library) {
         this.ExchangeId = ExchangeId;
         this.RequestorUsername= RequestorUsername;
-        this.ReceiverUsername= ReceiverUsername;
+        
              Id_Book = id_Book;
              Author = author;
              Title = title;
-             Availability = availability;
+           
              Id_Library = id_Library;
         }
         public BookExchange()
@@ -58,13 +58,13 @@ namespace SystemBiblioteczny.Models
                 int exchangeId = int.Parse(splitted[0]);
                 int bookId = int.Parse(splitted[1]);
                 string newRequestor = splitted[2];
-                string newReciever = splitted[3];
-                string newAuthor = splitted[4];
-                string newTitle = splitted[5];
-                bool newAvailibility = bool.Parse(splitted[6]);
-                int newIdLibrary = int.Parse(splitted[7]);
+               
+                string newAuthor = splitted[3];
+                string newTitle = splitted[4];
+               
+                int newIdLibrary = int.Parse(splitted[5]);
 
-                BookExchange book = new (exchangeId, newRequestor, newReciever, bookId, newAuthor, newTitle, newAvailibility, newIdLibrary);
+                BookExchange book = new (exchangeId, newRequestor, bookId, newAuthor, newTitle, newIdLibrary);
                 
                 list.Add(book);
 
