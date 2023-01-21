@@ -39,7 +39,7 @@
                 <Label Content="Tutaj damy obsługę zwracania książki" />
             </TabItem>
             <TabItem Header="Ustawienia">
-                <Label Content="Tutaj damy obsługę zwracania książki" />
+                <Button Content="Wyloguj" Height="39" Click="Return" Margin="106,0,547,0"/>
             </TabItem>
         </TabControl>
 

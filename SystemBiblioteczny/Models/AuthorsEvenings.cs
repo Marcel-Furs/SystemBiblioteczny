@@ -61,7 +61,7 @@ namespace SystemBiblioteczny.Models
                 {
                     writer.WriteLine(line);
                 }
-                writer.WriteLine(newAuthorsEvening);
+                writer.WriteLine("asdadwa");
                 writer.Close();
             }
         }
