@@ -3,10 +3,6 @@
 12 Juliusz_Słowacki Kordian False 4
 7 Henryk_Sienkiewicz Potop False 1
 11 Bolesław_Prus Kamizelka False 3
-12 Juliusz_Słowacki Kordian False 4
-11 Bolesław_Prus Kamizelka False 3
-8 Henryk_Sienkiewicz Krzyżacy False 1
-1 Adam_Mickiewicz Dziady_3 False 1
 8 Henryk_Sienkiewicz Krzyżacy False 1
 7 Henryk_Sienkiewicz Potop False 1
 5 Franz_Kafka Przemiana True 3

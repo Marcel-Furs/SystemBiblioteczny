@@ -47,14 +47,30 @@ namespace SystemBiblioteczny
             String name = AuthorsName.Text;
             String lastname = AuthorsLastname.Text;
             int libraryID;
-            if (!int.TryParse(LibraryID.Text, out libraryID)) MessageBox.Show("Numer biblioteki podaj liczbą!");
+            if (!int.TryParse(LibraryID.Text, out libraryID))
+            {
+                MessageBox.Show("Numer biblioteki podaj liczbą!");
+                return;
+            }
             DateTime? date = Date.SelectedDate;
-            String hour = EventTime.Text;
-            String duration = EventDuration.Text;
+            int duration;
+            if (!int.TryParse(LibraryID.Text, out duration))
+            {
+                MessageBox.Show("Czas trwania podaj liczbą!");
+                return;
+            }
+            int hour;
+            if (!int.TryParse(EventTime.Text, out hour))
+            {
+                MessageBox.Show("Podaj pełną godzinę od 8 do 22 liczbą!");
+                return;
+            }
             String phoneNumber = ContactNumber.Text;
 
-            //AuthorsEvening newAuthorsEvening = new(name, lastname, libraryID, date, hour, duration, phoneNumber);
-
+            AuthorsEvening newAuthorsEvening = new(name, lastname, libraryID, date, hour, duration, phoneNumber);
+            if (newAuthorsEvening.CheckIfCanAddToDataBase()) {
+                MessageBox.Show("Pomyślnie wysłano propozycję wieczorka autorskiego!");
+            }
         }
 
         private void Find(object sender, RoutedEventArgs e)
