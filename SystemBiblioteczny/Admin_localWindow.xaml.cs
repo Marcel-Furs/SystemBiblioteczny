@@ -30,6 +30,7 @@ namespace SystemBiblioteczny
         public Admin_LocalWindow(LocalAdmin userData)
         {
             InitializeComponent();
+            base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
             userDataFinal = userData;
 
