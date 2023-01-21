@@ -23,6 +23,7 @@ namespace SystemBiblioteczny
         public Admin_NetworkWindow()
         {
             InitializeComponent();
+            base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
         private void Return(object sender, RoutedEventArgs e)

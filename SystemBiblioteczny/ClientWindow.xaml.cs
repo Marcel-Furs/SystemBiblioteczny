@@ -23,6 +23,8 @@ namespace SystemBiblioteczny
         public ClientWindow()
         {
             InitializeComponent();
+            base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
             Books books = new();
             List<Book> listofBooks = books.GetBooksList();
             foreach (Book e in listofBooks)

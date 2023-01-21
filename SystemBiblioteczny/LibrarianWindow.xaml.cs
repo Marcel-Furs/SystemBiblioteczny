@@ -24,6 +24,7 @@ namespace SystemBiblioteczny
         public LibrarianWindow()
         {
             InitializeComponent();
+            base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
         private void Return(object sender, RoutedEventArgs e)

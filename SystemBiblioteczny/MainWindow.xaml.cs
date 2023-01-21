@@ -26,6 +26,7 @@ namespace SystemBiblioteczny
         public MainWindow()
         {
             InitializeComponent();
+            base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             clientOption.IsChecked = true;
         }
 
