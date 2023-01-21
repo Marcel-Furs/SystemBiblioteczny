@@ -9,11 +9,14 @@
     <Grid>
 
         <TabControl>
-            <TabItem Header="Zarządzaj wieczorkiem autorskim">
+            <TabItem Header="Zarządzaj wieczorkami autorskimi">
                 <Grid Background="#FFE5E5E5">
-                    <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="704,353,0,0" VerticalAlignment="Top" Height="43" Width="80" Click="Return"/>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Nowe książki">
+                <Grid Background="#FFE5E5E5">
 
+                </Grid>
             </TabItem>
             <TabItem Header="Wymień się książkami">
                 <Grid Background="#FFE5E5E5">
@@ -66,10 +69,17 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Wygeneruj raport">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                </Grid>
             </TabItem>
             <TabItem Header="Zarządzaj kontami">
                 <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Ustawienia">
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="704,353,0,0" VerticalAlignment="Top" Height="43" Width="80" Click="Return"/>
+                </Grid>
+
             </TabItem>
         </TabControl>
 

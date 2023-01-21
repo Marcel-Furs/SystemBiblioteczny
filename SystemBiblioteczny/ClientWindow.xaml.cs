@@ -29,7 +29,7 @@ namespace SystemBiblioteczny
                 TableBooks.Items.Add(e);
             }
             TableBooks.IsReadOnly = true;
-
+            Date.FontSize = 10;
         }
 
         private void Return(object sender, RoutedEventArgs e)
@@ -41,16 +41,12 @@ namespace SystemBiblioteczny
 
         private void AuthorsEvening(object sender, RoutedEventArgs e)
         {
-            AuthorEveningEventWindow m = new();
-            m.Show();
-            this.Close();
+            
         }
 
         private void Book_Available(object sender, RoutedEventArgs e)
         {
-            BookAvalilableWindow w = new();
-            w.Show();
-            this.Close();
+
         }
 
         private void Register_Evening(object sender, RoutedEventArgs e)

@@ -55,20 +55,20 @@
             <Label Content="Nazwa użytkownika:" Margin="0,48,0,48" Grid.RowSpan="3" HorizontalAlignment="Left" Width="195" FontSize="16"/>
             <TextBox x:Name="RegisterUsername" HorizontalAlignment="Left" Margin="195,48,0,24" Width="195" Grid.RowSpan="2" TextChanged="RegisterUsername_TextChanged"/>
             <Label Grid.Row="1" Content="Hasło" Margin="0,48,0,48" Grid.RowSpan="3" HorizontalAlignment="Left" Width="195" FontSize="16" />
-            <PasswordBox Grid.Row="1" x:Name="RegisterPassword" Height="25" VerticalAlignment="Top" Margin="195,48,0,0" Grid.RowSpan="2"/>
+            <PasswordBox Grid.Row="1" x:Name="RegisterPassword" Height="25" VerticalAlignment="Top" Margin="195,48,0,0" Grid.RowSpan="2" PasswordChanged="RegisterPassword_PasswordChanged"/>
             <Label Grid.Row="2" Content="Powtórz hasło" HorizontalAlignment="Left" Margin="0,48,0,48" Grid.RowSpan="3" Width="195" FontSize="16" />
-            <PasswordBox Grid.Row="2" x:Name="RegisterPasswordConfirmation" HorizontalAlignment="Left" Margin="195,48,0,24" Grid.RowSpan="2" Width="195"/>
+            <PasswordBox Grid.Row="2" x:Name="RegisterPasswordConfirmation" HorizontalAlignment="Left" Margin="195,48,0,24" Grid.RowSpan="2" Width="195" PasswordChanged="RegisterPasswordConfirm_PasswordChanged"/>
 
             <Button Grid.Row="8" Click="Register_Client" FontSize="20">Register</Button>
             <Label Grid.Row="4" Content="Imię" HorizontalAlignment="Left" Margin="0,0,0,46" Grid.RowSpan="2" Width="195" FontSize="16" />
-            <TextBox Grid.Row="4" x:Name="RegisterName" HorizontalAlignment="Left" Margin="195,0,0,24" Width="195"/>
+            <TextBox Grid.Row="4" x:Name="RegisterName" HorizontalAlignment="Left" Margin="195,0,0,24" Width="195" TextChanged="RegisterName_TextChanged"/>
             <Label Grid.Row="4" Content="Nazwisko" HorizontalAlignment="Left" Margin="0,46,0,0" Grid.RowSpan="2" Width="195" FontSize="16" />
             <Label Grid.Row="5" Content="Email" HorizontalAlignment="Left" Margin="0,48,0,46" Grid.RowSpan="3" Width="195" FontSize="16" />
             <Label Grid.Row="7" Content="Numer telefonu" HorizontalAlignment="Left" Margin="0,0,0,46" Grid.RowSpan="2" Width="195" FontSize="16" />
-            <TextBox Grid.Row="4" x:Name="RegisterLastname" HorizontalAlignment="Left" Margin="195,48,0,24" Width="195" Grid.RowSpan="2"/>
-            <TextBox Grid.Row="6" x:Name="RegisterEmailAddress" HorizontalAlignment="Left" Margin="195,1,0,24" Width="195"/>
+            <TextBox Grid.Row="4" x:Name="RegisterLastname" HorizontalAlignment="Left" Margin="195,48,0,24" Width="195" Grid.RowSpan="2" TextChanged="RegisterLastname_TextChanged"/>
+            <TextBox Grid.Row="6" x:Name="RegisterEmailAddress" HorizontalAlignment="Left" Margin="195,1,0,24" Width="195" TextChanged="RegisterEmailAddress_TextChanged"/>
             <Button Content="*" HorizontalAlignment="Left" Margin="118,7,0,0" Grid.Row="7" VerticalAlignment="Top" Width="16" Height="12" Click="Hint"/>
-            <TextBox x:Name="RegisterPhoneNumber" HorizontalAlignment="Left" Margin="195,0,0,23" Width="195" Grid.Row="7"/>
+            <TextBox x:Name="RegisterPhoneNumber" HorizontalAlignment="Left" Margin="195,0,0,23" Width="195" Grid.Row="7" TextChanged="RegisterPhoneNumber_TextChanged"/>
         </Grid>
     </Grid>
 </Window>
