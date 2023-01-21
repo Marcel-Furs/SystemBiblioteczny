@@ -73,7 +73,8 @@ namespace SystemBiblioteczny
             }
         }
 
-        private void Find(object sender, RoutedEventArgs e)
+        
+        private void OptAvailability_Checked(object sender, RoutedEventArgs e)
         {
             Books books = new();
             List<Book> listofBooks = books.GetBooksList();
@@ -85,22 +86,27 @@ namespace SystemBiblioteczny
                     if (i.Availability == true) TableBooks.Items.Add(i);
                 }
             }
-
-            if (OptAll.IsChecked == true)
-            {
-                foreach (var j in listofBooks)
-                {
-                    TableBooks.Items.Add(j);
-                }
-            }
-
         }
 
-        private void Sort(object sender, RoutedEventArgs e)
+        private void OptAll_Checked(object sender, RoutedEventArgs e)
         {
             Books books = new();
             List<Book> listofBooks = books.GetBooksList();
+            TableBooks.Items.Clear();
+            if (OptAll.IsChecked == true)
+            {
+                var sort1 = listofBooks.OrderBy(x => x.Id_Book).ToList();
+                sort1.ForEach(x =>
+                {
+                    TableBooks.Items.Add(x);
+                });
+            }
+        }
 
+        private void OptAuthor_Checked(object sender, RoutedEventArgs e)
+        {
+            Books books = new();
+            List<Book> listofBooks = books.GetBooksList();
             TableBooks.Items.Clear();
             if (OptAuthor.IsChecked == true)
             {
@@ -109,9 +115,14 @@ namespace SystemBiblioteczny
                 {
                     TableBooks.Items.Add(x);
                 });
-                
-            }
 
+            }
+        }
+
+        private void OptTitle_Checked(object sender, RoutedEventArgs e)
+        {
+            Books books = new();
+            List<Book> listofBooks = books.GetBooksList();
             if (OptTitle.IsChecked == true)
             {
                 var sort1 = listofBooks.OrderBy(x => x.Title).ToList();
