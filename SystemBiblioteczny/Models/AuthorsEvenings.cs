@@ -61,7 +61,8 @@ namespace SystemBiblioteczny.Models
                 {
                     writer.WriteLine(line);
                 }
-                writer.WriteLine("asdadwa");
+                // TODO linijka niżej
+                writer.WriteLine("");
                 writer.Close();
             }
         }
