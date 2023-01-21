@@ -2,4 +2,11 @@
 2 Adam_Mickiewicz Dziady_3 true 2 
 3 Adam_Mickiewicz Dziady_3 false 1 
 4 Juliusz_Słowacki Lubi_wacki true 2 
-5 Jan_Brzechwa Lokomotywa false 1 
+5 Franz_Kafka Przemiana true 3 
+6 Johann_Goethe Werter false 1 
+7 Henryk_Sienkiewicz Potop true 1 
+8 Henryk_Sienkiewicz Krzyżacy true 1 
+9 Henryk_Sienkiewicz Ogniem_i_mieczem true 2 
+10 Bolesław_Prus Lalka false 1 
+11 Bolesław_Prus Kamizelka true 3 
+12 Juliusz_Słowacki Kordian false 4 
