@@ -44,22 +44,18 @@ namespace SystemBiblioteczny
 
         private void Register_Evening(object sender, RoutedEventArgs e)
         {
-            if (Date.SelectedDate == null) {
-                MessageBox.Show("date null!");
-                return;
-            }
-
             String name = AuthorsName.Text;
             String lastname = AuthorsLastname.Text;
             int libraryID;
-            if (int.TryParse(LibraryID.Text, out libraryID))
-            {
-                // TODO sprawdzić czy biblioteka istnieje
-            }
-            else {
-                MessageBox.Show("Numer biblioteki podaj liczbą!");
-            }
-}
+            if (!int.TryParse(LibraryID.Text, out libraryID)) MessageBox.Show("Numer biblioteki podaj liczbą!");
+            DateTime? date = Date.SelectedDate;
+            String hour = EventTime.Text;
+            String duration = EventDuration.Text;
+            String phoneNumber = ContactNumber.Text;
+
+            //AuthorsEvening newAuthorsEvening = new(name, lastname, libraryID, date, hour, duration, phoneNumber);
+
+        }
 
         private void Find(object sender, RoutedEventArgs e)
         {
@@ -82,13 +78,6 @@ namespace SystemBiblioteczny
                 }
             }
         }
-
-        //String date = Date.SelectedDate?.ToString("HH:mm:ss");
-        //String hour = EventTime.Text;
-        //String duration = EventDuration.Text;
-        //String phoneNumber = ContactNumber.Text;
-
-        //AuthorsEvening newAuthorsEvening = new();
 
 
 

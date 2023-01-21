@@ -11,10 +11,11 @@ namespace SystemBiblioteczny.Models
         String FirstName { get; set; }
         String LastName { get; set; }
         int LibraryID { get; set; }
-        String Date { get; set; }
+        DateTime? Date { get; set; }
+        String Hour { get; set; }
         int Duration { get; set; }
         String PhoneNumber { get; set; }
-        public AuthorsEvening(string firstname, string lastName, int id, string date, int duration, String phoneNumber) {
+        public AuthorsEvening(string firstname, string lastName, int id, DateTime? date, String Hour, int duration, String phoneNumber) {
             FirstName = firstname;
             LastName = lastName;
             LibraryID = id;
