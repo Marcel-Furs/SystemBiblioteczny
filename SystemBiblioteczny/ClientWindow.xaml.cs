@@ -62,20 +62,47 @@ namespace SystemBiblioteczny
             Books books = new();
             List<Book> listofBooks = books.GetBooksList();
             TableBooks.Items.Clear();
-            if (OptDostepnosc.IsChecked == true)
+            if (OptAvailability.IsChecked == true)
             {
-                foreach (Book i in listofBooks)
+                foreach (var i in listofBooks)
                 {
                     if (i.Availability == true) TableBooks.Items.Add(i);
                 }
             }
 
-            if (OptWszystkie.IsChecked == true)
+            if (OptAll.IsChecked == true)
             {
-                foreach (Book j in listofBooks)
+                foreach (var j in listofBooks)
                 {
                     TableBooks.Items.Add(j);
                 }
+            }
+
+        }
+
+        private void Sort(object sender, RoutedEventArgs e)
+        {
+            Books books = new();
+            List<Book> listofBooks = books.GetBooksList();
+
+            TableBooks.Items.Clear();
+            if (OptAuthor.IsChecked == true)
+            {
+                var sort1 = listofBooks.OrderBy(x => x.Author).ToList();
+                sort1.ForEach(x =>
+                {
+                    TableBooks.Items.Add(x);
+                });
+                
+            }
+
+            if (OptTitle.IsChecked == true)
+            {
+                var sort1 = listofBooks.OrderBy(x => x.Title).ToList();
+                sort1.ForEach(x =>
+                {
+                    TableBooks.Items.Add(x);
+                });
             }
         }
 

@@ -26,13 +26,20 @@
                             </Style>
                         </DataGrid.Resources>
                     </DataGrid>
-                    <RadioButton Content="Autor" Margin="430,104,300,282"/>
-                    <RadioButton Content="Tytuł" Margin="430,129,300,257"/>
+
                     <Label Content="Pokaż dostępne książki" HorizontalAlignment="Left" Margin="430,51,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="22"/>
-                    <Button Content="Szukaj" HorizontalAlignment="Left" Margin="718,43,0,0" VerticalAlignment="Top" Width="66" Click="Find" RenderTransformOrigin="0.514,0.564"/>
-                    <RadioButton x:Name="OptDostepnosc" Content="" HorizontalAlignment="Left" Margin="676,68,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Szukaj" HorizontalAlignment="Left" Margin="718,43,0,0" VerticalAlignment="Top" Width="66" Click="Find" RenderTransformOrigin="0.514,0.564" FontSize="14"/>
+                    <RadioButton x:Name="OptAvailability" Content="" HorizontalAlignment="Left" Margin="676,68,0,0" VerticalAlignment="Top"/>
                     <Label Content="Pokaż wszystkie książki" HorizontalAlignment="Left" Margin="430,10,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="22"/>
-                    <RadioButton x:Name="OptWszystkie" Content="" HorizontalAlignment="Left" Margin="676,27,0,0" VerticalAlignment="Top"/>
+                    <RadioButton x:Name="OptAll" Content="" HorizontalAlignment="Left" Margin="676,27,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Margin="545,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Wyszukaj po tytule lub autorze:" HorizontalAlignment="Left" Margin="430,252,0,0" VerticalAlignment="Top" FontSize="20"/>
+                    <RadioButton x:Name="OptAuthor" Content="Autor" HorizontalAlignment="Left" Margin="526,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.004,0.41"/>
+                    <RadioButton x:Name="OptTitle" Content="Tytuł" HorizontalAlignment="Left" Margin="445,168,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Sortuj po autorze lub tytule:" HorizontalAlignment="Left" Margin="430,114,0,0" VerticalAlignment="Top" FontSize="22"/>
+                    <Button Content="Sortuj" HorizontalAlignment="Left" Margin="718,124,0,0" VerticalAlignment="Top" Width="66" FontSize="14" Click="Sort"/>
+                    <Button Content="Wyszukaj" HorizontalAlignment="Left" Margin="718,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.13" Width="66" FontSize="14"/>
+                    <Button Content="Zarezerwuj" HorizontalAlignment="Left" Margin="142,270,0,0" VerticalAlignment="Top" Height="53" Width="134" FontSize="20"/>
 
                 </Grid>
             </TabItem>
