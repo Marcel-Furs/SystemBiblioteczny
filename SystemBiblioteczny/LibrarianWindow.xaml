@@ -20,7 +20,7 @@
             <TabItem Header="Zgłoś zapotrzebowanie">
                 <Grid Background="White">
 
-                    <Button Content="Wyślij zgłoszenie" Click="SendApplication" HorizontalAlignment="Left" Margin="142,311,0,0" VerticalAlignment="Top" Height="49" Width="106"/>
+                    <Button Content="Wyślij zgłoszenie" Click="SendApplication" HorizontalAlignment="Left" Margin="188,317,0,0" VerticalAlignment="Top" Height="49" Width="106"/>
                     <Label Content="Dane książki do zamówienia:" FontSize="16" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="48" Width="294"/>
                     <Label Content="Imię autora:" FontSize="16" HorizontalAlignment="Left" Margin="26,102,0,0" VerticalAlignment="Top" Height="48" Width="96"/>
                     <Label Content="Nazwisko autora:" FontSize="16" HorizontalAlignment="Left" Margin="26,150,0,0" VerticalAlignment="Top" Height="48" Width="147"/>
@@ -30,6 +30,8 @@
                     <TextBox x:Name="SurnameInput" HorizontalAlignment="Left" Margin="240,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="TitleInput" HorizontalAlignment="Left" Margin="240,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="QuantityInput" HorizontalAlignment="Left" Margin="240,252,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Id biblioteki:" HorizontalAlignment="Left" Margin="26,304,0,0" VerticalAlignment="Top" Height="28" Width="74"/>
+                    <TextBox x:Name="LibraryIDInput" HorizontalAlignment="Left" Margin="116,309,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.522,0.604"/>
                 </Grid>
 
 

@@ -15,6 +15,28 @@
             </TabItem>
             <TabItem Header="Nowe książki">
                 <Grid Background="#FFE5E5E5">
+                    <Grid>
+                        <DataGrid x:Name="NewBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="784" Height="203" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header =""  Width="30"/>
+
+                                <DataGridTextColumn Header ="Imię autora" Binding="{Binding Author}" Width="160"/>
+                                <DataGridTextColumn Header ="Nazwisko autora" Binding="{Binding Author}" Width="160"/>
+                                <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="180"/>
+                                <DataGridTextColumn Header ="Ilość" Binding="{Binding RequestorUsername}" Width="100"/>
+                                <DataGridTextColumn Header ="Id biblioteki" Binding="{Binding Id_Library}" Width="90"/>
+                            </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Background" Value="#FFCCA2DC"/>
+                                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                                    <Setter Property="BorderBrush" Value="White"/>
+                                </Style>
+                            </DataGrid.Resources>
+                        </DataGrid>
+                    </Grid>
+                    <Button Content="Zamów" HorizontalAlignment="Left" Margin="42,223,0,0" VerticalAlignment="Top" Height="34" Width="99"/>
+                    <Button Content="Odrzuć" HorizontalAlignment="Left" Margin="172,223,0,0" VerticalAlignment="Top" Height="34" Width="99"/>
 
                 </Grid>
             </TabItem>

@@ -270,5 +270,65 @@ namespace SystemBiblioteczny
             bookFromGui = int.Parse(RequestBookLabel.Text);
             exchangeFromGui = int.Parse(SendBookLabel.Text);
         }
+
+        public List<string> GetListOfDataBaseLines(string fileName)
+        {
+
+            string path = System.IO.Path.Combine("../../../DataBases/" + fileName + ".txt");
+            List<string> lines = new();
+            using (StreamReader reader = new(path))
+            {
+                var line = reader.ReadLine();
+
+                while (line != null)
+                {
+                    lines.Add(line);
+                    line = reader.ReadLine();
+
+                }
+                reader.Close();
+
+            }
+            return lines;
+        }
+
+        public void WriteToDataBase(string fileName, string newLine)
+        {
+
+            List<string> lines = GetListOfDataBaseLines(fileName);
+            string path = System.IO.Path.Combine("../../../DataBases/" + fileName + ".txt");
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+
+                foreach (string line in lines)
+                {
+                    writer.WriteLine(line);
+                }
+                writer.WriteLine(newLine);
+                writer.Close();
+            }
+
+        }
+
+        //public void AddBookToListAndDeleteFromApplications(Book book)
+        //{
+        //    WriteToDataBase("BookList", book.UserName + " " + book.Password + " " + book.LibraryId);
+
+        //    string path = System.IO.Path.Combine("../../../DataBases/ClientList.txt");
+        //    List<string> lines = GetListOfDataBaseLines("ClientList");
+        //    using (StreamWriter writer = new StreamWriter(path))
+        //    {
+        //        for (int i = 0; i < lines.Count; i++)
+        //        {
+        //            string line = lines[i];
+        //            string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+        //            string userName = splitted[0];
+        //            if (userName.CompareTo(librarian.UserName) == 0) { }
+        //            else { writer.WriteLine(line); }
+        //        }
+        //        writer.Close();
+        //    }
+        //}
     }
 }
