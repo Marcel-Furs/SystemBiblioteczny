@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
@@ -15,7 +16,9 @@ namespace SystemBiblioteczny
         private BookExchange bookExchangeModel = new();
         private AccountBase accountModel = new();
         private Books bookModel = new();
+        private AuthorsEvening eveningModel = new();
         private LocalAdmin localAdmin = new();
+        private AuthorsEvenings eveningsModel = new();
         private int bookFromGui = -1;
         private int exchangeFromGui = -1;
         public Admin_LocalWindow(LocalAdmin userData)
@@ -50,19 +53,42 @@ namespace SystemBiblioteczny
                 if (idExchange.CompareTo(exchangeFromGui) == 0)
                 {
                     info = true;
-                    if (localAdmin.LibraryId.CompareTo(listofBooks[i].Id_Library) == 0) MessageBox.Show("Nie możesz wysłać książki do własnej biblioteki");
-                    else
+                    if (localAdmin.LibraryId.CompareTo(listofBooks[i].Id_Library) != 0) MessageBox.Show("Nie możesz wysłać książki należącej do innej biblioteki");
+                    else 
                     {
-                        if (listofBooks[i].Availability == true) SendBookIfAvaliable();
-                        else MessageBox.Show("Książka aktualnie nie jest dostępna");
+                        int bookId = SendBookIfAvaliable();
+                        List<Book> lines = bookModel.GetBooksList();
+                        string path = System.IO.Path.Combine("../../../DataBases/BookList.txt");
+                        using (StreamWriter writer = new StreamWriter(path))
+                        {
+                            for (int k = 0; k < lines.Count; k++)
+                            {
+                                int bookIdFromList = lines[k].Id_Book;
+                                int newLibraryId = getRequestorLibraryId(listofBooks[i].RequestorUsername);
+                                if (bookId.CompareTo(bookIdFromList) == 0) writer.WriteLine(lines[k].Id_Book + " " + lines[k].Author + " " + lines[k].Title + " " + "True" + " " + newLibraryId);
+                                else writer.WriteLine(lines[k].Id_Book + " " + lines[k].Author + " " + lines[k].Title + " " + lines[k].Availability + " " + lines[k].Id_Library);
+                            }
+                            writer.Close();
+                        }
+                        MessageBox.Show("Wysłano książke");
+                        RefreshTableData();
                     }
                 }
             }
             if (info == false) MessageBox.Show("Nie istnieje zlecenie o podanym id");
 
         }
-        private void SendBookIfAvaliable()
+        private int getRequestorLibraryId(string requestorUsername) {
+            int result = 0;
+            List<LocalAdmin> list = accountModel.GetLocalAdminList();
+            for (int i = 0; i < list.Count; i++) {
+                if (list[i].UserName!.CompareTo(requestorUsername) == 0) result = list[i].LibraryId;
+            }
+            return result;
+        }
+        private int SendBookIfAvaliable()
         {
+            int resultBookId = 0;
             string path = System.IO.Path.Combine("../../../DataBases/ExchangeBookList.txt");
             List<string> lines = accountModel.GetListOfDataBaseLines("ExchangeBookList");
 
@@ -82,24 +108,21 @@ namespace SystemBiblioteczny
                     int newIdLibrary = int.Parse(splitted[5]);
 
 
-                    if (newId.CompareTo(exchangeFromGui) == 0) { }
+                    if (newId.CompareTo(exchangeFromGui) == 0) resultBookId = bookId;
                     else if (echangeId > exchangeFromGui) { writer.WriteLine((echangeId - 1) + " " + bookId + " " + newRequestor + " " + newAuthor + " " + newTitle + " " + newIdLibrary); }
                     else writer.WriteLine(line);
                 }
 
                 writer.Close();
             }
-
-            MessageBox.Show("Wysłano książke");
-
-            RefreshTableData();
-
+           
+            return resultBookId;
         }
 
         private void RequestForABook(object sender, RoutedEventArgs e)
         {
             RefreshTextBoxes();
-
+            bool info = false;
             List<Book> listofBooks = bookModel.GetBooksList();
 
             for (int i = 0; i < listofBooks.Count; i++)
@@ -108,7 +131,7 @@ namespace SystemBiblioteczny
 
                 if (idBookFromList.CompareTo(bookFromGui) == 0)
                 {
-
+                    info = true;
                     if (localAdmin.LibraryId.CompareTo(listofBooks[i].Id_Library) == 0) MessageBox.Show("Możesz wysyłać prośby o książki tylko z innych bibliotek");
                     else
                     {
@@ -126,13 +149,15 @@ namespace SystemBiblioteczny
 
                             accountModel.WriteToDataBase("ExchangeBookList", echangeId + " " + bnewBookId + " " + newRequestor + " " + newAuthor + " " + newTitle + " " + newIdLibrary);
                             SendBookRequestIfAvaliable();
+                            MessageBox.Show("Wysłano prośbę");
 
                         }
 
                     }
                 }
-
+               
             }
+            if (info == false) MessageBox.Show("Nie istnieje zlecenie o podanym id");
         }
         private void SendBookRequestIfAvaliable()
         {
@@ -149,9 +174,6 @@ namespace SystemBiblioteczny
                 }
                 writer.Close();
             }
-
-            MessageBox.Show("Wysłano prośbę");
-
             RefreshTableData();
         }
         void RefreshTableData()
@@ -196,14 +218,14 @@ namespace SystemBiblioteczny
                         int BookIdToDelete = -1;
                         string path = System.IO.Path.Combine("../../../DataBases/BookList.txt");
                         BookIdToDelete = RejectBookIfAvaliable(BookIdToDelete);
-
+                        List<Book> list = bookModel.GetBooksList();
                         using (StreamWriter writer = new StreamWriter(path))
                         {
-                            for (int k = 0; k < listofBooks.Count; k++)
+                            for (int k = 0; k < list.Count; k++)
                             {
 
-                                if (BookIdToDelete == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "True" + " " + listofBooks[k].Id_Library);
-                                else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
+                                if (BookIdToDelete == list[k].Id_Book) writer.WriteLine(list[k].Id_Book + " " + list[k].Author + " " + list[k].Title + " " + "True" + " " + list[k].Id_Library);
+                                else writer.WriteLine(list[k].Id_Book + " " + list[k].Author + " " + list[k].Title + " " + list[k].Availability + " " + list[k].Id_Library);
                             }
                             writer.Close();
                         }
@@ -270,51 +292,10 @@ namespace SystemBiblioteczny
             bookFromGui = int.Parse(RequestBookLabel.Text);
             exchangeFromGui = int.Parse(SendBookLabel.Text);
         }
-
-        public List<string> GetListOfDataBaseLines(string fileName)
-        {
-
-            string path = System.IO.Path.Combine("../../../DataBases/" + fileName + ".txt");
-            List<string> lines = new();
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-
-                }
-                reader.Close();
-
-            }
-            return lines;
-        }
-
-        public void WriteToDataBase(string fileName, string newLine)
-        {
-
-            List<string> lines = GetListOfDataBaseLines(fileName);
-            string path = System.IO.Path.Combine("../../../DataBases/" + fileName + ".txt");
-
-            using (StreamWriter writer = new StreamWriter(path))
-            {
-
-                foreach (string line in lines)
-                {
-                    writer.WriteLine(line);
-                }
-                writer.WriteLine(newLine);
-                writer.Close();
-            }
-
-        }
         private void LoadEventData()
         {
             AuthorsEvnings.Items.Clear();
-            AuthorsEvenings events = new();
-            List<AuthorsEvening> listOfEvents = events.GetEventList();
+            List<AuthorsEvening> listOfEvents = eveningsModel.GetEventList();
             foreach (AuthorsEvening e in listOfEvents)
             {
                 if (localAdmin.LibraryId == e.LibraryID)
@@ -324,19 +305,15 @@ namespace SystemBiblioteczny
 
         private void Approve_button(object sender, RoutedEventArgs e)
         {
-            AuthorsEvening evening = new();
-            evening = (AuthorsEvening)AuthorsEvnings.SelectedItem;
-            AuthorsEvenings evenings = new();
-            if (evening != null) evenings.ChangeApprovedToTrue(evening);
+            eveningModel = (AuthorsEvening)AuthorsEvnings.SelectedItem;
+            if (eveningModel != null) eveningsModel.ChangeApprovedToTrue(eveningModel);
             LoadEventData();
         }
 
         private void Reject_button(object sender, RoutedEventArgs e)
         {
-            AuthorsEvening evening = new();
-            evening = (AuthorsEvening)AuthorsEvnings.SelectedItem;
-            AuthorsEvenings evenings = new();
-            if (evening != null) evenings.RemoveFromList(evening);
+            eveningModel = (AuthorsEvening)AuthorsEvnings.SelectedItem;
+            if (eveningModel != null) eveningsModel.RemoveFromList(eveningModel);
             LoadEventData();
         }
     }
