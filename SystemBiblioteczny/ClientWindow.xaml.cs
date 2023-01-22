@@ -67,6 +67,8 @@ namespace SystemBiblioteczny
             if (newAuthorsEvening.TryAddToDataBase()) {
                 MessageBox.Show("Pomyślnie wysłano propozycję wieczorka autorskiego!");
             }
+
+            LoadEventData();
         }
 
 
@@ -161,6 +163,7 @@ namespace SystemBiblioteczny
         }
         private void LoadEventData()
         {
+            AuthorsEvenings.Items.Clear();
             AuthorsEvenings events = new();
             List<AuthorsEvening> listOfEvents = events.GetEventList();
             foreach (AuthorsEvening e in listOfEvents)
@@ -172,7 +175,12 @@ namespace SystemBiblioteczny
 
         private void WithDraw(object sender, RoutedEventArgs e)
         {
-
+            AuthorsEvening evening = new();
+            evening = (AuthorsEvening)AuthorsEvenings.SelectedItem;
+            AuthorsEvenings evenings = new();
+            //List<AuthorsEvening> list = evenings.GetEventList();
+            if(evening != null) evenings.RemoveFromList(evening);
+            LoadEventData();
         }
     }
 }

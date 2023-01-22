@@ -113,5 +113,26 @@ namespace SystemBiblioteczny.Models
             }
             return list;
         }
+
+
+        public void RemoveFromList(AuthorsEvening evening)
+        {
+            AuthorsEvenings e = new();
+            List<AuthorsEvening> listofevenings = e.GetEventList();
+            string path = System.IO.Path.Combine(Environment.CurrentDirectory, "../../../DataBases/AuthorsEveningList.txt");
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                for (int i = 0; i < listofevenings.Count; i++) {
+                    if (!evening.Equals(listofevenings[i])) {
+                        string text = listofevenings[i].Date.ToString();
+                        string[] splitted = text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                        writer.WriteLine(listofevenings[i].User + " " + listofevenings[i].FirstName + " " + listofevenings[i].LastName
+                    + " " + listofevenings[i].LibraryID + " " + splitted[0] + " "
+                    + " " + listofevenings[i].Hour + " " + listofevenings[i].PhoneNumber);
+                    }
+                }
+                writer.Close();
+            }
+        }
     }
 }
