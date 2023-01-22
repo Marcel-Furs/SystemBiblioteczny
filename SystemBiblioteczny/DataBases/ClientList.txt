@@ -5,4 +5,3 @@ ptasniemiec 1234 Wojt Pta wojtpta@polsl.de 112
 klient klient test test test@test 
 admin admin admin admin admin@admin 
 szczurwysyn szczuras1 Grzesiu Kolędra szczurwysyn@gmail.com 213742069
-monikab 1234 Monika Błaszczyk ajkdwa@nadwaw 

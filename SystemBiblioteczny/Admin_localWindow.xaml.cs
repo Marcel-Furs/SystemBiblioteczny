@@ -26,7 +26,7 @@ namespace SystemBiblioteczny
             localAdmin = userData;
             nazwaLabel.Content = localAdmin.UserName;
             numerLabel.Content = localAdmin.LibraryId;
-
+            LoadEventData();
             RefreshTableData();
         }
         private void Return(object sender, RoutedEventArgs e)
@@ -310,7 +310,34 @@ namespace SystemBiblioteczny
             }
 
         }
+        private void LoadEventData()
+        {
+            AuthorsEvnings.Items.Clear();
+            AuthorsEvenings events = new();
+            List<AuthorsEvening> listOfEvents = events.GetEventList();
+            foreach (AuthorsEvening e in listOfEvents)
+            {
+                if (localAdmin.LibraryId == e.LibraryID)
+                    AuthorsEvnings.Items.Add(e);
+            }
+        }
 
-        
+        private void Approve_button(object sender, RoutedEventArgs e)
+        {
+            AuthorsEvening evening = new();
+            evening = (AuthorsEvening)AuthorsEvnings.SelectedItem;
+            AuthorsEvenings evenings = new();
+            if (evening != null) evenings.ChangeApprovedToTrue(evening);
+            LoadEventData();
+        }
+
+        private void Reject_button(object sender, RoutedEventArgs e)
+        {
+            AuthorsEvening evening = new();
+            evening = (AuthorsEvening)AuthorsEvnings.SelectedItem;
+            AuthorsEvenings evenings = new();
+            if (evening != null) evenings.RemoveFromList(evening);
+            LoadEventData();
+        }
     }
 }

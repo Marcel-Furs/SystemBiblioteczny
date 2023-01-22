@@ -11,6 +11,26 @@
         <TabControl>
             <TabItem Header="Zarządzaj wieczorkami autorskimi">
                 <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="AuthorsEvnings" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="574" Height="387" Margin="7,5,0,0" IsReadOnly="true">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="#FFCCA2DC"/>
+                                <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                                <Setter Property="BorderBrush" Value="White"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn Header ="Zatwierdzony" Binding="{Binding Approved}" Width="80"/>
+                            <DataGridTextColumn Header ="Osoba zgłaszająca" Binding="{Binding User}" Width="100" />
+                            <DataGridTextColumn Header ="Imię autora" Binding="{Binding FirstName}" Width="80"/>
+                            <DataGridTextColumn Header ="Nazwisko autora" Binding="{Binding LastName}" Width="100"/>
+                            <DataGridTextColumn Header ="Data" Binding="{Binding Date}" Width="70" CanUserResize="False"/>
+                            <DataGridTextColumn Header ="Godzina" Binding="{Binding Hour}" Width="50"/>
+                            <DataGridTextColumn Header ="Numer Telefonu" Binding="{Binding PhoneNumber}" Width="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Content="Zatwierdź" HorizontalAlignment="Left" Margin="630,47,0,0" VerticalAlignment="Top" Height="42" Width="105" Click="Approve_button"/>
+                    <Button Content="Odrzuć" HorizontalAlignment="Left" Margin="630,119,0,0" VerticalAlignment="Top" Height="42" Width="105" Click="Reject_button"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Nowe książki">

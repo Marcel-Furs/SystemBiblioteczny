@@ -1,4 +1,2 @@
-nazwa Jan Kowalski 1 12.12.2023  17 123123123
-admin Adam Kowalski 1 12.12.2023  17 123123123
-jan Marcel Kowalski 1 12.12.2023  17 123123123
-admin Andrzej Kowalski 1 12.12.2023  17 123123123
+True jan Marcel Kowalski 1 12.12.2023  17 123123123
+True admin Andrzej Kowalski 1 12.12.2023  17 123123123

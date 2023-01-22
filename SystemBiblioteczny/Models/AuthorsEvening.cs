@@ -13,6 +13,7 @@ namespace SystemBiblioteczny.Models
 {
     public class AuthorsEvening
     {
+        public bool Approved { get; set; }
         public string User { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -20,7 +21,8 @@ namespace SystemBiblioteczny.Models
         public DateTime? Date { get; set; }
         public int Hour { get; set; }
         public string PhoneNumber { get; set; }
-        public AuthorsEvening(string owner, string firstname, string lastName, int id, DateTime? date, int hour, string phoneNumber) {
+        public AuthorsEvening(bool approved, string owner, string firstname, string lastName, int id, DateTime? date, int hour, string phoneNumber) {
+            Approved = approved;
             User = owner;
             FirstName = firstname;
             LastName = lastName;
