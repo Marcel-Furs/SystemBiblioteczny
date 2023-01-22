@@ -8,6 +8,12 @@ namespace SystemBiblioteczny.Models
 {
      class NetworkAdmin : Person
     {
+
+        public NetworkAdmin(string username, string password) {
+            this.UserName = username;
+            this.Password = password;
+         }
+
         public void AddLibrary(Library library) {
             Libraries lib = new Libraries();
             lib.AddLibraryToDB(library);

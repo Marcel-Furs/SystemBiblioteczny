@@ -24,7 +24,7 @@ namespace SystemBiblioteczny
     public partial class Admin_LocalWindow : Window
     {
 
-        LocalAdmin userDataFinal = new();
+       
 
 
         public Admin_LocalWindow(LocalAdmin userData)
@@ -32,7 +32,6 @@ namespace SystemBiblioteczny
             InitializeComponent();
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
-            userDataFinal = userData;
 
             nazwaLabel.Content = userData.UserName;
             numerLabel.Content = userData.LibraryId;
@@ -66,6 +65,8 @@ namespace SystemBiblioteczny
                         if (isAvailable == true) {
                             
                             string path = System.IO.Path.Combine("../../../DataBases/ExchangeBookList.txt");
+                            string path3 = System.IO.Path.Combine("../../../DataBases/LocalAdminList.txt");
+
                             List<string> lines = new();
                             using (StreamReader reader = new(path))
                             {
