@@ -24,9 +24,6 @@ namespace SystemBiblioteczny
     public partial class Admin_LocalWindow : Window
     {
 
-       
-
-
         public Admin_LocalWindow(LocalAdmin userData)
         {
             InitializeComponent();
