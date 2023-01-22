@@ -169,36 +169,7 @@ namespace SystemBiblioteczny.Methods
 
             return true;
         }
-       public void AddUserToDB(Client newClient)
-        {
-            string path = System.IO.Path.Combine("../../../DataBases/ClientList.txt");
-            List<string> lines = new();
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-
-                }
-                reader.Close();
-
-            }
-            using (StreamWriter writer = new StreamWriter(path))
-            {
-         
-                foreach (string line in lines)
-                {
-                    writer.WriteLine(line);
-                }
-                writer.WriteLine(newClient.UserName + " " + newClient.Password + " " + newClient.FirstName + " " + newClient.LastName + " " + newClient.Email + " " + newClient.Phone);
-                writer.Close();
-            }
-           
-
-        }
+      
         public bool CheckIfAllDataIsCorrectAndCanCreateAccount(string username, string password, string confirmPassword, string name, string lastname, string email)
         {
             bool unique = this.CheckIfUsernameIsUnique(username);
@@ -241,7 +212,6 @@ namespace SystemBiblioteczny.Methods
                 MessageBox.Show("Błędny format email!");
                 return false;
             }
-            //AddUserToDB(username, password);
             MessageBox.Show("Użytkownik został utworzony");
             return true;
         }

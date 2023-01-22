@@ -41,10 +41,11 @@ namespace SystemBiblioteczny
             var phoneNumber = RegisterPhoneNumber.Text;
             AccountBase.RoleTypeEnum role = AccountBase.RoleTypeEnum.Client;
             LoginMethod l = new();
+            AccountBase a = new();
             bool canProceed = l.CheckIfAllDataIsCorrectAndCanCreateAccount(username, password, confirmPassword, name, lastname, email);
             if (canProceed == false) return;
             Client newClient = new(username, password, name, lastname, email, phoneNumber);
-            l.AddUserToDB(newClient);
+            a.AddClientToList(newClient);
             ClientWindow clientwindow = new(newClient);
             clientwindow.Show();
             this.Close();
