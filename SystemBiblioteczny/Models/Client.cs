@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-     class Client : Person
+     public class Client : Person
     {
         public string? Statistics { get; set; }
 
@@ -18,6 +18,12 @@ namespace SystemBiblioteczny.Models
             UserName = userName;
             Email = email;
             Phone = phone;
+        }
+        public Client() { }
+
+        public Client(string? userName)
+        {
+            UserName = userName;
         }
 
         public void MakeReservation() { }

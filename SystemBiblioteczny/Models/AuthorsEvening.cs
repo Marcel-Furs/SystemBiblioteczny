@@ -13,24 +13,24 @@ namespace SystemBiblioteczny.Models
 {
     public class AuthorsEvening
     {
+        public string User { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int LibraryID { get; set; }
         public DateTime? Date { get; set; }
         public int Hour { get; set; }
-        public int Duration { get; set; }
         public string PhoneNumber { get; set; }
-        public AuthorsEvening(string firstname, string lastName, int id, DateTime? date, int hour, int duration, string phoneNumber) {
+        public AuthorsEvening(string owner, string firstname, string lastName, int id, DateTime? date, int hour, string phoneNumber) {
+            User = owner;
             FirstName = firstname;
             LastName = lastName;
             LibraryID = id;
             Date = date;
             Hour = hour;
-            Duration = duration;
             PhoneNumber = phoneNumber;
         }
 
-        public bool CheckIfCanAddToDataBase()
+        public bool TryAddToDataBase()
         {
             if (FirstName.Length < 2) {
                 MessageBox.Show("Imię autora powinno mieć przynajmniej 2 znaki!");
@@ -54,11 +54,6 @@ namespace SystemBiblioteczny.Models
             if (Hour > 22 || Hour < 8)
             {
                 MessageBox.Show("Podaj pełną godzinę od 8 do 22!");
-                return false;
-            }
-            if (Duration < 1 || Duration > 300) 
-            {
-                MessageBox.Show("Ustaw czas trwania jako liczbę z przedziału od 1 do 300!");
                 return false;
             }
             if (!Regex.Match(PhoneNumber, "^\\d{9}$").Success)
