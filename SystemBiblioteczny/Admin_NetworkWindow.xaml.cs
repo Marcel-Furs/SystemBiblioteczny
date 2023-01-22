@@ -24,6 +24,7 @@ namespace SystemBiblioteczny
         {
             InitializeComponent();
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            LoadLibrariesData();
         }
 
         private void Return(object sender, RoutedEventArgs e)
@@ -44,6 +45,16 @@ namespace SystemBiblioteczny
             City.Text = "";
             Street.Text = "";
             Number.Text = "";
+        }
+        private void LoadLibrariesData()
+        {
+            Libraries_Table.Items.Clear();
+            Libraries library = new();
+            List<Library> listOfEvents = library.GetListOfLibraries();
+            foreach (Library e in listOfEvents)
+            {
+                Libraries_Table.Items.Add(e);
+            }
         }
     }
 }

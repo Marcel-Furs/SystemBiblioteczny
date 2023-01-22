@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Shapes;
 
 namespace SystemBiblioteczny.Models
@@ -128,6 +129,29 @@ namespace SystemBiblioteczny.Models
                 return false;
             }
             return true;
+        }
+
+        internal List<Library> GetListOfLibraries()
+        {
+            AccountBase a = new();
+            List<String> listOfString = a.GetListOfDataBaseLines("Libraries");
+            List<Library> list = new();
+            for (int i = 0; i < listOfString.Count; i++)
+            {
+                string line = listOfString[i];
+
+                string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                int id = int.Parse(splitted[0]);
+                string city = splitted[1];
+                string street = splitted[2];
+                string local = splitted[3];
+
+                Library tmp = new(id, city, street, local);
+
+                list.Add(tmp);
+
+            }
+            return list;
         }
     }
     }
