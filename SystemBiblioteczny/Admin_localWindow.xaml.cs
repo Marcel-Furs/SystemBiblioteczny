@@ -1,19 +1,8 @@
-﻿using Accessibility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
@@ -23,298 +12,263 @@ namespace SystemBiblioteczny
     /// </summary>
     public partial class Admin_LocalWindow : Window
     {
-
+        private BookExchange bookExchangeModel = new();
+        private AccountBase accountModel = new();
+        private Books bookModel = new();
+        private LocalAdmin localAdmin = new();
+        private int bookFromGui = -1;
+        private int exchangeFromGui = -1;
         public Admin_LocalWindow(LocalAdmin userData)
         {
             InitializeComponent();
+
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-
-
-            nazwaLabel.Content = userData.UserName;
-            numerLabel.Content = userData.LibraryId;
+            localAdmin = userData;
+            nazwaLabel.Content = localAdmin.UserName;
+            numerLabel.Content = localAdmin.LibraryId;
 
             RefreshTableData();
         }
         private void Return(object sender, RoutedEventArgs e)
         {
-            MainWindow m= new();
+            MainWindow m = new();
             m.Show();
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void SendBook_Click(object sender, RoutedEventArgs e)
         {
-            if (SendBookLabel.Text == "") { SendBookLabel.Text = "-1"; }
-            BookExchange books = new();
-            List<BookExchange> listofBooks = books.GetExchangeBooksList();
+            RefreshTextBoxes();
+
+            List<BookExchange> listofBooks = bookExchangeModel.GetExchangeBooksList();
             bool info = false;
-            for(int i = 0; i < listofBooks.Count; i++)
+
+            for (int i = 0; i < listofBooks.Count; i++)
             {
                 int idExchange = listofBooks[i].ExchangeId;
-                int SendBookLabelInt = int.Parse(SendBookLabel.Text);
-                if (idExchange.CompareTo(SendBookLabelInt) == 0) {
+
+                if (idExchange.CompareTo(exchangeFromGui) == 0)
+                {
                     info = true;
-                    if ((numerLabel.Content).ToString()!.CompareTo(listofBooks[i].Id_Library.ToString()) == 0) {
-                        MessageBox.Show("Możesz wysyłać książki tylko do innych bibliotek");
+                    if (localAdmin.LibraryId.CompareTo(listofBooks[i].Id_Library) == 0) MessageBox.Show("Nie możesz wysłać książki do własnej biblioteki");
+                    else
+                    {
+                        if (listofBooks[i].Availability == true) SendBookIfAvaliable();
+                        else MessageBox.Show("Książka aktualnie nie jest dostępna");
                     }
-                    else { 
-                    bool isAvailable = listofBooks[i].Availability;
-                        if (isAvailable == true) {
-                            
-                            string path = System.IO.Path.Combine("../../../DataBases/ExchangeBookList.txt");
-                            string path3 = System.IO.Path.Combine("../../../DataBases/LocalAdminList.txt");
-
-                            List<string> lines = new();
-                            using (StreamReader reader = new(path))
-                            {
-                                var line = reader.ReadLine();
-
-                                while (line != null)
-                                {
-                                    lines.Add(line);
-                                    line = reader.ReadLine();
-
-                                }
-                                reader.Close();
-
-                            }
-                            using (StreamWriter writer = new StreamWriter(path))
-                            {
-                                for (int j = 0; j < lines.Count; j++) {
-                                   
-                                    string line = lines[j];
-                                    string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                                    int newId = int.Parse(splitted[0]);
-
-                                    int echangeId = int.Parse(splitted[0]);
-                                    int bookId = int.Parse(splitted[1]);
-                                    string newRequestor = splitted[2];
-                                   
-                                    string newAuthor = splitted[3];
-                                    string newTitle = splitted[4];
-                                    
-                                    int newIdLibrary = int.Parse(splitted[5]);
-
-
-                                    if (newId.CompareTo(SendBookLabelInt) == 0) {}
-                                    else if (echangeId > SendBookLabelInt) { writer.WriteLine((echangeId - 1)+" "+ bookId  + " " + newRequestor  + " " + newAuthor + " " + newTitle  + " " + newIdLibrary); }
-                                    else writer.WriteLine(line);
-                                }
-                              
-                                writer.Close();
-                            }
-
-                            MessageBox.Show("Wysłano książke");
-
-                            RefreshTableData();
-
-
-                        } 
-                    else MessageBox.Show("Książka aktualnie nie jest dostępna");
-                    }
-                } 
+                }
             }
-            if (info == false) { MessageBox.Show("Nie istnieje zlecenie o podanym id"); }
+            if (info == false) MessageBox.Show("Nie istnieje zlecenie o podanym id");
+
+        }
+        private void SendBookIfAvaliable()
+        {
+            string path = System.IO.Path.Combine("../../../DataBases/ExchangeBookList.txt");
+            List<string> lines = accountModel.GetListOfDataBaseLines("ExchangeBookList");
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                for (int j = 0; j < lines.Count; j++)
+                {
+
+                    string line = lines[j];
+                    string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                    int newId = int.Parse(splitted[0]);
+                    int echangeId = int.Parse(splitted[0]);
+                    int bookId = int.Parse(splitted[1]);
+                    string newRequestor = splitted[2];
+                    string newAuthor = splitted[3];
+                    string newTitle = splitted[4];
+                    int newIdLibrary = int.Parse(splitted[5]);
+
+
+                    if (newId.CompareTo(exchangeFromGui) == 0) { }
+                    else if (echangeId > exchangeFromGui) { writer.WriteLine((echangeId - 1) + " " + bookId + " " + newRequestor + " " + newAuthor + " " + newTitle + " " + newIdLibrary); }
+                    else writer.WriteLine(line);
+                }
+
+                writer.Close();
+            }
+
+            MessageBox.Show("Wysłano książke");
+
+            RefreshTableData();
 
         }
 
         private void RequestForABook(object sender, RoutedEventArgs e)
         {
-            string bookId = RequestBookLabel.Text;
-            if (bookId == "") MessageBox.Show("Proszę podać wartość");
-            else {
-                if (SendBookLabel.Text == "") { SendBookLabel.Text = "-1"; }
-                Books books = new();
-                List<Book> listofBooks = books.GetBooksList();
-               
-                for (int i = 0; i < listofBooks.Count; i++)
+            RefreshTextBoxes();
+
+            List<Book> listofBooks = bookModel.GetBooksList();
+
+            for (int i = 0; i < listofBooks.Count; i++)
+            {
+                int idBookFromList = listofBooks[i].Id_Book;
+
+                if (idBookFromList.CompareTo(bookFromGui) == 0)
                 {
-                    int idBookFromList = listofBooks[i].Id_Book;
-                    int idBookFromGui = int.Parse(bookId);
-                    if (idBookFromList.CompareTo(idBookFromGui) == 0)
+
+                    if (localAdmin.LibraryId.CompareTo(listofBooks[i].Id_Library) == 0) MessageBox.Show("Możesz wysyłać prośby o książki tylko z innych bibliotek");
+                    else
                     {
-                        
-                        if ((numerLabel.Content).ToString()!.CompareTo(listofBooks[i].Id_Library.ToString()) == 0)
-                        {
-                            MessageBox.Show("Możesz wysyłać prośby tylko do innych bibliotek");
-                        }
+                        if (listofBooks[i].Availability == false) MessageBox.Show("Możesz wysyłać prośby dotyczące tylko dostępnych książek");
                         else
                         {
-                            if (listofBooks[i].Availability == false) { MessageBox.Show("Możesz wysyłać prośby dotyczące tylko dostępnych książek"); }
-                            else {
-                                string path = System.IO.Path.Combine("../../../DataBases/ExchangeBookList.txt");
-                                string path2 = System.IO.Path.Combine("../../../DataBases/BookList.txt");
-                                List<string> lines = new();
-                                using (StreamReader reader = new(path))
-                                {
-                                    var line = reader.ReadLine();
+                            List<string> lines = accountModel.GetListOfDataBaseLines("ExchangeBookList");
 
-                                    while (line != null)
-                                    {
-                                        lines.Add(line);
-                                        line = reader.ReadLine();
+                            int echangeId = lines.Count + 1;
+                            int bnewBookId = listofBooks[i].Id_Book;
+                            string newRequestor = localAdmin.UserName!;
+                            string newAuthor = listofBooks[i].Author;
+                            string newTitle = listofBooks[i].Title;
+                            int newIdLibrary = listofBooks[i].Id_Library;
 
-                                    }
-                                    reader.Close();
-
-                                }
-                                using (StreamWriter writer = new StreamWriter(path))
-                                {
-                                    foreach (string line in lines)
-                                    {
-                                        writer.WriteLine(line);
-                                    }
-
-                                    int echangeId = lines.Count + 1;
-                                    int bnewBookId = listofBooks[i].Id_Book;
-                                    string newRequestor = nazwaLabel.Content.ToString()!;
-
-                                    string newAuthor = listofBooks[i].Author;
-                                    string newTitle = listofBooks[i].Title;
-
-                                    int newIdLibrary = listofBooks[i].Id_Library;
-
-                                    writer.WriteLine(echangeId + " " + bnewBookId + " " + newRequestor + " " + newAuthor + " " + newTitle + " " + newIdLibrary);
-                                    writer.Close();
-                                }
-
-                                
-                                using (StreamWriter writer = new StreamWriter(path2))
-                                {
-                                   
-  
-                                    for (int k = 0; k < listofBooks.Count; k++) {
-                                      
-                                        if (idBookFromGui == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book+" "+ listofBooks[k].Author+" "+ listofBooks[k].Title+" "+ "False" + " "+ listofBooks[k].Id_Library);
-                                        else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
-                                    }
-                                    writer.Close();
-
-                                    
-                                   
-                                }
-
-                                MessageBox.Show("Wysłano prośbę");
-
-                                RefreshTableData();
-
-                            }
-
+                            accountModel.WriteToDataBase("ExchangeBookList", echangeId + " " + bnewBookId + " " + newRequestor + " " + newAuthor + " " + newTitle + " " + newIdLibrary);
+                            SendBookRequestIfAvaliable();
 
                         }
+
                     }
                 }
-               
+
             }
         }
-        void RefreshTableData() {
-            BookExchange books3 = new();
-            List<BookExchange> listofBooks3 = books3.GetExchangeBooksList();
+        private void SendBookRequestIfAvaliable()
+        {
+
+            List<Book> listofBooks = bookModel.GetBooksList();
+            string path2 = System.IO.Path.Combine("../../../DataBases/BookList.txt");
+            using (StreamWriter writer = new StreamWriter(path2))
+            {
+                for (int k = 0; k < listofBooks.Count; k++)
+                {
+
+                    if (bookFromGui == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "False" + " " + listofBooks[k].Id_Library);
+                    else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
+                }
+                writer.Close();
+            }
+
+            MessageBox.Show("Wysłano prośbę");
+
+            RefreshTableData();
+        }
+        void RefreshTableData()
+        {
+            List<BookExchange> listofExchangeBooks = bookExchangeModel.GetExchangeBooksList();
+            List<Book> listofBooks = bookModel.GetBooksList();
+
             TableExchangeBooks.Items.Clear();
-            foreach (BookExchange e3 in listofBooks3)
-            {
-                TableExchangeBooks.Items.Add(e3);
-            }
-            TableExchangeBooks.IsReadOnly = true;
-            Books books5 = new();
-            List<Book> listofBooks5 = books5.GetBooksList();
             TableBooks.Items.Clear();
-            foreach (Book e5 in listofBooks5)
+
+            foreach (BookExchange bookExchange in listofExchangeBooks)
             {
-                TableBooks.Items.Add(e5);
+                TableExchangeBooks.Items.Add(bookExchange);
             }
+
+            foreach (Book book in listofBooks)
+            {
+                TableBooks.Items.Add(book);
+            }
+
+            TableExchangeBooks.IsReadOnly = true;
             TableBooks.IsReadOnly = true;
         }
 
         private void CancelRequestButton(object sender, RoutedEventArgs e)
         {
-            if (SendBookLabel.Text == "") { SendBookLabel.Text = "-1"; }
-            BookExchange books = new();
-            List<BookExchange> listofBooks = books.GetExchangeBooksList();
+            RefreshTextBoxes();
+
+            List<BookExchange> listofBooks = bookExchangeModel.GetExchangeBooksList();
             bool info = false;
+
             for (int i = 0; i < listofBooks.Count; i++)
             {
                 int idExchange = listofBooks[i].ExchangeId;
-                int SendBookLabelInt = int.Parse(SendBookLabel.Text);
-                if (idExchange.CompareTo(SendBookLabelInt) == 0)
+
+                if (idExchange.CompareTo(exchangeFromGui) == 0)
                 {
                     info = true;
-                    if ((numerLabel.Content).ToString()!.CompareTo(listofBooks[i].Id_Library.ToString()) != 0)
-                    {
-                        MessageBox.Show("Możesz odrzucać prośby tylko do swojej biblioteki");
-                    }
+                    if (localAdmin.LibraryId.CompareTo(listofBooks[i].Id_Library) != 0) MessageBox.Show("Możesz odrzucać prośby wysłane tylko do swojej biblioteki");
                     else
                     {
-                       
-                            
-                            string path = System.IO.Path.Combine("../../../DataBases/ExchangeBookList.txt");
-                            string path2 = System.IO.Path.Combine("../../../DataBases/BookList.txt");
-                            List<string> lines = new();
-                            using (StreamReader reader = new(path))
-                            {
-                                var line = reader.ReadLine();
-
-                                while (line != null)
-                                {
-                                    lines.Add(line);
-                                    line = reader.ReadLine();
-
-                                }
-                                reader.Close();
-
-                            }
                         int BookIdToDelete = -1;
-                            using (StreamWriter writer = new StreamWriter(path))
+                        string path = System.IO.Path.Combine("../../../DataBases/BookList.txt");
+                        BookIdToDelete = RejectBookIfAvaliable(BookIdToDelete);
+
+                        using (StreamWriter writer = new StreamWriter(path))
+                        {
+                            for (int k = 0; k < listofBooks.Count; k++)
                             {
-                                for (int j = 0; j < lines.Count; j++)
-                                {
 
-                                    string line = lines[j];
-                                    string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                                    int newId = int.Parse(splitted[0]);
-
-                                    int echangeId = int.Parse(splitted[0]);
-                                    int bookId = int.Parse(splitted[1]);
-                                    string newRequestor = splitted[2];
-
-                                    string newAuthor = splitted[3];
-                                    string newTitle = splitted[4];
-
-                                    int newIdLibrary = int.Parse(splitted[5]);
-
-
-                                    if (newId.CompareTo(SendBookLabelInt) == 0) { BookIdToDelete = bookId; }
-                                    else if (echangeId > SendBookLabelInt) { writer.WriteLine((echangeId - 1) + " " + bookId + " " + newRequestor + " " + newAuthor + " " + newTitle + " " + newIdLibrary); }
-                                    else writer.WriteLine(line);
-                                }
-
-                                writer.Close();
+                                if (BookIdToDelete == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "True" + " " + listofBooks[k].Id_Library);
+                                else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
                             }
-
-                            MessageBox.Show("Odrzucono prośbę");
-                            using (StreamWriter writer = new StreamWriter(path2))
-                            {
-                                
-                                for (int k = 0; k < listofBooks.Count; k++)
-                                {
-
-                                    if (BookIdToDelete == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "True" + " " + listofBooks[k].Id_Library);
-                                    else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
-                                }
-                                writer.Close();
-
-
-
-                            }
-
-                            RefreshTableData();
-
-
-                        
+                            writer.Close();
+                        }
+                        MessageBox.Show("Odrzucono prośbę");
+                        RefreshTableData();
                     }
                 }
             }
             if (info == false) { MessageBox.Show("Nie istnieje zlecenie o podanym id"); }
+        }
+        private int RejectBookIfAvaliable(int BookIdToDelete)
+        {
+
+            string path = System.IO.Path.Combine("../../../DataBases/ExchangeBookList.txt");
+            List<string> lines = accountModel.GetListOfDataBaseLines("ExchangeBookList");
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                for (int j = 0; j < lines.Count; j++)
+                {
+                    string line = lines[j];
+                    string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                    int newId = int.Parse(splitted[0]);
+                    int echangeId = int.Parse(splitted[0]);
+                    int bookId = int.Parse(splitted[1]);
+                    string newRequestor = splitted[2];
+                    string newAuthor = splitted[3];
+                    string newTitle = splitted[4];
+                    int newIdLibrary = int.Parse(splitted[5]);
+
+
+                    if (newId.CompareTo(exchangeFromGui) == 0) { BookIdToDelete = bookId; }
+                    else if (echangeId > exchangeFromGui) { writer.WriteLine((echangeId - 1) + " " + bookId + " " + newRequestor + " " + newAuthor + " " + newTitle + " " + newIdLibrary); }
+                    else writer.WriteLine(line);
+                }
+
+                writer.Close();
+            }
+            return BookIdToDelete;
+        }
+
+        private void RequestBookLabel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(RequestBookLabel.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                RequestBookLabel.Text = RequestBookLabel.Text.Remove(RequestBookLabel.Text.Length - 1);
+            }
+        }
+
+        private void SendBookLabel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(SendBookLabel.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                SendBookLabel.Text = SendBookLabel.Text.Remove(SendBookLabel.Text.Length - 1);
+            }
+        }
+
+        private void RefreshTextBoxes()
+        {
+            if (SendBookLabel.Text == "") { SendBookLabel.Text = "0"; }
+            if (RequestBookLabel.Text == "") { RequestBookLabel.Text = "0"; }
+            bookFromGui = int.Parse(RequestBookLabel.Text);
+            exchangeFromGui = int.Parse(SendBookLabel.Text);
         }
     }
 }

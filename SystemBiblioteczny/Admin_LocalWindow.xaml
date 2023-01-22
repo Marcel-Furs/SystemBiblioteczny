@@ -32,7 +32,7 @@
                         </DataGrid.Columns>
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Background" Value="DarkMagenta"/>
+                                <Setter Property="Background" Value="#FFCCA2DC"/>
                                 <Setter Property="BorderThickness" Value="0,0,1,2"/>
                                 <Setter Property="BorderBrush" Value="White"/>
                             </Style>
@@ -59,10 +59,10 @@
                     <Label x:Name="nazwaLabel" Content="nazwa" HorizontalAlignment="Left" Margin="670,271,0,0" VerticalAlignment="Top" Width="114"/>
                     <Label Content="Numer biblioteki" HorizontalAlignment="Left" Margin="670,305,0,0" VerticalAlignment="Top" Width="114"/>
                     <Label x:Name="numerLabel" Content="numer" HorizontalAlignment="Left" Margin="670,336,0,0" VerticalAlignment="Top" Width="101"/>
-                    <Button x:Name="SendBook" Content="Wyślij dostępną książkę" HorizontalAlignment="Left" Margin="500,293,0,0" VerticalAlignment="Top" Click="Button_Click" Height="40" Width="149" Background="#FFCCA2DC"/>
+                    <Button x:Name="SendBook" Content="Wyślij dostępną książkę" HorizontalAlignment="Left" Margin="500,293,0,0" VerticalAlignment="Top" Click="SendBook_Click" Height="40" Width="149" Background="#FFCCA2DC"/>
                     <Label Content="Id wymiany" HorizontalAlignment="Left" Margin="500,217,0,0" VerticalAlignment="Top" Width="149"/>
-                    <TextBox x:Name="SendBookLabel" HorizontalAlignment="Left" Margin="500,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="149"/>
-                    <TextBox x:Name="RequestBookLabel" HorizontalAlignment="Left" Margin="320,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="149"/>
+                    <TextBox x:Name="SendBookLabel" HorizontalAlignment="Left" Margin="500,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="149" TextChanged="SendBookLabel_TextChanged"/>
+                    <TextBox x:Name="RequestBookLabel" HorizontalAlignment="Left" Margin="320,266,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="149" TextChanged="RequestBookLabel_TextChanged"/>
                     <Label Content="Id książki" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Width="144"/>
                     <Button x:Name="CancelRequest" Content="Odrzuć prośbę o książkę" HorizontalAlignment="Left" Margin="500,348,0,0" VerticalAlignment="Top" Click="CancelRequestButton" Height="27" Width="149" Background="#FFCCA2DC"/>
                     <Button x:Name="RequestBook" Content="Poproś o książkę"  HorizontalAlignment="Left" Margin="320,293,0,0" VerticalAlignment="Top" Click="RequestForABook" Height="40" Width="149" Background="#FFCCA2DC"/>

@@ -5,7 +5,5 @@
 5 12 x Juliusz_Słowacki Kordian 4
 6 11 x Bolesław_Prus Kamizelka 3
 7 8 x Henryk_Sienkiewicz Krzyżacy 1
-8 1 x Adam_Mickiewicz Dziady_3 1
-9 8 x Henryk_Sienkiewicz Krzyżacy 1
-10 7 x Henryk_Sienkiewicz Potop 1
-11 5 x Franz_Kafka Przemiana 3
+8 8 x Henryk_Sienkiewicz Krzyżacy 1
+9 5 x Franz_Kafka Przemiana 3
