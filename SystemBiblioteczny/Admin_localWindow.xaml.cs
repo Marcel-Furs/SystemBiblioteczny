@@ -311,24 +311,6 @@ namespace SystemBiblioteczny
 
         }
 
-        //public void AddBookToListAndDeleteFromApplications(Book book)
-        //{
-        //    WriteToDataBase("BookList", book.UserName + " " + book.Password + " " + book.LibraryId);
-
-        //    string path = System.IO.Path.Combine("../../../DataBases/ClientList.txt");
-        //    List<string> lines = GetListOfDataBaseLines("ClientList");
-        //    using (StreamWriter writer = new StreamWriter(path))
-        //    {
-        //        for (int i = 0; i < lines.Count; i++)
-        //        {
-        //            string line = lines[i];
-        //            string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-        //            string userName = splitted[0];
-        //            if (userName.CompareTo(librarian.UserName) == 0) { }
-        //            else { writer.WriteLine(line); }
-        //        }
-        //        writer.Close();
-        //    }
-        //}
+        
     }
 }
