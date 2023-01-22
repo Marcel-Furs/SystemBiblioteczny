@@ -9,7 +9,7 @@
     <Grid>
 
         <TabControl>
-            <TabItem Header="Zarządzaj wieczorkami autorskimi">
+            <TabItem Header="Wieczorki Autorskie">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="AuthorsEvnings" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="574" Height="387" Margin="7,5,0,0" IsReadOnly="true">
                         <DataGrid.Resources>

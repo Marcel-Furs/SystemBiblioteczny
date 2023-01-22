@@ -8,7 +8,7 @@
         Title="Logowanie" Height="432" Width="786" MaxWidth="800" MaxHeight="450" MinWidth="800" MinHeight="450">
     <Grid>
         <Grid.Background>
-            <ImageBrush Stretch="UniformToFill" ImageSource="/kot.jpg" TileMode="Tile"/>
+            <ImageBrush Stretch="UniformToFill" TileMode="None" ImageSource="/kot1.jpg"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>

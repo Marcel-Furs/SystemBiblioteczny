@@ -18,7 +18,10 @@
 
             </TabItem>
             <TabItem Header="Zgłoś zapotrzebowanie">
-                <Grid Background="White">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/tlo2.jpg"/>
+                    </Grid.Background>
 
                     <Button Content="Wyślij zgłoszenie" Click="SendApplication" HorizontalAlignment="Left" Margin="188,317,0,0" VerticalAlignment="Top" Height="49" Width="106"/>
                     <Label Content="Dane książki do zamówienia:" FontSize="16" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="48" Width="294"/>

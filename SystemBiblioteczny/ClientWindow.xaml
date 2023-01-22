@@ -107,7 +107,11 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Statystyki">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/tlo1.jpg"/>
+                    </Grid.Background>
+                </Grid>
             </TabItem>
             <TabItem Header="Ustawienia">
                 <Button Content="Wyloguj" Height="39" Click="Return" Margin="106,0,547,0"/>
