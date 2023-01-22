@@ -29,6 +29,7 @@ namespace SystemBiblioteczny.Models
             Hour = hour;
             PhoneNumber = phoneNumber;
         }
+        public AuthorsEvening() { }
 
         public bool TryAddToDataBase()
         {
@@ -63,6 +64,16 @@ namespace SystemBiblioteczny.Models
             }
             a.Add(this);
             return true;
+        }
+
+        internal void AddToDataBase()
+        {
+            AuthorsEvenings a = new(); 
+            a.Add(this);
+        }
+        public bool Equals(AuthorsEvening? other) {
+            if (other is null) return false;
+            return FirstName == other.FirstName && LastName == other.LastName && Date == other.Date && Hour == other.Hour && LibraryID == other.LibraryID && PhoneNumber == other.PhoneNumber;
         }
     }
 }
