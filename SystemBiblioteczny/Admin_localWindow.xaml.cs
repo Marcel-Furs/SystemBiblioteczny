@@ -266,7 +266,25 @@ namespace SystemBiblioteczny
             }
             return BookIdToDelete;
         }
+        private void TableExchangeBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BookExchange book = (BookExchange)TableExchangeBooks.SelectedItem;
+            if (book != null)
+            {
+                SendBookLabel.Text = book.ExchangeId.ToString();
+                RequestBookLabel.Text = book.Id_Book.ToString();
+            } 
+        }
 
+        private void TableBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Book book = (Book)TableBooks.SelectedItem;
+            if (book != null)
+            {
+                SendBookLabel.Text = "0";
+                RequestBookLabel.Text = book.Id_Book.ToString();
+            }
+        }
         private void RequestBookLabel_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(RequestBookLabel.Text, "[^0-9]"))
@@ -306,15 +324,16 @@ namespace SystemBiblioteczny
         private void Approve_button(object sender, RoutedEventArgs e)
         {
             eveningModel = (AuthorsEvening)AuthorsEvnings.SelectedItem;
-            if (eveningModel != null) eveningsModel.ChangeApprovedToTrue(eveningModel);
+           // if (eveningModel != null) eveningsModel.ChangeApprovedToTrue(eveningModel);
             LoadEventData();
         }
 
         private void Reject_button(object sender, RoutedEventArgs e)
         {
             eveningModel = (AuthorsEvening)AuthorsEvnings.SelectedItem;
-            if (eveningModel != null) eveningsModel.RemoveFromList(eveningModel);
+           // if (eveningModel != null) eveningsModel.RemoveFromList(eveningModel);
             LoadEventData();
         }
+
     }
 }

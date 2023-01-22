@@ -62,7 +62,7 @@
             </TabItem>
             <TabItem Header="Wymień się książkami">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="TableExchangeBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="784" Height="203" >
+                    <DataGrid x:Name="TableExchangeBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="784" Height="203" SelectionChanged="TableExchangeBooks_SelectionChanged" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header =""  Width="30"/>
                             <DataGridTextColumn Header ="Id wymiany" Binding="{Binding ExchangeId}" Width="90"/>
@@ -80,7 +80,7 @@
                             </Style>
                         </DataGrid.Resources>
                     </DataGrid>
-                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="300" Height="169" Margin="0,227,0,0" >
+                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="300" Height="169" Margin="0,227,0,0" SelectionChanged="TableBooks_SelectionChanged" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="20"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="80"/>
@@ -108,6 +108,7 @@
                     <Label Content="Id książki" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Width="144"/>
                     <Button x:Name="CancelRequest" Content="Odrzuć prośbę o książkę" HorizontalAlignment="Left" Margin="500,348,0,0" VerticalAlignment="Top" Click="CancelRequestButton" Height="27" Width="149" Background="#FFCCA2DC"/>
                     <Button x:Name="RequestBook" Content="Poproś o książkę"  HorizontalAlignment="Left" Margin="320,293,0,0" VerticalAlignment="Top" Click="RequestForABook" Height="40" Width="149" Background="#FFCCA2DC"/>
+                    <Label x:Name="Labellabel" Content="Label" HorizontalAlignment="Left" Margin="394,375,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Wygeneruj raport">
