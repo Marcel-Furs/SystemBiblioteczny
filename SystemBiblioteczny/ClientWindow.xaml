@@ -117,7 +117,7 @@
                     <Label Content="Wypożczone książki:" HorizontalAlignment="Left" Margin="51,87,0,0" VerticalAlignment="Top"/>
                     <Label Content="Saldo konta" HorizontalAlignment="Left" Margin="339,87,0,0" VerticalAlignment="Top"/>
                     <Label Content="Label" HorizontalAlignment="Left" Margin="631,87,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="Name_S" HorizontalAlignment="Left" Margin="259,40,0,0" TextWrapping="Wrap" Text="IMIE"  VerticalAlignment="Top" Width="59" TextChanged="TextBox_TextChanged" IsReadOnly="True"/>
+                    <TextBox x:Name="Name_S" HorizontalAlignment="Left" Margin="259,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="59" TextChanged="TextBox_TextChanged" IsReadOnly="True"/>
                     <TextBox HorizontalAlignment="Left" Margin="339,40,0,0" TextWrapping="Wrap" Text="NAZWISKO" VerticalAlignment="Top" Width="120" IsReadOnly="True" TextChanged="TextBox_TextChanged_1"/>
 
                 </Grid>

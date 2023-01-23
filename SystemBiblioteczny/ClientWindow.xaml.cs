@@ -30,6 +30,7 @@ namespace SystemBiblioteczny
             InitializeComponent();
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             loggedUser = user;
+            
             Books books = new();
             List<Book> listofBooks = books.GetBooksList();
             foreach (Book e in listofBooks)
