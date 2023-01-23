@@ -71,10 +71,11 @@
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
+                            <DataGridTextColumn Header ="Id bib." Binding="{Binding LibraryId}" Width="36" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Nazwa użytkownika" Binding="{Binding UserName}" Width="140" IsReadOnly="True"/>
-                            <DataGridTextColumn Header ="Imię" Binding="{Binding FirstName}" Width="130" IsReadOnly="True"/>
-                            <DataGridTextColumn Header ="Nazwisko" Binding="{Binding LastName}" Width="130" IsReadOnly="True"/>
-                            <DataGridTextColumn Header ="Numer biblioteki" Binding="{Binding LibraryId}" Width="112" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Imię" Binding="{Binding FirstName}" Width="110" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Nazwisko" Binding="{Binding LastName}" Width="110" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Email" Binding="{Binding Email}" Width="120" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <TextBox HorizontalAlignment="Left" Margin="29,245,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="213"/>

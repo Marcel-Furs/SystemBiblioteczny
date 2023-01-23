@@ -164,6 +164,7 @@ namespace SystemBiblioteczny.Models
             return list;
 
         }
+
         private List<LocalAdmin> LocalAdminList() {
 
             List<LocalAdmin> list = new();
@@ -176,9 +177,15 @@ namespace SystemBiblioteczny.Models
 
                 string username = splitted[0];
                 string password = splitted[1];
-                int newIdLibrary = int.Parse(splitted[2]);
+                string firstName = splitted[2];
+                string lastName = splitted[3];
+                string email = splitted[4];
+                int newIdLibrary = int.Parse(splitted[5]);
+                string phone;
+                if (splitted.Length < 7) phone = "";
+                else phone = splitted[6];
 
-                LocalAdmin admin = new(username,password,newIdLibrary);
+                LocalAdmin admin = new(username, password, firstName, lastName, email, newIdLibrary, phone);
                 list.Add(admin);
 
             }
@@ -198,9 +205,15 @@ namespace SystemBiblioteczny.Models
 
                 string username = splitted[0];
                 string password = splitted[1];
-                int newIdLibrary = int.Parse(splitted[2]);
+                string firstName = splitted[2];
+                string lastName = splitted[3];
+                string email = splitted[4];
+                int newIdLibrary = int.Parse(splitted[5]);
+                string phone;
+                if (splitted.Length < 7) phone = "";
+                else phone = splitted[6];
 
-                Librarian librarian = new(username, password, newIdLibrary);
+                Librarian librarian = new(username, password, firstName, lastName, email, newIdLibrary, phone);
                 list.Add(librarian);
 
             }
@@ -220,8 +233,14 @@ namespace SystemBiblioteczny.Models
 
                 string username = splitted[0];
                 string password = splitted[1];
+                string firstName = splitted[2];
+                string lastName = splitted[3];
+                string email = splitted[4];
+                string phone;
+                if (splitted.Length < 6) phone = "";
+                else phone = splitted[5];
 
-                NetworkAdmin admin = new(username, password);
+                NetworkAdmin admin = new(username, password, firstName, lastName, email, phone);
                 list.Add(admin);
 
             }

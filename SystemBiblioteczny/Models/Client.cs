@@ -10,20 +10,20 @@ namespace SystemBiblioteczny.Models
     {
         public string? Statistics { get; set; }
 
-        public Client(string userName, string password, string firstName, string lastName, string email, string phone)
+        public Client(string UserName, string Password, string FirstName, string LastName, string Email, string Phone)
         {
-            FirstName = firstName;
-            LastName = lastName;
-            Password = password;
-            UserName = userName;
-            Email = email;
-            Phone = phone;
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+            this.Password = Password;
+            this.UserName = UserName;
+            this.Email = Email;
+            this.Phone = Phone;
         }
         public Client() { }
 
-        public Client(string? userName)
+        public Client(string? UserName)
         {
-            UserName = userName;
+            this.UserName = UserName;
         }
 
         public void MakeReservation() { }
