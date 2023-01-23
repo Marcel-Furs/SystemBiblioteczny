@@ -31,12 +31,12 @@
                     <RadioButton x:Name="OptAvailability" Content="" HorizontalAlignment="Left" Margin="697,68,0,0" VerticalAlignment="Top" Checked="OptAvailability_Checked"/>
                     <Label Content="Pokaż wszystkie książki" HorizontalAlignment="Left" Margin="430,10,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="22" />
                     <RadioButton x:Name="OptAll" Content="" HorizontalAlignment="Left" Margin="697,27,0,0" VerticalAlignment="Top" Checked="OptAll_Checked"/>
-                    <TextBox HorizontalAlignment="Left" Margin="545,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Wyszukaj po tytule lub autorze:" HorizontalAlignment="Left" Margin="430,252,0,0" VerticalAlignment="Top" FontSize="20"/>
+                    <TextBox x:Name="Find1" HorizontalAlignment="Left" Margin="545,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Find_TextChanged"/>
+                    <Label Content="Wyszukaj po tytule lub autorze:" HorizontalAlignment="Left" Margin="450,249,0,0" VerticalAlignment="Top" FontSize="20"/>
                     <RadioButton x:Name="OptAuthor" Content="Autor" HorizontalAlignment="Left" Margin="637,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.004,0.41" Checked="OptAuthor_Checked"/>
                     <RadioButton x:Name="OptTitle" Content="Tytuł" HorizontalAlignment="Left" Margin="506,168,0,0" VerticalAlignment="Top" Checked="OptTitle_Checked"/>
                     <Label Content="Sortuj po autorze lub tytule:" HorizontalAlignment="Left" Margin="430,114,0,0" VerticalAlignment="Top" FontSize="22"/>
-                    <Button Content="Wyszukaj" HorizontalAlignment="Left" Margin="718,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.13" Width="66" FontSize="14"/>
+                    <Button Content="Wyszukaj" HorizontalAlignment="Left" Margin="572,329,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.13" Width="66" FontSize="14" Click="Find"/>
                     <Button Content="Zarezerwuj" HorizontalAlignment="Left" Margin="142,303,0,0" VerticalAlignment="Top" Height="53" Width="134" FontSize="20" Click="Book"/>
                     <TextBox x:Name="RequestBookLabel"  HorizontalAlignment="Left" Margin="216,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" TextChanged="RequestBookLabel_TextChanged"/>
                     <Label Content="Id ksiązki:" HorizontalAlignment="Left" Margin="142,263,0,0" VerticalAlignment="Top"/>

@@ -135,6 +135,45 @@ namespace SystemBiblioteczny
             }
         }
 
+        private void Find_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void Find(object sender, RoutedEventArgs e)
+        {
+            Books books = new();
+            List<Book> listofBooks = books.GetBooksList();
+            bool info = false;
+
+            for (int i = 0; i < listofBooks.Count; i++)
+            {
+                if (listofBooks[i].Author == Find1.Text)
+                {
+                    TableBooks.Items.Clear();
+                    info = true;
+                    var find = listofBooks.Where(x => x.Author == Find1.Text).ToList();
+                    find.ForEach(x =>
+                    {
+                        TableBooks.Items.Add(x);
+
+                    });
+                }
+                if (listofBooks[i].Title == Find1.Text)
+                {
+                    TableBooks.Items.Clear();
+                    info = true;
+                    var find1 = listofBooks.Where(x => x.Title == Find1.Text).ToList();
+                    find1.ForEach(x =>
+                    {
+                     TableBooks.Items.Add(x);
+                    });
+                }
+                
+            }
+            if (info == false) { MessageBox.Show("Nie istnieje taki autor bądź tytuł w bazie danych"); }
+        }
+
         private void TableBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Book book = (Book)TableBooks.SelectedItem;
@@ -254,5 +293,6 @@ namespace SystemBiblioteczny
         {
 
         }
+
     }
 }
