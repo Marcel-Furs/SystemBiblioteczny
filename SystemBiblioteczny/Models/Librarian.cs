@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-     class Librarian : Person
+     public class Librarian : Person
     {
         public int LibraryId { get; set; }
         

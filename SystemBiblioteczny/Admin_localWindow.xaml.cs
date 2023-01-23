@@ -13,6 +13,7 @@ namespace SystemBiblioteczny
     /// </summary>
     public partial class Admin_LocalWindow : Window
     {
+        private ApplicationBook applicationBookModel = new();
         private BookExchange bookExchangeModel = new();
         private AccountBase accountModel = new();
         private Books bookModel = new();
@@ -31,6 +32,7 @@ namespace SystemBiblioteczny
             numerLabel.Content = localAdmin.LibraryId;
             LoadEventData();
             RefreshTableData();
+            RefreshTableApplicationsData();
         }
         private void Return(object sender, RoutedEventArgs e)
         {
@@ -196,6 +198,25 @@ namespace SystemBiblioteczny
 
             TableExchangeBooks.IsReadOnly = true;
             TableBooks.IsReadOnly = true;
+        }
+
+        void RefreshTableApplicationsData()
+        {
+            List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
+           
+
+            TableExchangeBooks.Items.Clear();
+            
+
+            foreach (ApplicationBook bookApplication in listofApplicationBooks)
+            {
+                NewApplicationsData.Items.Add(bookApplication);
+            }
+
+            
+
+            NewApplicationsData.IsReadOnly = true;
+            
         }
 
         private void CancelRequestButton(object sender, RoutedEventArgs e)

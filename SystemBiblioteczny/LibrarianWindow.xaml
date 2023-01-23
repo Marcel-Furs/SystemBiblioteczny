@@ -31,8 +31,6 @@
                     <TextBox x:Name="AuthorInput" HorizontalAlignment="Left" Margin="287,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157" Height="18"/>
                     <TextBox x:Name="TitleInput" HorizontalAlignment="Left" Margin="286,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
                     <TextBox x:Name="QuantityInput" HorizontalAlignment="Left" Margin="287,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
-                    <TextBox x:Name="UsernameInput" HorizontalAlignment="Left" Margin="286,257,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157" Height="18"/>
-                    <Label Content="Nazwa użytkownika zamawiającego:" FontSize="16" HorizontalAlignment="Left" Margin="13,251,0,0" VerticalAlignment="Top" Height="48" Width="268"/>
                 </Grid>
 
 

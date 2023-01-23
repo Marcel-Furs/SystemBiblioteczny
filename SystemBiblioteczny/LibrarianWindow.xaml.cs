@@ -23,10 +23,13 @@ namespace SystemBiblioteczny
     public partial class LibrarianWindow : Window
     {
         private AccountBase accountModel = new();
-        public LibrarianWindow()
+        private Librarian librarianModel = new();
+        public LibrarianWindow(Librarian userData)
         {
             InitializeComponent();
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            librarianModel = userData;
+            
         }
 
         private void Return(object sender, RoutedEventArgs e)
@@ -41,7 +44,7 @@ namespace SystemBiblioteczny
             var title = TitleInput.Text;
             var author = AuthorInput.Text;
             var quantity = QuantityInput.Text;
-            var librarian = UsernameInput.Text;
+            var librarian = librarianModel.UserName!;
             ApplicationBook applicationBook = new(title, author, quantity, librarian, false);
 
             

@@ -58,7 +58,7 @@ namespace SystemBiblioteczny.Methods
                         break;
                     case (AccountBase.RoleTypeEnum.Librarian):
                         {
-                            var person = new Person(newLogin, newPassword);
+                            Librarian person = new(newLogin, newPassword, firstName, lastName, email, newIdLibrary, phone);
                             list.Add(person);
                         }
                         break;
@@ -100,7 +100,8 @@ namespace SystemBiblioteczny.Methods
                                     clientwindow.Show();
                                 } break;
                             case (AccountBase.RoleTypeEnum.Librarian): {
-                                    LibrarianWindow librarianwindow = new();
+                                    Librarian userData = (Librarian)list[j];
+                                    LibrarianWindow librarianwindow = new(userData);
                                     librarianwindow.Show();
                                 } break;
                             case (AccountBase.RoleTypeEnum.LocalAdmin): {

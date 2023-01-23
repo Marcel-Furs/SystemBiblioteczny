@@ -40,11 +40,10 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header =""  Width="30"/>
 
-                                <DataGridTextColumn Header ="Imię autora" Binding="{Binding Author}" Width="160"/>
-                                <DataGridTextColumn Header ="Nazwisko autora" Binding="{Binding Author}" Width="160"/>
-                                <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="180"/>
-                                <DataGridTextColumn Header ="Ilość" Binding="{Binding RequestorUsername}" Width="100"/>
-                                <DataGridTextColumn Header ="Id biblioteki" Binding="{Binding Id_Library}" Width="90"/>
+                                <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="160"/>
+                                <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="160"/>
+                                <DataGridTextColumn Header ="Ilość" Binding="{Binding Quantity}" Width="180"/>
+                                <DataGridTextColumn Header ="Bibliotekarz zamawiający" Binding="{Binding Librarian}" Width="150"/>
                             </DataGrid.Columns>
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
