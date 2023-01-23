@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -151,7 +152,9 @@ namespace SystemBiblioteczny.Models
                 string firstName = splitted[2];
                 string lastName = splitted[3];
                 string email = splitted[4];
-                string phone = splitted[5];
+                string phone;
+                if (splitted.Length < 6) phone = ""; 
+                else phone = splitted[5];
 
                 Client client = new(username, password, firstName,lastName,email,phone);
                 list.Add(client);

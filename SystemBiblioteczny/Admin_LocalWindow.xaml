@@ -90,7 +90,7 @@
                         </DataGrid.Columns>
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Background" Value="Turquoise"/>
+                                <Setter Property="Background" Value="#FFF1D7F9"/>
                                 <Setter Property="BorderThickness" Value="0,0,1,2"/>
                                 <Setter Property="BorderBrush" Value="Black"/>
                             </Style>
@@ -108,7 +108,7 @@
                     <Label Content="Id książki" HorizontalAlignment="Center" Margin="0,217,0,0" VerticalAlignment="Top" Width="144"/>
                     <Button x:Name="CancelRequest" Content="Odrzuć prośbę o książkę" HorizontalAlignment="Left" Margin="500,348,0,0" VerticalAlignment="Top" Click="CancelRequestButton" Height="27" Width="149" Background="#FFCCA2DC"/>
                     <Button x:Name="RequestBook" Content="Poproś o książkę"  HorizontalAlignment="Left" Margin="320,293,0,0" VerticalAlignment="Top" Click="RequestForABook" Height="40" Width="149" Background="#FFCCA2DC"/>
-                    <Label x:Name="Labellabel" Content="Label" HorizontalAlignment="Left" Margin="394,375,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Podgląd kiążek" HorizontalAlignment="Left" Margin="113,202,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Wygeneruj raport">

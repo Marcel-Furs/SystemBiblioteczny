@@ -20,6 +20,7 @@ namespace SystemBiblioteczny
     /// </summary>
     public partial class Admin_NetworkWindow : Window
     {
+        private AccountBase accountModel = new();
         public Admin_NetworkWindow()
         {
             InitializeComponent();
@@ -57,6 +58,36 @@ namespace SystemBiblioteczny
                 Libraries_Table.Items.Add(e);
             }
         }
+        private void ShowClientList(object sender, RoutedEventArgs e)
+        {
+            Person_Table.Items.Clear();
+            List<Client> clients = accountModel.GetClientList();
+            foreach (Client c in clients) {
+                Person_Table.Items.Add(c);
+            }
+            Person_Table.IsReadOnly = true;
+        }
+        private void ShowLibrarianList(object sender, RoutedEventArgs e)
+        {
+            Person_Table.Items.Clear();
+            List<Librarian> librarians = accountModel.GetLibrarianList();
+            foreach (Librarian l in librarians)
+            {
+                Person_Table.Items.Add(l);
+            }
+            Person_Table.IsReadOnly = true;
+        }
+
+        private void ShowAdminList(object sender, RoutedEventArgs e)
+        {
+            Person_Table.Items.Clear();
+            List<LocalAdmin> admins = accountModel.GetLocalAdminList();
+            foreach (LocalAdmin a in admins)
+            {
+                Person_Table.Items.Add(a);
+            }
+            Person_Table.IsReadOnly = true;
+        }
 
         private void Remove_Library(object sender, RoutedEventArgs e)
         {
@@ -73,5 +104,6 @@ namespace SystemBiblioteczny
                 LoadLibrariesData();
             }
         }
+        
     }
 }
