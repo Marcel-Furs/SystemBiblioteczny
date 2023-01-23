@@ -20,6 +20,8 @@ namespace SystemBiblioteczny.Models
             this.LibraryId = LibraryId;
             this.Phone = Phone;
         }
+
+        public Librarian() { }
         public void RentBook() { }
 
         public void EndRental() { }

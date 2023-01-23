@@ -71,6 +71,9 @@ namespace SystemBiblioteczny
         }
         private void ShowLibrarianList(object sender, RoutedEventArgs e)
         {
+            ShowLibrarianListMethod();
+        }
+        private void ShowLibrarianListMethod() {
             Person_Table.Items.Clear();
             List<Librarian> librarians = accountModel.GetLibrarianList();
             foreach (Librarian l in librarians)
@@ -89,6 +92,37 @@ namespace SystemBiblioteczny
                 Person_Table.Items.Add(a);
             }
             Person_Table.IsReadOnly = true;
+        }
+        private void MakeClientAnLibrarian(object sender, RoutedEventArgs e)
+        {
+            List<Client> list = accountModel.GetClientList();
+            bool info = false;
+            for (int i = 0; i < list.Count; i++) {
+                if (list[i].UserName!.CompareTo(UserNameTextBox.Text) == 0) {
+                    info = true;
+                    if (IdLibraryLabel.Text == "") MessageBox.Show("Proszę wpisać poprawne id");
+                    else {
+                        int newLibId = int.Parse(IdLibraryLabel.Text);
+                        Librarian librarian = new(list[i].UserName!, list[i].Password!, list[i].FirstName!, list[i].LastName!, list[i].Email!, newLibId, list[i].Phone!);
+                        accountModel.AddLibrarianToListAndDeleteFromClients(librarian);
+                        ShowLibrarianListMethod();
+                    }
+
+
+                }
+            }
+            if (info == false) MessageBox.Show("Nie istnieje klient o podanej nazwie"); 
+
+        }
+
+        private void MakeClientAnAdmin(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MakePersonAnClient(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void Remove_Library(object sender, RoutedEventArgs e)
@@ -120,6 +154,15 @@ namespace SystemBiblioteczny
         private void Number_TextChanged(object sender, TextChangedEventArgs e)
         {
             Number.Text = loginMethod.EraseWhiteSpace(Number.Text);
+        }
+
+        private void IdLibraryLabel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(IdLibraryLabel.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                IdLibraryLabel.Text = IdLibraryLabel.Text.Remove(IdLibraryLabel.Text.Length - 1);
+            }
         }
     }
 }

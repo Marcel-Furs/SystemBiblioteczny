@@ -100,7 +100,7 @@ namespace SystemBiblioteczny.Models
         }
         public void AddLibrarianToListAndDeleteFromClients(Librarian librarian)
         {
-            WriteToDataBase("LibrarianList", librarian.UserName + " " + librarian.Password + " " + librarian.LibraryId);
+            WriteToDataBase("LibrarianList", librarian.UserName + " " + librarian.Password + " " + librarian.FirstName + " " + librarian.LastName + " " + librarian.Email + " " + librarian.LibraryId + " " + librarian.Phone);
 
             string path = System.IO.Path.Combine("../../../DataBases/ClientList.txt");
             List<string> lines = GetListOfDataBaseLines("ClientList");
@@ -119,7 +119,7 @@ namespace SystemBiblioteczny.Models
         }
         public void AddLocalAdminToListAndDeleteFromClients(LocalAdmin admin)
         {
-            WriteToDataBase("LibrarianList", admin.UserName + " " + admin.Password + " " + admin.LibraryId);
+            WriteToDataBase("LibrarianList", admin.UserName + " " + admin.Password + " " + admin.FirstName + " " + admin.LastName + " " + admin.Email + " " + admin.LibraryId + " " + admin.Phone);
 
             string path = System.IO.Path.Combine("../../../DataBases/ClientList.txt");
             List<string> lines = GetListOfDataBaseLines("ClientList");

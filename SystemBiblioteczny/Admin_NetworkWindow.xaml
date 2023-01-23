@@ -78,12 +78,13 @@
                             <DataGridTextColumn Header ="Email" Binding="{Binding Email}" Width="120" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBox HorizontalAlignment="Left" Margin="29,245,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="213"/>
+                    <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Margin="30,216,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="213"/>
                     <Label Content="Podaj nazwę użytkownika" HorizontalAlignment="Left" Margin="62,0,0,0" VerticalAlignment="Center" Width="147" Height="26"/>
-                    <Label Content="lub wybierz z listy" HorizontalAlignment="Left" Margin="82,211,0,0" VerticalAlignment="Top" Width="106" Height="29"/>
-                    <Button Content="Nadaj uprawnienia administratora lokalnego" HorizontalAlignment="Left" Margin="17,312,0,0" VerticalAlignment="Top" Height="25"/>
-                    <Button Content="Nadaj uprawnienia bibliotekarza" HorizontalAlignment="Left" Margin="17,287,0,0" VerticalAlignment="Top" Height="25" Width="239"/>
-                    <Button Content="Odbierz wszystkie uprawnienia użytkownika" HorizontalAlignment="Left" Margin="16,358,0,0" VerticalAlignment="Top" Height="25" Width="240"/>
+                    <Button Content="Nadaj uprawnienia administratora lokalnego" HorizontalAlignment="Left" Margin="17,312,0,0" VerticalAlignment="Top" Height="25" Click="MakeClientAnAdmin"/>
+                    <Button Content="Nadaj uprawnienia bibliotekarza" HorizontalAlignment="Left" Margin="17,287,0,0" VerticalAlignment="Top" Height="25" Width="239" Click="MakeClientAnLibrarian"/>
+                    <Button Content="Odbierz wszystkie uprawnienia użytkownika" HorizontalAlignment="Left" Margin="16,358,0,0" VerticalAlignment="Top" Height="25" Width="240" Click="MakePersonAnClient"/>
+                    <Label Content="Jeśli nadajesz uprawnienia podaj id biblioteki" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top" Width="256" Height="26"/>
+                    <TextBox x:Name="IdLibraryLabel" HorizontalAlignment="Left" Margin="30,264,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="213" TextChanged="IdLibraryLabel_TextChanged"/>
 
                 </Grid>
             </TabItem>
