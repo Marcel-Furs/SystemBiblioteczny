@@ -351,16 +351,7 @@ namespace SystemBiblioteczny
             // if (eveningModel != null) eveningsModel.RemoveFromList(eveningModel);
             LoadEventData();
         }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-        private void RejectApplicationButton()
-=======
         private void ShowClientList(object sender, RoutedEventArgs e)
->>>>>>> c038e7922cdc924b058252a0d5584b53ded113f6
-=======
-        private void ShowClientList(object sender, RoutedEventArgs e)
->>>>>>> c038e7922cdc924b058252a0d5584b53ded113f6
         {
             ShowClientListMethod();
         }

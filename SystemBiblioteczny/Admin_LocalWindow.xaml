@@ -54,8 +54,8 @@
                             </DataGrid.Resources>
                         </DataGrid>
                     </Grid>
-                    <Button x:Name="OrderBooksFromApplication" Content="Zamów" HorizontalAlignment="Left" Margin="42,223,0,0" VerticalAlignment="Top" Height="34" Width="99" Click="OrderBookFromApplication"/>
-                    <Button x:Name="RejectApplicationForBooks" Content="Odrzuć" HorizontalAlignment="Left" Margin="172,223,0,0" VerticalAlignment="Top" Height="34" Width="99" Click="RejectApplicationButton"/>
+                    <Button  Content="Zamów" HorizontalAlignment="Left" Margin="42,223,0,0" VerticalAlignment="Top" Height="34" Width="99" />
+                    <Button  Content="Odrzuć" HorizontalAlignment="Left" Margin="172,223,0,0" VerticalAlignment="Top" Height="34" Width="99"/>
 
                 </Grid>
             </TabItem>
