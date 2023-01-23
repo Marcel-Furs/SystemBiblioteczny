@@ -36,7 +36,7 @@
             <TabItem Header="Nowe książki">
                 <Grid Background="#FFE5E5E5">
                     <Grid>
-                        <DataGrid x:Name="NewBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="784" Height="203" >
+                        <DataGrid x:Name="NewApplicationsData" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="784" Height="203" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header =""  Width="30"/>
 

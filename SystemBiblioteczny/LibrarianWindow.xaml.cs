@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
 {
@@ -21,6 +22,7 @@ namespace SystemBiblioteczny
     /// </summary>
     public partial class LibrarianWindow : Window
     {
+        private AccountBase accountModel = new();
         public LibrarianWindow()
         {
             InitializeComponent();
@@ -37,45 +39,20 @@ namespace SystemBiblioteczny
         private void SendApplication(object sender, RoutedEventArgs e)
         {
             var title = TitleInput.Text;
-            var authorsName = NameInput.Text;
-            var authorsSurname = SurnameInput.Text;
+            var author = AuthorInput.Text;
             var quantity = QuantityInput.Text;
+            var librarian = UsernameInput.Text;
+            ApplicationBook applicationBook = new(title, author, quantity, librarian, false);
 
             
 
-            
-
-            if (title.Any() && authorsName.Any() && authorsSurname.Any() && quantity.Any())
+            if (title.Any() && author.Any()  && quantity.Any())
             {
-                MessageBox.Show("Wysłano zgłoszenie zapotrzebowania na: " + "\n" + authorsName + " " + authorsSurname + " " + title + " - ilość: " + quantity);
+                MessageBox.Show("Wysłano zgłoszenie zapotrzebowania na: " + "\n" + author + " " + title + " - ilość: " + quantity);
 
 
-
-                string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
-                List<string> lines = new();
-                using (StreamReader reader = new(path))
-                {
-                    var line = reader.ReadLine();
-
-                    while (line != null)
-                    {
-                        lines.Add(line);
-                        line = reader.ReadLine();
-
-                    }
-                    reader.Close();
-
-                }
-                using (StreamWriter writer = new StreamWriter(path))
-                {
-
-                    foreach (string line in lines)
-                    {
-                        writer.WriteLine(line);
-                    }
-                    writer.WriteLine(NameInput.Text + " " + SurnameInput.Text + " " + TitleInput.Text + " " + QuantityInput.Text);
-                    writer.Close();
-                }
+                List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
+                accountModel.WriteToDataBase("BookApplicationList", TitleInput.Text + " " + AuthorInput.Text + " " + QuantityInput.Text + " " + librarian + " " + false);
             }
             else
             {
