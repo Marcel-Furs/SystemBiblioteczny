@@ -1,2 +1,3 @@
-False jan  Marcel Kowalski 0 12.12.2023 17 123123123
-False admin  Andrzej Kowalski 0 12.12.2023 17 123123123
+False jan  Marcel Kowalski 1 12.12.2023 17 123123123
+False admin  Andrzej Kowalski 2 12.12.2023 17 123123123
+False admin Magdalena Dziubosz 1 21.01.2023  13 123123123

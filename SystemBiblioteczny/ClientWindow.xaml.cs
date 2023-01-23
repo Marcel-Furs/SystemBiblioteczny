@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
@@ -22,6 +23,7 @@ namespace SystemBiblioteczny
     public partial class ClientWindow : Window
     {
         Client loggedUser = new();
+        LoginMethod loginMethod = new();
         public ClientWindow(Client user)
         {
             InitializeComponent();
@@ -181,6 +183,32 @@ namespace SystemBiblioteczny
             //List<AuthorsEvening> list = evenings.GetEventList();
            // if(evening != null) evenings.RemoveFromList(evening);
             LoadEventData();
+        }
+
+        private void AuthorsName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AuthorsName.Text = loginMethod.EraseWhiteSpace(AuthorsName.Text);
+        }
+
+        private void AuthorsLastname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            AuthorsLastname.Text = loginMethod.EraseWhiteSpace(AuthorsLastname.Text);
+        }
+
+        private void LibraryID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LibraryID.Text = loginMethod.EraseWhiteSpace(LibraryID.Text);
+        }
+
+        private void EventTime_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EventTime.Text = loginMethod.EraseWhiteSpace(EventTime.Text);
+        }
+
+        private void ContactNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ContactNumber.Text = loginMethod.EraseWhiteSpace(ContactNumber.Text);
         }
     }
 }
