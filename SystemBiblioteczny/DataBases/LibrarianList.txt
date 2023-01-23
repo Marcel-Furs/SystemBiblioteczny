@@ -1,4 +1,4 @@
-﻿macibol 123 1
-jankoc 123 2
-admin admin 1
-admin2 admin2 2
+macibol 123  1
+jankoc 123  0
+admin admin  1
+admin2 admin2  0

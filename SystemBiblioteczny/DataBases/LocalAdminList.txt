@@ -1,6 +1,6 @@
-﻿magddzi 123 1
-milokur 123 1
-andrmas 123 1
-marcfur 123 2
-jakusko 123 2
-admin admin 1
+magddzi 123  1
+milokur 123  0
+andrmas 123  3
+marcfur 123  4
+jakusko 123  5
+admin admin  1
