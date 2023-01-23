@@ -229,5 +229,30 @@ namespace SystemBiblioteczny
            // if(evening != null) evenings.RemoveFromList(evening);
             LoadEventData();
         }
+
+        private void AuthorsName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void AuthorsLastname_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void LibraryID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void EventTime_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ContactNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
