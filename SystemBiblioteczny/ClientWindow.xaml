@@ -114,12 +114,36 @@
             </TabItem>
             <TabItem Header="Statystyki">
                 <Grid>
-                    <Label Content="Wypożczone książki:" HorizontalAlignment="Left" Margin="51,87,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Saldo konta" HorizontalAlignment="Left" Margin="339,87,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Label" HorizontalAlignment="Left" Margin="631,87,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="Name_S" HorizontalAlignment="Left" Margin="259,40,0,0" TextWrapping="Wrap" Text="IMIE"  VerticalAlignment="Top" Width="59" TextChanged="TextBox_TextChanged" IsReadOnly="True"/>
-                    <TextBox HorizontalAlignment="Left" Margin="339,40,0,0" TextWrapping="Wrap" Text="NAZWISKO" VerticalAlignment="Top" Width="120" IsReadOnly="True" TextChanged="TextBox_TextChanged_1"/>
+                    <Label Content="Wypożczone książki:" HorizontalAlignment="Left" Margin="115,100,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Czy są zaległe książki?" HorizontalAlignment="Left" Margin="601,113,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="Name_S" HorizontalAlignment="Left" Margin="265,40,0,0" TextWrapping="Wrap" Text=""  VerticalAlignment="Top" Width="95"  IsReadOnly="True" RenderTransformOrigin="0.499,0.72"/>
+                    <TextBox x:Name="Lastname_S" HorizontalAlignment="Left" Margin="397,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" IsReadOnly="True" />
 
+                    <DataGrid x:Name="TableBooks1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="457" Height="229" SelectionChanged="TableBooks_SelectionChanged" Margin="0,167,0,0" RenderTransformOrigin="0.5,0.5" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="120" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Id biblioteki" Binding="{Binding Id_Library}" Width="65" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Dzień wypożyczenia:" Binding="{Binding DateTime1}" Width="110" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="Turquoise"/>
+                                <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleY="0.33"/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="1.28"/>
+                            </TransformGroup>
+                        </DataGrid.RenderTransform>
+                    </DataGrid>
+                    <TextBox x:Name="statusBook" HorizontalAlignment="Left" Margin="601,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Ustawienia">

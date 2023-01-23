@@ -95,7 +95,7 @@ namespace SystemBiblioteczny.Methods
                         switch (role)
                         {
                             case (AccountBase.RoleTypeEnum.Client): {
-                                    Client userData = new(list[j].UserName);
+                                    Client userData = new(list[j].UserName, list[j].Password, list[j].FirstName, list[j].LastName, list[j].Email, list[j].Phone);
                                     ClientWindow clientwindow = new(userData);
                                     clientwindow.Show();
                                 } break;
