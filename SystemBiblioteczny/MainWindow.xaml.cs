@@ -23,6 +23,7 @@ namespace SystemBiblioteczny
 
     public partial class MainWindow : Window
     {
+        LoginMethod loginMethod = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -82,43 +83,36 @@ namespace SystemBiblioteczny
 
         private void RegisterUsername_TextChanged(object sender, TextChangedEventArgs e)
         {
-            LoginMethod l = new();
-            RegisterUsername.Text = l.EraseWhiteSpace(RegisterUsername.Text);
+            RegisterUsername.Text = loginMethod.EraseWhiteSpace(RegisterUsername.Text);
         }
 
         private void RegisterName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            LoginMethod l = new();
-            RegisterName.Text = l.EraseWhiteSpace(RegisterName.Text);
+            RegisterName.Text = loginMethod.EraseWhiteSpace(RegisterName.Text);
         }
 
         private void RegisterLastname_TextChanged(object sender, TextChangedEventArgs e)
         {
-            LoginMethod l = new();
-            RegisterLastname.Text = l.EraseWhiteSpace(RegisterLastname.Text);
+            RegisterLastname.Text = loginMethod.EraseWhiteSpace(RegisterLastname.Text);
         }
 
         private void RegisterEmailAddress_TextChanged(object sender, TextChangedEventArgs e)
         {
-            LoginMethod l = new();
-            RegisterEmailAddress.Text = l.EraseWhiteSpace(RegisterEmailAddress.Text);
+            RegisterEmailAddress.Text = loginMethod.EraseWhiteSpace(RegisterEmailAddress.Text);
         }
 
         private void RegisterPhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
-            LoginMethod l = new();
-            RegisterPhoneNumber.Text = l.EraseWhiteSpace(RegisterPhoneNumber.Text);
+            RegisterPhoneNumber.Text = loginMethod.EraseWhiteSpace(RegisterPhoneNumber.Text);
         }
 
         private void RegisterPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            LoginMethod l = new();
-            RegisterPassword.Password = l.EraseWhiteSpace(RegisterPassword.Password);
+            RegisterPassword.Password = loginMethod.EraseWhiteSpace(RegisterPassword.Password);
         }
         private void RegisterPasswordConfirm_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            LoginMethod l = new();
-            RegisterPasswordConfirmation.Password = l.EraseWhiteSpace(RegisterPasswordConfirmation.Password);
+            RegisterPasswordConfirmation.Password = loginMethod.EraseWhiteSpace(RegisterPasswordConfirmation.Password);
         }
     }
 }

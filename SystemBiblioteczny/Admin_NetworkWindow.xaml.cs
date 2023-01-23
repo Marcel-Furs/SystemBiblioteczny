@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
@@ -21,6 +22,7 @@ namespace SystemBiblioteczny
     public partial class Admin_NetworkWindow : Window
     {
         private AccountBase accountModel = new();
+        private LoginMethod loginMethod = new();
         public Admin_NetworkWindow()
         {
             InitializeComponent();
@@ -104,6 +106,20 @@ namespace SystemBiblioteczny
                 LoadLibrariesData();
             }
         }
-        
+
+        private void City_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            City.Text = loginMethod.EraseWhiteSpace(City.Text);
+        }
+
+        private void Street_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Street.Text = loginMethod.EraseWhiteSpace(Street.Text);
+        }
+
+        private void Number_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Number.Text = loginMethod.EraseWhiteSpace(Number.Text);
+        }
     }
 }

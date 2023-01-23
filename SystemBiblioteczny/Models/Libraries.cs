@@ -217,9 +217,12 @@ namespace SystemBiblioteczny.Models
                 string newDate = splitted[5];
                 int newHour = int.Parse(splitted[6]);
                 string newPhoneNumber = splitted[7];
-                if (libraryID == library.ID) libraryID = 0;
-                if (approved == true) approved = false;
-                listOfString[i] = approved + " " + username + "  " + authorsName + " " + authorsLastname + " " + libraryID + " " + newDate + " " + newHour + " " + newPhoneNumber;
+                if (libraryID == library.ID)
+                {
+                    listOfString.Remove(line);
+                }
+                else
+                    listOfString[i] = approved + " " + username + "  " + authorsName + " " + authorsLastname + " " + libraryID + " " + newDate + " " + newHour + " " + newPhoneNumber;
             }
             a.WriteDataBase("AuthorsEveningList", listOfString);
             listOfString = a.GetListOfDataBaseLines("LibrarianList");
