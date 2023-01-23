@@ -1,2 +1,3 @@
 Lokomotywa Jan_Brzechwa 15 admin False
-asd asd 12 admin False
+Lalunia Jan_Brzechwa 15 admin False
+Hej Jan_Brzechwa 15 admin True
