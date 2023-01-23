@@ -66,7 +66,7 @@ namespace SystemBiblioteczny
             }
             String phoneNumber = ContactNumber.Text;
 
-            AuthorsEvening newAuthorsEvening = new(false, loggedUser.UserName, name, lastname, libraryID, date, hour, phoneNumber);
+            AuthorsEvening newAuthorsEvening = new(false, loggedUser.UserName!, name, lastname, libraryID, date, hour, phoneNumber);
             if (newAuthorsEvening.TryAddToDataBase()) {
                 MessageBox.Show("Pomyślnie wysłano propozycję wieczorka autorskiego!");
             }
