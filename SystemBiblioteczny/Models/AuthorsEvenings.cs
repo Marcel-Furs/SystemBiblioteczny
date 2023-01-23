@@ -33,7 +33,7 @@ namespace SystemBiblioteczny.Models
                 string line = lines[i];
 
                 string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                if (int.Parse(splitted[1]) == id) return true;
+                if (int.Parse(splitted[0]) == id) return true;
             }
             return false;
         }

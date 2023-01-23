@@ -335,6 +335,10 @@ namespace SystemBiblioteczny
             LoadEventData();
         }
 
+        private void DisplayNewApplications()
+        {
+
+        }
 
     }
 }

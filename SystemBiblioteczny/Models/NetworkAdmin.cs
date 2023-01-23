@@ -9,10 +9,15 @@ namespace SystemBiblioteczny.Models
      class NetworkAdmin : Person
     {
 
-        public NetworkAdmin(string username, string password) {
-            this.UserName = username;
-            this.Password = password;
-         }
+        public NetworkAdmin(string UserName, string Password, string FirstName, string LastName, string Email, string Phone)
+        {
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+            this.Password = Password;
+            this.UserName = UserName;
+            this.Email = Email;
+            this.Phone = Phone;
+        }
 
         public void AddLibrary(Library library) {
             Libraries lib = new Libraries();

@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
@@ -23,6 +24,7 @@ namespace SystemBiblioteczny
     {
         Client loggedUser = new();
         private int bookFromGui = -1;
+        LoginMethod loginMethod = new();
         public ClientWindow(Client user)
         {
             InitializeComponent();
@@ -224,9 +226,8 @@ namespace SystemBiblioteczny
             evening = (AuthorsEvening)AuthorsEvenings.SelectedItem;
             AuthorsEvenings evenings = new();
             //List<AuthorsEvening> list = evenings.GetEventList();
-            if(evening != null) evenings.RemoveFromList(evening);
+           // if(evening != null) evenings.RemoveFromList(evening);
             LoadEventData();
         }
-
     }
 }

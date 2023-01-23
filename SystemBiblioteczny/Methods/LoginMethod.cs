@@ -16,44 +16,37 @@ namespace SystemBiblioteczny.Methods
 {
     class LoginMethod
     {
+        private AccountBase accountModel = new();
         public bool CheckLogin(string Login, string Password, AccountBase.RoleTypeEnum role)
         {
             bool Logged = false;
-
-            List<Person> list = new();
-            List<string> lines = new();
-            string path = "";
+            string file = "";
 
             switch (role) {
-                case (AccountBase.RoleTypeEnum.Client):path = System.IO.Path.Combine("../../../DataBases/ClientList.txt"); break;
-                case (AccountBase.RoleTypeEnum.Librarian): path = System.IO.Path.Combine("../../../DataBases/LibrarianList.txt"); break;
-                case (AccountBase.RoleTypeEnum.LocalAdmin): path = System.IO.Path.Combine("../../../DataBases/LocalAdminList.txt"); break;
-                case (AccountBase.RoleTypeEnum.NetworkAdmin): path = System.IO.Path.Combine("../../../DataBases/NetworkAdminList.txt"); break;
+                case (AccountBase.RoleTypeEnum.Client):file = "ClientList" ; break;
+                case (AccountBase.RoleTypeEnum.Librarian): file = "LibrarianList"; break;
+                case (AccountBase.RoleTypeEnum.LocalAdmin): file = "LocalAdminList"; break;
+                case (AccountBase.RoleTypeEnum.NetworkAdmin): file = "NetworkAdminList"; break;
             }
 
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
+            List<Person> list = new();
+            List<string> lines = accountModel.GetListOfDataBaseLines(file);
 
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-
-                }
-                reader.Close();
-
-            }
 
             for (int i = 0; i < lines.Count; i++)
             {
                 string line = lines[i];
-
                 string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
 
                 string newLogin = splitted[0];
                 string newPassword = splitted[1];
-
+                string firstName = splitted[2];
+                string lastName = splitted[3];
+                string email = splitted[4];
+                int newIdLibrary = 0;
+                if (splitted.Length >= 6) newIdLibrary = int.Parse(splitted[5]);
+                string phone = "";
+                if (splitted.Length >= 7) phone = splitted[6];
 
                 switch (role)
                 {
@@ -71,8 +64,7 @@ namespace SystemBiblioteczny.Methods
                         break;
                     case (AccountBase.RoleTypeEnum.LocalAdmin):
                         {
-                            int libraryId = int.Parse( splitted[2]);
-                            var person = new LocalAdmin(newLogin, newPassword, libraryId);
+                            LocalAdmin person = new(newLogin, newPassword, firstName, lastName, email, newIdLibrary, phone);
                             list.Add(person);
                         }
                         break;

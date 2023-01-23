@@ -1,4 +1,4 @@
-macibol 123  1
-jankoc 123  0
-admin admin  1
-admin2 admin2  0
+macibol2 123 macibol Zaw tomazaw@brak.zasad 1 999
+admin admin Admin Amdmin admin@admin.pl 2 998
+ptasniemiec3 1234 Wojt Pta wojtpta@polsl.de 2 997
+zawada1 1234 Toma Zaw tomazaw@brak.zasad 2 997
