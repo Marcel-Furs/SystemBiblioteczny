@@ -73,6 +73,7 @@ namespace SystemBiblioteczny
                 Person_Table.Items.Add(c);
             }
             Person_Table.IsReadOnly = true;
+            TabelaName.Content = "Tabela pokazująca listę klientów";
         }
         private void ShowLibrarianList(object sender, RoutedEventArgs e)
         {
@@ -86,6 +87,7 @@ namespace SystemBiblioteczny
                 Person_Table.Items.Add(l);
             }
             Person_Table.IsReadOnly = true;
+            TabelaName.Content = "Tabela pokazująca listę bibliotekarzy";
         }
 
         private void ShowAdminList(object sender, RoutedEventArgs e)
@@ -100,6 +102,7 @@ namespace SystemBiblioteczny
                 Person_Table.Items.Add(a);
             }
             Person_Table.IsReadOnly = true;
+            TabelaName.Content = "Tabela pokazująca listę administratorów lokalnych";
         }
         private void MakeClientAnLibrarian(object sender, RoutedEventArgs e)
         {
