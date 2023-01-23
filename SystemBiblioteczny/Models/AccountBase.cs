@@ -77,6 +77,21 @@ namespace SystemBiblioteczny.Models
             }
 
         }
+        public void WriteDataBase(string fileName, List<string> lines)
+        {
+            string path = System.IO.Path.Combine("../../../DataBases/" + fileName + ".txt");
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+
+                foreach (string line in lines)
+                {
+                    writer.WriteLine(line);
+                }
+                writer.Close();
+            }
+
+        }
 
         public void AddClientToList(Client client) {
 

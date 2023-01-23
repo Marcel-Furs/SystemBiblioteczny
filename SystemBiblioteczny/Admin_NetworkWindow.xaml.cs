@@ -46,6 +46,7 @@ namespace SystemBiblioteczny
             City.Text = "";
             Street.Text = "";
             Number.Text = "";
+            LoadLibrariesData();
         }
         private void LoadLibrariesData()
         {
@@ -86,6 +87,17 @@ namespace SystemBiblioteczny
                 Person_Table.Items.Add(a);
             }
             Person_Table.IsReadOnly = true;
+        }
+
+        private void Remove_Library(object sender, RoutedEventArgs e)
+        {
+            Library library = new();
+            library = (Library)Libraries_Table.SelectedItem;
+            if (library != null) {
+                Libraries libraries = new();
+                libraries.ChangeIdTo0(library);
+            }
+            LoadLibrariesData();
         }
         
     }

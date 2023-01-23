@@ -1,3 +1,3 @@
-1 2 admin Henryk_Sienkiewicz Potop 2
-2 2 admin Henryk_Sienkiewicz Potop 2
-3 4 admin Juliusz_Słowacki Kordian 4
+1 2  admin Henryk_Sienkiewicz  Potop 1
+2 2  admin Henryk_Sienkiewicz  Potop 0
+3 4  admin Juliusz_Słowacki  Kordian 3

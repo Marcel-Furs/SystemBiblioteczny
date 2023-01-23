@@ -179,7 +179,7 @@ namespace SystemBiblioteczny
             evening = (AuthorsEvening)AuthorsEvenings.SelectedItem;
             AuthorsEvenings evenings = new();
             //List<AuthorsEvening> list = evenings.GetEventList();
-          //  if(evening != null) evenings.RemoveFromList(evening);
+            if(evening != null) evenings.RemoveFromList(evening);
             LoadEventData();
         }
     }
