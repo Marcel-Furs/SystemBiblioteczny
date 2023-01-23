@@ -294,5 +294,14 @@ namespace SystemBiblioteczny
 
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Name_S.Text = loggedUser.UserName;
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

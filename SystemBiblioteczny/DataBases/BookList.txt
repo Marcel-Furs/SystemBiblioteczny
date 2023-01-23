@@ -10,7 +10,7 @@
 10 Henryk_Sienkiewicz Potop True 3
 11 Bolesław_Prus Kamizelka True 4
 12 Juliusz_Słowacki Kordian True 5
-13 Henryk_Sienkiewicz Krzyżacy True 1
+13 Henryk_Sienkiewicz Krzyżacy False 1
 14 Adam_Mickiewicz Dziady_3 True 0
 15 Henryk_Sienkiewicz Krzyżacy False 3
 16 Franz_Kafka Przemiana True 4
