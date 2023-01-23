@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,9 +63,13 @@ namespace SystemBiblioteczny
         }
         private void ShowClientList(object sender, RoutedEventArgs e)
         {
+            ShowClientListMethod();
+        }
+        private void ShowClientListMethod() {
             Person_Table.Items.Clear();
             List<Client> clients = accountModel.GetClientList();
-            foreach (Client c in clients) {
+            foreach (Client c in clients)
+            {
                 Person_Table.Items.Add(c);
             }
             Person_Table.IsReadOnly = true;
@@ -144,7 +149,59 @@ namespace SystemBiblioteczny
 
         private void MakePersonAnClient(object sender, RoutedEventArgs e)
         {
+            List<LocalAdmin> admins = accountModel.GetLocalAdminList();
+            List<Librarian> librarians = accountModel.GetLibrarianList();
+            Client client = new();
+            
+            bool info = false;
+            AccountBase.RoleTypeEnum role = AccountBase.RoleTypeEnum.Client;
+            for (int i = 0; i < admins.Count; i++)
+            {
+                if (admins[i].UserName!.CompareTo(UserNameTextBox.Text) == 0)
+                {
+                    info = true;
+                    role = AccountBase.RoleTypeEnum.LocalAdmin;
+                    client = new(admins[i].UserName!, admins[i].Password!, admins[i].FirstName!, admins[i].LastName!, admins[i].Email!, admins[i].Phone!);
+                }
+            }
+            for (int i = 0; i < librarians.Count; i++)
+            {
+                if (librarians[i].UserName!.CompareTo(UserNameTextBox.Text) == 0)
+                {
+                    info = true;
+                    role = AccountBase.RoleTypeEnum.Librarian;
+                    client = new(librarians[i].UserName!, librarians[i].Password!, librarians[i].FirstName!, librarians[i].LastName!, librarians[i].Email!, librarians[i].Phone!);
+                }
+            }
+            if (info == true)
+            {
+                string path = "";
+                if (role == AccountBase.RoleTypeEnum.LocalAdmin) path = System.IO.Path.Combine("../../../DataBases/LocalAdminList.txt");
+                if (role == AccountBase.RoleTypeEnum.Librarian) path =  System.IO.Path.Combine("../../../DataBases/LibrarianList.txt");
+               
+                List<string> lines = new();
+                if (role == AccountBase.RoleTypeEnum.LocalAdmin) lines = accountModel.GetListOfDataBaseLines("LocalAdminList");
+                if (role == AccountBase.RoleTypeEnum.Librarian) lines = accountModel.GetListOfDataBaseLines("LibrarianList");
 
+                using (StreamWriter writer = new StreamWriter(path))
+                {
+                    for (int i = 0; i < lines.Count; i++)
+                    {
+                        string line = lines[i];
+                        string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                        string userName = splitted[0];
+                        if (userName.CompareTo(UserNameTextBox.Text) == 0) { }
+                        else { writer.WriteLine(line); }
+                    }
+                    writer.Close();
+                }
+                accountModel.AddClientToList(client);
+                MessageBox.Show("Usunięto uprawnienia");
+                ShowClientListMethod();
+            }
+
+            if (info == false) MessageBox.Show("Nie istnieje osoba o podanej nazwie");
+           
         }
 
         private void Remove_Library(object sender, RoutedEventArgs e)

@@ -98,6 +98,7 @@ namespace SystemBiblioteczny.Models
             WriteToDataBase("ClientList", client.UserName+" "+client.Password+" "+client.FirstName+" "+client.LastName+" "+client.Email+" "+client.Phone);
 
         }
+
         public void AddLibrarianToListAndDeleteFromClients(Librarian librarian)
         {
             WriteToDataBase("LibrarianList", librarian.UserName + " " + librarian.Password + " " + librarian.FirstName + " " + librarian.LastName + " " + librarian.Email + " " + librarian.LibraryId + " " + librarian.Phone);
