@@ -10,7 +10,7 @@
         <TabControl>
             <TabItem Header="Zarezerwuj Książkę" >
                 <Grid>
-                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="418" Height="229" >
+                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="418" Height="229" SelectionChanged="TableBooks_SelectionChanged" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
@@ -38,7 +38,8 @@
                     <Label Content="Sortuj po autorze lub tytule:" HorizontalAlignment="Left" Margin="430,114,0,0" VerticalAlignment="Top" FontSize="22"/>
                     <Button Content="Wyszukaj" HorizontalAlignment="Left" Margin="718,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.13" Width="66" FontSize="14"/>
                     <Button Content="Zarezerwuj" HorizontalAlignment="Left" Margin="142,303,0,0" VerticalAlignment="Top" Height="53" Width="134" FontSize="20" Click="Book"/>
-                    <TextBox x:Name="RequestBookLabel" HorizontalAlignment="Left" Margin="59,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="RequestBookLabel"  HorizontalAlignment="Left" Margin="216,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" TextChanged="RequestBookLabel_TextChanged"/>
+                    <Label Content="Id ksiązki:" HorizontalAlignment="Left" Margin="142,263,0,0" VerticalAlignment="Top"/>
 
                 </Grid>
             </TabItem>

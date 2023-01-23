@@ -22,6 +22,7 @@ namespace SystemBiblioteczny
     public partial class ClientWindow : Window
     {
         Client loggedUser = new();
+        private int bookFromGui = -1;
         public ClientWindow(Client user)
         {
             InitializeComponent();
@@ -132,35 +133,79 @@ namespace SystemBiblioteczny
             }
         }
 
+        private void TableBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Book book = (Book)TableBooks.SelectedItem;
+            if (book != null)
+            {
+                RequestBookLabel.Text = book.Id_Book.ToString();
+            }
+        }
+
+        private void RequestBookLabel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(RequestBookLabel.Text, "[^0-9]"))
+           {
+                MessageBox.Show("Proszę wpisać numer.");
+                RequestBookLabel.Text = RequestBookLabel.Text.Remove(RequestBookLabel.Text.Length - 1);
+           }
+        }
+
+        private void RefreshTextBoxes()
+        {
+            if (RequestBookLabel.Text == "") { RequestBookLabel.Text = "0"; }
+            bookFromGui = int.Parse(RequestBookLabel.Text);;
+        }
         private void Book(object sender, RoutedEventArgs e)
         {
-            Book book = new();
-            book = (Book)TableBooks.SelectedItem;
+            RefreshTextBoxes();
+            //Book book = new();
+           // book = (Book)TableBooks.SelectedItem;
             Books books = new();
             List<Book> listofBooks = books.GetBooksList();
-            if (book.Availability == true)
+
+            bool info = false;
+
+            for (int i = 0; i < listofBooks.Count; i++)
             {
-                //string bookId = RequestBookLabel.Text;
-                int idBookFromGui = book.Id_Book;
-                string path2 = System.IO.Path.Combine("../../../DataBases/BookList.txt");
-                using (StreamWriter writer = new StreamWriter(path2))
+                int idSelected = listofBooks[i].Id_Book;
+
+                if (idSelected.CompareTo(bookFromGui) == 0)
                 {
-                    for (int k = 0; k < listofBooks.Count; k++)
+                    if (listofBooks[i].Availability == true)
                     {
-                        if (idBookFromGui == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "False" + " " + listofBooks[k].Id_Library);
-                        else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
+                        info = true;
+                        int idBookFromGui = bookFromGui;
+                        string path2 = System.IO.Path.Combine("../../../DataBases/BookList.txt");
+                        using (StreamWriter writer = new StreamWriter(path2))
+                        {
+                            for (int k = 0; k < listofBooks.Count; k++)
+                            {
+                                if (idBookFromGui == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "False" + " " + listofBooks[k].Id_Library);
+                                else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
+                            }
+                            writer.Close();
+                        }
+                        MessageBox.Show("Zarezerwowano ksiązkę!");
+                        UptodateTable();
                     }
-                    writer.Close();
-                }
-                MessageBox.Show("Zarezerwowano ksiązkę!");
-                TableBooks.Items.Clear();
-                foreach (var t in listofBooks)
-                {
-                    TableBooks.Items.Add(t);
+                    else { MessageBox.Show("Ta ksiązka jest niedostępna!"); info = true; }
                 }
             }
-            else MessageBox.Show("Ta książka nie jest dostępna!");
+            if (info == false) { MessageBox.Show("Nie istnieje książka o podanym id"); }
         }
+
+        private void UptodateTable()
+        {
+            TableBooks.Items.Clear();
+            Books books = new();
+            List<Book> listofBooks = books.GetBooksList();
+            foreach (var e in listofBooks)
+            {
+                TableBooks.Items.Add(e);
+            }
+        }
+
         private void LoadEventData()
         {
             AuthorsEvenings.Items.Clear();
@@ -182,5 +227,6 @@ namespace SystemBiblioteczny
             if(evening != null) evenings.RemoveFromList(evening);
             LoadEventData();
         }
+
     }
 }
