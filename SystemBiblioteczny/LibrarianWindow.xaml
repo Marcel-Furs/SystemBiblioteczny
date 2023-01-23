@@ -19,18 +19,18 @@
             </TabItem>
             <TabItem Header="Zgłoś zapotrzebowanie">
                 <Grid>
-                    <Grid.Background>
-                        <ImageBrush ImageSource="/tlo2.jpg"/>
-                    </Grid.Background>
+
 
                     <Button Content="Wyślij zgłoszenie" Click="SendApplication" HorizontalAlignment="Left" Margin="188,317,0,0" VerticalAlignment="Top" Height="49" Width="106"/>
-                    <Label Content="Dane książki do zamówienia:" FontSize="16" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="48" Width="294"/>
+                    <Label Content="Dane książki do zamówienia:" FontSize="16" HorizontalAlignment="Left" Margin="13,26,0,0" VerticalAlignment="Top" Height="48" Width="294"/>
                     <Label Content="Autor:" FontSize="16" HorizontalAlignment="Left" Margin="13,104,0,0" VerticalAlignment="Top" Height="48" Width="96"/>
                     <Label Content="Tytuł:" FontSize="16" HorizontalAlignment="Left" Margin="13,150,0,0" VerticalAlignment="Top" Height="48" Width="48"/>
                     <Label Content="Ilość potrzebnych sztuk:" FontSize="16" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Height="48" Width="181"/>
-                    <TextBox x:Name="AuthorInput" HorizontalAlignment="Left" Margin="287,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157" Height="18"/>
-                    <TextBox x:Name="TitleInput" HorizontalAlignment="Left" Margin="286,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
-                    <TextBox x:Name="QuantityInput" HorizontalAlignment="Left" Margin="287,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
+                    <TextBox x:Name="AuthorInput" HorizontalAlignment="Left" Margin="210,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157" Height="18"/>
+                    <TextBox x:Name="TitleInput" HorizontalAlignment="Left" Margin="210,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
+                    <TextBox x:Name="QuantityInput" HorizontalAlignment="Left" Margin="210,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
+                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="382,30,0,0"/>
+                    <Label Content="Zamówione książki gotowe do odebrania:" FontSize="16" HorizontalAlignment="Left" Margin="418,0,0,0" VerticalAlignment="Top" Height="48" Width="315"/>
                 </Grid>
 
 

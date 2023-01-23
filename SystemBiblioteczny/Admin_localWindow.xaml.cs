@@ -12,6 +12,7 @@ namespace SystemBiblioteczny
     /// </summary>
     public partial class Admin_LocalWindow : Window
     {
+        
         private ApplicationBook applicationBookModel = new();
         private BookExchange bookExchangeModel = new();
         private AccountBase accountModel = new();
@@ -21,6 +22,7 @@ namespace SystemBiblioteczny
         private AuthorsEvenings eveningsModel = new();
         private int bookFromGui = -1;
         private int exchangeFromGui = -1;
+        private string titleFromGui = "";
         public Admin_LocalWindow(LocalAdmin userData)
         {
             InitializeComponent();
@@ -204,11 +206,14 @@ namespace SystemBiblioteczny
         {
             List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
 
-            TableExchangeBooks.Items.Clear();
-
-            foreach (ApplicationBook bookApplication in listofApplicationBooks)
+            NewApplicationsData.Items.Clear();
+            for(int i = 0; i<listofApplicationBooks.Count; i++)
             {
-                NewApplicationsData.Items.Add(bookApplication);
+                ApplicationBook book = listofApplicationBooks[i];
+                if (book.Approved.CompareTo(true) == 0)
+                {
+                    
+                }else NewApplicationsData.Items.Add(book);
             }
 
             NewApplicationsData.IsReadOnly = true;
@@ -292,6 +297,85 @@ namespace SystemBiblioteczny
                 RequestBookLabel.Text = book.Id_Book.ToString();
             }
         }
+
+        private void NewApplicationsData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplicationBook book = (ApplicationBook)NewApplicationsData.SelectedItem;
+            if (book != null) titleFromGui = book.Title;
+        }
+
+        private void OrderBook(object sender, RoutedEventArgs e)
+        {
+            bool info = false;
+            if (titleFromGui == "") MessageBox.Show("Nie wybrano książki");
+            else
+            {
+                List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
+                for(int i = 0; i<list.Count; i++)
+                {
+                    
+                    string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
+                    List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
+
+                    using (StreamWriter writer = new StreamWriter(path))
+                    {
+                        for (int j = 0; j < lines.Count; j++)
+                        {
+                            string line = lines[j];
+                            if (list[j].Title.CompareTo(titleFromGui) == 0 && info == false)
+                            {
+                                writer.WriteLine(list[j].Title + " " + list[j].Author + " " + list[j].Quantity + " " + list[j].Librarian + " " + "True");
+                                info = true;
+                            }
+                            else writer.WriteLine(line);
+                        }
+
+                        writer.Close();
+                    }
+                    
+                }
+                RefreshTableApplicationsData();
+            }
+            
+            
+        }
+
+        private void RejectBook(object sender, RoutedEventArgs e)
+        {
+
+            bool info = false;
+            if (titleFromGui == "") MessageBox.Show("Nie wybrano książki");
+            else
+            {
+                List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
+                for (int i = 0; i < list.Count; i++)
+                {
+
+                    string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
+                    List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
+
+                    using (StreamWriter writer = new StreamWriter(path))
+                    {
+                        for (int j = 0; j < lines.Count; j++)
+                        {
+                            string line = lines[j];
+                            if (list[j].Title.CompareTo(titleFromGui) == 0 && info == false)
+                            {
+                                info = true; 
+                                
+                            }
+                            else writer.WriteLine(line);
+                        }
+
+                        writer.Close();
+                    }
+
+                }
+                RefreshTableApplicationsData();
+            }
+        }
+
+        
 
         private void TableBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -472,5 +556,7 @@ namespace SystemBiblioteczny
                 IdLibraryLabel.Text = IdLibraryLabel.Text.Remove(IdLibraryLabel.Text.Length - 1);
             }
         }
+
+        
     }
 }

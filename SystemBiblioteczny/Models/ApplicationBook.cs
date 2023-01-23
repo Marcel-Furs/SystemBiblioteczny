@@ -42,8 +42,9 @@ namespace SystemBiblioteczny.Models
                 string newAuthor = splitted[1];
                 string newQuantity = splitted[2];
                 string newRequestor = splitted[3];
+                bool newApproval = bool.Parse(splitted[4]);
 
-                ApplicationBook book = new(newTitle, newAuthor, newQuantity, newRequestor, false);
+                ApplicationBook book = new(newTitle, newAuthor, newQuantity, newRequestor, newApproval);
 
                 list.Add(book);
 

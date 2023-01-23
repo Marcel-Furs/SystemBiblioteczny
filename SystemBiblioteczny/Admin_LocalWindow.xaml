@@ -36,7 +36,7 @@
             <TabItem Header="Nowe książki">
                 <Grid Background="#FFE5E5E5">
                     <Grid>
-                        <DataGrid x:Name="NewApplicationsData" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="784" Height="203" >
+                        <DataGrid x:Name="NewApplicationsData" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="784" Height="203" SelectionChanged="NewApplicationsData_SelectionChanged" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header =""  Width="30"/>
 
@@ -54,8 +54,9 @@
                             </DataGrid.Resources>
                         </DataGrid>
                     </Grid>
-                    <Button  Content="Zamów" HorizontalAlignment="Left" Margin="42,223,0,0" VerticalAlignment="Top" Height="34" Width="99" />
-                    <Button  Content="Odrzuć" HorizontalAlignment="Left" Margin="172,223,0,0" VerticalAlignment="Top" Height="34" Width="99"/>
+                    <Button  Content="Zamów" HorizontalAlignment="Left" Margin="73,234,0,0" VerticalAlignment="Top" Height="34" Width="99" Click="OrderBook" />
+                    <Button  Content="Odrzuć" HorizontalAlignment="Left" Margin="201,234,0,0" VerticalAlignment="Top" Height="34" Width="99" Click="RejectBook"/>
+                    
 
                 </Grid>
             </TabItem>
