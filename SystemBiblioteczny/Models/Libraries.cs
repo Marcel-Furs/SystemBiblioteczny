@@ -155,10 +155,11 @@ namespace SystemBiblioteczny.Models
             return list;
         }
 
-        internal void ChangeIdTo0(Library library)
+        internal void RemoveLibraryAndChangeIdTo0(Library library)
         {
             AccountBase a = new();
             List<string> listOfString = a.GetListOfDataBaseLines("Libraries");
+            a.WriteDataBase("Libraries", listOfString);
             for (int i = 0; i < listOfString.Count; i++)
             {
                 string line = listOfString[i];
@@ -168,7 +169,10 @@ namespace SystemBiblioteczny.Models
                 string city = splitted[1];
                 string street = splitted[2];
                 string local = splitted[3];
-                if (id == library.ID) id = 0;
+                if (id == library.ID) {
+                    listOfString.Remove(line);
+                }
+                else
                 listOfString[i] = id + " " + city + "  " + street + " " + local;
             }
             a.WriteDataBase("Libraries",listOfString);

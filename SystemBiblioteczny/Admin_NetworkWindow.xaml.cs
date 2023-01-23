@@ -60,13 +60,18 @@ namespace SystemBiblioteczny
 
         private void Remove_Library(object sender, RoutedEventArgs e)
         {
-            Library library = new();
-            library = (Library)Libraries_Table.SelectedItem;
-            if (library != null) {
-                Libraries libraries = new();
-                libraries.ChangeIdTo0(library);
+            MessageBoxResult dialogResult = MessageBox.Show("Dodanie na nowo biblioteki będzie wiązało się z nadawaniem uprawnień administratorom, bibliotekarzom i przypisywaniem książek!", "Czy chcesz rozpocząć usuwanie biblioteki?", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                Library library = new();
+                library = (Library)Libraries_Table.SelectedItem;
+                if (library != null)
+                {
+                    Libraries libraries = new();
+                    libraries.RemoveLibraryAndChangeIdTo0(library);
+                }
+                LoadLibrariesData();
             }
-            LoadLibrariesData();
         }
     }
 }
