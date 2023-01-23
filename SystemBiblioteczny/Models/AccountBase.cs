@@ -119,7 +119,7 @@ namespace SystemBiblioteczny.Models
         }
         public void AddLocalAdminToListAndDeleteFromClients(LocalAdmin admin)
         {
-            WriteToDataBase("LibrarianList", admin.UserName + " " + admin.Password + " " + admin.FirstName + " " + admin.LastName + " " + admin.Email + " " + admin.LibraryId + " " + admin.Phone);
+            WriteToDataBase("LocalAdminList", admin.UserName + " " + admin.Password + " " + admin.FirstName + " " + admin.LastName + " " + admin.Email + " " + admin.LibraryId + " " + admin.Phone);
 
             string path = System.IO.Path.Combine("../../../DataBases/ClientList.txt");
             List<string> lines = GetListOfDataBaseLines("ClientList");

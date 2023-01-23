@@ -85,6 +85,9 @@ namespace SystemBiblioteczny
 
         private void ShowAdminList(object sender, RoutedEventArgs e)
         {
+            ShowAdminListMethod();
+        }
+       private void ShowAdminListMethod() {
             Person_Table.Items.Clear();
             List<LocalAdmin> admins = accountModel.GetLocalAdminList();
             foreach (LocalAdmin a in admins)
@@ -105,9 +108,9 @@ namespace SystemBiblioteczny
                         int newLibId = int.Parse(IdLibraryLabel.Text);
                         Librarian librarian = new(list[i].UserName!, list[i].Password!, list[i].FirstName!, list[i].LastName!, list[i].Email!, newLibId, list[i].Phone!);
                         accountModel.AddLibrarianToListAndDeleteFromClients(librarian);
+                        MessageBox.Show("Nadano uprawnienia");
                         ShowLibrarianListMethod();
                     }
-
 
                 }
             }
@@ -117,7 +120,26 @@ namespace SystemBiblioteczny
 
         private void MakeClientAnAdmin(object sender, RoutedEventArgs e)
         {
+            List<Client> list = accountModel.GetClientList();
+            bool info = false;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].UserName!.CompareTo(UserNameTextBox.Text) == 0)
+                {
+                    info = true;
+                    if (IdLibraryLabel.Text == "") MessageBox.Show("Proszę wpisać poprawne id");
+                    else
+                    {
+                        int newLibId = int.Parse(IdLibraryLabel.Text);
+                        LocalAdmin admin = new(list[i].UserName!, list[i].Password!, list[i].FirstName!, list[i].LastName!, list[i].Email!, newLibId, list[i].Phone!);
+                        accountModel.AddLocalAdminToListAndDeleteFromClients(admin);
+                        MessageBox.Show("Nadano uprawnienia");
+                        ShowAdminListMethod();
+                    }
 
+                }
+            }
+            if (info == false) MessageBox.Show("Nie istnieje klient o podanej nazwie");
         }
 
         private void MakePersonAnClient(object sender, RoutedEventArgs e)
