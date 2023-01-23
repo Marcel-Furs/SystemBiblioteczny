@@ -129,22 +129,7 @@ namespace SystemBiblioteczny.Methods
         {
 
             List<Person> list = new();
-            List<string> lines = new();
-
-            string path = System.IO.Path.Combine("../../../DataBases/ClientList.txt");
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-
-                }
-                reader.Close();
-
-            }
+            List<string> lines = accountModel.GetListOfDataBaseLines("ClientList");
 
             for (int i = 0; i < lines.Count; i++)
             {

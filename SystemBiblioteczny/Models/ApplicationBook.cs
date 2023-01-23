@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-    public class ApplicationBook:Book
+    public class ApplicationBook : Book
     {
         private AccountBase accountModel = new();
         public string Quantity { get; set; }

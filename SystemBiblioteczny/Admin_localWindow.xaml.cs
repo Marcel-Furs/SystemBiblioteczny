@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Shapes;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
@@ -56,7 +55,7 @@ namespace SystemBiblioteczny
                 {
                     info = true;
                     if (localAdmin.LibraryId.CompareTo(listofBooks[i].Id_Library) != 0) MessageBox.Show("Nie możesz wysłać książki należącej do innej biblioteki");
-                    else 
+                    else
                     {
                         int bookId = SendBookIfAvaliable();
                         List<Book> lines = bookModel.GetBooksList();
@@ -80,10 +79,12 @@ namespace SystemBiblioteczny
             if (info == false) MessageBox.Show("Nie istnieje zlecenie o podanym id");
 
         }
-        private int getRequestorLibraryId(string requestorUsername) {
+        private int getRequestorLibraryId(string requestorUsername)
+        {
             int result = 0;
             List<LocalAdmin> list = accountModel.GetLocalAdminList();
-            for (int i = 0; i < list.Count; i++) {
+            for (int i = 0; i < list.Count; i++)
+            {
                 if (list[i].UserName!.CompareTo(requestorUsername) == 0) result = list[i].LibraryId;
             }
             return result;
@@ -117,7 +118,7 @@ namespace SystemBiblioteczny
 
                 writer.Close();
             }
-           
+
             return resultBookId;
         }
 
@@ -157,7 +158,7 @@ namespace SystemBiblioteczny
 
                     }
                 }
-               
+
             }
             if (info == false) MessageBox.Show("Nie istnieje zlecenie o podanym id");
         }
@@ -170,7 +171,6 @@ namespace SystemBiblioteczny
             {
                 for (int k = 0; k < listofBooks.Count; k++)
                 {
-
                     if (bookFromGui == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "False" + " " + listofBooks[k].Id_Library);
                     else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
                 }
@@ -203,20 +203,16 @@ namespace SystemBiblioteczny
         void RefreshTableApplicationsData()
         {
             List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
-           
 
             TableExchangeBooks.Items.Clear();
-            
 
             foreach (ApplicationBook bookApplication in listofApplicationBooks)
             {
                 NewApplicationsData.Items.Add(bookApplication);
             }
 
-            
-
             NewApplicationsData.IsReadOnly = true;
-            
+
         }
 
         private void CancelRequestButton(object sender, RoutedEventArgs e)
@@ -294,7 +290,7 @@ namespace SystemBiblioteczny
             {
                 SendBookLabel.Text = book.ExchangeId.ToString();
                 RequestBookLabel.Text = book.Id_Book.ToString();
-            } 
+            }
         }
 
         private void TableBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -345,21 +341,141 @@ namespace SystemBiblioteczny
         private void Approve_button(object sender, RoutedEventArgs e)
         {
             eveningModel = (AuthorsEvening)AuthorsEvnings.SelectedItem;
-           // if (eveningModel != null) eveningsModel.ChangeApprovedToTrue(eveningModel);
+            // if (eveningModel != null) eveningsModel.ChangeApprovedToTrue(eveningModel);
             LoadEventData();
         }
 
         private void Reject_button(object sender, RoutedEventArgs e)
         {
             eveningModel = (AuthorsEvening)AuthorsEvnings.SelectedItem;
-           // if (eveningModel != null) eveningsModel.RemoveFromList(eveningModel);
+            // if (eveningModel != null) eveningsModel.RemoveFromList(eveningModel);
             LoadEventData();
         }
 
-        private void DisplayNewApplications()
+<<<<<<< HEAD
+        private void RejectApplicationButton()
+=======
+        private void ShowClientList(object sender, RoutedEventArgs e)
+>>>>>>> c038e7922cdc924b058252a0d5584b53ded113f6
         {
+            ShowClientListMethod();
+        }
+        private void ShowClientListMethod()
+        {
+            Person_Table.Items.Clear();
+            List<Client> clients = accountModel.GetClientList();
+            foreach (Client c in clients)
+            {
+                Person_Table.Items.Add(c);
+            }
+            Person_Table.IsReadOnly = true;
+            TabelaName.Content = "Tabela pokazująca listę klientów";
+        }
+        private void ShowLibrarianList(object sender, RoutedEventArgs e)
+        {
+            ShowLibrarianListMethod();
+        }
+        private void ShowLibrarianListMethod()
+        {
+            Person_Table.Items.Clear();
+            List<Librarian> librarians = accountModel.GetLibrarianList();
+            foreach (Librarian l in librarians)
+            {
+                Person_Table.Items.Add(l);
+            }
+            Person_Table.IsReadOnly = true;
+            TabelaName.Content = "Tabela pokazująca listę bibliotekarzy";
+        }
+
+        private void ShowAdminList(object sender, RoutedEventArgs e)
+        {
+            ShowAdminListMethod();
+        }
+        private void ShowAdminListMethod()
+        {
+            Person_Table.Items.Clear();
+            List<LocalAdmin> admins = accountModel.GetLocalAdminList();
+            foreach (LocalAdmin a in admins)
+            {
+                Person_Table.Items.Add(a);
+            }
+            Person_Table.IsReadOnly = true;
+            TabelaName.Content = "Tabela pokazująca listę administratorów lokalnych";
+        }
+        private void MakeClientAnLibrarian(object sender, RoutedEventArgs e)
+        {
+            List<Client> list = accountModel.GetClientList();
+            bool info = false;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].UserName!.CompareTo(UserNameTextBox.Text) == 0)
+                {
+                    info = true;
+                    if (IdLibraryLabel.Text == "") MessageBox.Show("Proszę wpisać poprawne id");
+                    else
+                    {
+                        int newLibId = int.Parse(IdLibraryLabel.Text);
+                        Librarian librarian = new(list[i].UserName!, list[i].Password!, list[i].FirstName!, list[i].LastName!, list[i].Email!, newLibId, list[i].Phone!);
+                        accountModel.AddLibrarianToListAndDeleteFromClients(librarian);
+                        MessageBox.Show("Nadano uprawnienia");
+                        ShowLibrarianListMethod();
+                    }
+
+                }
+            }
+            if (info == false) MessageBox.Show("Nie istnieje klient o podanej nazwie");
+
+        }
+        private void MakePersonAnClient(object sender, RoutedEventArgs e)
+        {
+            List<Librarian> librarians = accountModel.GetLibrarianList();
+            Client client = new();
+
+            bool info = false;
+            
+            for (int i = 0; i < librarians.Count; i++)
+            {
+                if (librarians[i].UserName!.CompareTo(UserNameTextBox.Text) == 0)
+                {
+                    info = true;
+                   
+                    client = new(librarians[i].UserName!, librarians[i].Password!, librarians[i].FirstName!, librarians[i].LastName!, librarians[i].Email!, librarians[i].Phone!);
+                }
+            }
+            if (info == true)
+            {
+                string path = System.IO.Path.Combine("../../../DataBases/LibrarianList.txt");
+
+                List<string> lines = accountModel.GetListOfDataBaseLines("LibrarianList");
+
+                using (StreamWriter writer = new StreamWriter(path))
+                {
+                    for (int i = 0; i < lines.Count; i++)
+                    {
+                        string line = lines[i];
+                        string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                        string userName = splitted[0];
+                        if (userName.CompareTo(UserNameTextBox.Text) == 0) { }
+                        else { writer.WriteLine(line); }
+                    }
+                    writer.Close();
+                }
+                accountModel.AddClientToList(client);
+                MessageBox.Show("Usunięto uprawnienia");
+                ShowClientListMethod();
+            }
+
+            if (info == false) MessageBox.Show("Nie istnieje osoba o podanej nazwie");
 
         }
 
+        private void IdLibraryLabel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(IdLibraryLabel.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                IdLibraryLabel.Text = IdLibraryLabel.Text.Remove(IdLibraryLabel.Text.Length - 1);
+            }
+        }
     }
 }
