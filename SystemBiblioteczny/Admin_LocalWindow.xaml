@@ -55,7 +55,7 @@
                             </DataGrid.Resources>
                         </DataGrid>
                     </Grid>
-                    <Button Content="Zamów" HorizontalAlignment="Left" Margin="42,223,0,0" VerticalAlignment="Top" Height="34" Width="99"/>
+                    <Button x:Name="OrderBooks" Content="Zamów" HorizontalAlignment="Left" Margin="42,223,0,0" VerticalAlignment="Top" Height="34" Width="99"/>
                     <Button Content="Odrzuć" HorizontalAlignment="Left" Margin="172,223,0,0" VerticalAlignment="Top" Height="34" Width="99"/>
 
                 </Grid>

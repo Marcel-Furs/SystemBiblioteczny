@@ -33,8 +33,6 @@
                     <TextBox x:Name="SurnameInput" HorizontalAlignment="Left" Margin="240,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="TitleInput" HorizontalAlignment="Left" Margin="240,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="QuantityInput" HorizontalAlignment="Left" Margin="240,252,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Id biblioteki:" HorizontalAlignment="Left" Margin="26,304,0,0" VerticalAlignment="Top" Height="28" Width="74"/>
-                    <TextBox x:Name="LibraryIDInput" HorizontalAlignment="Left" Margin="116,309,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="56" RenderTransformOrigin="0.522,0.604"/>
                 </Grid>
 
 

@@ -73,7 +73,7 @@ namespace SystemBiblioteczny
                     {
                         writer.WriteLine(line);
                     }
-                    writer.WriteLine(NameInput.Text + " " + SurnameInput.Text + " " + TitleInput.Text + " " + QuantityInput.Text + " " + LibraryIDInput.Text);
+                    writer.WriteLine(NameInput.Text + " " + SurnameInput.Text + " " + TitleInput.Text + " " + QuantityInput.Text);
                     writer.Close();
                 }
             }
