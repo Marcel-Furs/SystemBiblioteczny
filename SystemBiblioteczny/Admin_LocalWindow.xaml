@@ -111,7 +111,12 @@
             </TabItem>
             <TabItem Header="Wygeneruj raport">
                 <Grid Background="#FFE5E5E5">
-                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="75,129,0,0" VerticalAlignment="Top" Height="54" Width="89" Click="Button_Click"/>
+                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="308,90,0,0" VerticalAlignment="Top" Height="54" Width="89" Click="Button_Click"/>
+                    <Label Content="Ilość książek w bibliotece" HorizontalAlignment="Left" Margin="56,42,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Ilość wypożyczeń" HorizontalAlignment="Left" Margin="56,73,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Ilość aktywnych klientów" HorizontalAlignment="Left" Margin="54,135,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Ilość bibliotekarzy" HorizontalAlignment="Left" Margin="54,166,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Ilość zarejestrowanych klientów" HorizontalAlignment="Left" Margin="54,104,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Zarządzaj uprawnieniami">
