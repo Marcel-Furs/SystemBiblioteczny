@@ -29,8 +29,9 @@ namespace SystemBiblioteczny.Models
                 bool newAvailibility = bool.Parse(splitted[3]);
                 int newIdLibrary = int.Parse(splitted[4]);
                 string newDate = splitted[5];
+                string newuserName = splitted[6];
 
-                BookReserverd book = new(newId, newAuthor, newTitle, newAvailibility, newIdLibrary, newDate);
+                BookReserverd book = new(newId, newAuthor, newTitle, newAvailibility, newIdLibrary, newDate, newuserName);
 
                 list.Add(book);
 
@@ -40,7 +41,7 @@ namespace SystemBiblioteczny.Models
 
         public void SaveReservedBooks(BookReserverd bookR)
         {
-            account.WriteToDataBase("ReservedBooks", bookR.Id_Book + " " + bookR.Author + " " + bookR.Title + " " + "False" + " " + bookR.Id_Library + " " + bookR.DateTime1);
+            account.WriteToDataBase("ReservedBooks", bookR.Id_Book + " " + bookR.Author + " " + bookR.Title + " " + "False" + " " + bookR.Id_Library + " " + bookR.DateTime1 + " " + bookR.UserName);
         }
     }
 }

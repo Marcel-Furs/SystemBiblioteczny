@@ -31,6 +31,7 @@ namespace SystemBiblioteczny
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             loggedUser = user;
 
+            PersonStatistics(user.UserName);
             UptodateTable();
 
             Date.FontSize = 10;
@@ -293,10 +294,10 @@ namespace SystemBiblioteczny
             LoadEventData();
         }
 
-        private void PersonStatistics(string name, string lastname)
+        private void PersonStatistics(string name)
         {
             Name_S.Text = name;
-            Lastname_S.Text = lastname;
+
 
         }
 
