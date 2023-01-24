@@ -30,8 +30,6 @@ namespace SystemBiblioteczny
             InitializeComponent();
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             loggedUser = user;
-            
-            
             AccountBase account = new AccountBase();
             List<Client> clients = account.GetClientList();
             Client client = new();
@@ -49,12 +47,8 @@ namespace SystemBiblioteczny
             }
             PersonStatistics(client.FirstName, client.LastName);
 
-            Books books = new();
-            List<Book> listofBooks = books.GetBooksList();
-            foreach (Book e in listofBooks)
-            {
-                TableBooks.Items.Add(e);
-            }
+            UptodateTable();
+
             Date.FontSize = 10;
             LoadEventData();
         }
@@ -186,7 +180,6 @@ namespace SystemBiblioteczny
                      TableBooks.Items.Add(x);
                     });
                 }
-                
             }
             if (info == false) { MessageBox.Show("Nie istnieje taki autor bądź tytuł w bazie danych"); }
         }
@@ -273,18 +266,8 @@ namespace SystemBiblioteczny
                 }
             }
             if (info == false) { MessageBox.Show("Nie istnieje książka o podanym id"); }
-            ReadFromReservedBooks();
         }
 
-        private void ReadFromReservedBooks()
-        {
-            BooksReserved books = new();
-            List<BookReserverd> b = books.GetReservedBooksList();
-            foreach (var e in b)
-            {
-                TableBooks1.Items.Add(e);
-            }
-        }
         private void UptodateTable()
         {
             TableBooks.Items.Clear();
@@ -293,6 +276,14 @@ namespace SystemBiblioteczny
             foreach (var e in listofBooks)
             {
                 TableBooks.Items.Add(e);
+            }
+
+            TableBooks1.Items.Clear();
+            BooksReserved booksR = new();
+            List<BookReserverd> listofBooksR = booksR.GetReservedBooksList();
+            foreach (var e in listofBooksR)
+            {
+                TableBooks1.Items.Add(e);
             }
         }
 

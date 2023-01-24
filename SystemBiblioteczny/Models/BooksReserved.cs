@@ -9,25 +9,13 @@ namespace SystemBiblioteczny.Models
 {
     public class BooksReserved
     {
+        private AccountBase account = new();
+       
         public List<BookReserverd> GetReservedBooksList()
         {
             List<BookReserverd> list = new();
 
-            string path = System.IO.Path.Combine(Environment.CurrentDirectory, "../../../DataBases/ReservedBooks.txt");
-
-            List<string> lines = new();
-
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-                }
-                reader.Close();
-            }
+            List<string> lines = account.GetListOfDataBaseLines("ReservedBooks");
 
             for (int i = 0; i < lines.Count; i++)
             {
@@ -50,26 +38,9 @@ namespace SystemBiblioteczny.Models
             return list;
         }
 
-        public void SaveReservedBooks(BookReserverd b)
+        public void SaveReservedBooks(BookReserverd bookR)
         {
-            List<BookReserverd> listofBooks = new();
-            listofBooks.Add(b);
-            List<string> lines = new();
-
-            string path2 = System.IO.Path.Combine("../../../DataBases/ReservedBooks.txt");
-            using (StreamWriter writer = new StreamWriter(path2))
-            {
-                for (int k = 0; k < listofBooks.Count; k++)
-                {
-                    foreach (string line in lines)
-                    {
-                        writer.WriteLine(line);
-                    }
-                    writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "False" + " " + listofBooks[k].Id_Library + " " + listofBooks[k].DateTime1);
-                    //else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
-                }
-                writer.Close();
-            }
+            account.WriteToDataBase("ReservedBooks", bookR.Id_Book + " " + bookR.Author + " " + bookR.Title + " " + "False" + " " + bookR.Id_Library + " " + bookR.DateTime1);
         }
     }
 }
