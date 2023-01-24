@@ -13,18 +13,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
 {
-    /// <summary>
-    /// Logika interakcji dla klasy LibrarianWindow.xaml
-    /// </summary>
     public partial class LibrarianWindow : Window
     {
+        LoginMethod loginMethod = new();
         private ApplicationBook applicationBookModel = new();
         private AccountBase accountModel = new();
         private Librarian librarianModel = new();
+        private Books books = new();
+        
         private string titleFromGui = "";
         private int bookRFromGui = -1;
         public LibrarianWindow(Librarian userData)
@@ -47,21 +48,28 @@ namespace SystemBiblioteczny
 
         private void SendApplication(object sender, RoutedEventArgs e)
         {
+            if (QuantityInput.Text == "" || QuantityInput.Text.CompareTo("0") == 0)
+            {
+                MessageBox.Show("Ilość nie może być zerem");
+                return;
+            }
+            int max = 1;
             var title = TitleInput.Text;
             var author = AuthorInput.Text;
-            var quantity = QuantityInput.Text;
+            int quantity = int.Parse(QuantityInput.Text);
             var librarian = librarianModel.UserName!;
-            ApplicationBook applicationBook = new(title, author, quantity, librarian, false);
-
-
-
-            if (title.Any() && author.Any() && quantity.Any())
+            foreach(ApplicationBook a in applicationBookModel.GetApplicationBooksList())
+            {
+                if (a.ID > max) max = a.ID;
+            }
+            max++;
+            if (title.Any() && author.Any())
             {
                 MessageBox.Show("Wysłano zgłoszenie zapotrzebowania na: " + "\n" + author + " " + title + " - ilość: " + quantity);
 
 
                 List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
-                accountModel.WriteToDataBase("BookApplicationList", TitleInput.Text + " " + AuthorInput.Text + " " + QuantityInput.Text + " " + librarian + " " + false);
+                accountModel.WriteToDataBase("BookApplicationList", max + " " + TitleInput.Text + " " + AuthorInput.Text + " " + QuantityInput.Text + " " + librarian + " " + false);
             }
             else
             {
@@ -80,12 +88,6 @@ namespace SystemBiblioteczny
             }
         }
 
-        private void ApprovedApplicationsTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ApplicationBook book = (ApplicationBook)ApprovedApplicationsTable.SelectedItem;
-            if (book != null) titleFromGui = book.Title;
-        }
-
         void RefreshTableApprovedApplicationsData()
         {
             List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
@@ -94,27 +96,26 @@ namespace SystemBiblioteczny
             for (int i = 0; i < listofApplicationBooks.Count; i++)
             {
                 ApplicationBook book = listofApplicationBooks[i];
-                if (book.Approved.CompareTo(false) == 0)
-                {
-
-                }
-                else ApprovedApplicationsTable.Items.Add(book);
+                if (book.Approved.CompareTo(false) != 0)ApprovedApplicationsTable.Items.Add(book);
             }
-
             ApprovedApplicationsTable.IsReadOnly = true;
 
         }
 
         private void CollectBook(object sender, RoutedEventArgs e)
         {
-            Book book1 = new();
-            bool info = false;
-            if (titleFromGui == "") MessageBox.Show("Nie wybrano książki");
+
+           
+            ApplicationBook IdFromGui = (ApplicationBook)(ApprovedApplicationsTable.SelectedItem);
+            if (IdFromGui == null) MessageBox.Show("Nie wybrano książki");
             else
             {
+                List<Book> book2 = new();
+                book2 = books.GetBooksList();
+                int newID = book2.Capacity;
+                newID++;
                 List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
-                for (int i = 0; i < list.Count; i++)
-                {
+                
 
                     string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
                     List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
@@ -124,10 +125,14 @@ namespace SystemBiblioteczny
                         for (int j = 0; j < lines.Count; j++)
                         {
                             string line = lines[j];
-                            if (list[j].Title.CompareTo(titleFromGui) == 0 && info == false)
+                            if (list[j].ID.CompareTo(IdFromGui.ID) == 0)
                             {
-                                info = true;
-                                accountModel.WriteToDataBase("BookList", book1.Id_Book + " " + list[j].Author + " " + list[j].Title + " " + book1.Availability + " " + book1.Id_Library);
+                                for(int i = 0; i < list[j].Quantity; i++)
+                                {
+                                    accountModel.WriteToDataBase("BookList", newID + " " + list[j].Author + " " + list[j].Title + " " + "True" + " " + librarianModel.LibraryId);
+                                    newID++;
+                                }
+                                
                             }
                             else writer.WriteLine(line);
                         }
@@ -135,7 +140,7 @@ namespace SystemBiblioteczny
                         writer.Close();
                     }
 
-                }
+                
                 RefreshTableApprovedApplicationsData();
             }
         }
@@ -280,8 +285,7 @@ namespace SystemBiblioteczny
                         {
                             for (int k = 0; k < listofBorrowedBooks.Count; k++)
                             {
-                                if (idBookFromGui == listofBorrowedBooks[k].Id_Book) ;//writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + "True" + " " + listofBorrowedBooks[k].Id_Library);
-                                else writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + listofBorrowedBooks[k].Availability + " " + listofBorrowedBooks[k].Id_Library + " " + listofBorrowedBooks[k].DateTime1 + " " + listofBorrowedBooks[k].UserName);
+                                if (idBookFromGui != listofBorrowedBooks[k].Id_Book)writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + listofBorrowedBooks[k].Availability + " " + listofBorrowedBooks[k].Id_Library + " " + listofBorrowedBooks[k].DateTime1 + " " + listofBorrowedBooks[k].UserName);
                             }
                             writer.Close();
                         };
@@ -375,11 +379,8 @@ namespace SystemBiblioteczny
 
             BooksReserved booksR = new();
             Books books = new();
-
             List<BookReserved> listofBorrowedBooks = booksR.GetReservedBooksList();
-
             List<Book> listofBooks = books.GetBooksList();
-
             bool info = false;
 
             for (int i = 0; i < listofBorrowedBooks.Count; i++)
@@ -434,6 +435,25 @@ namespace SystemBiblioteczny
             }
             if (info == false) { MessageBox.Show("Nie istnieje książka o podanym id"); }
 
+        }
+
+        private void AuthorInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AuthorInput.Text = loginMethod.EraseWhiteSpace(AuthorInput.Text);
+        }
+
+        private void TitleInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AuthorInput.Text = loginMethod.EraseWhiteSpace(AuthorInput.Text);
+        }
+
+        private void QuantityInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           if (System.Text.RegularExpressions.Regex.IsMatch(QuantityInput.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                QuantityInput.Text = QuantityInput.Text.Remove(QuantityInput.Text.Length - 1);
+            }
         }
     }
 }

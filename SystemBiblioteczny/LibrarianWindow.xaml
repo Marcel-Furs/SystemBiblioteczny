@@ -9,7 +9,7 @@
     <Grid>
         <TabControl>
             <TabItem Header="Zwróć książkę">
-                <Grid>
+                <Grid Background="#FFF5EBD8">
                     <DataGrid x:Name="TableReturnBook" Height="237" SelectionChanged="TableRentBook_SelectionChanged" Margin="113,10,113,159" RenderTransformOrigin="0.5,0.5" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
@@ -21,7 +21,7 @@
                         </DataGrid.Columns>
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Background" Value="Turquoise"/>
+                                <Setter Property="Background" Value="#FF8DEA8D"/>
                                 <Setter Property="BorderThickness" Value="0,0,1,2"/>
                                 <Setter Property="BorderBrush" Value="Black"/>
                             </Style>
@@ -45,7 +45,7 @@
                         </DataGrid.Columns>
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Background" Value="Turquoise"/>
+                                <Setter Property="Background" Value="#FF8DEA8D"/>
                                 <Setter Property="BorderThickness" Value="0,0,1,2"/>
                                 <Setter Property="BorderBrush" Value="Black"/>
                             </Style>
@@ -53,7 +53,7 @@
 
                     </DataGrid>
 
-                    <Button Content="Wypożycz" HorizontalAlignment="Left" Margin="97,259,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Rent_Book"/>
+                    <Button Content="Wypożycz" HorizontalAlignment="Left" Margin="97,263,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Rent_Book"/>
                     <Button Content="Anuluj rezerwacje" HorizontalAlignment="Left" Margin="326,263,0,0" VerticalAlignment="Top" Height="55" Width="110" Click="Cancel_Reservation"/>
                     <Button Content="Anuluj wszystkie" HorizontalAlignment="Left" Margin="523,263,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Cancel_All"/>
 
@@ -72,26 +72,26 @@
                     <Label Content="Autor:" FontSize="16" HorizontalAlignment="Left" Margin="13,104,0,0" VerticalAlignment="Top" Height="48" Width="96"/>
                     <Label Content="Tytuł:" FontSize="16" HorizontalAlignment="Left" Margin="13,150,0,0" VerticalAlignment="Top" Height="48" Width="48"/>
                     <Label Content="Ilość potrzebnych sztuk:" FontSize="16" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Height="48" Width="181"/>
-                    <TextBox x:Name="AuthorInput" HorizontalAlignment="Left" Margin="210,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157" Height="18"/>
-                    <TextBox x:Name="TitleInput" HorizontalAlignment="Left" Margin="210,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
-                    <TextBox x:Name="QuantityInput" HorizontalAlignment="Left" Margin="210,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
-                    <DataGrid x:Name="ApprovedApplicationsTable" Height="203"  Margin="382,34,0,169" SelectionChanged="ApprovedApplicationsTable_SelectionChanged">
-                        <DataGrid.Columns>
+                    <TextBox x:Name="AuthorInput" HorizontalAlignment="Left" Margin="193,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157" Height="24" TextChanged="AuthorInput_TextChanged"/>
+                    <TextBox x:Name="TitleInput" HorizontalAlignment="Left" Margin="193,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="24" TextChanged="TitleInput_TextChanged"/>
+                    <TextBox x:Name="QuantityInput" HorizontalAlignment="Left" Margin="193,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="24" TextChanged="QuantityInput_TextChanged"/>
+                    <DataGrid x:Name="ApprovedApplicationsTable" Height="203"  Margin="365,63,17,140" >
+                        <DataGrid.Columns >
                             <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="160"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="160"/>
                             <DataGridTextColumn Header ="Ilość" Binding="{Binding Quantity}" Width="180"/>
                         </DataGrid.Columns>
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Background" Value="#1D6F42"/>
+                                <Setter Property="Background" Value="#FF8DEA8D"/>
                                 <Setter Property="BorderThickness" Value="0,0,1,2"/>
-                                <Setter Property="BorderBrush" Value="White"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
                             </Style>
                         </DataGrid.Resources>
                     </DataGrid>
 
                     <Label Content="Zamówione książki gotowe do odebrania:" FontSize="16" HorizontalAlignment="Left" Margin="418,0,0,0" VerticalAlignment="Top" Height="48" Width="315"/>
-                    <Button Content="Odbierz" HorizontalAlignment="Left" Margin="543,269,0,0" VerticalAlignment="Top" Height="50" Width="115" Click="CollectBook"/>
+                    <Button Content="Odbierz" HorizontalAlignment="Left" Margin="510,307,0,0" VerticalAlignment="Top" Height="50" Width="115" Click="CollectBook"/>
                 </Grid>
 
 
@@ -104,7 +104,7 @@
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="Background" Value="#FF8DEA8D"/>
                                 <Setter Property="BorderThickness" Value="0,0,1,2"/>
-                                <Setter Property="BorderBrush" Value="White"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>

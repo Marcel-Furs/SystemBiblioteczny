@@ -7,15 +7,13 @@
         mc:Ignorable="d"
         Title="ClientWindow" Height="432" Width="786" MaxWidth="800" MaxHeight="450" MinWidth="800" MinHeight="450">
     <Grid>
-        <TabControl>
+        <TabControl Background="#FFF5EBD8">
             <TabItem Header="Zarezerwuj Książkę" >
-                <Grid>
+                <Grid Background="#FFF5EBD8">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="184*"/>
-                        <ColumnDefinition Width="77*"/>
-                        <ColumnDefinition Width="533*"/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="418" Height="229" SelectionChanged="TableBooks_SelectionChanged" Grid.ColumnSpan="3" >
+                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="418" Height="380" SelectionChanged="TableBooks_SelectionChanged" Margin="10,11,0,0" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
@@ -32,24 +30,21 @@
                         </DataGrid.Resources>
                     </DataGrid>
 
-                    <Label Content="Pokaż dostępne książki" HorizontalAlignment="Left" Margin="169,51,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="22" Grid.Column="2"/>
-                    <RadioButton x:Name="OptAvailability" Content="" HorizontalAlignment="Left" Margin="436,68,0,0" VerticalAlignment="Top" Checked="OptAvailability_Checked" Grid.Column="2"/>
-                    <Label Content="Pokaż wszystkie książki" HorizontalAlignment="Left" Margin="169,10,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="22" Grid.Column="2" />
-                    <RadioButton x:Name="OptAll" Content="" HorizontalAlignment="Left" Margin="436,27,0,0" VerticalAlignment="Top" Checked="OptAll_Checked" Grid.Column="2"/>
-                    <TextBox x:Name="Find1" HorizontalAlignment="Left" Margin="284,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Find_TextChanged" Grid.Column="2"/>
-                    <Label Content="Wyszukaj po tytule lub autorze:" HorizontalAlignment="Left" Margin="189,249,0,0" VerticalAlignment="Top" FontSize="20" Grid.Column="2"/>
-                    <RadioButton x:Name="OptAuthor" Content="Autor" HorizontalAlignment="Left" Margin="376,168,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.004,0.41" Checked="OptAuthor_Checked" Grid.Column="2"/>
-                    <RadioButton x:Name="OptTitle" Content="Tytuł" HorizontalAlignment="Left" Margin="245,168,0,0" VerticalAlignment="Top" Checked="OptTitle_Checked" Grid.Column="2"/>
-                    <Label Content="Sortuj po autorze lub tytule:" HorizontalAlignment="Left" Margin="174,115,0,0" VerticalAlignment="Top" FontSize="22" Grid.Column="2"/>
-                    <Button Content="Wyszukaj" HorizontalAlignment="Left" Margin="311,329,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.13" Width="66" FontSize="14" Click="Find" Grid.Column="2"/>
-                    <Button Content="Zarezerwuj" HorizontalAlignment="Left" Margin="142,303,0,0" VerticalAlignment="Top" Height="53" Width="134" FontSize="20" Click="Book" Grid.ColumnSpan="3"/>
-                    <TextBox x:Name="RequestBookLabel"  HorizontalAlignment="Left" Margin="32,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" TextChanged="RequestBookLabel_TextChanged" Grid.Column="1" Grid.ColumnSpan="2"/>
-                    <Label Content="Id ksiązki:" HorizontalAlignment="Left" Margin="142,263,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                    <Label Content="Pokaż dostępne książki" HorizontalAlignment="Left" Margin="467,56,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="22"/>
+                    <RadioButton x:Name="OptAvailability" Content="" HorizontalAlignment="Left" Margin="734,73,0,0" VerticalAlignment="Top" Checked="OptAvailability_Checked"/>
+                    <Label Content="Pokaż wszystkie książki" HorizontalAlignment="Left" Margin="467,15,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="22" />
+                    <RadioButton x:Name="OptAll" Content="" HorizontalAlignment="Left" Margin="734,32,0,0" VerticalAlignment="Top" Checked="OptAll_Checked"/>
+                    <TextBox x:Name="Find1" HorizontalAlignment="Left" Margin="558,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Find_TextChanged"/>
+                    <Label Content="Wyszukaj po tytule lub autorze:" HorizontalAlignment="Left" Margin="463,103,0,0" VerticalAlignment="Top" FontSize="20"/>
+                    <Button Content="Wyszukaj" HorizontalAlignment="Left" Margin="585,183,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.13" Width="66" FontSize="14" Click="Find"/>
+                    <Button Content="Zarezerwuj" HorizontalAlignment="Left" Margin="524,297,0,0" VerticalAlignment="Top" Height="53" Width="134" FontSize="20" Click="Book"/>
+                    <TextBox x:Name="RequestBookLabel"  HorizontalAlignment="Left" Margin="598,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" TextChanged="RequestBookLabel_TextChanged"/>
+                    <Label Content="Id ksiązki:" HorizontalAlignment="Left" Margin="524,257,0,0" VerticalAlignment="Top"/>
 
                 </Grid>
             </TabItem>
             <TabItem Header="Wieczorki Autorskie">
-                <Grid Background="White">
+                <Grid Background="#FFF5EBD8">
                     <Grid.ColumnDefinitions>
                     </Grid.ColumnDefinitions>
                     <Grid Margin="24,0,399,16">
@@ -62,23 +57,22 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
-                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" FontSize="24" HorizontalAlignment="Left" Content="ZGŁOSZENIE" Margin="124,2,0,2" Width="141"/>
                         <Label  Grid.Row="1" Content="Imię autora:" Margin="0,4,0,4" HorizontalAlignment="Left" Width="191" FontSize="16" />
-                        <TextBox x:Name="AuthorsName" Grid.Row="1" HorizontalAlignment="Left" Margin="191,12,0,12" Width="150" Height="20" FontSize="12" TextChanged="AuthorsName_TextChanged"/>
+                        <TextBox x:Name="AuthorsName" Grid.Row="1" HorizontalAlignment="Left" Margin="191,12,0,12" Width="150" Height="24" FontSize="12" TextChanged="AuthorsName_TextChanged"/>
                         <Label Grid.Row="2" Content="Nazwisko autora:" Margin="0,4,0,4" HorizontalAlignment="Left" Width="191" FontSize="16" Grid.RowSpan="2" />
-                        <TextBox Grid.Row="2" x:Name="AuthorsLastname"  HorizontalAlignment="Left" Margin="191,12,0,11" Width="150" Height="20" FontSize="12" TextChanged="AuthorsLastname_TextChanged"/>
+                        <TextBox Grid.Row="2" x:Name="AuthorsLastname"  HorizontalAlignment="Left" Margin="191,12,0,11" Width="150" Height="24" FontSize="12" TextChanged="AuthorsLastname_TextChanged"/>
                         <Label Grid.Row="3" Content="Numer biblioteki:" HorizontalAlignment="Left" Margin="0,4,0,4" Width="191" FontSize="16" Grid.RowSpan="2" />
-                        <TextBox Grid.Row="3" x:Name="LibraryID" HorizontalAlignment="Left" Margin="191,12,0,11" Width="150" Height="20" FontSize="12" TextChanged="LibraryID_TextChanged"/>
+                        <TextBox Grid.Row="3" x:Name="LibraryID" HorizontalAlignment="Left" Margin="191,12,0,11" Width="150" Height="24" FontSize="12" TextChanged="LibraryID_TextChanged"/>
 
-                        <Button Grid.Row="8" Click="Register_Evening" FontSize="20" Content="Zgłoś propozycję" Margin="22,1,49,11"/>
+                        <Button Grid.Row="8" Click="Register_Evening" FontSize="20" Content="Zgłoś propozycję" Margin="22,1,49,11" Height="35" Width="300"/>
                         <Label Grid.Row="4" Content="Data:" HorizontalAlignment="Left" Margin="0,4,0,4" Grid.RowSpan="2" Width="191" FontSize="16" />
-                        <DatePicker Grid.Row="4" x:Name="Date" HorizontalAlignment="Left" Margin="191,12,0,12" Width="150" Height="20" FontSize="12"/>
+                        <DatePicker Grid.Row="4" x:Name="Date" HorizontalAlignment="Left" Margin="191,12,0,12" Width="150" Height="24" FontSize="12"/>
                         <Label Grid.Row="5" Content="Godzina (8-22):" HorizontalAlignment="Left" Margin="0,4,0,4" Grid.RowSpan="2" Width="191" FontSize="16" />
                         <Label Grid.Row="6" Content="Telefon kontaktowy:" HorizontalAlignment="Left" Margin="0,4,0,4" Width="191" FontSize="16" />
-                        <TextBox Grid.Row="5" x:Name="EventTime" HorizontalAlignment="Left" Margin="191,12,0,11" Width="150" Height="20" FontSize="12" TextChanged="EventTime_TextChanged"/>
-                        <TextBox x:Name="ContactNumber" HorizontalAlignment="Left" Margin="191,12,0,11" Width="150" Height="20" FontSize="12" Grid.Row="6" TextChanged="ContactNumber_TextChanged"/>
+                        <TextBox Grid.Row="5" x:Name="EventTime" HorizontalAlignment="Left" Margin="191,12,0,11" Width="150" Height="24" FontSize="12" TextChanged="EventTime_TextChanged"/>
+                        <TextBox x:Name="ContactNumber" HorizontalAlignment="Left" Margin="191,12,0,11" Width="150" Height="24" FontSize="12" Grid.Row="6" TextChanged="ContactNumber_TextChanged"/>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -107,13 +101,13 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                             <Label FontSize="24" HorizontalAlignment="Left" Content="TWOJE ZGŁOSZENIA" Margin="100,17,0,11" Width="233"/>
-                            <Button Click="WithDraw" FontSize="20" Content="Wycofaj propozycję" Margin="56,17,57,12" Grid.Row="2"/>
+                            <Button Click="WithDraw" FontSize="20" Content="Wycofaj propozycję" Margin="56,12,58,12" Grid.Row="2" Height="35" Width="300"/>
                         </Grid>
                     </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Statystyki">
-                <Grid>
+                <Grid Background="#FFF5EBD8">
                     <Label Content="Wypożczone książki:" HorizontalAlignment="Left" Margin="115,100,0,0" VerticalAlignment="Top"/>
                     <Label Content="Czy są zaległe książki?" HorizontalAlignment="Left" Margin="601,113,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="Name_S" HorizontalAlignment="Center" Margin="0,39,0,0" TextWrapping="Wrap" Text=""  VerticalAlignment="Top" Width="94"  IsReadOnly="True" RenderTransformOrigin="0.499,0.72"/>

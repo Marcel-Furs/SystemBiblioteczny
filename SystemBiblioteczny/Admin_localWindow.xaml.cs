@@ -304,16 +304,13 @@ namespace SystemBiblioteczny
             }
         }
 
-        private void NewApplicationsData_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ApplicationBook book = (ApplicationBook)NewApplicationsData.SelectedItem;
-            if (book != null) titleFromGui = book.Title;
-        }
+        
 
         private void OrderBook(object sender, RoutedEventArgs e)
         {
-            bool info = false;
-            if (titleFromGui == "") MessageBox.Show("Nie wybrano książki");
+            ApplicationBook IdFromGui = (ApplicationBook)(NewApplicationsData.SelectedItem);
+           
+            if (IdFromGui == null) MessageBox.Show("Nie wybrano książki");
             else
             {
                 List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
@@ -328,10 +325,10 @@ namespace SystemBiblioteczny
                         for (int j = 0; j < lines.Count; j++)
                         {
                             string line = lines[j];
-                            if (list[j].Title.CompareTo(titleFromGui) == 0 && info == false)
+                            if (list[j].ID.CompareTo(IdFromGui.ID) == 0)
                             {
-                                writer.WriteLine(list[j].Title + " " + list[j].Author + " " + list[j].Quantity + " " + list[j].Librarian + " " + "True");
-                                info = true;
+                                writer.WriteLine(list[j].ID + " " + list[j].Title + " " + list[j].Author + " " + list[j].Quantity + " " + list[j].Librarian + " " + "True");
+                                
                             }
                             else writer.WriteLine(line);
                         }
@@ -348,9 +345,9 @@ namespace SystemBiblioteczny
 
         private void RejectBook(object sender, RoutedEventArgs e)
         {
-
-            bool info = false;
-            if (titleFromGui == "") MessageBox.Show("Nie wybrano książki");
+            ApplicationBook IdFromGui = (ApplicationBook)(NewApplicationsData.SelectedItem);
+            
+            if (IdFromGui == null) MessageBox.Show("Nie wybrano książki");
             else
             {
                 List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
@@ -365,12 +362,7 @@ namespace SystemBiblioteczny
                         for (int j = 0; j < lines.Count; j++)
                         {
                             string line = lines[j];
-                            if (list[j].Title.CompareTo(titleFromGui) == 0 && info == false)
-                            {
-                                info = true;
-
-                            }
-                            else writer.WriteLine(line);
+                            if (list[j].ID.CompareTo(IdFromGui.ID) != 0) writer.WriteLine(line);
                         }
 
                         writer.Close();

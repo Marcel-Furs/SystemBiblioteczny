@@ -31,7 +31,7 @@ namespace SystemBiblioteczny
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             loggedUser = user;
 
-            PersonStatistics(user.UserName);
+            PersonStatistics(user.UserName!);
             UptodateTable();
 
             Date.FontSize = 10;
@@ -95,37 +95,6 @@ namespace SystemBiblioteczny
             if (OptAll.IsChecked == true)
             {
                 var sort1 = listofBooks.OrderBy(x => x.Id_Book).ToList();
-                sort1.ForEach(x =>
-                {
-                    TableBooks.Items.Add(x);
-                });
-            }
-        }
-
-        private void OptAuthor_Checked(object sender, RoutedEventArgs e)
-        {
-            Books books = new();
-            List<Book> listofBooks = books.GetBooksList();
-            TableBooks.Items.Clear();
-            if (OptAuthor.IsChecked == true)
-            {
-                var sort1 = listofBooks.OrderBy(x => x.Author).ToList();
-                sort1.ForEach(x =>
-                {
-                    TableBooks.Items.Add(x);
-                });
-
-            }
-        }
-
-        private void OptTitle_Checked(object sender, RoutedEventArgs e)
-        {
-            Books books = new();
-            List<Book> listofBooks = books.GetBooksList();
-            TableBooks.Items.Clear();
-            if (OptTitle.IsChecked == true)
-            {
-                var sort1 = listofBooks.OrderBy(x => x.Title).ToList();
                 sort1.ForEach(x =>
                 {
                     TableBooks.Items.Add(x);
@@ -235,7 +204,7 @@ namespace SystemBiblioteczny
                         bookBorrowed.Title = listofBooks[i].Title;
                         bookBorrowed.Id_Library = listofBooks[i].Id_Library;
                         bookBorrowed.DateTime1 = czas;
-                        bookBorrowed.UserName = loggedUser.UserName;
+                        bookBorrowed.UserName = loggedUser.UserName!;
 
                         listofBorrowedBooks.Add(bookBorrowed);
                         booksR.SaveReservedBooks(bookBorrowed);
