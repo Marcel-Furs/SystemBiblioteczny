@@ -29,8 +29,23 @@
                     <TextBox x:Name="AuthorInput" HorizontalAlignment="Left" Margin="210,110,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="157" Height="18"/>
                     <TextBox x:Name="TitleInput" HorizontalAlignment="Left" Margin="210,156,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
                     <TextBox x:Name="QuantityInput" HorizontalAlignment="Left" Margin="210,204,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="156" Height="18"/>
-                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="382,30,0,0"/>
+                    <DataGrid x:Name="ApprovedApplicationsTable" Height="203"  Margin="382,34,0,169" SelectionChanged="ApprovedApplicationsTable_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="160"/>
+                            <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="160"/>
+                            <DataGridTextColumn Header ="Ilość" Binding="{Binding Quantity}" Width="180"/>
+                        </DataGrid.Columns>
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="#1D6F42"/>
+                                <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                                <Setter Property="BorderBrush" Value="White"/>
+                            </Style>
+                        </DataGrid.Resources>
+                    </DataGrid>
+
                     <Label Content="Zamówione książki gotowe do odebrania:" FontSize="16" HorizontalAlignment="Left" Margin="418,0,0,0" VerticalAlignment="Top" Height="48" Width="315"/>
+                    <Button Content="Odbierz" HorizontalAlignment="Left" Margin="543,269,0,0" VerticalAlignment="Top" Height="50" Width="115" Click="CollectBook"/>
                 </Grid>
 
 

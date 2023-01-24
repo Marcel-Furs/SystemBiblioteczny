@@ -38,8 +38,6 @@
                     <Grid>
                         <DataGrid x:Name="NewApplicationsData" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="784" Height="203" SelectionChanged="NewApplicationsData_SelectionChanged" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header =""  Width="30"/>
-
                                 <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="160"/>
                                 <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="160"/>
                                 <DataGridTextColumn Header ="Ilość" Binding="{Binding Quantity}" Width="180"/>
