@@ -302,27 +302,27 @@ namespace SystemBiblioteczny
 
         private void AuthorsName_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            AuthorsName.Text = loginMethod.EraseWhiteSpace(AuthorsName.Text);
         }
 
         private void AuthorsLastname_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            AuthorsName.Text = loginMethod.EraseWhiteSpace(AuthorsName.Text);
         }
 
         private void LibraryID_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            AuthorsName.Text = loginMethod.EraseWhiteSpace(AuthorsName.Text);
         }
 
         private void EventTime_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            AuthorsName.Text = loginMethod.EraseWhiteSpace(AuthorsName.Text);
         }
 
         private void ContactNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            AuthorsName.Text = loginMethod.EraseWhiteSpace(AuthorsName.Text);
         }
         
     }
