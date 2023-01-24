@@ -1,3 +1,4 @@
 5 Henryk_Sienkiewicz Krzyżacy True 2 01.24.2023 admin
-12 Juliusz_S�owacki Kordian True 2 01.24.2023 admin
-7 Henryk_Sienkiewicz Krzyżacy True 2 01.24.2023 admin
+12 Juliusz_Słowacki Kordian True 2 01.24.2023 admin
+10 Henryk_Sienkiewicz Potop False 2 01.24.2023 admin
+4 Juliusz_Słowacki Kordian False 2 01.24.2023 admin

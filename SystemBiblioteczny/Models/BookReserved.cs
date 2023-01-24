@@ -32,8 +32,8 @@ namespace SystemBiblioteczny.Models
             DateOnly dateczas1 = DateOnly.FromDateTime(DateTime.Now);
 
             bool status = false;
-            if((dateczas.Day - dateczas1.Day) > 7) status = true;
-
+            if((dateczas.Day - dateczas1.Day) >7) status = true;
+            
             return status;
         }
     }
