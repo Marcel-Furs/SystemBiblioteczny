@@ -102,37 +102,6 @@ namespace SystemBiblioteczny
             }
         }
 
-        private void OptAuthor_Checked(object sender, RoutedEventArgs e)
-        {
-            Books books = new();
-            List<Book> listofBooks = books.GetBooksList();
-            TableBooks.Items.Clear();
-            if (OptAuthor.IsChecked == true)
-            {
-                var sort1 = listofBooks.OrderBy(x => x.Author).ToList();
-                sort1.ForEach(x =>
-                {
-                    TableBooks.Items.Add(x);
-                });
-
-            }
-        }
-
-        private void OptTitle_Checked(object sender, RoutedEventArgs e)
-        {
-            Books books = new();
-            List<Book> listofBooks = books.GetBooksList();
-            TableBooks.Items.Clear();
-            if (OptTitle.IsChecked == true)
-            {
-                var sort1 = listofBooks.OrderBy(x => x.Title).ToList();
-                sort1.ForEach(x =>
-                {
-                    TableBooks.Items.Add(x);
-                });
-            }
-        }
-
         private void Find_TextChanged(object sender, TextChangedEventArgs e)
         { }
 

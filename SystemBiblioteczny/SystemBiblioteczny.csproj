@@ -9,9 +9,6 @@
 
   <ItemGroup>
     <None Remove="DataBases\Libraries.txt" />
-    <None Remove="kot1.jpg" />
-    <None Remove="tlo1.jpg" />
-    <None Remove="tlo2.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,9 +25,6 @@
     <Resource Include="DataBases\Libraries.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="kot1.jpg" />
-    <Resource Include="tlo1.jpg" />
-    <Resource Include="tlo2.jpg" />
   </ItemGroup>
 
 </Project>
