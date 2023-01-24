@@ -5,6 +5,10 @@ using System.Windows;
 using System.Windows.Controls;
 using SystemBiblioteczny.Models;
 
+using iTextSharp.text; 
+using iTextSharp.text.pdf;
+using System.Reflection.Metadata;
+
 namespace SystemBiblioteczny
 {
     /// <summary>
@@ -557,6 +561,17 @@ namespace SystemBiblioteczny
             }
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            using (var document = new iTextSharp.text.Document())
+            {
+                string path = @"../../../DataBases/BookHistory.txt";
+                string text = File.ReadAllText(path);
+                PdfWriter.GetInstance(document,new FileStream(@"../../../DataBases/Book.pdf", FileMode.Create));
+                document.Open();
+                document.Add(new Paragraph(text));
+                document.Close();
+            }
+        }
     }
 }
