@@ -30,22 +30,6 @@ namespace SystemBiblioteczny
             InitializeComponent();
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             loggedUser = user;
-            AccountBase account = new AccountBase();
-            List<Client> clients = account.GetClientList();
-            Client client = new();
-            foreach (var a in clients)
-            {
-                if (a.UserName == user.UserName && a.Password == user.Password)
-                {
-                    client.UserName = a.UserName;
-                    client.Password = a.Password;
-                    client.FirstName = a.FirstName;
-                    client.LastName = a.LastName;
-                    client.Email = a.Email; 
-                    client.Phone = a.Phone;
-                }
-            }
-            PersonStatistics(client.FirstName, client.LastName);
 
             UptodateTable();
 
