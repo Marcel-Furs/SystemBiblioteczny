@@ -29,7 +29,7 @@ namespace SystemBiblioteczny
             InitializeComponent();
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             librarianModel = userData;
-            
+            LoadEventData();
         }
 
         private void Return(object sender, RoutedEventArgs e)
@@ -60,6 +60,17 @@ namespace SystemBiblioteczny
             else
             {
                 MessageBox.Show("Niewystarczająca ilość danych, uzupełnij wszystkie dane!");
+            }
+        }
+        private void LoadEventData()
+        {
+            AuthorsEvenings eveningsModel = new();
+            AuthorsEvnings.Items.Clear();
+            List<AuthorsEvening> listOfEvents = eveningsModel.GetEventList();
+            foreach (AuthorsEvening e in listOfEvents)
+            {
+                if (librarianModel.LibraryId == e.LibraryID && e.Approved == true)
+                    AuthorsEvnings.Items.Add(e);
             }
         }
 

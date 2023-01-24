@@ -37,7 +37,25 @@
 
             </TabItem>
             <TabItem Header="Organizacja lokalu">
-                <Label Content="Tutaj damy obsługę zwracania książki" />
+                <Label >
+                    <DataGrid x:Name="AuthorsEvnings"  VerticalAlignment="Center" Width="500" Height="387" IsReadOnly="true" HorizontalAlignment="Center" Margin="130,0,0,0">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="#FF8DEA8D"/>
+                                <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                                <Setter Property="BorderBrush" Value="White"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header ="Osoba zgłaszająca" Binding="{Binding User}" Width="100" />
+                            <DataGridTextColumn Header ="Imię autora" Binding="{Binding FirstName}" Width="80"/>
+                            <DataGridTextColumn Header ="Nazwisko autora" Binding="{Binding LastName}" Width="100"/>
+                            <DataGridTextColumn Header ="Data" Binding="{Binding Date}" Width="70" CanUserResize="False"/>
+                            <DataGridTextColumn Header ="Godzina" Binding="{Binding Hour}" Width="50"/>
+                            <DataGridTextColumn Header ="Numer Telefonu" Binding="{Binding PhoneNumber}" Width="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Label>
             </TabItem>
             <TabItem Header="Ustawienia">
                 <Button Content="Wyloguj" Height="39" Click="Return" Margin="106,0,547,0"/>
