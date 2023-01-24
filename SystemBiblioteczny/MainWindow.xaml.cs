@@ -105,14 +105,14 @@ namespace SystemBiblioteczny
         {
             RegisterPhoneNumber.Text = loginMethod.EraseWhiteSpace(RegisterPhoneNumber.Text);
         }
-
-        private void RegisterPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        private void PasswordChanged(object sender, RoutedEventArgs e)
         {
             RegisterPassword.Password = loginMethod.EraseWhiteSpace(RegisterPassword.Password);
         }
-        private void RegisterPasswordConfirm_PasswordChanged(object sender, RoutedEventArgs e)
+        private void ConfirmationPasswordChanged(object sender, RoutedEventArgs e)
         {
             RegisterPasswordConfirmation.Password = loginMethod.EraseWhiteSpace(RegisterPasswordConfirmation.Password);
         }
+        
     }
 }
