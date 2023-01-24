@@ -26,6 +26,7 @@ namespace SystemBiblioteczny
         private AccountBase accountModel = new();
         private Librarian librarianModel = new();
         private string titleFromGui = "";
+        private int bookRFromGui = -1;
         public LibrarianWindow(Librarian userData)
         {
             InitializeComponent();
@@ -33,6 +34,7 @@ namespace SystemBiblioteczny
             librarianModel = userData;
             RefreshTableApprovedApplicationsData();
             LoadEventData();
+            UptodateTable();
 
         }
 
@@ -137,6 +139,104 @@ namespace SystemBiblioteczny
                 RefreshTableApprovedApplicationsData();
             }
         }
+        //Wypozycz ksiazki
+        private void RefreshTextBoxes()
+        {
+            if (RequestBookRLabel.Text == "") { RequestBookRLabel.Text = "0"; }
+            bookRFromGui = int.Parse(RequestBookRLabel.Text); ;
+        }
+        private void RequestBookRLabel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(RequestBookRLabel.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                RequestBookRLabel.Text = RequestBookRLabel.Text.Remove(RequestBookRLabel.Text.Length - 1);
+            }
+        }
 
+        private void TableRentBook_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Book book = (Book)TableRentBook.SelectedItem;
+            if (book != null)
+            {
+                RequestBookRLabel.Text = book.Id_Book.ToString();
+            }
+        }
+        private void UptodateTable()
+        {
+            TableRentBook.Items.Clear();
+            BooksReserved books = new();
+            List<BookReserverd> listofBooks = books.GetReservedBooksList();
+            var listofBooksR = listofBooks.Where(x => x.Id_Library == librarianModel.LibraryId).ToList();
+            foreach (var e in listofBooksR)
+            {
+                TableRentBook.Items.Add(e);
+            }
+
+        }
+        private void Rent_Book(object sender, RoutedEventArgs e)
+        {
+            RefreshTextBoxes();
+            BookReserverd bookRe = new();
+            BooksReserved booksR = new();
+
+            string czas = DateTime.Now.ToString("MM/dd/yyyy");
+
+            //Book book = new();
+            // book = (Book)TableBooks.SelectedItem;
+            Books books = new();
+            List<Book> listofBooks = books.GetBooksList();
+            List<Book> listofBorrowedBooks = books.GetBooksList();
+            BookReserverd bookBorrowed = new();
+            bool info = false;
+
+            bool status1 = false;
+
+            for (int i = 0; i < listofBooks.Count; i++)
+            {
+                int idSelected = listofBooks[i].Id_Book;
+
+                if (idSelected.CompareTo(bookRFromGui) == 0)
+                {
+                    if (listofBooks[i].Availability == true)
+                    {
+                        info = true;
+                        int idBookFromGui = bookRFromGui;
+                        string path2 = System.IO.Path.Combine("../../../DataBases/ReservedBooks.txt");
+                        using (StreamWriter writer = new StreamWriter(path2))
+                        {
+                            for (int k = 0; k < listofBooks.Count; k++)
+                            {
+                                if (idBookFromGui == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "False" + " " + listofBooks[k].Id_Library);
+                                else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
+                            }
+                            writer.Close();
+                        }
+                        bookBorrowed.Id_Book = listofBooks[i].Id_Book;
+                        bookBorrowed.Author = listofBooks[i].Author;
+                        bookBorrowed.Title = listofBooks[i].Title;
+                        bookBorrowed.Id_Library = listofBooks[i].Id_Library;
+                        bookBorrowed.DateTime1 = czas;
+
+                        listofBorrowedBooks.Add(bookBorrowed);
+                        booksR.SaveReservedBooks(bookBorrowed);
+
+                        MessageBox.Show("Wypożyczono ksiązkę!");
+                    }
+                    else { MessageBox.Show("Ta ksiązka jest niedostępna!"); info = true; }
+                }
+            }
+            if (info == false) { MessageBox.Show("Nie istnieje książka o podanym id"); }
+        }
+
+        private void Cancel_Reservations(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Cancel_All(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

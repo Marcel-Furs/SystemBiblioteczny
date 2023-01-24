@@ -235,6 +235,7 @@ namespace SystemBiblioteczny
                         bookBorrowed.Title = listofBooks[i].Title;
                         bookBorrowed.Id_Library = listofBooks[i].Id_Library;
                         bookBorrowed.DateTime1 = czas;
+                        bookBorrowed.UserName = loggedUser.UserName;
 
                         listofBorrowedBooks.Add(bookBorrowed);
                         booksR.SaveReservedBooks(bookBorrowed);
