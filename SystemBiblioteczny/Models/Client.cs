@@ -8,8 +8,6 @@ namespace SystemBiblioteczny.Models
 {
      public class Client : Person
     {
-        public string? Statistics { get; set; }
-
         public Client(string UserName, string Password, string FirstName, string LastName, string Email, string Phone)
         {
             this.FirstName = FirstName;
@@ -21,9 +19,9 @@ namespace SystemBiblioteczny.Models
         }
         public Client() { }
 
-        public Client(string? UserName)
+        public Client(Person person)
         {
-            this.UserName = UserName;
+            UserName = person.UserName;
         }
 
         public void MakeReservation() { }

@@ -8,6 +8,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Navigation;
 using System.Xml;
 using SystemBiblioteczny.Models;
@@ -95,7 +96,7 @@ namespace SystemBiblioteczny.Methods
                         switch (role)
                         {
                             case (AccountBase.RoleTypeEnum.Client): {
-                                    Client userData = new(list[j].UserName);
+                                    Client userData = new Client(list[j]);
                                     ClientWindow clientwindow = new(userData);
                                     clientwindow.Show();
                                 } break;
