@@ -195,7 +195,7 @@ namespace SystemBiblioteczny
         private void Book(object sender, RoutedEventArgs e)
         {
             RefreshTextBoxes();
-            BookReserverd bookRe = new();
+            BookReserved bookRe = new();
             BooksReserved booksR = new();
 
             string czas= DateTime.Now.ToString("MM/dd/yyyy");
@@ -205,7 +205,7 @@ namespace SystemBiblioteczny
             Books books = new();
             List<Book> listofBooks = books.GetBooksList();
             List<Book> listofBorrowedBooks = books.GetBooksList();
-            BookReserverd bookBorrowed = new();
+            BookReserved bookBorrowed = new();
             bool info = false;
 
             bool status1 = false;
@@ -266,11 +266,12 @@ namespace SystemBiblioteczny
 
             TableBooks1.Items.Clear();
             BooksReserved booksR = new();
-            List<BookReserverd> listofBooksR = booksR.GetReservedBooksList();
-            foreach (var e in listofBooksR)
+            List<BookReserved> listofBooksR = booksR.GetReservedBooksList();
+            var listofBooksRAccepted = listofBooksR.Where(x => x.Availability == true).ToList();
+            listofBooksRAccepted.ForEach(x =>
             {
-                TableBooks1.Items.Add(e);
-            }
+                TableBooks1.Items.Add(x);
+            });
         }
 
         private void LoadEventData()

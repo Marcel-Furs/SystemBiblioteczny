@@ -9,11 +9,8 @@
     <Grid>
         <TabControl>
             <TabItem Header="Zwróć książkę">
-                <Label Content="Tutaj damy obsługę zwracania książki" />
-            </TabItem>
-            <TabItem Header="Wypożycz książkę" >
                 <Grid>
-                    <DataGrid x:Name="TableRentBook" Height="237" SelectionChanged="TableRentBook_SelectionChanged" Margin="-3,168,229,1" RenderTransformOrigin="0.5,0.5" >
+                    <DataGrid x:Name="TableReturnBook" Height="237" SelectionChanged="TableRentBook_SelectionChanged" Margin="113,10,113,159" RenderTransformOrigin="0.5,0.5" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
@@ -29,22 +26,41 @@
                                 <Setter Property="BorderBrush" Value="Black"/>
                             </Style>
                         </DataGrid.Resources>
-                        <DataGrid.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform AngleY="0"/>
-                                <RotateTransform/>
-                                <TranslateTransform Y="0"/>
-                            </TransformGroup>
-                        </DataGrid.RenderTransform>
+                    </DataGrid>
+                    <Button Content="Zwróć " HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Height="52" Width="90" Click="Return_Book"/>
+                    <Label Content="Id książki:" HorizontalAlignment="Left" Margin="188,300,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="ReturnBookLabel" HorizontalAlignment="Left" Margin="272,304,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="31" TextChanged="ReturnBookLabel_TextChanged"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Wypożycz książkę" >
+                <Grid>
+                    <DataGrid x:Name="TableRentBook" Height="237" SelectionChanged="TableRentBook_SelectionChanged" Margin="97,10,129,159" RenderTransformOrigin="0.5,0.5" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="120" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Id biblioteki" Binding="{Binding Id_Library}" Width="65" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Dzień wypożyczenia:" Binding="{Binding DateTime1}" Width="110" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Nazwa użytkownika:" Binding="{Binding UserName}" Width="110" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="Turquoise"/>
+                                <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                        </DataGrid.Resources>
+
                     </DataGrid>
 
-                    <Button Content="Wypożycz" HorizontalAlignment="Left" Margin="614,51,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Rent_Book"/>
-                    <Button Content="Anuluj rezerwacje" HorizontalAlignment="Left" Margin="614,168,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Cancel_Reservations"/>
-                    <Button Content="Anuluj wszystkie" HorizontalAlignment="Left" Margin="614,287,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Cancel_All"/>
+                    <Button Content="Wypożycz" HorizontalAlignment="Left" Margin="97,259,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Rent_Book"/>
+                    <Button Content="Anuluj rezerwacje" HorizontalAlignment="Left" Margin="326,263,0,0" VerticalAlignment="Top" Height="55" Width="110" Click="Cancel_Reservation"/>
+                    <Button Content="Anuluj wszystkie" HorizontalAlignment="Left" Margin="523,263,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Cancel_All"/>
 
-                    <TextBox x:Name="RequestBookRLabel"  HorizontalAlignment="Left" Margin="525,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" TextChanged="RequestBookRLabel_TextChanged" />
-                    <Label Content="Id książki:" HorizontalAlignment="Left" Margin="445,66,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="RequestBookRLabel"  HorizontalAlignment="Left" Margin="132,343,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" TextChanged="RequestBookRLabel_TextChanged" RenderTransformOrigin="0.489,0.485" />
+                    <Label Content="Id książki:" HorizontalAlignment="Left" Margin="51,339,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Id książki:" HorizontalAlignment="Left" Margin="291,339,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="CancelBookRLabel"  HorizontalAlignment="Left" Margin="357,343,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" TextChanged="CancelBookRLabel_TextChanged" />
                 </Grid>
             </TabItem>
             <TabItem Header="Zgłoś zapotrzebowanie">
