@@ -13,5 +13,5 @@
 13 Henryk_Sienkiewicz Krzyżacy True 2
 14 Adam_Mickiewicz Dziady_3 True 0
 15 Henryk_Sienkiewicz Krzyżacy True 3
-16 Franz_Kafka Przemiana True 2
+16 Franz_Kafka Przemiana False 2
 0 Jan_Brzechwa Lokomotywa False 0

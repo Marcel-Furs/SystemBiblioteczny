@@ -116,8 +116,7 @@
                 <Grid>
                     <Label Content="Wypożczone książki:" HorizontalAlignment="Left" Margin="115,100,0,0" VerticalAlignment="Top"/>
                     <Label Content="Czy są zaległe książki?" HorizontalAlignment="Left" Margin="601,113,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="Name_S" HorizontalAlignment="Left" Margin="265,40,0,0" TextWrapping="Wrap" Text=""  VerticalAlignment="Top" Width="95"  IsReadOnly="True" RenderTransformOrigin="0.499,0.72"/>
-                    <TextBox x:Name="Lastname_S" HorizontalAlignment="Left" Margin="397,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95" IsReadOnly="True" />
+                    <TextBox x:Name="Name_S" HorizontalAlignment="Center" Margin="0,39,0,0" TextWrapping="Wrap" Text=""  VerticalAlignment="Top" Width="94"  IsReadOnly="True" RenderTransformOrigin="0.499,0.72"/>
 
                     <DataGrid x:Name="TableBooks1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="457" Height="229" SelectionChanged="TableBooks_SelectionChanged" Margin="0,167,0,0" RenderTransformOrigin="0.5,0.5" >
                         <DataGrid.Columns>

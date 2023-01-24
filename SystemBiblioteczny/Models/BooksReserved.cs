@@ -11,9 +11,9 @@ namespace SystemBiblioteczny.Models
     {
         private AccountBase account = new();
        
-        public List<BookReserverd> GetReservedBooksList()
+        public List<BookReserved> GetReservedBooksList()
         {
-            List<BookReserverd> list = new();
+            List<BookReserved> list = new();
 
             List<string> lines = account.GetListOfDataBaseLines("ReservedBooks");
 
@@ -31,7 +31,7 @@ namespace SystemBiblioteczny.Models
                 string newDate = splitted[5];
                 string newuserName = splitted[6];
 
-                BookReserverd book = new(newId, newAuthor, newTitle, newAvailibility, newIdLibrary, newDate, newuserName);
+                BookReserved book = new(newId, newAuthor, newTitle, newAvailibility, newIdLibrary, newDate, newuserName);
 
                 list.Add(book);
 
@@ -39,7 +39,7 @@ namespace SystemBiblioteczny.Models
             return list;
         }
 
-        public void SaveReservedBooks(BookReserverd bookR)
+        public void SaveReservedBooks(BookReserved bookR)
         {
             account.WriteToDataBase("ReservedBooks", bookR.Id_Book + " " + bookR.Author + " " + bookR.Title + " " + "False" + " " + bookR.Id_Library + " " + bookR.DateTime1 + " " + bookR.UserName);
         }

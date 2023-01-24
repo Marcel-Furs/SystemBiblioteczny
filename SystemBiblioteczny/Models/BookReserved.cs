@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-    public class BookReserverd : Book
+    public class BookReserved : Book
     {
         public string UserName { get; set; }
         public  string DateTime1 { get; set; }
-        public BookReserverd(int id_Book, string author, string title, bool availability, int id_Library, string dateTime, string userName)
+        public BookReserved(int id_Book, string author, string title, bool availability, int id_Library, string dateTime, string userName)
         {
             Id_Book = id_Book;
             Author = author;
@@ -21,7 +21,7 @@ namespace SystemBiblioteczny.Models
             UserName = userName;
         }
 
-        public BookReserverd()
+        public BookReserved()
         {
         }
 
