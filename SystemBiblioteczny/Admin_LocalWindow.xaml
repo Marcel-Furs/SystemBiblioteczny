@@ -54,7 +54,7 @@
                     </Grid>
                     <Button  Content="Zamów" HorizontalAlignment="Left" Margin="73,234,0,0" VerticalAlignment="Top" Height="34" Width="99" Click="OrderBook" />
                     <Button  Content="Odrzuć" HorizontalAlignment="Left" Margin="201,234,0,0" VerticalAlignment="Top" Height="34" Width="99" Click="RejectBook"/>
-                    
+
 
                 </Grid>
             </TabItem>
@@ -111,6 +111,7 @@
             </TabItem>
             <TabItem Header="Wygeneruj raport">
                 <Grid Background="#FFE5E5E5">
+                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="75,129,0,0" VerticalAlignment="Top" Height="54" Width="89" Click="Button_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Zarządzaj uprawnieniami">
