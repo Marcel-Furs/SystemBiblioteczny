@@ -22,9 +22,9 @@ namespace SystemBiblioteczny
 {
     public partial class ClientWindow : Window
     {
-        Client loggedUser = new();
+        private Client loggedUser = new();
         private int bookFromGui = -1;
-        LoginMethod loginMethod = new();
+        private LoginMethod loginMethod = new();
         public ClientWindow(Client user)
         {
             InitializeComponent();
