@@ -139,11 +139,14 @@ namespace SystemBiblioteczny
                 RefreshTableApprovedApplicationsData();
             }
         }
-        //Wypozycz ksiazki
+        //===================================================================================================================================================================
         private void RefreshTextBoxes()
         {
             if (RequestBookRLabel.Text == "") { RequestBookRLabel.Text = "0"; }
             bookRFromGui = int.Parse(RequestBookRLabel.Text); ;
+
+            if (CancelBookRLabel.Text == "") { CancelBookRLabel.Text = "0"; }
+            bookRFromGui = int.Parse(CancelBookRLabel.Text); ;
         }
         private void RequestBookRLabel_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -154,12 +157,22 @@ namespace SystemBiblioteczny
             }
         }
 
+        private void CancelBookRLabel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(CancelBookRLabel.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                CancelBookRLabel.Text = CancelBookRLabel.Text.Remove(CancelBookRLabel.Text.Length - 1);
+            }
+        }
+
         private void TableRentBook_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Book book = (Book)TableRentBook.SelectedItem;
             if (book != null)
             {
                 RequestBookRLabel.Text = book.Id_Book.ToString();
+                CancelBookRLabel.Text = book.Id_Book.ToString();
             }
         }
         private void UptodateTable()
@@ -177,20 +190,13 @@ namespace SystemBiblioteczny
         private void Rent_Book(object sender, RoutedEventArgs e)
         {
             RefreshTextBoxes();
-            BookReserved bookRe = new();
-            BooksReserved booksR = new();
 
-            string czas = DateTime.Now.ToString("MM/dd/yyyy");
-
-            //Book book = new();
-            // book = (Book)TableBooks.SelectedItem;
+            //string czas = DateTime.Now.ToString("MM/dd/yyyy");
             BooksReserved books = new();
 
             List<BookReserved> listofBorrowedBooks = books.GetReservedBooksList();
-            //BookReserved bookBorrowed = new();
-            bool info = false;
 
-            bool status1 = false;
+            bool info = false;
 
             for (int i = 0; i < listofBorrowedBooks.Count; i++)
             {
@@ -221,14 +227,121 @@ namespace SystemBiblioteczny
             if (info == false) { MessageBox.Show("Nie istnieje książka o podanym id"); }
         }
 
-        private void Cancel_Reservations(object sender, RoutedEventArgs e)
+        private void Cancel_Reservation(object sender, RoutedEventArgs e)
         {
+            RefreshTextBoxes();
 
+            //string czas = DateTime.Now.ToString("MM/dd/yyyy");
+            BooksReserved booksR = new();
+            Books books = new();
+
+            List<BookReserved> listofBorrowedBooks = booksR.GetReservedBooksList();
+            List<Book> listofBooks = books.GetBooksList();
+
+            bool info = false;
+
+            for (int i = 0; i < listofBorrowedBooks.Count; i++)
+            {
+                int idSelected = listofBorrowedBooks[i].Id_Book;
+
+                if (idSelected.CompareTo(bookRFromGui) == 0)
+                {
+                    if (listofBorrowedBooks[i].Availability == false)
+                    {
+                        info = true;
+                        int idBookFromGui = bookRFromGui;
+                        string path2 = System.IO.Path.Combine("../../../DataBases/ReservedBooks.txt");
+                        using (StreamWriter writer = new StreamWriter(path2))
+                        {
+                            for (int k = 0; k < listofBorrowedBooks.Count; k++)
+                            {
+                                if (idBookFromGui == listofBorrowedBooks[k].Id_Book);//writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + "True" + " " + listofBorrowedBooks[k].Id_Library);
+                                else writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + listofBorrowedBooks[k].Availability + " " + listofBorrowedBooks[k].Id_Library + " " + listofBorrowedBooks[k].DateTime1 + " " + listofBorrowedBooks[k].UserName);
+                            }
+                            writer.Close();
+                        };
+                        MessageBox.Show("Anulowano ksiązkę!");
+                        UptodateTable();
+
+                        string path3 = System.IO.Path.Combine("../../../DataBases/BookList.txt");
+                        using (StreamWriter writer = new StreamWriter(path3))
+                        {
+                            for (int k = 0; k < listofBooks.Count; k++)
+                            {
+                                if (idBookFromGui == listofBooks[k].Id_Book) writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + "True" + " " + listofBooks[k].Id_Library);
+                                else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
+                            }
+                            writer.Close();
+                        };
+                    }
+                    else { MessageBox.Show("Ta ksiązka jest niedostępna!"); info = true; }
+                }
+            }
+            if (info == false) { MessageBox.Show("Nie istnieje książka o podanym id"); }
         }
 
         private void Cancel_All(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult dialogResult = MessageBox.Show("Czy chcesz rozpocząć usuwanie książek?", "", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                RefreshTextBoxes();
 
+                BooksReserved booksR = new();
+                Books books = new();
+
+                List<BookReserved> listofBorrowedBooks = booksR.GetReservedBooksList();
+                List<Book> listofBooks = books.GetBooksList();
+
+                List<int> takeId = new();
+                foreach(var g in listofBorrowedBooks)
+                {
+                    if (g.Id_Library == librarianModel.LibraryId && g.Availability == false)
+                    {
+                        takeId.Add(g.Id_Book);
+                    }
+                }
+
+                string path2 = System.IO.Path.Combine("../../../DataBases/ReservedBooks.txt");
+                using (StreamWriter writer = new StreamWriter(path2))
+                {
+                    for (int i = 0; i < listofBorrowedBooks.Count; i++)
+                    {
+                        if (listofBorrowedBooks[i].Availability == false && listofBorrowedBooks[i].Id_Library == librarianModel.LibraryId) ;
+                        else writer.WriteLine(listofBorrowedBooks[i].Id_Book + " " + listofBorrowedBooks[i].Author + " " + listofBorrowedBooks[i].Title + " " + listofBorrowedBooks[i].Availability + " " + listofBorrowedBooks[i].Id_Library + " " + listofBorrowedBooks[i].DateTime1 + " " + listofBorrowedBooks[i].UserName);
+                        
+                    }
+                    writer.Close();
+                };
+                MessageBox.Show("Anulowano wszystkie książki!");
+                UptodateTable();
+
+                string path3 = System.IO.Path.Combine("../../../DataBases/BookList.txt");
+                using (StreamWriter writer = new StreamWriter(path3))
+                {
+                    for (int k = 0; k < listofBooks.Count; k++)
+                    {
+                        bool tmp = false;
+                        for (int jola = 0; jola < takeId.Count; jola++)
+                        {
+
+                            if (takeId[jola] == listofBooks[k].Id_Book && listofBorrowedBooks[jola].Id_Library == librarianModel.LibraryId)
+                            {
+                                tmp = true;
+                                break;
+                            }
+                        }
+                        if (tmp == true)
+                        {
+                            writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + tmp + " " + listofBooks[k].Id_Library);
+                        }
+                        else writer.WriteLine(listofBooks[k].Id_Book + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + listofBooks[k].Availability + " " + listofBooks[k].Id_Library);
+                    }
+                    writer.Close();
+                };
+
+            }
         }
+        
     }
 }

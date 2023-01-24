@@ -35,20 +35,22 @@ namespace SystemBiblioteczny.Models
 
             for (int i = 0; i < lines.Count; i++)
             {
-                string line = lines[i];
-                string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                if (lines[i] != "")
+                {
+                    string line = lines[i];
+                    string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
 
-                int exchangeId = int.Parse(splitted[0]);
-                int bookId = int.Parse(splitted[1]);
-                string newRequestor = splitted[2];
-                string newAuthor = splitted[3];
-                string newTitle = splitted[4];
-                int newIdLibrary = int.Parse(splitted[5]);
+                    int exchangeId = int.Parse(splitted[0]);
+                    int bookId = int.Parse(splitted[1]);
+                    string newRequestor = splitted[2];
+                    string newAuthor = splitted[3];
+                    string newTitle = splitted[4];
+                    int newIdLibrary = int.Parse(splitted[5]);
 
-                BookExchange book = new (exchangeId, newRequestor, bookId, newAuthor, newTitle, newIdLibrary);
-                
-                list.Add(book);
+                    BookExchange book = new(exchangeId, newRequestor, bookId, newAuthor, newTitle, newIdLibrary);
 
+                    list.Add(book);
+                }
             }
             return list;
         }

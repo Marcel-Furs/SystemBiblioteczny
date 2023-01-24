@@ -39,12 +39,14 @@
                         </DataGrid.RenderTransform>
                     </DataGrid>
 
-                    <Button Content="Wypożycz" HorizontalAlignment="Left" Margin="614,51,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Rent_Book"/>
-                    <Button Content="Anuluj rezerwacje" HorizontalAlignment="Left" Margin="614,168,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Cancel_Reservations"/>
-                    <Button Content="Anuluj wszystkie" HorizontalAlignment="Left" Margin="614,287,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Cancel_All"/>
+                    <Button Content="Wypożycz" HorizontalAlignment="Left" Margin="43,38,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Rent_Book"/>
+                    <Button Content="Anuluj rezerwacje" HorizontalAlignment="Center" Margin="0,38,0,0" VerticalAlignment="Top" Height="55" Width="110" Click="Cancel_Reservation"/>
+                    <Button Content="Anuluj wszystkie" HorizontalAlignment="Left" Margin="595,38,0,0" VerticalAlignment="Top" Height="55" Width="111" Click="Cancel_All"/>
 
-                    <TextBox x:Name="RequestBookRLabel"  HorizontalAlignment="Left" Margin="525,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" TextChanged="RequestBookRLabel_TextChanged" />
-                    <Label Content="Id książki:" HorizontalAlignment="Left" Margin="445,66,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="RequestBookRLabel"  HorizontalAlignment="Left" Margin="78,118,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" TextChanged="RequestBookRLabel_TextChanged" />
+                    <Label Content="Id książki:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Id książki:" HorizontalAlignment="Left" Margin="281,122,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="CancelBookRLabel"  HorizontalAlignment="Center" Margin="0,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="40" TextChanged="CancelBookRLabel_TextChanged" />
                 </Grid>
             </TabItem>
             <TabItem Header="Zgłoś zapotrzebowanie">
