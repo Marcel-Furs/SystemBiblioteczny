@@ -8,8 +8,9 @@ namespace SystemBiblioteczny.Models
 {
     public class BookReserverd : Book
     {
+        public string UserName { get; set; }
         public  string DateTime1 { get; set; }
-        public BookReserverd(int id_Book, string author, string title, bool availability, int id_Library, string dateTime)
+        public BookReserverd(int id_Book, string author, string title, bool availability, int id_Library, string dateTime, string userName)
         {
             Id_Book = id_Book;
             Author = author;
@@ -17,6 +18,7 @@ namespace SystemBiblioteczny.Models
             Availability = availability;
             Id_Library = id_Library;
             DateTime1 = dateTime;
+            UserName = userName;
         }
 
         public BookReserverd()
