@@ -31,7 +31,7 @@ namespace SystemBiblioteczny
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             loggedUser = user;
 
-            PersonStatistics(user.UserName);
+            PersonStatistics(user.UserName!);
             UptodateTable();
 
             Date.FontSize = 10;
@@ -204,7 +204,7 @@ namespace SystemBiblioteczny
                         bookBorrowed.Title = listofBooks[i].Title;
                         bookBorrowed.Id_Library = listofBooks[i].Id_Library;
                         bookBorrowed.DateTime1 = czas;
-                        bookBorrowed.UserName = loggedUser.UserName;
+                        bookBorrowed.UserName = loggedUser.UserName!;
 
                         listofBorrowedBooks.Add(bookBorrowed);
                         booksR.SaveReservedBooks(bookBorrowed);

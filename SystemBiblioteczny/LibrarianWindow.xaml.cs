@@ -13,15 +13,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
 {
-    /// <summary>
-    /// Logika interakcji dla klasy LibrarianWindow.xaml
-    /// </summary>
     public partial class LibrarianWindow : Window
     {
+        LoginMethod loginMethod = new();
         private ApplicationBook applicationBookModel = new();
         private AccountBase accountModel = new();
         private Librarian librarianModel = new();
@@ -94,13 +93,8 @@ namespace SystemBiblioteczny
             for (int i = 0; i < listofApplicationBooks.Count; i++)
             {
                 ApplicationBook book = listofApplicationBooks[i];
-                if (book.Approved.CompareTo(false) == 0)
-                {
-
-                }
-                else ApprovedApplicationsTable.Items.Add(book);
+                if (book.Approved.CompareTo(false) != 0)ApprovedApplicationsTable.Items.Add(book);
             }
-
             ApprovedApplicationsTable.IsReadOnly = true;
 
         }
@@ -280,8 +274,7 @@ namespace SystemBiblioteczny
                         {
                             for (int k = 0; k < listofBorrowedBooks.Count; k++)
                             {
-                                if (idBookFromGui == listofBorrowedBooks[k].Id_Book) ;//writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + "True" + " " + listofBorrowedBooks[k].Id_Library);
-                                else writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + listofBorrowedBooks[k].Availability + " " + listofBorrowedBooks[k].Id_Library + " " + listofBorrowedBooks[k].DateTime1 + " " + listofBorrowedBooks[k].UserName);
+                                if (idBookFromGui != listofBorrowedBooks[k].Id_Book)writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + listofBorrowedBooks[k].Availability + " " + listofBorrowedBooks[k].Id_Library + " " + listofBorrowedBooks[k].DateTime1 + " " + listofBorrowedBooks[k].UserName);
                             }
                             writer.Close();
                         };
@@ -375,11 +368,8 @@ namespace SystemBiblioteczny
 
             BooksReserved booksR = new();
             Books books = new();
-
             List<BookReserved> listofBorrowedBooks = booksR.GetReservedBooksList();
-
             List<Book> listofBooks = books.GetBooksList();
-
             bool info = false;
 
             for (int i = 0; i < listofBorrowedBooks.Count; i++)
@@ -434,6 +424,25 @@ namespace SystemBiblioteczny
             }
             if (info == false) { MessageBox.Show("Nie istnieje książka o podanym id"); }
 
+        }
+
+        private void AuthorInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AuthorInput.Text = loginMethod.EraseWhiteSpace(AuthorInput.Text);
+        }
+
+        private void TitleInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AuthorInput.Text = loginMethod.EraseWhiteSpace(AuthorInput.Text);
+        }
+
+        private void QuantityInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           if (System.Text.RegularExpressions.Regex.IsMatch(QuantityInput.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                QuantityInput.Text = QuantityInput.Text.Remove(QuantityInput.Text.Length - 1);
+            }
         }
     }
 }

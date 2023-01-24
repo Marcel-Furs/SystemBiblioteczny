@@ -29,7 +29,7 @@
             <TextBox x:Name="LoginEmail" VerticalAlignment="Top" Height="24" Margin="195,19,0,0" Grid.Row="2" />
             <Label Grid.Row="2" Margin="14,68,0,4" Grid.RowSpan="2" HorizontalAlignment="Left" Width="195" FontSize="16" Content="Hasło" />
             <PasswordBox Grid.Row="3" x:Name="LoginPassword" VerticalAlignment="Top" Margin="195,2,0,0" Height="24"/>
-            <Button Grid.Row="5" Click="Sign_Client" VerticalAlignment="Top" Height="42" Width="370" Margin="15,22,5,0" FontSize="20" >Login</Button>
+            <Button Grid.Row="5" Click="Sign_Client" VerticalAlignment="Top" Height="34" Margin="33,22,43,0" FontSize="20" Content="Zaloguj" />
             <RadioButton x:Name="clientOption"  Content="Klient" HorizontalAlignment="Left" Margin="13,72,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.RowSpan="2"/>
             <RadioButton x:Name="admin_localOption" Content="Admin Biblioteki" HorizontalAlignment="Left" Margin="13,41,0,11" Grid.Row="4"/>
             <RadioButton x:Name="admin_networkOption" Content="Admin Sieci" HorizontalAlignment="Left" Margin="13,61,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.RowSpan="2"/>
@@ -52,11 +52,11 @@
             <Label Content="Nazwa użytkownika:" Margin="0,48,0,48" Grid.RowSpan="3" HorizontalAlignment="Left" Width="195" FontSize="16"/>
             <TextBox x:Name="RegisterUsername" HorizontalAlignment="Left" Margin="177,5,0,19" Width="195" TextChanged="RegisterUsername_TextChanged" Grid.Row="1" Height="24"/>
             <Label Grid.Row="1" Content="Hasło" Margin="0,48,0,48" Grid.RowSpan="3" HorizontalAlignment="Left" Width="195" FontSize="16" />
-            <PasswordBox Grid.Row="2" x:Name="RegisterPassword" Height="24" VerticalAlignment="Top" Margin="177,5,18,0"/>
+            <PasswordBox Grid.Row="2" x:Name="RegisterPassword" Height="24" VerticalAlignment="Top" Margin="177,5,18,0" PasswordChanged="PasswordChanged"/>
             <Label Grid.Row="2" Content="Powtórz hasło" HorizontalAlignment="Left" Margin="0,48,0,48" Grid.RowSpan="3" Width="195" FontSize="16" />
-            <PasswordBox Grid.Row="3" x:Name="RegisterPasswordConfirmation" HorizontalAlignment="Left" Margin="177,4,0,19" Width="195" Height="24"/>
+            <PasswordBox Grid.Row="3" x:Name="RegisterPasswordConfirmation" HorizontalAlignment="Left" Margin="177,4,0,19" Width="195" Height="24" PasswordChanged="ConfirmationPasswordChanged"/>
 
-            <Button Grid.Row="7" Click="Register_Client" FontSize="20" Height="42" Width="370" Margin="5,46,15,8" Grid.RowSpan="2">Register</Button>
+            <Button Grid.Row="7" Click="Register_Client" FontSize="20" Margin="55,45,34,19" Grid.RowSpan="2" Content="Zarejestruj"/>
             <Label Grid.Row="4" Content="Imię" HorizontalAlignment="Left" Margin="0,0,0,46" Grid.RowSpan="2" Width="195" FontSize="16" />
             <TextBox Grid.Row="4" x:Name="RegisterName" HorizontalAlignment="Left" Margin="177,5,0,19" Width="195" TextChanged="RegisterName_TextChanged" Height="24"/>
             <Label Grid.Row="4" Content="Nazwisko" HorizontalAlignment="Left" Margin="0,46,0,0" Grid.RowSpan="2" Width="195" FontSize="16" />
