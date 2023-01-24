@@ -425,14 +425,14 @@ namespace SystemBiblioteczny
         private void Approve_button(object sender, RoutedEventArgs e)
         {
             eveningModel = (AuthorsEvening)AuthorsEvnings.SelectedItem;
-            // if (eveningModel != null) eveningsModel.ChangeApprovedToTrue(eveningModel);
+            if (eveningModel != null) eveningsModel.ChangeApprovedToTrue(eveningModel);
             LoadEventData();
         }
 
         private void Reject_button(object sender, RoutedEventArgs e)
         {
             eveningModel = (AuthorsEvening)AuthorsEvnings.SelectedItem;
-            // if (eveningModel != null) eveningsModel.RemoveFromList(eveningModel);
+            if (eveningModel != null) eveningsModel.RemoveFromList(eveningModel);
             LoadEventData();
         }
         private void ShowClientList(object sender, RoutedEventArgs e)

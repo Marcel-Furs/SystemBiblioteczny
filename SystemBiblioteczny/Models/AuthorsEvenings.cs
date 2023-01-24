@@ -106,11 +106,8 @@ namespace SystemBiblioteczny.Models
                 int newHour = int.Parse(splitted[6]);
                 string newPhoneNumber = splitted[7];
                 DateTime? newDate1 = DateTime.Parse(newDate);
-
-                AuthorsEvening newEvent = new(approved, username, authorsName, authorsLastname, libraryID, newDate1, newHour, newPhoneNumber);
-
-                list.Add(newEvent);
-
+                    AuthorsEvening newEvent = new(approved, username, authorsName, authorsLastname, libraryID, newDate1, newHour, newPhoneNumber);
+                    list.Add(newEvent);
             }
             return list;
         }
