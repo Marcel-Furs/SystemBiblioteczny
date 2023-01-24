@@ -22,14 +22,16 @@ namespace SystemBiblioteczny
     /// </summary>
     public partial class LibrarianWindow : Window
     {
+        private ApplicationBook applicationBookModel = new();
         private AccountBase accountModel = new();
         private Librarian librarianModel = new();
+        private string titleFromGui = "";
         public LibrarianWindow(Librarian userData)
         {
             InitializeComponent();
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             librarianModel = userData;
-            
+            RefreshTableApprovedApplicationsData();
         }
 
         private void Return(object sender, RoutedEventArgs e)
@@ -60,6 +62,66 @@ namespace SystemBiblioteczny
             else
             {
                 MessageBox.Show("Niewystarczająca ilość danych, uzupełnij wszystkie dane!");
+            }
+        }
+
+        private void ApprovedApplicationsTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplicationBook book = (ApplicationBook)ApprovedApplicationsTable.SelectedItem;
+            if (book != null) titleFromGui = book.Title;
+        }
+
+        void RefreshTableApprovedApplicationsData()
+        {
+            List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
+            
+            ApprovedApplicationsTable.Items.Clear();
+            for (int i = 0; i < listofApplicationBooks.Count; i++)
+            {
+                ApplicationBook book = listofApplicationBooks[i];
+                if (book.Approved.CompareTo(false) == 0)
+                {
+                    
+                }
+                else ApprovedApplicationsTable.Items.Add(book);
+            }
+
+            ApprovedApplicationsTable.IsReadOnly = true;
+
+        }
+
+        private void CollectBook(object sender, RoutedEventArgs e)
+        {
+            Book book1 = new();
+            bool info = false;
+            if (titleFromGui == "") MessageBox.Show("Nie wybrano książki");
+            else
+            {
+                List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
+                for (int i = 0; i < list.Count; i++)
+                {
+
+                    string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
+                    List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
+
+                    using (StreamWriter writer = new StreamWriter(path))
+                    {
+                        for (int j = 0; j < lines.Count; j++)
+                        {
+                            string line = lines[j];
+                            if (list[j].Title.CompareTo(titleFromGui) == 0 && info == false)
+                            {
+                                info = true;
+                                accountModel.WriteToDataBase("BookList", book1.Id_Book + " " + list[j].Author + " " + list[j].Title + " " + book1.Availability + " " + book1.Id_Library);
+                            }
+                            else writer.WriteLine(line);
+                        }
+
+                        writer.Close();
+                    }
+
+                }
+                RefreshTableApprovedApplicationsData();
             }
         }
 
