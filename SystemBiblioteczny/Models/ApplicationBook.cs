@@ -9,13 +9,16 @@ namespace SystemBiblioteczny.Models
     public class ApplicationBook : Book
     {
         private AccountBase accountModel = new();
-        public string Quantity { get; set; }
+
+        public int ID { get; set; }
+        public int Quantity { get; set; }
         public string Librarian { get; set; }
 
         public bool Approved { get; set; }
 
-        public ApplicationBook(string title, string author, string quantity, string librarian, bool approved)
+        public ApplicationBook(int id, string title, string author, int quantity, string librarian, bool approved)
         {
+            this.ID = id;
             this.Title = title;
             this.Author = author;
             this.Quantity = quantity;
@@ -38,13 +41,14 @@ namespace SystemBiblioteczny.Models
             {
                 string line = lines[i];
                 string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                string newTitle = splitted[0];
-                string newAuthor = splitted[1];
-                string newQuantity = splitted[2];
-                string newRequestor = splitted[3];
-                bool newApproval = bool.Parse(splitted[4]);
+                int newId = int.Parse(splitted[0]);
+                string newTitle = splitted[1];
+                string newAuthor = splitted[2];
+                int newQuantity = int.Parse(splitted[3]);
+                string newRequestor = splitted[4];
+                bool newApproval = bool.Parse(splitted[5]);
 
-                ApplicationBook book = new(newTitle, newAuthor, newQuantity, newRequestor, newApproval);
+                ApplicationBook book = new(newId, newTitle, newAuthor, newQuantity, newRequestor, newApproval);
 
                 list.Add(book);
 

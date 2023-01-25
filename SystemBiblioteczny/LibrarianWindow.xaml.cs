@@ -24,6 +24,8 @@ namespace SystemBiblioteczny
         private ApplicationBook applicationBookModel = new();
         private AccountBase accountModel = new();
         private Librarian librarianModel = new();
+        private Books books = new();
+        
         private string titleFromGui = "";
         private int bookRFromGui = -1;
         public LibrarianWindow(Librarian userData)
@@ -46,21 +48,28 @@ namespace SystemBiblioteczny
 
         private void SendApplication(object sender, RoutedEventArgs e)
         {
+            if (QuantityInput.Text == "" || QuantityInput.Text.CompareTo("0") == 0)
+            {
+                MessageBox.Show("Ilość nie może być zerem");
+                return;
+            }
+            int max = 1;
             var title = TitleInput.Text;
             var author = AuthorInput.Text;
-            var quantity = QuantityInput.Text;
+            int quantity = int.Parse(QuantityInput.Text);
             var librarian = librarianModel.UserName!;
-            ApplicationBook applicationBook = new(title, author, quantity, librarian, false);
-
-
-
-            if (title.Any() && author.Any() && quantity.Any())
+            foreach(ApplicationBook a in applicationBookModel.GetApplicationBooksList())
+            {
+                if (a.ID > max) max = a.ID;
+            }
+            max++;
+            if (title.Any() && author.Any())
             {
                 MessageBox.Show("Wysłano zgłoszenie zapotrzebowania na: " + "\n" + author + " " + title + " - ilość: " + quantity);
 
 
                 List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
-                accountModel.WriteToDataBase("BookApplicationList", TitleInput.Text + " " + AuthorInput.Text + " " + QuantityInput.Text + " " + librarian + " " + false);
+                accountModel.WriteToDataBase("BookApplicationList", max + " " + TitleInput.Text + " " + AuthorInput.Text + " " + QuantityInput.Text + " " + librarian + " " + false);
             }
             else
             {
@@ -79,12 +88,6 @@ namespace SystemBiblioteczny
             }
         }
 
-        private void ApprovedApplicationsTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ApplicationBook book = (ApplicationBook)ApprovedApplicationsTable.SelectedItem;
-            if (book != null) titleFromGui = book.Title;
-        }
-
         void RefreshTableApprovedApplicationsData()
         {
             List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
@@ -101,14 +104,18 @@ namespace SystemBiblioteczny
 
         private void CollectBook(object sender, RoutedEventArgs e)
         {
-            Book book1 = new();
-            bool info = false;
-            if (titleFromGui == "") MessageBox.Show("Nie wybrano książki");
+
+           
+            ApplicationBook IdFromGui = (ApplicationBook)(ApprovedApplicationsTable.SelectedItem);
+            if (IdFromGui == null) MessageBox.Show("Nie wybrano książki");
             else
             {
+                List<Book> book2 = new();
+                book2 = books.GetBooksList();
+                int newID = book2.Capacity;
+                newID++;
                 List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
-                for (int i = 0; i < list.Count; i++)
-                {
+                
 
                     string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
                     List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
@@ -118,10 +125,14 @@ namespace SystemBiblioteczny
                         for (int j = 0; j < lines.Count; j++)
                         {
                             string line = lines[j];
-                            if (list[j].Title.CompareTo(titleFromGui) == 0 && info == false)
+                            if (list[j].ID.CompareTo(IdFromGui.ID) == 0)
                             {
-                                info = true;
-                                accountModel.WriteToDataBase("BookList", book1.Id_Book + " " + list[j].Author + " " + list[j].Title + " " + book1.Availability + " " + book1.Id_Library);
+                                for(int i = 0; i < list[j].Quantity; i++)
+                                {
+                                    accountModel.WriteToDataBase("BookList", newID + " " + list[j].Author + " " + list[j].Title + " " + "True" + " " + librarianModel.LibraryId);
+                                    newID++;
+                                }
+                                
                             }
                             else writer.WriteLine(line);
                         }
@@ -129,7 +140,7 @@ namespace SystemBiblioteczny
                         writer.Close();
                     }
 
-                }
+                
                 RefreshTableApprovedApplicationsData();
             }
         }

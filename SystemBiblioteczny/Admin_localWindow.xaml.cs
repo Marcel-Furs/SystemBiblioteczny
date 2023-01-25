@@ -8,6 +8,7 @@ using SystemBiblioteczny.Models;
 using iTextSharp.text; 
 using iTextSharp.text.pdf;
 using System.Reflection.Metadata;
+using Org.BouncyCastle.Asn1.X509.SigI;
 
 namespace SystemBiblioteczny
 {
@@ -16,7 +17,7 @@ namespace SystemBiblioteczny
     /// </summary>
     public partial class Admin_LocalWindow : Window
     {
-        
+
         private ApplicationBook applicationBookModel = new();
         private BookExchange bookExchangeModel = new();
         private AccountBase accountModel = new();
@@ -211,13 +212,14 @@ namespace SystemBiblioteczny
             List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
 
             NewApplicationsData.Items.Clear();
-            for(int i = 0; i<listofApplicationBooks.Count; i++)
+            for (int i = 0; i < listofApplicationBooks.Count; i++)
             {
                 ApplicationBook book = listofApplicationBooks[i];
                 if (book.Approved.CompareTo(true) == 0)
                 {
-                    
-                }else NewApplicationsData.Items.Add(book);
+
+                }
+                else NewApplicationsData.Items.Add(book);
             }
 
             NewApplicationsData.IsReadOnly = true;
@@ -302,53 +304,13 @@ namespace SystemBiblioteczny
             }
         }
 
-        private void NewApplicationsData_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ApplicationBook book = (ApplicationBook)NewApplicationsData.SelectedItem;
-            if (book != null) titleFromGui = book.Title;
-        }
+        
 
         private void OrderBook(object sender, RoutedEventArgs e)
         {
-            bool info = false;
-            if (titleFromGui == "") MessageBox.Show("Nie wybrano książki");
-            else
-            {
-                List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
-                for(int i = 0; i<list.Count; i++)
-                {
-                    
-                    string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
-                    List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
-
-                    using (StreamWriter writer = new StreamWriter(path))
-                    {
-                        for (int j = 0; j < lines.Count; j++)
-                        {
-                            string line = lines[j];
-                            if (list[j].Title.CompareTo(titleFromGui) == 0 && info == false)
-                            {
-                                writer.WriteLine(list[j].Title + " " + list[j].Author + " " + list[j].Quantity + " " + list[j].Librarian + " " + "True");
-                                info = true;
-                            }
-                            else writer.WriteLine(line);
-                        }
-
-                        writer.Close();
-                    }
-                    
-                }
-                RefreshTableApplicationsData();
-            }
-            
-            
-        }
-
-        private void RejectBook(object sender, RoutedEventArgs e)
-        {
-
-            bool info = false;
-            if (titleFromGui == "") MessageBox.Show("Nie wybrano książki");
+            ApplicationBook IdFromGui = (ApplicationBook)(NewApplicationsData.SelectedItem);
+           
+            if (IdFromGui == null) MessageBox.Show("Nie wybrano książki");
             else
             {
                 List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
@@ -363,9 +325,9 @@ namespace SystemBiblioteczny
                         for (int j = 0; j < lines.Count; j++)
                         {
                             string line = lines[j];
-                            if (list[j].Title.CompareTo(titleFromGui) == 0 && info == false)
+                            if (list[j].ID.CompareTo(IdFromGui.ID) == 0)
                             {
-                                info = true; 
+                                writer.WriteLine(list[j].ID + " " + list[j].Title + " " + list[j].Author + " " + list[j].Quantity + " " + list[j].Librarian + " " + "True");
                                 
                             }
                             else writer.WriteLine(line);
@@ -377,9 +339,41 @@ namespace SystemBiblioteczny
                 }
                 RefreshTableApplicationsData();
             }
+
+
         }
 
-        
+        private void RejectBook(object sender, RoutedEventArgs e)
+        {
+            ApplicationBook IdFromGui = (ApplicationBook)(NewApplicationsData.SelectedItem);
+            
+            if (IdFromGui == null) MessageBox.Show("Nie wybrano książki");
+            else
+            {
+                List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
+                for (int i = 0; i < list.Count; i++)
+                {
+
+                    string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
+                    List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
+
+                    using (StreamWriter writer = new StreamWriter(path))
+                    {
+                        for (int j = 0; j < lines.Count; j++)
+                        {
+                            string line = lines[j];
+                            if (list[j].ID.CompareTo(IdFromGui.ID) != 0) writer.WriteLine(line);
+                        }
+
+                        writer.Close();
+                    }
+
+                }
+                RefreshTableApplicationsData();
+            }
+        }
+
+
 
         private void TableBooks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -515,13 +509,13 @@ namespace SystemBiblioteczny
             Client client = new();
 
             bool info = false;
-            
+
             for (int i = 0; i < librarians.Count; i++)
             {
                 if (librarians[i].UserName!.CompareTo(UserNameTextBox.Text) == 0)
                 {
                     info = true;
-                   
+
                     client = new(librarians[i].UserName!, librarians[i].Password!, librarians[i].FirstName!, librarians[i].LastName!, librarians[i].Email!, librarians[i].Phone!);
                 }
             }
@@ -563,15 +557,101 @@ namespace SystemBiblioteczny
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using (var document = new iTextSharp.text.Document())
+            // ilosc ksiazek w bibliotece
+            Books a = new();
+            List<Book> AllBooksList = a.GetBooksList();
+            int BooksCount = 0;
+            for (int i=0; i < AllBooksList.Count; i++)
             {
-                string path = @"../../../DataBases/BookHistory.txt";
-                string text = File.ReadAllText(path);
-                PdfWriter.GetInstance(document,new FileStream(@"../../../DataBases/Book.pdf", FileMode.Create));
-                document.Open();
-                document.Add(new Paragraph(text));
-                document.Close();
+                if (AllBooksList[i].Id_Library == localAdmin.LibraryId)
+                {
+                    BooksCount++;
+                }
             }
+
+            // ilosc wypozyczen
+            BooksReserved b = new();
+            List<BookReserved> AllBooksReservedList = b.GetReservedBooksList();
+            int ReservedBooksCount = 0;
+            for(int i=0; i < AllBooksReservedList.Count; i++)
+            {
+                if (AllBooksReservedList[i].Availability == true || AllBooksList[i].Availability == true)
+                {
+                    ReservedBooksCount++;
+                }
+            }
+
+            // ilosc zarejestrowanych klientow
+            AccountBase c = new();
+            int AllClients = c.GetClientList().Count;
+
+            // ilosc aktywnych klientow
+            List<string> list = c.GetListOfDataBaseLines("BookHistory");
+            List<string> userList = new();
+            userList.Add("");
+            int AllActiveClients = 0;
+            for(int i = 0; i < list.Count; i++)
+            {
+                string line = list[i];
+                string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                int libId = int.Parse(splitted[1]);
+                string user = splitted[2];
+                if (libId==localAdmin.LibraryId)
+                {
+                    for(int j = 0; j < userList.Count; j++)
+                    {
+                        if (userList[j].CompareTo(user) != 0)
+                        {
+                            AllActiveClients++;
+                            userList.Add(user);
+                        }
+                    }
+                }
+
+            }
+
+
+            // ilosc bibliotekarzy
+            List<Librarian> AllLibrarians= c.GetLibrarianList();
+            int allLibrans = 0;
+            for(int i=0;i<AllLibrarians.Count;i++)
+            {
+                Librarian librarian = AllLibrarians[i];
+                if (librarian.LibraryId == localAdmin.LibraryId)
+                {
+                    allLibrans++;
+                }
+            }
+
+
+            // ilosc wieczorkow autorskich
+            AuthorsEvenings evenings = new();
+            List<AuthorsEvening> AuthorEvenings = evenings.GetEventList();
+            int AllAuthorEvenings = 0;
+            for(int i = 0; i < AuthorEvenings.Count; i++)
+            {
+                AuthorsEvening f = AuthorEvenings[i];
+                if (f.LibraryID == localAdmin.LibraryId) AllAuthorEvenings++;
+                
+            }
+
+
+
+
+            using (FileStream fs = new FileStream(@"../../../DataBases/Raport.pdf", FileMode.Create))
+            {
+                iTextSharp.text.Document doc = new iTextSharp.text.Document();
+                PdfWriter.GetInstance(doc, fs);
+                doc.Open();
+                doc.Add(new Paragraph(BooksCount.ToString()));
+                doc.Add(new Paragraph(ReservedBooksCount.ToString()));
+                doc.Add(new Paragraph(AllClients.ToString()));
+                doc.Add(new Paragraph(AllActiveClients.ToString()));
+                doc.Add(new Paragraph(allLibrans.ToString()));
+                doc.Add(new Paragraph(AllAuthorEvenings.ToString()));
+                doc.Close();
+            }
+            MessageBox.Show("Utworzono raport.");
         }
     }
 }
