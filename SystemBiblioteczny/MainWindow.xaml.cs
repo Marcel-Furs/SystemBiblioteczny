@@ -107,11 +107,15 @@ namespace SystemBiblioteczny
         }
         private void PasswordChanged(object sender, RoutedEventArgs e)
         {
-            RegisterPassword.Password = loginMethod.EraseWhiteSpace(RegisterPassword.Password);
+            string a = RegisterPassword.Password;
+            string b = loginMethod.EraseWhiteSpace(RegisterPassword.Password);
+            if (a != b) RegisterPassword.Password = b;
         }
         private void ConfirmationPasswordChanged(object sender, RoutedEventArgs e)
         {
-            RegisterPasswordConfirmation.Password = loginMethod.EraseWhiteSpace(RegisterPasswordConfirmation.Password);
+            string a = RegisterPasswordConfirmation.Password;
+            string b = loginMethod.EraseWhiteSpace(RegisterPasswordConfirmation.Password);
+            if (a != b) RegisterPasswordConfirmation.Password = b;
         }
         
     }

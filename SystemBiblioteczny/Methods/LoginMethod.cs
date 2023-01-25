@@ -194,7 +194,7 @@ namespace SystemBiblioteczny.Methods
             MessageBox.Show("Użytkownik został utworzony");
             return true;
         }
-        public String EraseWhiteSpace(string s1) {
+        public string EraseWhiteSpace(string s1) {
             for (int i = 0; i < s1.Length; i++)
             {
                 if (Char.IsWhiteSpace(s1[i]))
