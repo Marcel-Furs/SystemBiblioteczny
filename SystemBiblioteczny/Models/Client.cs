@@ -19,11 +19,6 @@ namespace SystemBiblioteczny.Models
         }
         public Client() { }
 
-        public Client(Person person)
-        {
-            UserName = person.UserName;
-        }
-
         public void MakeReservation() { }
 
         public void ShowStats() { }
