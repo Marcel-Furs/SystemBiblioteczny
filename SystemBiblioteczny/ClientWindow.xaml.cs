@@ -273,10 +273,11 @@ namespace SystemBiblioteczny
             TableBooks.Items.Clear();
             Books books = new();
             List<Book> listofBooks = books.GetBooksList();
-            foreach (var e in listofBooks)
+            var listOfBooks1 = listofBooks.Where(x => x.Id_Library != 0).ToList();
+            listOfBooks1.ForEach(x =>
             {
-                TableBooks.Items.Add(e);
-            }
+                TableBooks.Items.Add(x);
+            });
 
             TableBooks1.Items.Clear();
             BooksReserved booksR = new();
