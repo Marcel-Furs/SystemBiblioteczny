@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-     class NetworkAdmin : Person
+    public class NetworkAdmin : Person
     {
 
         public NetworkAdmin(string UserName, string Password, string FirstName, string LastName, string Email, string Phone)

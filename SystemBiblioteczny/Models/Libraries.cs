@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace SystemBiblioteczny.Models
 {
-     class Libraries
+    public class Libraries
     {
         private List<Library> GetLibrariesList()
        {

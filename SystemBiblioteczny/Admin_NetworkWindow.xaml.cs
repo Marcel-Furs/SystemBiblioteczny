@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,11 +29,14 @@ namespace SystemBiblioteczny
         private NetworkAdmin networkAdmin = new();
         private AccountBase accountModel = new();
         private LoginMethod loginMethod = new();
-        public Admin_NetworkWindow()
+        public Admin_NetworkWindow(NetworkAdmin newNetworkAdmin)
         {
+            networkAdmin = newNetworkAdmin;
             InitializeComponent();
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             LoadLibrariesData();
+            EmailBox.Text = networkAdmin.Email;
+            PhoneBox.Text = networkAdmin.Phone;
         }
 
         private void Return(object sender, RoutedEventArgs e)
@@ -63,6 +67,57 @@ namespace SystemBiblioteczny
             foreach (Library e in listOfEvents)
             {
                 Libraries_Table.Items.Add(e);
+            }
+        }
+        private void ChangePassword(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox1.Password.CompareTo(PasswordBox2.Password) == 0)
+            {
+                if (PasswordBox2.Password.Length < 4) MessageBox.Show("Hasło musi mieć przynajmiej 4 znaki");
+                else accountModel.ChangePersonData(networkAdmin, AccountBase.RoleTypeEnum.NetworkAdmin, PasswordBox1.Password);
+            } 
+            else MessageBox.Show("Podane hasła różnią się od siebie");
+        }
+       
+        private void SaveChanges(object sender, RoutedEventArgs e)
+        {
+           try
+           {
+                if (EmailBox.Text.CompareTo(networkAdmin.Email) != 0) {
+                    MailAddress mail = new MailAddress(EmailBox.Text);
+                    accountModel.ChangePersonData(networkAdmin, AccountBase.RoleTypeEnum.NetworkAdmin,"",EmailBox.Text);
+                }
+                if (PhoneBox.Text.CompareTo(networkAdmin.Phone!.ToString()) != 0)
+                {
+                    if (PhoneBox.Text.CompareTo("") == 0) MessageBox.Show("Nie podano poprawnego numeru telefonu");
+                    else accountModel.ChangePersonData(networkAdmin, AccountBase.RoleTypeEnum.NetworkAdmin, "", "",PhoneBox.Text);
+                }
+
+            }
+           catch (FormatException)
+           {
+              MessageBox.Show("Błędny format email!");
+           }
+
+        }
+        private void Password1Changed(object sender, RoutedEventArgs e)
+        {
+            string a = PasswordBox1.Password;
+            string b = loginMethod.EraseWhiteSpace(PasswordBox1.Password);
+            if (a != b) PasswordBox1.Password = b;
+        }
+        private void Password2Changed(object sender, RoutedEventArgs e)
+        {
+            string a = PasswordBox2.Password;
+            string b = loginMethod.EraseWhiteSpace(PasswordBox2.Password);
+            if (a != b) PasswordBox2.Password = b;
+        }
+        private void PhoneBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(PhoneBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                PhoneBox.Text = PhoneBox.Text.Remove(PhoneBox.Text.Length - 1);
             }
         }
         private void ShowClientList(object sender, RoutedEventArgs e)
@@ -393,7 +448,8 @@ namespace SystemBiblioteczny
                 doc.Close();
             }
             MessageBox.Show("Utworzono raport.");
-        } 
-    
+        }
+
+       
     }
 }

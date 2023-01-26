@@ -1,3 +1,3 @@
-﻿janokladka 1234 Janusz Okładka janusz@lib.pl 0
+janokladka 1234 Janusz Okładka janusz@lib.pl 0
 beataokladka 1234 Beata Okladka beata@lib.pl 0
-admin admin admin admin admin@admin.pl 0 2
+admin admin admin admin admin@admin.pl 0 987123564
