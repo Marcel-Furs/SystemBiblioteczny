@@ -1,32 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Shapes;
 
 namespace SystemBiblioteczny.Models
 {
     public class AuthorsEvenings
     {
+        AccountBase accountModel = new();
         public bool CheckIfLibraryExist(int id)
         {
 
-            List<string> lines = new();
-            String path = System.IO.Path.Combine("../../../DataBases/Libraries.txt");
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-
-                }
-                reader.Close();
-            }
+            List<string> lines = accountModel.GetListOfDataBaseLines("Libraries");
 
             for (int i = 0; i < lines.Count; i++)
             {
@@ -41,20 +25,8 @@ namespace SystemBiblioteczny.Models
         public void Add(AuthorsEvening newAuthorsEvening)
         {
             string path = System.IO.Path.Combine("../../../DataBases/AuthorsEveningList.txt");
-            List<string> lines = new();
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
+            List<string> lines = accountModel.GetListOfDataBaseLines("AuthorsEveningList");
 
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-
-                }
-                reader.Close();
-
-            }
             using (StreamWriter writer = new StreamWriter(path))
             {
 
@@ -62,10 +34,10 @@ namespace SystemBiblioteczny.Models
                 {
                     writer.WriteLine(line);
                 }
-                string text = newAuthorsEvening.Date.ToString();
+                string text = newAuthorsEvening.Date.ToString()!;
                 string[] splitted = text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                writer.WriteLine(newAuthorsEvening.Approved + " " + newAuthorsEvening.User + " " + newAuthorsEvening.FirstName + " " + newAuthorsEvening.LastName 
-                    + " " + newAuthorsEvening.LibraryID + " " + splitted[0] + " " 
+                writer.WriteLine(newAuthorsEvening.Approved + " " + newAuthorsEvening.User + " " + newAuthorsEvening.FirstName + " " + newAuthorsEvening.LastName
+                    + " " + newAuthorsEvening.LibraryID + " " + splitted[0] + " "
                     + " " + newAuthorsEvening.Hour + " " + newAuthorsEvening.PhoneNumber);
 
                 writer.Close();
@@ -74,22 +46,7 @@ namespace SystemBiblioteczny.Models
         public List<AuthorsEvening> GetEventList()
         {
             List<AuthorsEvening> list = new();
-
-            string path = System.IO.Path.Combine(Environment.CurrentDirectory, "../../../DataBases/AuthorsEveningList.txt");
-
-            List<string> lines = new();
-
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-                }
-                reader.Close();
-            }
+            List<string> lines = accountModel.GetListOfDataBaseLines("AuthorsEveningList");
 
             for (int i = 0; i < lines.Count; i++)
             {
@@ -106,8 +63,8 @@ namespace SystemBiblioteczny.Models
                 int newHour = int.Parse(splitted[6]);
                 string newPhoneNumber = splitted[7];
                 DateTime? newDate1 = DateTime.Parse(newDate);
-                    AuthorsEvening newEvent = new(approved, username, authorsName, authorsLastname, libraryID, newDate1, newHour, newPhoneNumber);
-                    list.Add(newEvent);
+                AuthorsEvening newEvent = new(approved, username, authorsName, authorsLastname, libraryID, newDate1, newHour, newPhoneNumber);
+                list.Add(newEvent);
             }
             return list;
         }
@@ -120,9 +77,11 @@ namespace SystemBiblioteczny.Models
             string path = System.IO.Path.Combine(Environment.CurrentDirectory, "../../../DataBases/AuthorsEveningList.txt");
             using (StreamWriter writer = new StreamWriter(path))
             {
-                for (int i = 0; i < listofevenings.Count; i++) {
-                    if (!evening.Equals(listofevenings[i])) {
-                        string text = listofevenings[i].Date.ToString();
+                for (int i = 0; i < listofevenings.Count; i++)
+                {
+                    if (!evening.Equals(listofevenings[i]))
+                    {
+                        string text = listofevenings[i].Date.ToString()!;
                         string[] splitted = text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
                         writer.WriteLine(listofevenings[i].Approved + " " + listofevenings[i].User + " " + listofevenings[i].FirstName + " " + listofevenings[i].LastName
                     + " " + listofevenings[i].LibraryID + " " + splitted[0] + " "
@@ -146,9 +105,9 @@ namespace SystemBiblioteczny.Models
                     {
                         listofevenings[i].Approved = true;
                     }
-                    string text = listofevenings[i].Date.ToString();
+                    string text = listofevenings[i].Date.ToString()!;
                     string[] splitted = text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                    writer.WriteLine(listofevenings[i].Approved + " " + listofevenings[i].User + " " 
+                    writer.WriteLine(listofevenings[i].Approved + " " + listofevenings[i].User + " "
                     + listofevenings[i].FirstName + " " + listofevenings[i].LastName
                     + " " + listofevenings[i].LibraryID + " " + splitted[0] + " "
                     + " " + listofevenings[i].Hour + " " + listofevenings[i].PhoneNumber);
@@ -170,9 +129,9 @@ namespace SystemBiblioteczny.Models
                     {
                         listofevenings[i].Approved = false;
                     }
-                    string text = listofevenings[i].Date.ToString();
+                    string text = listofevenings[i].Date.ToString()!;
                     string[] splitted = text.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                    writer.WriteLine(listofevenings[i].Approved + " " + listofevenings[i].User + " " 
+                    writer.WriteLine(listofevenings[i].Approved + " " + listofevenings[i].User + " "
                     + listofevenings[i].FirstName + " " + listofevenings[i].LastName
                     + " " + listofevenings[i].LibraryID + " " + splitted[0] + " "
                     + " " + listofevenings[i].Hour + " " + listofevenings[i].PhoneNumber);

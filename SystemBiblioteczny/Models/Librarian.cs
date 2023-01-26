@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SystemBiblioteczny.Models
+﻿namespace SystemBiblioteczny.Models
 {
-     public class Librarian : Person
+    public class Librarian : Person
     {
         public int LibraryId { get; set; }
-        
-        public Librarian(string UserName, string Password, string FirstName, string LastName, string Email, int LibraryId, string Phone="0")
+
+        public Librarian(string UserName, string Password, string FirstName, string LastName, string Email, int LibraryId, string Phone = "0")
         {
             this.FirstName = FirstName;
             this.LastName = LastName;
@@ -22,8 +16,6 @@ namespace SystemBiblioteczny.Models
         }
 
         public Librarian() { }
-        public void RentBook() { }
 
-        public void EndRental() { }
     }
 }

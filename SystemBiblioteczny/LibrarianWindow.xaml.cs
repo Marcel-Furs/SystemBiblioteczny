@@ -2,18 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
@@ -107,7 +98,7 @@ namespace SystemBiblioteczny
             if (PasswordBox1.Password.CompareTo(PasswordBox2.Password) == 0)
             {
                 if (PasswordBox2.Password.Length < 4) MessageBox.Show("Hasło musi mieć przynajmiej 4 znaki");
-                else accountModel.ChangePersonData(librarianModel, AccountBase.RoleTypeEnum.Librarian, PasswordBox1.Password,"","",librarianModel.LibraryId);
+                else accountModel.ChangePersonData(librarianModel, AccountBase.RoleTypeEnum.Librarian, PasswordBox1.Password, "", "", librarianModel.LibraryId);
             }
             else MessageBox.Show("Podane hasła różnią się od siebie");
         }
@@ -119,7 +110,7 @@ namespace SystemBiblioteczny
                 if (EmailBox.Text.CompareTo(librarianModel.Email) != 0)
                 {
                     MailAddress mail = new MailAddress(EmailBox.Text);
-                    accountModel.ChangePersonData(librarianModel, AccountBase.RoleTypeEnum.Librarian, "", EmailBox.Text,"",librarianModel.LibraryId);
+                    accountModel.ChangePersonData(librarianModel, AccountBase.RoleTypeEnum.Librarian, "", EmailBox.Text, "", librarianModel.LibraryId);
                 }
                 if (PhoneBox.Text.CompareTo(librarianModel.Phone!.ToString()) != 0)
                 {
@@ -491,16 +482,16 @@ namespace SystemBiblioteczny
 
         }
 
-        private void Bill(string dateBorrow,string dateReturn)
+        private void Bill(string dateBorrow, string dateReturn)
         {
             DateTime dateTimeBorrow = DateTime.ParseExact(dateBorrow, "dd/MM/yyyy", null);
             DateTime dateTimeReturn = DateTime.ParseExact(dateReturn, "dd/MM/yyyy", null);
 
             TimeSpan result = dateTimeBorrow - dateTimeReturn;
 
-            double zaplata =  2 + (result.Days * 0.1);
-            if(zaplata > 1) { MessageBox.Show("Do zapłaty: " + zaplata + " zł," + " za " + result.Days + " dni"); }
-            else { MessageBox.Show("Do zapłaty: " + zaplata + " groszy," + " za " + result.Days + " dni"); } 
+            double zaplata = 2 + (result.Days * 0.1);
+            if (zaplata > 1) { MessageBox.Show("Do zapłaty: " + zaplata + " zł," + " za " + result.Days + " dni"); }
+            else { MessageBox.Show("Do zapłaty: " + zaplata + " groszy," + " za " + result.Days + " dni"); }
             if (result.Days == 1) { MessageBox.Show("Do zapłaty: " + zaplata + " groszy," + " za " + result.Days + " dzień"); }
         }
 
@@ -516,7 +507,7 @@ namespace SystemBiblioteczny
 
         private void QuantityInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-           if (System.Text.RegularExpressions.Regex.IsMatch(QuantityInput.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(QuantityInput.Text, "[^0-9]"))
             {
                 MessageBox.Show("Proszę wpisać numer.");
                 QuantityInput.Text = QuantityInput.Text.Remove(QuantityInput.Text.Length - 1);

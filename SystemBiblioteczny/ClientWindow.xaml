@@ -13,7 +13,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="418" Height="380" SelectionChanged="TableBooks_SelectionChanged" Margin="10,11,0,0" >
+                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="418" Height="376" SelectionChanged="TableBooks_SelectionChanged" Margin="10,0,0,0" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
@@ -111,7 +111,7 @@
                     <Label Content="Aktualne wypożyczone książki:" HorizontalAlignment="Left" Margin="121,100,0,0" VerticalAlignment="Top" FontSize="16"/>
                     <Label Content="Historia wypożyczeń książek:" HorizontalAlignment="Left" Margin="489,100,0,0" VerticalAlignment="Top" FontSize="16"/>
 
-                    <DataGrid x:Name="TableBooks1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="380" Height="225" SelectionChanged="TableBooks_SelectionChanged" Margin="14,152,0,0" RenderTransformOrigin="0.5,0.5" >
+                    <DataGrid x:Name="TableBooks1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="373" Height="225" SelectionChanged="TableBooks_SelectionChanged" Margin="14,152,0,0" RenderTransformOrigin="0.5,0.5" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="70" IsReadOnly="True"/>
@@ -135,10 +135,10 @@
                             </TransformGroup>
                         </DataGrid.RenderTransform>
                     </DataGrid>
-                    <Label Content="Statystyki użytkownika:" HorizontalAlignment="Left" Margin="174,31,0,0" VerticalAlignment="Top" FontSize="16"/>
-                    <Label x:Name="userNameClient" HorizontalAlignment="Left" Margin="346,25,0,0" VerticalAlignment="Top" Height="43" Width="185" FontSize="20" Foreground="#FF0B2A67"/>
+                    <Label Content="Statystyki użytkownika:" HorizontalAlignment="Left" Margin="215,31,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <Label x:Name="userNameClient" HorizontalAlignment="Left" Margin="421,25,0,0" VerticalAlignment="Top" Height="43" Width="185" FontSize="20" Foreground="#FF0B2A67"/>
 
-                    <DataGrid x:Name="TableHistoryBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="362" Height="225" SelectionChanged="TableBooks_SelectionChanged" Margin="423,152,0,0" RenderTransformOrigin="0.5,0.5" >
+                    <DataGrid x:Name="TableHistoryBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="349" Height="225" SelectionChanged="TableBooks_SelectionChanged" Margin="421,152,0,0" RenderTransformOrigin="0.5,0.5" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="70" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="90" IsReadOnly="True"/>

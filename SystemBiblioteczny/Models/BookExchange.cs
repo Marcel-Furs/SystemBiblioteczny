@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace SystemBiblioteczny.Models
 {
@@ -14,18 +9,19 @@ namespace SystemBiblioteczny.Models
         public string RequestorUsername { get; set; }
         private AccountBase accountModel = new();
 
-        public BookExchange(int ExchangeId, string RequestorUsername, int id_Book, string author, string title,  int id_Library) {
-        this.ExchangeId = ExchangeId;
-        this.RequestorUsername= RequestorUsername;
-        
-             Id_Book = id_Book;
-             Author = author;
-             Title = title;
-             Id_Library = id_Library;
+        public BookExchange(int ExchangeId, string RequestorUsername, int id_Book, string author, string title, int id_Library)
+        {
+            this.ExchangeId = ExchangeId;
+            this.RequestorUsername = RequestorUsername;
+
+            Id_Book = id_Book;
+            Author = author;
+            Title = title;
+            Id_Library = id_Library;
         }
         public BookExchange()
         {
-            
+
         }
 
         public List<BookExchange> GetExchangeBooksList()

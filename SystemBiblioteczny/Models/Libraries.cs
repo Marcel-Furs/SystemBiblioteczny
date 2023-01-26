@@ -1,96 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Shapes;
 
 namespace SystemBiblioteczny.Models
 {
     public class Libraries
     {
+        AccountBase accountModel = new();
         private List<Library> GetLibrariesList()
-       {
+        {
 
-          
             List<Library> list = new();
 
-            string path = System.IO.Path.Combine(Environment.CurrentDirectory, "../../../DataBases/Libraries.txt");
+            List<string> lines = accountModel.GetListOfDataBaseLines("Libraries");
 
-
-            List<string> lines = new();
-
-            using (StreamReader reader = new(path))
+            for (int i = 0; i < lines.Count; i++)
             {
-                var line = reader.ReadLine();
+                string line = lines[i];
 
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-                   
-                }
-                reader.Close();
-               
-             
+                string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+
+                int newId = int.Parse(splitted[0]);
+                string newCity = splitted[1];
+                string newStreet = splitted[2];
+                string newLocal = splitted[3];
+
+                Library lib = new(newId, newCity, newStreet, newLocal);
+
+                list.Add(lib);
+
             }
 
-
-                for (int i = 0; i < lines.Count; i++)
-                {
-                    string line = lines[i];
-
-                    string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-               
-                     int newId = int.Parse(splitted[0]);
-                     string newCity = splitted[1];
-                     string newStreet = splitted[2];
-                     string newLocal = splitted[3];
-
-                  Library lib = new(newId, newCity, newStreet, newLocal);
-               
-                    list.Add(lib);
-              
-            }
-
-          
             return list;
 
         }
 
         public void AddLibraryToDB(Library library)
         {
-            string path = System.IO.Path.Combine("../../../DataBases/Libraries.txt");
-            List<string> lines = new();
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-
-                }
-                reader.Close();
-
-            }
-            using (StreamWriter writer = new StreamWriter(path))
-            {
-
-                foreach (string line in lines)
-                {
-                    writer.WriteLine(line);
-                }
-                writer.WriteLine(library?.ID.ToString() + " " + library?.City + " " + library?.Street + " " + library?.Local);
-                writer.Close();
-            }
-           
+            List<string> lines = accountModel.GetListOfDataBaseLines("Libraries");
+            accountModel.WriteToDataBase("Libraries", library?.ID.ToString() + " " + library?.City + " " + library?.Street + " " + library?.Local);
         }
 
         public int ReturnUniqueID()
@@ -101,7 +49,7 @@ namespace SystemBiblioteczny.Models
             {
                 if (l.ID > max) max = l.ID;
             }
-            return max+1;
+            return max + 1;
         }
 
         public bool CheckIfCanAdd(string city, string street, string local)
@@ -109,7 +57,8 @@ namespace SystemBiblioteczny.Models
             List<Library> list = this.GetLibrariesList();
             foreach (Library l in list)
             {
-                if (l.City == city && l.Street == street && l.Local == local) {
+                if (l.City == city && l.Street == street && l.Local == local)
+                {
                     MessageBox.Show("Biblioteka o takich danych już istnieje!");
                     return false;
                 }
@@ -135,7 +84,7 @@ namespace SystemBiblioteczny.Models
         internal List<Library> GetListOfLibraries()
         {
             AccountBase a = new();
-            List<String> listOfString = a.GetListOfDataBaseLines("Libraries");
+            List<string> listOfString = a.GetListOfDataBaseLines("Libraries");
             List<Library> list = new();
             for (int i = 0; i < listOfString.Count; i++)
             {
@@ -169,14 +118,15 @@ namespace SystemBiblioteczny.Models
                 string city = splitted[1];
                 string street = splitted[2];
                 string local = splitted[3];
-                if (id == library.ID) {
+                if (id == library.ID)
+                {
                     listOfString.Remove(line);
                 }
                 else
-                listOfString[i] = id + " " + city + "  " + street + " " + local;
+                    listOfString[i] = id + " " + city + "  " + street + " " + local;
             }
-            a.WriteDataBase("Libraries",listOfString);
-            listOfString = a.GetListOfDataBaseLines("LocalAdminList"); 
+            a.WriteDataBase("Libraries", listOfString);
+            listOfString = a.GetListOfDataBaseLines("LocalAdminList");
             for (int i = 0; i < listOfString.Count; i++)
             {
                 string line = listOfString[i];
@@ -254,5 +204,5 @@ namespace SystemBiblioteczny.Models
             a.WriteDataBase("ExchangeBookList", listOfString);
         }
     }
-    }
+}
 

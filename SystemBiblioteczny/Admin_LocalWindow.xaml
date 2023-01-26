@@ -15,7 +15,7 @@
                         <ColumnDefinition Width="82*"/>
                         <ColumnDefinition Width="77*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="AuthorsEvnings" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="574" Height="387" Margin="7,5,0,0" IsReadOnly="true" Grid.ColumnSpan="2">
+                    <DataGrid x:Name="AuthorsEvnings" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="574" Height="382" Margin="7,10,0,0" IsReadOnly="true" Grid.ColumnSpan="2">
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="Background" Value="#FFCCA2DC"/>

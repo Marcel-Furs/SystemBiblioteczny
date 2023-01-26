@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SystemBiblioteczny.Models
+﻿namespace SystemBiblioteczny.Models
 {
     public class NetworkAdmin : Person
     {
@@ -23,16 +17,5 @@ namespace SystemBiblioteczny.Models
         {
         }
 
-        public void AddLibrary(Library library) {
-            Libraries lib = new Libraries();
-            lib.AddLibraryToDB(library);
-           }
-
-        public void RemoveLibrary(Library library) {
-           //Zmienianie pliku tekstowego
-        }
-        public void CreateRaport() { }
-
-        public void ManageAccounts() { }
     }
 }

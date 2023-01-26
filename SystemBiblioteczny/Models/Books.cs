@@ -1,34 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny
 {
     public class Books
     {
+        AccountBase accountModel = new();
         public List<Book> GetBooksList()
         {
             List<Book> list = new();
-
-            string path = System.IO.Path.Combine(Environment.CurrentDirectory, "../../../DataBases/BookList.txt");
-
-            List<string> lines = new();
-
-            using (StreamReader reader = new(path))
-            {
-                var line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-                }
-                reader.Close();
-            }
+            List<string> lines = accountModel.GetListOfDataBaseLines("BookList");
 
             for (int i = 0; i < lines.Count; i++)
             {

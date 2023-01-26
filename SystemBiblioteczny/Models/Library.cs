@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SystemBiblioteczny.Models
+﻿namespace SystemBiblioteczny.Models
 {
-    public class Library 
+    public class Library
     {
         public int ID { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string Local { get; set; }
 
-        public Library(int id, string city, string street, string local)  {
+        public Library(int id, string city, string street, string local)
+        {
             this.ID = id;
             this.City = city;
             this.Street = street;
@@ -21,9 +16,6 @@ namespace SystemBiblioteczny.Models
         }
         public Library() { }
 
-        public Libraries ListOfLibraries = new();
-
-        //public List<Library>? GetListOfLibraries() { return ListOfLibraries.GetLibrariesList(); }
 
     }
 }

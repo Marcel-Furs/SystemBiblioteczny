@@ -1,8 +1,13 @@
-﻿using System;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
+using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
 using iTextSharp.text; 
@@ -11,11 +16,10 @@ using System.Reflection.Metadata;
 using Org.BouncyCastle.Asn1.X509.SigI;
 using MahApps.Metro.Controls;
 using System.Globalization;
+using System.Windows.Documents;
 using iTextSharp.text.xml;
 using System.Net.Mail;
 using SystemBiblioteczny.Methods;
-using System.Xml.Linq;
-using System.Windows.Documents;
 
 namespace SystemBiblioteczny
 {
@@ -36,9 +40,9 @@ namespace SystemBiblioteczny
         private int exchangeFromGui = -1;
         public Admin_LocalWindow(LocalAdmin userData)
         {
-            
+
             InitializeComponent();
-            
+
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             localAdmin = userData;
             EmailBox.Text = localAdmin.Email;
@@ -317,7 +321,7 @@ namespace SystemBiblioteczny
             if (PasswordBox1.Password.CompareTo(PasswordBox2.Password) == 0)
             {
                 if (PasswordBox2.Password.Length < 4) MessageBox.Show("Hasło musi mieć przynajmiej 4 znaki");
-                else accountModel.ChangePersonData(localAdmin, AccountBase.RoleTypeEnum.LocalAdmin, PasswordBox1.Password,"","",localAdmin.LibraryId);
+                else accountModel.ChangePersonData(localAdmin, AccountBase.RoleTypeEnum.LocalAdmin, PasswordBox1.Password, "", "", localAdmin.LibraryId);
             }
             else MessageBox.Show("Podane hasła różnią się od siebie");
         }
@@ -329,7 +333,7 @@ namespace SystemBiblioteczny
                 if (EmailBox.Text.CompareTo(localAdmin.Email) != 0)
                 {
                     MailAddress mail = new MailAddress(EmailBox.Text);
-                    accountModel.ChangePersonData(localAdmin, AccountBase.RoleTypeEnum.LocalAdmin, "", EmailBox.Text,"",localAdmin.LibraryId);
+                    accountModel.ChangePersonData(localAdmin, AccountBase.RoleTypeEnum.LocalAdmin, "", EmailBox.Text, "", localAdmin.LibraryId);
                 }
                 if (PhoneBox.Text.CompareTo(localAdmin.Phone!.ToString()) != 0)
                 {
@@ -369,7 +373,7 @@ namespace SystemBiblioteczny
         private void OrderBook(object sender, RoutedEventArgs e)
         {
             ApplicationBook IdFromGui = (ApplicationBook)(NewApplicationsData.SelectedItem);
-           
+
             if (IdFromGui == null) MessageBox.Show("Nie wybrano książki");
             else
             {
@@ -388,7 +392,7 @@ namespace SystemBiblioteczny
                             if (list[j].ID.CompareTo(IdFromGui.ID) == 0)
                             {
                                 writer.WriteLine(list[j].ID + " " + list[j].Title + " " + list[j].Author + " " + list[j].Quantity + " " + list[j].Librarian + " " + "True");
-                                
+
                             }
                             else writer.WriteLine(line);
                         }
@@ -406,7 +410,7 @@ namespace SystemBiblioteczny
         private void RejectBook(object sender, RoutedEventArgs e)
         {
             ApplicationBook IdFromGui = (ApplicationBook)(NewApplicationsData.SelectedItem);
-            
+
             if (IdFromGui == null) MessageBox.Show("Nie wybrano książki");
             else
             {
@@ -653,7 +657,7 @@ namespace SystemBiblioteczny
             Books a = new();
             List<Book> AllBooksList = a.GetBooksList();
             int BooksCount = 0;
-            for (int i=0; i < AllBooksList.Count; i++)
+            for (int i = 0; i < AllBooksList.Count; i++)
             {
                 if (AllBooksList[i].Id_Library == localAdmin.LibraryId)
                 {
@@ -667,7 +671,7 @@ namespace SystemBiblioteczny
             List<BookReserved> AllBooksReservedList = b.GetReservedBooksList();
             List<string> listHistory = history.GetListOfDataBaseLines("BookHistory");
             int ReservedBooksCount = 0;
-            for(int i=0; i < AllBooksReservedList.Count; i++)
+            for (int i = 0; i < AllBooksReservedList.Count; i++)
             {
                 if (AllBooksReservedList[i].Availability == true && AllBooksReservedList[i].Id_Library == localAdmin.LibraryId)
                 {
@@ -689,15 +693,15 @@ namespace SystemBiblioteczny
             List<string> userList = new();
             userList.Add("");
             int AllActiveClients = 0;
-            for(int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
                 string line = list[i];
                 string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
                 int libId = int.Parse(splitted[1]);
                 string user = splitted[2];
-                if (libId==localAdmin.LibraryId)
+                if (libId == localAdmin.LibraryId)
                 {
-                    for(int j = 0; j < userList.Count; j++)
+                    for (int j = 0; j < userList.Count; j++)
                     {
                         if (userList[j].CompareTo(user) != 0)
                         {
@@ -711,9 +715,9 @@ namespace SystemBiblioteczny
 
 
             // ilosc bibliotekarzy w danej bibliotece
-            List<Librarian> AllLibrarians= c.GetLibrarianList();
+            List<Librarian> AllLibrarians = c.GetLibrarianList();
             int allLibrans = 0;
-            for(int i=0;i<AllLibrarians.Count;i++)
+            for (int i = 0; i < AllLibrarians.Count; i++)
             {
                 Librarian librarian = AllLibrarians[i];
                 if (librarian.LibraryId == localAdmin.LibraryId)
@@ -727,17 +731,17 @@ namespace SystemBiblioteczny
             AuthorsEvenings evenings = new();
             List<AuthorsEvening> AuthorEvenings = evenings.GetEventList();
             int AllAuthorEvenings = 0;
-            for(int i = 0; i < AuthorEvenings.Count; i++)
+            for (int i = 0; i < AuthorEvenings.Count; i++)
             {
                 AuthorsEvening f = AuthorEvenings[i];
                 if (f.LibraryID == localAdmin.LibraryId)
                 {
                     AllAuthorEvenings++;
                 }
-                
+
             }
 
-            
+
 
 
 
@@ -753,7 +757,7 @@ namespace SystemBiblioteczny
             }
 
             iTextSharp.text.Document doc = new iTextSharp.text.Document();
-            PdfWriter.GetInstance(doc, new FileStream(path1,FileMode.Create));
+            PdfWriter.GetInstance(doc, new FileStream(path1, FileMode.Create));
 
             doc.Open();
             doc.Add(new iTextSharp.text.Paragraph("Autor: " + localAdmin.UserName));

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
     public class BookReserved : Book
     {
         public string UserName { get; set; }
-        public  string DateTime1 { get; set; }
+        public string DateTime1 { get; set; }
         public BookReserved(int id_Book, string author, string title, bool availability, int id_Library, string dateTime, string userName)
         {
             Id_Book = id_Book;
@@ -32,8 +28,8 @@ namespace SystemBiblioteczny.Models
             DateOnly dateczas1 = DateOnly.FromDateTime(DateTime.Now);
 
             bool status = false;
-            if((dateczas.Day - dateczas1.Day) >7) status = true;
-            
+            if ((dateczas.Day - dateczas1.Day) > 7) status = true;
+
             return status;
         }
     }

@@ -10,7 +10,7 @@
         <TabControl>
             <TabItem Header="Zwróć książkę">
                 <Grid Background="#FFF5EBD8">
-                    <DataGrid x:Name="TableReturnBook" Height="237" SelectionChanged="TableRentBook_SelectionChanged" Margin="113,10,113,159" RenderTransformOrigin="0.5,0.5" >
+                    <DataGrid x:Name="TableReturnBook" Height="237" SelectionChanged="TableRentBook_SelectionChanged" Margin="113,21,113,148" RenderTransformOrigin="0.5,0.5" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
@@ -33,8 +33,8 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Wypożycz książkę" >
-                <Grid>
-                    <DataGrid x:Name="TableRentBook" Height="237" SelectionChanged="TableRentBook_SelectionChanged" Margin="97,10,129,159" RenderTransformOrigin="0.5,0.5" >
+                <Grid Background="#FFF5EBD8">
+                    <DataGrid x:Name="TableRentBook" Height="237" SelectionChanged="TableRentBook_SelectionChanged" Margin="97,21,129,148" RenderTransformOrigin="0.5,0.5" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
@@ -64,9 +64,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Zgłoś zapotrzebowanie">
-                <Grid>
-
-
+                <Grid Background="#FFF5EBD8">
                     <Button Content="Wyślij zgłoszenie" Click="SendApplication" HorizontalAlignment="Left" Margin="188,317,0,0" VerticalAlignment="Top" Height="49" Width="106"/>
                     <Label Content="Dane książki do zamówienia:" FontSize="16" HorizontalAlignment="Left" Margin="13,26,0,0" VerticalAlignment="Top" Height="48" Width="294"/>
                     <Label Content="Autor:" FontSize="16" HorizontalAlignment="Left" Margin="13,104,0,0" VerticalAlignment="Top" Height="48" Width="96"/>
@@ -90,7 +88,7 @@
                         </DataGrid.Resources>
                     </DataGrid>
 
-                    <Label Content="Zamówione książki gotowe do odebrania:" FontSize="16" HorizontalAlignment="Left" Margin="418,0,0,0" VerticalAlignment="Top" Height="48" Width="315"/>
+                    <Label Content="Zamówione książki gotowe do odebrania:" FontSize="16" HorizontalAlignment="Left" Margin="414,10,0,0" VerticalAlignment="Top" Height="48" Width="314"/>
                     <Button Content="Odbierz" HorizontalAlignment="Left" Margin="510,307,0,0" VerticalAlignment="Top" Height="50" Width="115" Click="CollectBook"/>
                 </Grid>
 
@@ -98,8 +96,8 @@
 
             </TabItem>
             <TabItem Header="Organizacja lokalu">
-                <Label >
-                    <DataGrid x:Name="AuthorsEvnings"  VerticalAlignment="Center" Width="500" Height="387" IsReadOnly="true" HorizontalAlignment="Center" Margin="130,0,0,0">
+                <Grid Background="#FFF5EBD8">
+                    <DataGrid x:Name="AuthorsEvnings"   Width="492" IsReadOnly="true" HorizontalAlignment="Center" Margin="0,22,0,22">
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="Background" Value="#FF8DEA8D"/>
@@ -116,7 +114,7 @@
                             <DataGridTextColumn Header ="Numer Telefonu" Binding="{Binding PhoneNumber}" Width="90"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                </Label>
+                </Grid>
             </TabItem>
             <TabItem Header="Ustawienia">
                 <Grid Background="#FFF5EBD8">

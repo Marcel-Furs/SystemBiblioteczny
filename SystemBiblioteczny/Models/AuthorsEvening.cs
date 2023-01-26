@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Shapes;
 
 namespace SystemBiblioteczny.Models
 {
@@ -21,7 +14,8 @@ namespace SystemBiblioteczny.Models
         public DateTime? Date { get; set; }
         public int Hour { get; set; }
         public string PhoneNumber { get; set; }
-        public AuthorsEvening(bool approved, string owner, string firstname, string lastName, int id, DateTime? date, int hour, string phoneNumber) {
+        public AuthorsEvening(bool approved, string owner, string firstname, string lastName, int id, DateTime? date, int hour, string phoneNumber)
+        {
             Approved = approved;
             User = owner;
             FirstName = firstname;
@@ -35,7 +29,8 @@ namespace SystemBiblioteczny.Models
 
         public bool TryAddToDataBase()
         {
-            if (FirstName.Length < 2) {
+            if (FirstName.Length < 2)
+            {
                 MessageBox.Show("Imię autora powinno mieć przynajmniej 2 znaki!");
                 return false;
             }
@@ -45,7 +40,8 @@ namespace SystemBiblioteczny.Models
                 return false;
             }
             AuthorsEvenings a = new();
-            if (!a.CheckIfLibraryExist(LibraryID)) {
+            if (!a.CheckIfLibraryExist(LibraryID))
+            {
                 MessageBox.Show("Biblioteka o takim numerze nie istnieje!");
                 return false;
             }
@@ -70,10 +66,11 @@ namespace SystemBiblioteczny.Models
 
         internal void AddToDataBase()
         {
-            AuthorsEvenings a = new(); 
+            AuthorsEvenings a = new();
             a.Add(this);
         }
-        public bool Equals(AuthorsEvening? other) {
+        public bool Equals(AuthorsEvening? other)
+        {
             if (other is null) return false;
             return FirstName == other.FirstName && LastName == other.LastName && Date == other.Date && Hour == other.Hour && LibraryID == other.LibraryID && PhoneNumber == other.PhoneNumber;
         }
