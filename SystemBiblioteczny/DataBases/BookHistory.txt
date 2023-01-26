@@ -10,3 +10,4 @@
 8 3 Franz_Kafka Przemiana macibol 02.01.2023 10.01.2023
 14 2 Adam_Mickiewicz Dziady_3 klient 05.01.2023 18.01.2023
 11 2 Bolesław_Prus Kamizelka klient 12.01.2023 20.01.2023
+3 3 Bolesław_Prus Kamizelka szczurwysyn 26.01.2023 26.01.2023

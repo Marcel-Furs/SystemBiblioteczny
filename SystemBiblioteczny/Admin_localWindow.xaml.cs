@@ -222,17 +222,24 @@ namespace SystemBiblioteczny
 
         void RefreshTableApplicationsData()
         {
-            List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
 
+            List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
+            int libID = 0;
             NewApplicationsData.Items.Clear();
             for (int i = 0; i < listofApplicationBooks.Count; i++)
             {
                 ApplicationBook book = listofApplicationBooks[i];
-                if (book.Approved.CompareTo(true) == 0)
+                if (book.Approved.CompareTo(false) == 0)
                 {
-
+                    List<Librarian> librarians = accountModel.GetLibrarianList();
+                    for(int j = 0; j<librarians.Count;j++)
+                    {
+                        if (librarians[j].UserName!.CompareTo(listofApplicationBooks[i].Librarian) == 0) libID = librarians[j].LibraryId ;
+                    }
+                    
+                    if(libID.CompareTo(localAdmin.LibraryId) == 0) NewApplicationsData.Items.Add(book);
                 }
-                else NewApplicationsData.Items.Add(book);
+                
             }
 
             NewApplicationsData.IsReadOnly = true;
