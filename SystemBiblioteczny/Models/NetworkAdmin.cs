@@ -17,18 +17,5 @@
         {
         }
 
-        public void AddLibrary(Library library)
-        {
-            Libraries lib = new Libraries();
-            lib.AddLibraryToDB(library);
-        }
-
-        public void RemoveLibrary(Library library)
-        {
-            //Zmienianie pliku tekstowego
-        }
-        public void CreateRaport() { }
-
-        public void ManageAccounts() { }
     }
 }

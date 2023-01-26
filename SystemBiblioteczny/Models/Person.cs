@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SystemBiblioteczny.Models
+﻿namespace SystemBiblioteczny.Models
 {
     public class Person
     {
@@ -16,11 +14,6 @@ namespace SystemBiblioteczny.Models
 
         public string? Phone { get; set; }
 
-        //login data
-        public Person(string UserName = " ", String Password = " ")
-        {
-            this.UserName = UserName;
-            this.Password = Password;
-        }
+
     }
 }

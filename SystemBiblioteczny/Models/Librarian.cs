@@ -16,8 +16,6 @@
         }
 
         public Librarian() { }
-        public void RentBook() { }
 
-        public void EndRental() { }
     }
 }

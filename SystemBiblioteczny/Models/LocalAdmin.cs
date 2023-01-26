@@ -14,11 +14,6 @@
             this.Phone = Phone;
         }
         public LocalAdmin() { }
-        public void ManageEvent() { }
 
-        public void ExchangeBooks() { }
-        public void CreateRaport() { }
-
-        public void ManageAccounts() { }
     }
 }

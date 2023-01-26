@@ -16,9 +16,6 @@
         }
         public Library() { }
 
-        public Libraries ListOfLibraries = new();
-
-        //public List<Library>? GetListOfLibraries() { return ListOfLibraries.GetLibrariesList(); }
 
     }
 }

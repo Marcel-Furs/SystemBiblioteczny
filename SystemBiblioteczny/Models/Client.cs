@@ -13,10 +13,6 @@
         }
         public Client() { }
 
-        public void MakeReservation() { }
-
-        public void ShowStats() { }
-        public void ProposeEvent() { }
 
     }
 }
