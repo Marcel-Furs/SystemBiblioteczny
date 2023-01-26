@@ -108,15 +108,14 @@
             </TabItem>
             <TabItem Header="Statystyki">
                 <Grid Background="#FFF5EBD8">
-                    <Label Content="Wypożczone książki:" HorizontalAlignment="Left" Margin="115,100,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Czy są zaległe książki?" HorizontalAlignment="Left" Margin="601,113,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="Name_S" HorizontalAlignment="Center" Margin="0,39,0,0" TextWrapping="Wrap" Text=""  VerticalAlignment="Top" Width="94"  IsReadOnly="True" RenderTransformOrigin="0.499,0.72"/>
+                    <Label Content="Aktualne wypożyczone książki:" HorizontalAlignment="Left" Margin="121,100,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <Label Content="Historia wypożyczeń książek:" HorizontalAlignment="Left" Margin="489,100,0,0" VerticalAlignment="Top" FontSize="16"/>
 
-                    <DataGrid x:Name="TableBooks1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="457" Height="229" SelectionChanged="TableBooks_SelectionChanged" Margin="0,167,0,0" RenderTransformOrigin="0.5,0.5" >
+                    <DataGrid x:Name="TableBooks1" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="380" Height="225" SelectionChanged="TableBooks_SelectionChanged" Margin="14,152,0,0" RenderTransformOrigin="0.5,0.5" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
-                            <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
-                            <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="120" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="70" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="90" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Id biblioteki" Binding="{Binding Id_Library}" Width="65" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Dzień wypożyczenia:" Binding="{Binding DateTime1}" Width="110" IsReadOnly="True"/>
                         </DataGrid.Columns>
@@ -130,13 +129,39 @@
                         <DataGrid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
-                                <SkewTransform AngleY="0.33"/>
+                                <SkewTransform AngleY="0.0"/>
+                                <RotateTransform Angle="-0.0"/>
+                                <TranslateTransform Y="1.28"/>
+                            </TransformGroup>
+                        </DataGrid.RenderTransform>
+                    </DataGrid>
+                    <Label Content="Statystyki użytkownika:" HorizontalAlignment="Left" Margin="174,31,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <Label x:Name="userNameClient" HorizontalAlignment="Left" Margin="346,25,0,0" VerticalAlignment="Top" Height="43" Width="185" FontSize="20" Foreground="#FF0B2A67"/>
+
+                    <DataGrid x:Name="TableHistoryBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="362" Height="225" SelectionChanged="TableBooks_SelectionChanged" Margin="423,152,0,0" RenderTransformOrigin="0.5,0.5" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="70" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="90" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Dzień wypożyczenia:" Binding="{Binding DateTime1}" Width="110" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Dzień oddania:" Binding="{Binding DateReturn}" Width="110" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="Turquoise"/>
+                                <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleY="0.0"/>
                                 <RotateTransform/>
                                 <TranslateTransform Y="1.28"/>
                             </TransformGroup>
                         </DataGrid.RenderTransform>
                     </DataGrid>
-                    <TextBox x:Name="statusBook" HorizontalAlignment="Left" Margin="601,168,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Ustawienia">

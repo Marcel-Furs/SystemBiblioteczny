@@ -25,6 +25,7 @@ namespace SystemBiblioteczny
         private Client loggedUser = new();
         private int bookFromGui = -1;
         private LoginMethod loginMethod = new();
+        private AccountBase account = new();
         public ClientWindow(Client user)
         {
             InitializeComponent();
@@ -211,8 +212,8 @@ namespace SystemBiblioteczny
 
                         status1 = bookRe.AccountBalance(bookBorrowed.DateTime1);
 
-                        if (status1 == false) statusBook.Text = "Nie ma zaległych książek";
-                        else statusBook.Text = "Trzeba zapłacić za zaległą książkę!";
+                        //if (status1 == false) statusBook.Text = "Nie ma zaległych książek";
+                        //else statusBook.Text = "Trzeba zapłacić za zaległą książkę!";
 
                         MessageBox.Show("Zarezerwowano ksiązkę!");
                         UptodateTable();
@@ -236,7 +237,7 @@ namespace SystemBiblioteczny
             TableBooks1.Items.Clear();
             BooksReserved booksR = new();
             List<BookReserved> listofBooksR = booksR.GetReservedBooksList();
-            var listofBooksRAccepted = listofBooksR.Where(x => x.Availability == true).ToList();
+            var listofBooksRAccepted = listofBooksR.Where(x => x.Availability == true && loggedUser.UserName == x.UserName).ToList();
             listofBooksRAccepted.ForEach(x =>
             {
                 TableBooks1.Items.Add(x);
@@ -267,8 +268,14 @@ namespace SystemBiblioteczny
 
         private void PersonStatistics(string name)
         {
-            Name_S.Text = name;
-
+            userNameClient.Content = name;
+            BooksHistory bookH = new();
+            List<BookHistory> list = bookH.GetHistoredBooksList();
+            List<BookHistory> listHistoryBook = list.Where(x => x.UserName == name).ToList();
+            listHistoryBook.ForEach(x =>
+            {
+                TableHistoryBooks.Items.Add(x);
+            });
 
         }
 
