@@ -16,22 +16,23 @@
                         </Grid.ColumnDefinitions>
                         <Grid Margin="10,8,484,8">
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition Height="78*"/>
+                                <RowDefinition Height="78*"/>
+                                <RowDefinition Height="41*"/>
+                                <RowDefinition Height="37*"/>
+                                <RowDefinition Height="78*"/>
+                                <RowDefinition Height="78*"/>
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" FontSize="24" HorizontalAlignment="Left" Content="NOWA BIBLIOTEKA" Margin="79,1,0,32" Width="212"/>
                             <Label Content="Miasto:" Margin="0,18,0,18" HorizontalAlignment="Left" Width="137" FontSize="16" Grid.Row="1"/>
-                            <TextBox x:Name="City" HorizontalAlignment="Left" Margin="92,26,0,32" Width="191" Grid.Row="1" Height="24" TextChanged="City_TextChanged"/>
-                            <Label Grid.Row="2" Content="Ulica:" Margin="0,18,0,20" HorizontalAlignment="Left" Width="88" FontSize="16" />
-                            <TextBox Grid.Row="2" x:Name="Street"  HorizontalAlignment="Left" Margin="92,26,0,32" Width="191" Height="24" TextChanged="Street_TextChanged"/>
-                            <Label Grid.Row="3" Content="Numer:" HorizontalAlignment="Left" Margin="0,18,0,21" Width="80" FontSize="16" />
-                            <TextBox Grid.Row="3" x:Name="Number" HorizontalAlignment="Left" Margin="92,26,0,32" Width="191" Height="24" TextChanged="Number_TextChanged"/>
+                            <TextBox x:Name="City" HorizontalAlignment="Left" Margin="92,26,0,28" Width="191" Grid.Row="1" Height="24" TextChanged="City_TextChanged"/>
+                            <Label Grid.Row="2" Content="Ulica:" Margin="0,18,0,20" HorizontalAlignment="Left" Width="88" FontSize="16" Grid.RowSpan="2" />
+                            <TextBox Grid.Row="2" x:Name="Street"  HorizontalAlignment="Left" Margin="92,26,0,28" Width="191" Height="24" TextChanged="Street_TextChanged" Grid.RowSpan="2"/>
+                            <Label Grid.Row="4" Content="Numer:" HorizontalAlignment="Left" Margin="0,18,0,21" Width="80" FontSize="16" />
+                            <TextBox Grid.Row="4" x:Name="Number" HorizontalAlignment="Left" Margin="92,26,0,28" Width="191" Height="24" TextChanged="Number_TextChanged"/>
 
-                            <Button Grid.Row="4" Click="Add_Library" FontSize="20" Content="DODAJ" Margin="62,18,35,19"/>
-                            <Button Grid.Row="4" Click="Remove_Library" FontSize="20" Content="USUŃ" Margin="464,22,-367,15"/>
+                            <Button Grid.Row="5" Click="Add_Library" FontSize="20" Content="DODAJ" Margin="62,18,35,19"/>
+                            <Button Grid.Row="5" Click="Remove_Library" FontSize="20" Content="USUŃ" Margin="464,22,-367,15"/>
                         </Grid>
                         <DataGrid x:Name="Libraries_Table" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="373" Height="249" Margin="403,55,0,0">
                             <DataGrid.Resources>
@@ -99,7 +100,21 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Ustawienia">
-                <Button Content="Wyloguj" Height="39" Width="80" Click="Return" Margin="329,0,385,0"/>
+                <Grid Background="#FFF5EBD8">
+                    <Label FontSize="24" Content="Nadaj nowe hasło" HorizontalAlignment="Left" Margin="108,58,0,0" VerticalAlignment="Top" Width="202"/>
+                    <Label Content="Podaj nowe hasło" HorizontalAlignment="Left" Margin="157,116,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Powtórz nowe hasło" HorizontalAlignment="Left" Margin="150,178,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Zmień hasło" HorizontalAlignment="Left" Margin="89,252,0,0" VerticalAlignment="Top" Height="35" Width="240" Click="ChangePassword"/>
+                    <Label FontSize="24" Content="Dane osobowe" HorizontalAlignment="Left" Margin="485,58,0,0" VerticalAlignment="Top" Width="170"/>
+                    <Label Content="Adres email" HorizontalAlignment="Left" Margin="534,116,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Numer telefonu" HorizontalAlignment="Left" Margin="523,178,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Zapisz zmiany" HorizontalAlignment="Left" Margin="450,252,0,0" VerticalAlignment="Top" Height="35" Width="240" Click="SaveChanges"/>
+                    <Button Content="Wyloguj" HorizontalAlignment="Left" Margin="587,339,0,0" VerticalAlignment="Top" Height="35" Width="175" Click="Return" />
+                    <TextBox x:Name="EmailBox" HorizontalAlignment="Left" Margin="450,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Height="24"/>
+                    <TextBox x:Name="PhoneBox" HorizontalAlignment="Left" Margin="450,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Height="24" TextChanged="PhoneBox_TextChanged"/>
+                    <PasswordBox  x:Name="PasswordBox1" HorizontalAlignment="Left" Margin="89,147,0,0" VerticalAlignment="Top" Width="240" Height="24" PasswordChanged="Password1Changed"/>
+                    <PasswordBox  x:Name="PasswordBox2" HorizontalAlignment="Left" Margin="89,205,0,0" VerticalAlignment="Top" Width="240" Height="24" PasswordChanged="Password2Changed"/>
+                </Grid>
             </TabItem>
         </TabControl>
 

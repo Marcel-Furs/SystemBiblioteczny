@@ -31,7 +31,6 @@ namespace SystemBiblioteczny
         private AuthorsEvenings eveningsModel = new();
         private int bookFromGui = -1;
         private int exchangeFromGui = -1;
-        private string titleFromGui = "";
         public Admin_LocalWindow(LocalAdmin userData)
         {
             

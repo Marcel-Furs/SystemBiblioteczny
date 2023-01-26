@@ -6,11 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Shapes;
 
 namespace SystemBiblioteczny.Models
 {
-    internal class AccountBase
+    public class AccountBase
     {
         private List<Client> clients = new();
 
@@ -87,6 +88,66 @@ namespace SystemBiblioteczny.Models
                 foreach (string line in lines)
                 {
                     writer.WriteLine(line);
+                }
+                writer.Close();
+            }
+
+        }
+        public void ChangePersonData(Person person, AccountBase.RoleTypeEnum role,  string password = "", string email = "", string phone = "",int libId = -1)
+        {
+
+            string path = "";
+            List<string> list = new();
+
+            switch (role)
+            {
+                case (AccountBase.RoleTypeEnum.Client):
+                    {
+                        person = (Client)person;
+                        list = GetListOfDataBaseLines("ClientList");
+                        path = System.IO.Path.Combine("../../../DataBases/ClientList.txt");
+                    }
+                    break;
+                case (AccountBase.RoleTypeEnum.Librarian):
+                    {
+                        person = (Librarian)person;
+                        list = GetListOfDataBaseLines("LibrarianList");
+                        path = System.IO.Path.Combine("../../../DataBases/LibrarianList.txt");
+                    }
+                    break;
+                case (AccountBase.RoleTypeEnum.LocalAdmin):
+                    {
+                        person = (LocalAdmin)person;
+                        list = GetListOfDataBaseLines("LocalAdminList");
+                        path = System.IO.Path.Combine("../../../DataBases/LocalAdminList.txt");
+                    }
+                    break;
+                case (AccountBase.RoleTypeEnum.NetworkAdmin):
+                    {
+                        person = (NetworkAdmin)person;
+                        list = GetListOfDataBaseLines("NetworkAdminList");
+                        path = System.IO.Path.Combine("../../../DataBases/NetworkAdminList.txt");
+                        libId = 0;
+                    }
+                    break;
+            }
+            if (password == "") password = person.Password!;
+            if (email == "") email = person.Email!;
+            if (phone == "") phone = person.Phone!;
+
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    string line = list[i];
+                    string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                    if (person.UserName!.CompareTo(splitted[0]) == 0)
+                    {
+                        if (libId == -1) writer.WriteLine(person.UserName + " " + password + " " + person.FirstName + " " + person.LastName + " " + email + " " + phone);
+                        else writer.WriteLine(person.UserName + " " + password + " " + person.FirstName + " " + person.LastName + " " + email + " " + libId + " " + phone);
+                        MessageBox.Show("Dane zostały zmienione");
+                    }
+                    else writer.WriteLine(line);
                 }
                 writer.Close();
             }

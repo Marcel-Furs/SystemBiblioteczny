@@ -53,7 +53,7 @@ namespace SystemBiblioteczny.Methods
                 {
                     case (AccountBase.RoleTypeEnum.Client):
                         {
-                            var person = new Person(newLogin, newPassword);
+                            Client person = new(newLogin, newPassword, firstName, lastName, email, phone);
                             list.Add(person);
                         }
                         break;
@@ -71,7 +71,7 @@ namespace SystemBiblioteczny.Methods
                         break;
                     case (AccountBase.RoleTypeEnum.NetworkAdmin):
                         {
-                            var person = new Person(newLogin, newPassword);
+                            NetworkAdmin person = new(newLogin, newPassword, firstName, lastName, email, phone);
                             list.Add(person);
                         }
                         break;
@@ -111,7 +111,8 @@ namespace SystemBiblioteczny.Methods
                                     admin_localwindow.Show();
                                 } break;
                             case (AccountBase.RoleTypeEnum.NetworkAdmin): {
-                                    Admin_NetworkWindow admin_networkwindow = new();
+                                    NetworkAdmin userData = (NetworkAdmin)list[j];
+                                    Admin_NetworkWindow admin_networkwindow = new(userData);
                                     admin_networkwindow.Show();
                                 } break;
                         }
