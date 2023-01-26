@@ -319,6 +319,86 @@ namespace SystemBiblioteczny.Methods
             }
             return AllActiveClients;
         }
+
+        internal int GetNumberRenalsAll(DateTime? selectedDate1, DateTime? selectedDate2)
+        {
+            if (selectedDate1 == null) selectedDate1 = DateTime.MinValue;
+            if (selectedDate2 == null) selectedDate2 = DateTime.Now;
+            AccountBase history = new();
+            BooksReserved b = new();
+            List<BookReserved> AllBooksReservedList = b.GetReservedBooksList();
+            List<string> listHistory = history.GetListOfDataBaseLines("BookHistory");
+            int counter = 0;
+            for (int i = 0; i < AllBooksReservedList.Count; i++)
+            {
+                if (AllBooksReservedList[i].Availability == true &&
+                    DateTime.Parse(AllBooksReservedList[i].DateTime1) >= selectedDate1
+                    && DateTime.Parse(AllBooksReservedList[i].DateTime1) <= selectedDate2)
+
+
+                {
+                    counter++;
+                }
+            }
+            for (int j = 0; j < listHistory.Count; j++)
+            {
+                string line = listHistory[j];
+                string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                string date = splitted[5];
+                if (DateTime.Parse(date) >= selectedDate1 && DateTime.Parse(date) <= selectedDate2)
+                    counter++;
+            }
+            return counter;
+        }
+
+        internal int GetNumberOfEventsAll(DateTime? selectedDate1, DateTime? selectedDate2)
+        {
+            if (selectedDate1 == null) selectedDate1 = DateTime.MinValue;
+            if (selectedDate2 == null) selectedDate2 = DateTime.Now;
+            AuthorsEvenings evenings = new();
+            List<AuthorsEvening> AuthorEvenings = evenings.GetEventList();
+            int AllAuthorEvenings = 0;
+            for (int i = 0; i < AuthorEvenings.Count; i++)
+            {
+                AuthorsEvening f = AuthorEvenings[i];
+                if (f.Date >= selectedDate1 && f.Date <= selectedDate2)
+                {
+                    AllAuthorEvenings++;
+                }
+            }
+            return AllAuthorEvenings;
+        }
+
+        internal int GetNumberOfActiveUsersAll(DateTime? selectedDate1, DateTime? selectedDate2)
+        {
+            if (selectedDate1 == null) selectedDate1 = DateTime.MinValue;
+            if (selectedDate2 == null) selectedDate2 = DateTime.Now;
+            List<string> list = accountModel.GetListOfDataBaseLines("BookHistory");
+            List<string> userList = new();
+            userList.Add("");
+            int AllActiveClients = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                string line = list[i];
+                string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                int libId = int.Parse(splitted[1]);
+                string user = splitted[4];
+                DateTime rentalDate = DateTime.Parse(splitted[5]);
+                if (rentalDate >= selectedDate1 && rentalDate <= selectedDate2)
+                {
+                    for (int j = 0; j < userList.Count; j++)
+                    {
+                        if (userList[j].CompareTo(user) != 0)
+                        {
+                            AllActiveClients++;
+                            userList.Add(user);
+                        }
+                    }
+                }
+
+            }
+            return AllActiveClients;
+        }
     }
 }
 
