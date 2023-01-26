@@ -13,6 +13,8 @@ using MahApps.Metro.Controls;
 using System.Globalization;
 using System.Windows.Documents;
 using iTextSharp.text.xml;
+using System.Net.Mail;
+using SystemBiblioteczny.Methods;
 
 namespace SystemBiblioteczny
 {
@@ -21,7 +23,7 @@ namespace SystemBiblioteczny
     /// </summary>
     public partial class Admin_LocalWindow : Window
     {
-
+        private LoginMethod loginMethod = new();
         private ApplicationBook applicationBookModel = new();
         private BookExchange bookExchangeModel = new();
         private AccountBase accountModel = new();
@@ -35,9 +37,11 @@ namespace SystemBiblioteczny
         {
             
             InitializeComponent();
-
+            
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             localAdmin = userData;
+            EmailBox.Text = localAdmin.Email;
+            PhoneBox.Text = localAdmin.Phone;
             nazwaLabel.Content = localAdmin.UserName;
             numerLabel.Content = localAdmin.LibraryId;
             LoadEventData();
@@ -307,8 +311,59 @@ namespace SystemBiblioteczny
                 RequestBookLabel.Text = book.Id_Book.ToString();
             }
         }
+        private void ChangePassword(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox1.Password.CompareTo(PasswordBox2.Password) == 0)
+            {
+                if (PasswordBox2.Password.Length < 4) MessageBox.Show("Hasło musi mieć przynajmiej 4 znaki");
+                else accountModel.ChangePersonData(localAdmin, AccountBase.RoleTypeEnum.LocalAdmin, PasswordBox1.Password,"","",localAdmin.LibraryId);
+            }
+            else MessageBox.Show("Podane hasła różnią się od siebie");
+        }
 
-        
+        private void SaveChanges(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (EmailBox.Text.CompareTo(localAdmin.Email) != 0)
+                {
+                    MailAddress mail = new MailAddress(EmailBox.Text);
+                    accountModel.ChangePersonData(localAdmin, AccountBase.RoleTypeEnum.LocalAdmin, "", EmailBox.Text,"",localAdmin.LibraryId);
+                }
+                if (PhoneBox.Text.CompareTo(localAdmin.Phone!.ToString()) != 0)
+                {
+                    if (PhoneBox.Text.CompareTo("") == 0) MessageBox.Show("Nie podano poprawnego numeru telefonu");
+                    else accountModel.ChangePersonData(localAdmin, AccountBase.RoleTypeEnum.LocalAdmin, "", "", PhoneBox.Text, localAdmin.LibraryId);
+                }
+
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Błędny format email!");
+            }
+
+        }
+        private void Password1Changed(object sender, RoutedEventArgs e)
+        {
+            string a = PasswordBox1.Password;
+            string b = loginMethod.EraseWhiteSpace(PasswordBox1.Password);
+            if (a != b) PasswordBox1.Password = b;
+        }
+        private void Password2Changed(object sender, RoutedEventArgs e)
+        {
+            string a = PasswordBox2.Password;
+            string b = loginMethod.EraseWhiteSpace(PasswordBox2.Password);
+            if (a != b) PasswordBox2.Password = b;
+        }
+        private void PhoneBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(PhoneBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                PhoneBox.Text = PhoneBox.Text.Remove(PhoneBox.Text.Length - 1);
+            }
+        }
+
 
         private void OrderBook(object sender, RoutedEventArgs e)
         {

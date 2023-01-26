@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,7 +35,8 @@ namespace SystemBiblioteczny
 
             PersonStatistics(user.UserName!);
             UptodateTable();
-
+            EmailBox.Text = loggedUser.Email;
+            PhoneBox.Text = loggedUser.Phone;
             Date.FontSize = 10;
             LoadEventData();
         }
@@ -161,6 +163,58 @@ namespace SystemBiblioteczny
         {
             if (RequestBookLabel.Text == "") { RequestBookLabel.Text = "0"; }
             bookFromGui = int.Parse(RequestBookLabel.Text);;
+        }
+        private void ChangePassword(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox1.Password.CompareTo(PasswordBox2.Password) == 0)
+            {
+                if (PasswordBox2.Password.Length < 4) MessageBox.Show("Hasło musi mieć przynajmiej 4 znaki");
+                else account.ChangePersonData(loggedUser, AccountBase.RoleTypeEnum.Client, PasswordBox1.Password);
+            }
+            else MessageBox.Show("Podane hasła różnią się od siebie");
+        }
+
+        private void SaveChanges(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (EmailBox.Text.CompareTo(loggedUser.Email) != 0)
+                {
+                    MailAddress mail = new MailAddress(EmailBox.Text);
+                    account.ChangePersonData(loggedUser, AccountBase.RoleTypeEnum.Client, "", EmailBox.Text);
+                }
+                if (PhoneBox.Text.CompareTo(loggedUser.Phone!.ToString()) != 0)
+                {
+                    if (PhoneBox.Text.CompareTo("") == 0) MessageBox.Show("Nie podano poprawnego numeru telefonu");
+                    else account.ChangePersonData(loggedUser, AccountBase.RoleTypeEnum.Client, "", "", PhoneBox.Text);
+                }
+
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Błędny format email!");
+            }
+
+        }
+        private void Password1Changed(object sender, RoutedEventArgs e)
+        {
+            string a = PasswordBox1.Password;
+            string b = loginMethod.EraseWhiteSpace(PasswordBox1.Password);
+            if (a != b) PasswordBox1.Password = b;
+        }
+        private void Password2Changed(object sender, RoutedEventArgs e)
+        {
+            string a = PasswordBox2.Password;
+            string b = loginMethod.EraseWhiteSpace(PasswordBox2.Password);
+            if (a != b) PasswordBox2.Password = b;
+        }
+        private void PhoneBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(PhoneBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                PhoneBox.Text = PhoneBox.Text.Remove(PhoneBox.Text.Length - 1);
+            }
         }
         private void Book(object sender, RoutedEventArgs e)
         {
