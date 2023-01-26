@@ -730,15 +730,17 @@ namespace SystemBiblioteczny
 
             string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
             string fileName = "raport-id-" + localAdmin.LibraryId + "-" + localAdmin.UserName + "-" + currentDateTime + ".pdf";
-            string path = @"../../../Raporty/" + fileName;
-
-            if(!Directory.Exists("../../../Raporty/"))
+            //string path = @"../../../Raporty/" + fileName;
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            path += @"\Raporty\";
+            string path1 = path + fileName;
+            if (!Directory.Exists(path))
             {
-                Directory.CreateDirectory("../../../Raporty/");
+                Directory.CreateDirectory(path);
             }
 
             iTextSharp.text.Document doc = new iTextSharp.text.Document();
-            PdfWriter.GetInstance(doc, new FileStream(path,FileMode.Create));
+            PdfWriter.GetInstance(doc, new FileStream(path1,FileMode.Create));
 
                 doc.Open();
 
@@ -770,7 +772,7 @@ namespace SystemBiblioteczny
                 doc.Add(table);
                 doc.Close();
             }
-            MessageBox.Show("Utworzono raport.");
+            MessageBox.Show("Utworzono raport w folderze raporty na pulpicie.");
         }
     }
 }
