@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,8 +26,6 @@ namespace SystemBiblioteczny
         private AccountBase accountModel = new();
         private Librarian librarianModel = new();
         private Books books = new();
-
-        private string titleFromGui = "";
         private int bookRFromGui = -1;
         public LibrarianWindow(Librarian userData)
         {
@@ -36,6 +35,8 @@ namespace SystemBiblioteczny
             RefreshTableApprovedApplicationsData();
             LoadEventData();
             UptodateTable();
+            EmailBox.Text = librarianModel.Email;
+            PhoneBox.Text = librarianModel.Phone;
 
         }
 
@@ -100,6 +101,58 @@ namespace SystemBiblioteczny
             }
             ApprovedApplicationsTable.IsReadOnly = true;
 
+        }
+        private void ChangePassword(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox1.Password.CompareTo(PasswordBox2.Password) == 0)
+            {
+                if (PasswordBox2.Password.Length < 4) MessageBox.Show("Hasło musi mieć przynajmiej 4 znaki");
+                else accountModel.ChangePersonData(librarianModel, AccountBase.RoleTypeEnum.Librarian, PasswordBox1.Password,"","",librarianModel.LibraryId);
+            }
+            else MessageBox.Show("Podane hasła różnią się od siebie");
+        }
+
+        private void SaveChanges(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (EmailBox.Text.CompareTo(librarianModel.Email) != 0)
+                {
+                    MailAddress mail = new MailAddress(EmailBox.Text);
+                    accountModel.ChangePersonData(librarianModel, AccountBase.RoleTypeEnum.Librarian, "", EmailBox.Text,"",librarianModel.LibraryId);
+                }
+                if (PhoneBox.Text.CompareTo(librarianModel.Phone!.ToString()) != 0)
+                {
+                    if (PhoneBox.Text.CompareTo("") == 0) MessageBox.Show("Nie podano poprawnego numeru telefonu");
+                    else accountModel.ChangePersonData(librarianModel, AccountBase.RoleTypeEnum.Librarian, "", "", PhoneBox.Text, librarianModel.LibraryId);
+                }
+
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Błędny format email!");
+            }
+
+        }
+        private void Password1Changed(object sender, RoutedEventArgs e)
+        {
+            string a = PasswordBox1.Password;
+            string b = loginMethod.EraseWhiteSpace(PasswordBox1.Password);
+            if (a != b) PasswordBox1.Password = b;
+        }
+        private void Password2Changed(object sender, RoutedEventArgs e)
+        {
+            string a = PasswordBox2.Password;
+            string b = loginMethod.EraseWhiteSpace(PasswordBox2.Password);
+            if (a != b) PasswordBox2.Password = b;
+        }
+        private void PhoneBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(PhoneBox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Proszę wpisać numer.");
+                PhoneBox.Text = PhoneBox.Text.Remove(PhoneBox.Text.Length - 1);
+            }
         }
 
         private void CollectBook(object sender, RoutedEventArgs e)
