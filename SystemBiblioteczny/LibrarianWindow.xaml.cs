@@ -25,7 +25,7 @@ namespace SystemBiblioteczny
         private AccountBase accountModel = new();
         private Librarian librarianModel = new();
         private Books books = new();
-        
+
         private string titleFromGui = "";
         private int bookRFromGui = -1;
         public LibrarianWindow(Librarian userData)
@@ -58,7 +58,7 @@ namespace SystemBiblioteczny
             var author = AuthorInput.Text;
             int quantity = int.Parse(QuantityInput.Text);
             var librarian = librarianModel.UserName!;
-            foreach(ApplicationBook a in applicationBookModel.GetApplicationBooksList())
+            foreach (ApplicationBook a in applicationBookModel.GetApplicationBooksList())
             {
                 if (a.ID > max) max = a.ID;
             }
@@ -96,7 +96,7 @@ namespace SystemBiblioteczny
             for (int i = 0; i < listofApplicationBooks.Count; i++)
             {
                 ApplicationBook book = listofApplicationBooks[i];
-                if (book.Approved.CompareTo(false) != 0)ApprovedApplicationsTable.Items.Add(book);
+                if (book.Approved.CompareTo(false) != 0) ApprovedApplicationsTable.Items.Add(book);
             }
             ApprovedApplicationsTable.IsReadOnly = true;
 
@@ -105,7 +105,7 @@ namespace SystemBiblioteczny
         private void CollectBook(object sender, RoutedEventArgs e)
         {
 
-           
+
             ApplicationBook IdFromGui = (ApplicationBook)(ApprovedApplicationsTable.SelectedItem);
             if (IdFromGui == null) MessageBox.Show("Nie wybrano książki");
             else
@@ -115,32 +115,32 @@ namespace SystemBiblioteczny
                 int newID = book2.Capacity;
                 newID++;
                 List<ApplicationBook> list = applicationBookModel.GetApplicationBooksList();
-                
 
-                    string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
-                    List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
 
-                    using (StreamWriter writer = new StreamWriter(path))
+                string path = System.IO.Path.Combine("../../../DataBases/BookApplicationList.txt");
+                List<string> lines = accountModel.GetListOfDataBaseLines("BookApplicationList");
+
+                using (StreamWriter writer = new StreamWriter(path))
+                {
+                    for (int j = 0; j < lines.Count; j++)
                     {
-                        for (int j = 0; j < lines.Count; j++)
+                        string line = lines[j];
+                        if (list[j].ID.CompareTo(IdFromGui.ID) == 0)
                         {
-                            string line = lines[j];
-                            if (list[j].ID.CompareTo(IdFromGui.ID) == 0)
+                            for (int i = 0; i < list[j].Quantity; i++)
                             {
-                                for(int i = 0; i < list[j].Quantity; i++)
-                                {
-                                    accountModel.WriteToDataBase("BookList", newID + " " + list[j].Author + " " + list[j].Title + " " + "True" + " " + librarianModel.LibraryId);
-                                    newID++;
-                                }
-                                
+                                accountModel.WriteToDataBase("BookList", newID + " " + list[j].Author + " " + list[j].Title + " " + "True" + " " + librarianModel.LibraryId);
+                                newID++;
                             }
-                            else writer.WriteLine(line);
-                        }
 
-                        writer.Close();
+                        }
+                        else writer.WriteLine(line);
                     }
 
-                
+                    writer.Close();
+                }
+
+
                 RefreshTableApprovedApplicationsData();
             }
         }
@@ -285,7 +285,7 @@ namespace SystemBiblioteczny
                         {
                             for (int k = 0; k < listofBorrowedBooks.Count; k++)
                             {
-                                if (idBookFromGui != listofBorrowedBooks[k].Id_Book)writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + listofBorrowedBooks[k].Availability + " " + listofBorrowedBooks[k].Id_Library + " " + listofBorrowedBooks[k].DateTime1 + " " + listofBorrowedBooks[k].UserName);
+                                if (idBookFromGui != listofBorrowedBooks[k].Id_Book) writer.WriteLine(listofBorrowedBooks[k].Id_Book + " " + listofBorrowedBooks[k].Author + " " + listofBorrowedBooks[k].Title + " " + listofBorrowedBooks[k].Availability + " " + listofBorrowedBooks[k].Id_Library + " " + listofBorrowedBooks[k].DateTime1 + " " + listofBorrowedBooks[k].UserName);
                             }
                             writer.Close();
                         };
@@ -425,9 +425,11 @@ namespace SystemBiblioteczny
                             writer.Close();
                         };
 
+                        Bill(dateBorrow, ReturnDate);
+
                         for (int k = 0; k < listofBooks.Count; k++)
                         {
-                            if (idBookFromGui == listofBooks[k].Id_Book) accountModel.WriteToDataBase("BookHistory", listofBooks[k].Id_Book + " " + listofBooks[k].Id_Library + " " + username + " " + dateBorrow + " " + ReturnDate);
+                            if (idBookFromGui == listofBooks[k].Id_Book) accountModel.WriteToDataBase("BookHistory", listofBooks[k].Id_Book + " " + listofBooks[k].Id_Library + " " + listofBooks[k].Author + " " + listofBooks[k].Title + " " + username + " " + dateBorrow + " " + ReturnDate);
                         }
                     }
                     else { MessageBox.Show("Ta ksiązka jest niedostępna!"); info = true; }
@@ -435,6 +437,19 @@ namespace SystemBiblioteczny
             }
             if (info == false) { MessageBox.Show("Nie istnieje książka o podanym id"); }
 
+        }
+
+        private void Bill(string dateBorrow,string dateReturn)
+        {
+            DateTime dateTimeBorrow = DateTime.ParseExact(dateBorrow, "MM/dd/yyyy", null);
+            DateTime dateTimeReturn = DateTime.ParseExact(dateReturn, "MM/dd/yyyy", null);
+
+            TimeSpan result = dateTimeBorrow - dateTimeReturn;
+
+            double zaplata = result.Days * 0.1;
+            if(zaplata > 1) { MessageBox.Show("Do zapłaty: " + zaplata + " zł," + " za " + result.Days + " dni"); }
+            else { MessageBox.Show("Do zapłaty: " + zaplata + " groszy," + " za " + result.Days + " dni"); } 
+            if (result.Days == 1) { MessageBox.Show("Do zapłaty: " + zaplata + " groszy," + " za " + result.Days + " dzień"); }
         }
 
         private void AuthorInput_TextChanged(object sender, TextChangedEventArgs e)
