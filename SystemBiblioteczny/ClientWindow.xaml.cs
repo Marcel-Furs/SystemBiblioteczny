@@ -222,7 +222,7 @@ namespace SystemBiblioteczny
             BookReserved bookRe = new();
             BooksReserved booksR = new();
 
-            string czas= DateTime.Now.ToString("MM/dd/yyyy");
+            string czas= DateTime.Now.ToString("dd/MM/yyyy");
 
             //Book book = new();
             // book = (Book)TableBooks.SelectedItem;

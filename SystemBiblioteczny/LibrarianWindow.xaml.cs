@@ -314,7 +314,6 @@ namespace SystemBiblioteczny
         {
             RefreshTextBoxes();
 
-            //string czas = DateTime.Now.ToString("MM/dd/yyyy");
             BooksReserved booksR = new();
             Books books = new();
 
@@ -428,7 +427,7 @@ namespace SystemBiblioteczny
         {
             RefreshTextBoxes();
 
-            string ReturnDate = DateTime.Now.ToString("MM/dd/yyyy");
+            string ReturnDate = DateTime.Now.ToString("dd/MM/yyyy");
 
             BooksReserved booksR = new();
             Books books = new();
@@ -494,8 +493,8 @@ namespace SystemBiblioteczny
 
         private void Bill(string dateBorrow,string dateReturn)
         {
-            DateTime dateTimeBorrow = DateTime.ParseExact(dateBorrow, "MM/dd/yyyy", null);
-            DateTime dateTimeReturn = DateTime.ParseExact(dateReturn, "MM/dd/yyyy", null);
+            DateTime dateTimeBorrow = DateTime.ParseExact(dateBorrow, "dd/MM/yyyy", null);
+            DateTime dateTimeReturn = DateTime.ParseExact(dateReturn, "dd/MM/yyyy", null);
 
             TimeSpan result = dateTimeBorrow - dateTimeReturn;
 

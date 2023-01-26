@@ -96,7 +96,7 @@ namespace SystemBiblioteczny.Methods
                         switch (role)
                         {
                             case (AccountBase.RoleTypeEnum.Client): {
-                                    Client userData =  (Client)list[j];
+                                    Client userData = (Client)(list[j]);
                                     ClientWindow clientwindow = new(userData);
                                     clientwindow.Show();
                                 } break;
@@ -205,6 +205,38 @@ namespace SystemBiblioteczny.Methods
                 }
             }
             return s1;
+        }
+
+        public int GetNumberOfRentals(int libraryId, DateTime? selectedDate1, DateTime? selectedDate2)
+        {
+            if (selectedDate1 == null) selectedDate1 = DateTime.MinValue;
+            if (selectedDate2 == null) selectedDate2 = DateTime.Now;
+            AccountBase history = new();
+            BooksReserved b = new();
+            List<BookReserved> AllBooksReservedList = b.GetReservedBooksList();
+            List<string> listHistory = history.GetListOfDataBaseLines("BookHistory");
+            int counter = 0;
+            for (int i = 0; i < AllBooksReservedList.Count; i++)
+            {
+                if (AllBooksReservedList[i].Availability == true && AllBooksReservedList[i].Id_Library == libraryId &&
+                    DateTime.Parse(AllBooksReservedList[i].DateTime1) >= selectedDate1
+                    && DateTime.Parse(AllBooksReservedList[i].DateTime1) <= selectedDate2)
+
+
+                {
+                    counter++;
+                }
+            }
+            for (int j = 0; j < listHistory.Count; j++)
+            {
+                string line = listHistory[j];
+                string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                string id = splitted[1];
+                string date = splitted[5];
+                if (int.Parse(id) == libraryId && DateTime.Parse(date) >= selectedDate1 && DateTime.Parse(date) <= selectedDate2)
+                    counter++;
+            }
+            return counter;
         }
     }
     }

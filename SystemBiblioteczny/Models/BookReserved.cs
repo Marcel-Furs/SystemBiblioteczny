@@ -27,7 +27,7 @@ namespace SystemBiblioteczny.Models
 
         public bool AccountBalance(string date11)
         {
-            DateTime zmiana = DateTime.ParseExact(date11, "MM/dd/yyyy", null );
+            DateTime zmiana = DateTime.ParseExact(date11, "dd/MM/yyyy", null );
             DateOnly dateczas = DateOnly.FromDateTime(zmiana);
             DateOnly dateczas1 = DateOnly.FromDateTime(DateTime.Now);
 

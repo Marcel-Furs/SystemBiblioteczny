@@ -11,10 +11,11 @@ using System.Reflection.Metadata;
 using Org.BouncyCastle.Asn1.X509.SigI;
 using MahApps.Metro.Controls;
 using System.Globalization;
-using System.Windows.Documents;
 using iTextSharp.text.xml;
 using System.Net.Mail;
 using SystemBiblioteczny.Methods;
+using System.Xml.Linq;
+using System.Windows.Documents;
 
 namespace SystemBiblioteczny
 {
@@ -616,24 +617,36 @@ namespace SystemBiblioteczny
 
         private void GenerateRaport(object sender, RoutedEventArgs e)
         {
-            DateTime? chosenStartDate = startDatePicker.SelectedDate;
-            DateTime? chosenEndDate = endDatePicker.SelectedDate;
-            int activeCustomers = 0;
-            using (StreamReader reader = new StreamReader("../../../DataBases/BookHistory.txt"))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] parts = line.Split(' ');
-                    DateTime startDate = DateTime.ParseExact(parts[5], "MM.dd.yyyy", CultureInfo.InvariantCulture);
-                    DateTime endDate = DateTime.ParseExact(parts[6], "MM.dd.yyyy", CultureInfo.InvariantCulture);
-                    if (chosenStartDate != null && chosenEndDate != null || (startDate >= chosenStartDate && endDate <= chosenEndDate))
-                    {
-                        activeCustomers++;
-                    }
-                }
-            
-            }
+            string dateFrom = "";
+            if (startDatePicker.SelectedDate == null) dateFrom = "od początku";
+            else dateFrom = startDatePicker.SelectedDate.ToString()!;
+            string dateTo = "";
+            if (endDatePicker.SelectedDate == null) dateTo = DateTime.Now.ToString("yyyy-MM-dd");
+            else dateTo = endDatePicker.SelectedDate.ToString()!;
+            //DateTime? chosenStartDate = startDatePicker.SelectedDate;
+            //DateTime? chosenEndDate = endDatePicker.SelectedDate;
+            //int activeCustomers = 0;
+            //using (StreamReader reader = new StreamReader("../../../DataBases/BookHistory.txt"))
+            //{
+            //    string line;
+            //    while ((line = reader.ReadLine()) != null)
+            //    {
+            //        string[] parts = line.Split(' ');
+            //        DateTime startDate = DateTime.ParseExact(parts[5], "MM.dd.yyyy", CultureInfo.InvariantCulture);
+            //        DateTime endDate = DateTime.ParseExact(parts[6], "MM.dd.yyyy", CultureInfo.InvariantCulture);
+            //        if (chosenStartDate != null && chosenEndDate != null || (startDate >= chosenStartDate && endDate <= chosenEndDate))
+            //        {
+            //            activeCustomers++;
+            //        }
+            //    }
+
+            //}
+            //
+            int numberOfRentals = loginMethod.GetNumberOfRentals(localAdmin.LibraryId, startDatePicker.SelectedDate, endDatePicker.SelectedDate);
+
+
+
+
 
 
             // ilosc ksiazek w danej bibliotece 
@@ -742,36 +755,43 @@ namespace SystemBiblioteczny
             iTextSharp.text.Document doc = new iTextSharp.text.Document();
             PdfWriter.GetInstance(doc, new FileStream(path1,FileMode.Create));
 
-                doc.Open();
+            doc.Open();
+            doc.Add(new iTextSharp.text.Paragraph("Autor: " + localAdmin.UserName));
+            doc.Add(new iTextSharp.text.Paragraph("Data utworzenia: " + DateTime.Now.ToString("yyyy-MM-dd")));
+            doc.Add(new iTextSharp.text.Paragraph("Zakres raportu od: " + dateFrom));
+            doc.Add(new iTextSharp.text.Paragraph("Zakres raportu do: " + dateTo));
 
-            if (activeCustomers != 0)
-            {
-                PdfPTable tablee = new PdfPTable(1);
-                tablee.WidthPercentage = 100;
-                tablee.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów w zakresie: " + chosenStartDate + " - " + chosenEndDate + ": ")));
-                tablee.AddCell(new iTextSharp.text.Paragraph(activeCustomers.ToString()));
-                doc.Add(tablee);
-                doc.Close();
-            }
-            else
-            {
-                PdfPTable table = new PdfPTable(6);
-                table.AddCell(new PdfPCell(new Phrase("Liczba ksiazek")));
-                table.AddCell(new PdfPCell(new Phrase("Liczba wypozyczonych ksiazek")));
-                table.AddCell(new PdfPCell(new Phrase("Liczba klientów")));
-                table.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów")));
-                table.AddCell(new PdfPCell(new Phrase("Liczba bibliotekarzy")));
-                table.AddCell(new PdfPCell(new Phrase("Liczba wieczorków autorskich")));
+            doc.Add(new iTextSharp.text.Paragraph("Wypożyczeń z biblioteki: " + numberOfRentals));
 
-                table.AddCell(new iTextSharp.text.Paragraph(BooksCount.ToString()));
-                table.AddCell(new iTextSharp.text.Paragraph(ReservedBooksCount.ToString()));
-                table.AddCell(new iTextSharp.text.Paragraph(AllClients.ToString()));
-                table.AddCell(new iTextSharp.text.Paragraph(AllActiveClients.ToString()));
-                table.AddCell(new iTextSharp.text.Paragraph(allLibrans.ToString()));
-                table.AddCell(new iTextSharp.text.Paragraph(AllAuthorEvenings.ToString()));
-                doc.Add(table);
-                doc.Close();
-            }
+            //if (activeCustomers != 0)
+            //{
+            //    PdfPTable tablee = new PdfPTable(1);
+            //    tablee.WidthPercentage = 100;
+            //    tablee.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów w zakresie: " + chosenStartDate + " - " + chosenEndDate + ": ")));
+            //    tablee.AddCell(new iTextSharp.text.Paragraph(activeCustomers.ToString()));
+            //    doc.Add(tablee);
+            //    doc.Close();
+            //}
+            //else
+            //{
+            //    PdfPTable table = new PdfPTable(6);
+            //    table.AddCell(new PdfPCell(new Phrase("Liczba ksiazek")));
+            //    table.AddCell(new PdfPCell(new Phrase("Liczba wypozyczonych ksiazek")));
+            //    table.AddCell(new PdfPCell(new Phrase("Liczba klientów")));
+            //    table.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów")));
+            //    table.AddCell(new PdfPCell(new Phrase("Liczba bibliotekarzy")));
+            //    table.AddCell(new PdfPCell(new Phrase("Liczba wieczorków autorskich")));
+
+            //    table.AddCell(new iTextSharp.text.Paragraph(BooksCount.ToString()));
+            //    table.AddCell(new iTextSharp.text.Paragraph(ReservedBooksCount.ToString()));
+            //    table.AddCell(new iTextSharp.text.Paragraph(AllClients.ToString()));
+            //    table.AddCell(new iTextSharp.text.Paragraph(AllActiveClients.ToString()));
+            //    table.AddCell(new iTextSharp.text.Paragraph(allLibrans.ToString()));
+            //    table.AddCell(new iTextSharp.text.Paragraph(AllAuthorEvenings.ToString()));
+            //    doc.Add(table);
+            //    doc.Close();
+            //}
+            doc.Close();
             MessageBox.Show("Utworzono raport w folderze raporty na pulpicie.");
         }
     }
