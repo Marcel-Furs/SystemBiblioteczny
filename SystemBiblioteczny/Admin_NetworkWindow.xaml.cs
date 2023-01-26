@@ -262,8 +262,8 @@ namespace SystemBiblioteczny
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] parts = line.Split(' ');
-                    DateTime startDate = DateTime.ParseExact(parts[3], "MM.dd.yyyy", CultureInfo.InvariantCulture);
-                    DateTime endDate = DateTime.ParseExact(parts[4], "MM.dd.yyyy", CultureInfo.InvariantCulture);
+                    DateTime startDate = DateTime.ParseExact(parts[5], "MM.dd.yyyy", CultureInfo.InvariantCulture);
+                    DateTime endDate = DateTime.ParseExact(parts[6], "MM.dd.yyyy", CultureInfo.InvariantCulture);
                     if (chosenStartDate != null && chosenEndDate != null || (startDate >= chosenStartDate && endDate <= chosenEndDate))
                     {
                         activeCustomers++;
