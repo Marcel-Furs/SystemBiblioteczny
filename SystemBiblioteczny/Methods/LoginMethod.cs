@@ -1,16 +1,7 @@
-﻿using ControlzEx.Standard;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Automation.Peers;
-using System.Windows.Navigation;
-using System.Xml;
 using SystemBiblioteczny.Models;
 
 namespace SystemBiblioteczny.Methods
@@ -23,8 +14,9 @@ namespace SystemBiblioteczny.Methods
             bool Logged = false;
             string file = "";
 
-            switch (role) {
-                case (AccountBase.RoleTypeEnum.Client):file = "ClientList" ; break;
+            switch (role)
+            {
+                case (AccountBase.RoleTypeEnum.Client): file = "ClientList"; break;
                 case (AccountBase.RoleTypeEnum.Librarian): file = "LibrarianList"; break;
                 case (AccountBase.RoleTypeEnum.LocalAdmin): file = "LocalAdminList"; break;
                 case (AccountBase.RoleTypeEnum.NetworkAdmin): file = "NetworkAdminList"; break;
@@ -92,38 +84,46 @@ namespace SystemBiblioteczny.Methods
                         MessageBox.Show("Poprawnie zalogowano");
                         correctLogin = true;
                         Logged = true;
-                       
+
                         switch (role)
                         {
-                            case (AccountBase.RoleTypeEnum.Client): {
-                                    Client userData =  (Client)list[j];
+                            case (AccountBase.RoleTypeEnum.Client):
+                                {
+                                    Client userData = (Client)list[j];
                                     ClientWindow clientwindow = new(userData);
                                     clientwindow.Show();
-                                } break;
-                            case (AccountBase.RoleTypeEnum.Librarian): {
+                                }
+                                break;
+                            case (AccountBase.RoleTypeEnum.Librarian):
+                                {
                                     Librarian userData = (Librarian)list[j];
                                     LibrarianWindow librarianwindow = new(userData);
                                     librarianwindow.Show();
-                                } break;
-                            case (AccountBase.RoleTypeEnum.LocalAdmin): {
+                                }
+                                break;
+                            case (AccountBase.RoleTypeEnum.LocalAdmin):
+                                {
                                     LocalAdmin userData = (LocalAdmin)list[j];
                                     Admin_LocalWindow admin_localwindow = new(userData);
                                     admin_localwindow.Show();
-                                } break;
-                            case (AccountBase.RoleTypeEnum.NetworkAdmin): {
+                                }
+                                break;
+                            case (AccountBase.RoleTypeEnum.NetworkAdmin):
+                                {
                                     NetworkAdmin userData = (NetworkAdmin)list[j];
                                     Admin_NetworkWindow admin_networkwindow = new(userData);
                                     admin_networkwindow.Show();
-                                } break;
+                                }
+                                break;
                         }
-                        
+
                     }
                     else wrongPassword = true;
                 }
-                
+
             }
 
-            if (wrongPassword == true)  MessageBox.Show("Podane hasło jest nieprawidłowe"); 
+            if (wrongPassword == true) MessageBox.Show("Podane hasło jest nieprawidłowe");
             else if (correctLogin == false) MessageBox.Show("Nie znaleziono danego użytkownika");
             return Logged;
         }
@@ -149,7 +149,7 @@ namespace SystemBiblioteczny.Methods
 
             return true;
         }
-      
+
         public bool CheckIfAllDataIsCorrectAndCanCreateAccount(string username, string password, string confirmPassword, string name, string lastname, string email)
         {
             bool unique = this.CheckIfUsernameIsUnique(username);
@@ -195,7 +195,8 @@ namespace SystemBiblioteczny.Methods
             MessageBox.Show("Użytkownik został utworzony");
             return true;
         }
-        public string EraseWhiteSpace(string s1) {
+        public string EraseWhiteSpace(string s1)
+        {
             for (int i = 0; i < s1.Length; i++)
             {
                 if (Char.IsWhiteSpace(s1[i]))
@@ -207,5 +208,5 @@ namespace SystemBiblioteczny.Methods
             return s1;
         }
     }
-    }
+}
 

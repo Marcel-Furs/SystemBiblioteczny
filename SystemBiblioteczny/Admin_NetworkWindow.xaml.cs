@@ -4,18 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
@@ -75,29 +66,30 @@ namespace SystemBiblioteczny
             {
                 if (PasswordBox2.Password.Length < 4) MessageBox.Show("Hasło musi mieć przynajmiej 4 znaki");
                 else accountModel.ChangePersonData(networkAdmin, AccountBase.RoleTypeEnum.NetworkAdmin, PasswordBox1.Password);
-            } 
+            }
             else MessageBox.Show("Podane hasła różnią się od siebie");
         }
-       
+
         private void SaveChanges(object sender, RoutedEventArgs e)
         {
-           try
-           {
-                if (EmailBox.Text.CompareTo(networkAdmin.Email) != 0) {
+            try
+            {
+                if (EmailBox.Text.CompareTo(networkAdmin.Email) != 0)
+                {
                     MailAddress mail = new MailAddress(EmailBox.Text);
-                    accountModel.ChangePersonData(networkAdmin, AccountBase.RoleTypeEnum.NetworkAdmin,"",EmailBox.Text);
+                    accountModel.ChangePersonData(networkAdmin, AccountBase.RoleTypeEnum.NetworkAdmin, "", EmailBox.Text);
                 }
                 if (PhoneBox.Text.CompareTo(networkAdmin.Phone!.ToString()) != 0)
                 {
                     if (PhoneBox.Text.CompareTo("") == 0) MessageBox.Show("Nie podano poprawnego numeru telefonu");
-                    else accountModel.ChangePersonData(networkAdmin, AccountBase.RoleTypeEnum.NetworkAdmin, "", "",PhoneBox.Text);
+                    else accountModel.ChangePersonData(networkAdmin, AccountBase.RoleTypeEnum.NetworkAdmin, "", "", PhoneBox.Text);
                 }
 
             }
-           catch (FormatException)
-           {
-              MessageBox.Show("Błędny format email!");
-           }
+            catch (FormatException)
+            {
+                MessageBox.Show("Błędny format email!");
+            }
 
         }
         private void Password1Changed(object sender, RoutedEventArgs e)
@@ -124,7 +116,8 @@ namespace SystemBiblioteczny
         {
             ShowClientListMethod();
         }
-        private void ShowClientListMethod() {
+        private void ShowClientListMethod()
+        {
             Person_Table.Items.Clear();
             List<Client> clients = accountModel.GetClientList();
             foreach (Client c in clients)
@@ -138,7 +131,8 @@ namespace SystemBiblioteczny
         {
             ShowLibrarianListMethod();
         }
-        private void ShowLibrarianListMethod() {
+        private void ShowLibrarianListMethod()
+        {
             Person_Table.Items.Clear();
             List<Librarian> librarians = accountModel.GetLibrarianList();
             foreach (Librarian l in librarians)
@@ -153,7 +147,8 @@ namespace SystemBiblioteczny
         {
             ShowAdminListMethod();
         }
-        private void ShowAdminListMethod() {
+        private void ShowAdminListMethod()
+        {
             Person_Table.Items.Clear();
             List<LocalAdmin> admins = accountModel.GetLocalAdminList();
             foreach (LocalAdmin a in admins)
@@ -167,11 +162,14 @@ namespace SystemBiblioteczny
         {
             List<Client> list = accountModel.GetClientList();
             bool info = false;
-            for (int i = 0; i < list.Count; i++) {
-                if (list[i].UserName!.CompareTo(UserNameTextBox.Text) == 0) {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].UserName!.CompareTo(UserNameTextBox.Text) == 0)
+                {
                     info = true;
                     if (IdLibraryLabel.Text == "") MessageBox.Show("Proszę wpisać poprawne id");
-                    else {
+                    else
+                    {
                         int newLibId = int.Parse(IdLibraryLabel.Text);
                         Librarian librarian = new(list[i].UserName!, list[i].Password!, list[i].FirstName!, list[i].LastName!, list[i].Email!, newLibId, list[i].Phone!);
                         accountModel.AddLibrarianToListAndDeleteFromClients(librarian);
@@ -372,15 +370,15 @@ namespace SystemBiblioteczny
                 string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
                 int libId = int.Parse(splitted[1]);
                 string user = splitted[2];
-                    for (int j = 0; j < userList.Count; j++)
+                for (int j = 0; j < userList.Count; j++)
+                {
+                    if (userList[j].CompareTo(user) != 0)
                     {
-                        if (userList[j].CompareTo(user) != 0)
-                        {
-                            AllActiveClients++;
-                            userList.Add(user);
-                        }
+                        AllActiveClients++;
+                        userList.Add(user);
                     }
-                
+                }
+
 
             }
 
@@ -392,7 +390,7 @@ namespace SystemBiblioteczny
             {
                 Librarian librarian = AllLibrarians[i];
                 allLibrans++;
-                
+
             }
 
 
@@ -407,7 +405,7 @@ namespace SystemBiblioteczny
             }
 
             string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
-            string fileName = "raport-" + networkAdmin.FirstName +"-" + currentDateTime + ".pdf";
+            string fileName = "raport-" + networkAdmin.FirstName + "-" + currentDateTime + ".pdf";
             string path = @"../../../Raporty/" + fileName;
 
             if (!Directory.Exists("../../../Raporty/"))
@@ -450,6 +448,6 @@ namespace SystemBiblioteczny
             MessageBox.Show("Utworzono raport.");
         }
 
-       
+
     }
 }

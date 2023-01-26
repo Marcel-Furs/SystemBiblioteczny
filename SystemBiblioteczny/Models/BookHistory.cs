@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SystemBiblioteczny.Models
 {
@@ -12,7 +8,7 @@ namespace SystemBiblioteczny.Models
 
         public List<BookHistory> listH = new();
 
-        public BookHistory (int id, int libraryId ,string author, string title,string userName,string dateTaken, string dateReturn)
+        public BookHistory(int id, int libraryId, string author, string title, string userName, string dateTaken, string dateReturn)
         {
             Id_Book = id;
             Id_Library = libraryId;

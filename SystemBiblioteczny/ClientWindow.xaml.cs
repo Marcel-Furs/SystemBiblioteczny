@@ -1,21 +1,10 @@
-﻿using ControlzEx.Standard;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
 
@@ -68,7 +57,8 @@ namespace SystemBiblioteczny
             String phoneNumber = ContactNumber.Text;
 
             AuthorsEvening newAuthorsEvening = new(false, loggedUser.UserName!, name, lastname, libraryID, date, hour, phoneNumber);
-            if (newAuthorsEvening.TryAddToDataBase()) {
+            if (newAuthorsEvening.TryAddToDataBase())
+            {
                 MessageBox.Show("Pomyślnie wysłano propozycję wieczorka autorskiego!");
             }
 
@@ -134,7 +124,7 @@ namespace SystemBiblioteczny
                     var find1 = listofBooks.Where(x => x.Title == Find1.Text).ToList();
                     find1.ForEach(x =>
                     {
-                     TableBooks.Items.Add(x);
+                        TableBooks.Items.Add(x);
                     });
                 }
             }
@@ -153,16 +143,16 @@ namespace SystemBiblioteczny
         private void RequestBookLabel_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(RequestBookLabel.Text, "[^0-9]"))
-           {
+            {
                 MessageBox.Show("Proszę wpisać numer.");
                 RequestBookLabel.Text = RequestBookLabel.Text.Remove(RequestBookLabel.Text.Length - 1);
-           }
+            }
         }
 
         private void RefreshTextBoxes()
         {
             if (RequestBookLabel.Text == "") { RequestBookLabel.Text = "0"; }
-            bookFromGui = int.Parse(RequestBookLabel.Text);;
+            bookFromGui = int.Parse(RequestBookLabel.Text); ;
         }
         private void ChangePassword(object sender, RoutedEventArgs e)
         {
@@ -222,7 +212,7 @@ namespace SystemBiblioteczny
             BookReserved bookRe = new();
             BooksReserved booksR = new();
 
-            string czas= DateTime.Now.ToString("MM/dd/yyyy");
+            string czas = DateTime.Now.ToString("MM/dd/yyyy");
 
             //Book book = new();
             // book = (Book)TableBooks.SelectedItem;
@@ -316,7 +306,7 @@ namespace SystemBiblioteczny
             evening = (AuthorsEvening)AuthorsEvenings.SelectedItem;
             AuthorsEvenings evenings = new();
             //List<AuthorsEvening> list = evenings.GetEventList();
-           // if(evening != null) evenings.RemoveFromList(evening);
+            // if(evening != null) evenings.RemoveFromList(evening);
             LoadEventData();
         }
 
@@ -357,6 +347,6 @@ namespace SystemBiblioteczny
         {
             AuthorsName.Text = loginMethod.EraseWhiteSpace(AuthorsName.Text);
         }
-        
+
     }
 }

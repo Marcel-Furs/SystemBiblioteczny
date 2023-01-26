@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SystemBiblioteczny.Models
 {
-     public class Person
+    public class Person
     {
         public string? FirstName { get; set; }
 
@@ -21,9 +17,10 @@ namespace SystemBiblioteczny.Models
         public string? Phone { get; set; }
 
         //login data
-        public Person(string UserName =" ", String Password= " ") {
-        this.UserName = UserName;
-        this.Password = Password;
+        public Person(string UserName = " ", String Password = " ")
+        {
+            this.UserName = UserName;
+            this.Password = Password;
         }
     }
 }
