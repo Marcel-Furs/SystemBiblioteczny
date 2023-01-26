@@ -446,7 +446,7 @@ namespace SystemBiblioteczny
 
             TimeSpan result = dateTimeBorrow - dateTimeReturn;
 
-            double zaplata = result.Days * 0.1;
+            double zaplata =  2 + (result.Days * 0.1);
             if(zaplata > 1) { MessageBox.Show("Do zapłaty: " + zaplata + " zł," + " za " + result.Days + " dni"); }
             else { MessageBox.Show("Do zapłaty: " + zaplata + " groszy," + " za " + result.Days + " dni"); } 
             if (result.Days == 1) { MessageBox.Show("Do zapłaty: " + zaplata + " groszy," + " za " + result.Days + " dzień"); }

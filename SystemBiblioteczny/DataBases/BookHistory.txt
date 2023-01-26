@@ -5,3 +5,5 @@
 5 2 Henryk_Sienkiewicz Krzyżacy admin 01.26.2023 01.26.2023
 2 2 Henryk_Sienkiewicz Potop admin 01.26.2023 01.26.2023
 12 2 Juliusz_Słowacki Kordian admin 01.26.2023 01.26.2023
+7 2 Henryk_Sienkiewicz Krzyżacy admin 01.26.2023 01.26.2023
+13 2 Henryk_Sienkiewicz Krzyżacy admin 01.26.2023 01.26.2023
