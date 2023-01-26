@@ -622,124 +622,26 @@ namespace SystemBiblioteczny
         private void GenerateRaport(object sender, RoutedEventArgs e)
         {
             string dateFrom = "";
-            if (startDatePicker.SelectedDate == null) dateFrom = "od początku";
+            if (startDatePicker.SelectedDate == null) dateFrom = "poczatku";
             else dateFrom = startDatePicker.SelectedDate.ToString()!;
             string dateTo = "";
-            if (endDatePicker.SelectedDate == null) dateTo = DateTime.Now.ToString("yyyy-MM-dd");
+            if (endDatePicker.SelectedDate == null) dateTo = DateTime.Now.ToString("dd-MM-yyyy");
             else dateTo = endDatePicker.SelectedDate.ToString()!;
-            //DateTime? chosenStartDate = startDatePicker.SelectedDate;
-            //DateTime? chosenEndDate = endDatePicker.SelectedDate;
-            //int activeCustomers = 0;
-            //using (StreamReader reader = new StreamReader("../../../DataBases/BookHistory.txt"))
-            //{
-            //    string line;
-            //    while ((line = reader.ReadLine()) != null)
-            //    {
-            //        string[] parts = line.Split(' ');
-            //        DateTime startDate = DateTime.ParseExact(parts[5], "MM.dd.yyyy", CultureInfo.InvariantCulture);
-            //        DateTime endDate = DateTime.ParseExact(parts[6], "MM.dd.yyyy", CultureInfo.InvariantCulture);
-            //        if (chosenStartDate != null && chosenEndDate != null || (startDate >= chosenStartDate && endDate <= chosenEndDate))
-            //        {
-            //            activeCustomers++;
-            //        }
-            //    }
 
-            //}
-            //
             int numberOfRentals = loginMethod.GetNumberOfRentals(localAdmin.LibraryId, startDatePicker.SelectedDate, endDatePicker.SelectedDate);
-
-
-
-
-
-
-            // ilosc ksiazek w danej bibliotece 
-            Books a = new();
-            List<Book> AllBooksList = a.GetBooksList();
-            int BooksCount = 0;
-            for (int i = 0; i < AllBooksList.Count; i++)
-            {
-                if (AllBooksList[i].Id_Library == localAdmin.LibraryId)
-                {
-                    BooksCount++;
-                }
-            }
-
-            // ilosc wypozyczen w danej bibliotece
-            AccountBase history = new();
-            BooksReserved b = new();
-            List<BookReserved> AllBooksReservedList = b.GetReservedBooksList();
-            List<string> listHistory = history.GetListOfDataBaseLines("BookHistory");
-            int ReservedBooksCount = 0;
-            for (int i = 0; i < AllBooksReservedList.Count; i++)
-            {
-                if (AllBooksReservedList[i].Availability == true && AllBooksReservedList[i].Id_Library == localAdmin.LibraryId)
-                {
-                    ReservedBooksCount++;
-                }
-            }
-            for (int j = 0; j < listHistory.Count; j++)
-            {
-                ReservedBooksCount++;
-            }
-
+            int numberOfBooksInLibrary = loginMethod.GetNumberOfBooksInLibrary(localAdmin.LibraryId);
+            int numberOfLibrarians = loginMethod.GetNumberOfLibrarians(localAdmin.LibraryId);
+            int numberOfEvents = loginMethod.GetNumberOfEvents(localAdmin.LibraryId, startDatePicker.SelectedDate, endDatePicker.SelectedDate);
+            int activeUsers = loginMethod.GetNumberOfActiveUsers(localAdmin.LibraryId, startDatePicker.SelectedDate, endDatePicker.SelectedDate);
 
             // ilosc zarejestrowanych klientow
             AccountBase c = new();
             int AllClients = c.GetClientList().Count;
 
             // ilosc aktywnych klientow w danej bibliotece
-            List<string> list = c.GetListOfDataBaseLines("BookHistory");
-            List<string> userList = new();
-            userList.Add("");
-            int AllActiveClients = 0;
-            for (int i = 0; i < list.Count; i++)
-            {
-                string line = list[i];
-                string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                int libId = int.Parse(splitted[1]);
-                string user = splitted[2];
-                if (libId == localAdmin.LibraryId)
-                {
-                    for (int j = 0; j < userList.Count; j++)
-                    {
-                        if (userList[j].CompareTo(user) != 0)
-                        {
-                            AllActiveClients++;
-                            userList.Add(user);
-                        }
-                    }
-                }
-
-            }
+            
 
 
-            // ilosc bibliotekarzy w danej bibliotece
-            List<Librarian> AllLibrarians = c.GetLibrarianList();
-            int allLibrans = 0;
-            for (int i = 0; i < AllLibrarians.Count; i++)
-            {
-                Librarian librarian = AllLibrarians[i];
-                if (librarian.LibraryId == localAdmin.LibraryId)
-                {
-                    allLibrans++;
-                }
-            }
-
-
-            // ilosc wieczorkow autorskich w danej bibliotece
-            AuthorsEvenings evenings = new();
-            List<AuthorsEvening> AuthorEvenings = evenings.GetEventList();
-            int AllAuthorEvenings = 0;
-            for (int i = 0; i < AuthorEvenings.Count; i++)
-            {
-                AuthorsEvening f = AuthorEvenings[i];
-                if (f.LibraryID == localAdmin.LibraryId)
-                {
-                    AllAuthorEvenings++;
-                }
-
-            }
 
 
 
@@ -760,13 +662,17 @@ namespace SystemBiblioteczny
             PdfWriter.GetInstance(doc, new FileStream(path1, FileMode.Create));
 
             doc.Open();
-            doc.Add(new iTextSharp.text.Paragraph("Autor: " + localAdmin.UserName));
+            doc.Add(new iTextSharp.text.Paragraph("Autor: " + localAdmin.FirstName + " " + localAdmin.LastName)); 
+            doc.Add(new iTextSharp.text.Paragraph("Biblioteka: " + localAdmin.LibraryId));
             doc.Add(new iTextSharp.text.Paragraph("Data utworzenia: " + DateTime.Now.ToString("yyyy-MM-dd")));
             doc.Add(new iTextSharp.text.Paragraph("Zakres raportu od: " + dateFrom));
             doc.Add(new iTextSharp.text.Paragraph("Zakres raportu do: " + dateTo));
-
-            doc.Add(new iTextSharp.text.Paragraph("Wypożyczeń z biblioteki: " + numberOfRentals));
-
+            doc.Add(new iTextSharp.text.Paragraph("\n"));
+            doc.Add(new iTextSharp.text.Paragraph("Wypozyczen z biblioteki: " + numberOfRentals));
+            doc.Add(new iTextSharp.text.Paragraph("Wieczorkow autorskich: " + numberOfEvents));
+            doc.Add(new iTextSharp.text.Paragraph("Aktywnych uzytkownikow: " + activeUsers));
+            doc.Add(new iTextSharp.text.Paragraph("Ksiazek w bibliotece na dzien dzisiejszy: " + numberOfBooksInLibrary));
+            doc.Add(new iTextSharp.text.Paragraph("Zatrudnionych bibliotekarzy w bibliotece na dzien dzisiejszy: " + numberOfLibrarians));
             //if (activeCustomers != 0)
             //{
             //    PdfPTable tablee = new PdfPTable(1);

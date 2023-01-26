@@ -208,7 +208,7 @@ namespace SystemBiblioteczny.Methods
             return s1;
         }
 
-        public int GetNumberOfRentals(int libraryId, DateTime? selectedDate1, DateTime? selectedDate2)
+        internal int GetNumberOfRentals(int libraryId, DateTime? selectedDate1, DateTime? selectedDate2)
         {
             if (selectedDate1 == null) selectedDate1 = DateTime.MinValue;
             if (selectedDate2 == null) selectedDate2 = DateTime.Now;
@@ -238,6 +238,86 @@ namespace SystemBiblioteczny.Methods
                     counter++;
             }
             return counter;
+        }
+
+        internal int GetNumberOfBooksInLibrary(int libraryId)
+        {
+            Books a = new();
+            List<Book> AllBooksList = a.GetBooksList();
+            int BooksCount = 0;
+            for (int i = 0; i < AllBooksList.Count; i++)
+            {
+                if (AllBooksList[i].Id_Library == libraryId)
+                {
+                    BooksCount++;
+                }
+            }
+            return BooksCount;
+        }
+
+        internal int GetNumberOfLibrarians(int libraryId)
+        {
+            List<Librarian> AllLibrarians = accountModel.GetLibrarianList();
+            int allLibrans = 0;
+            for (int i = 0; i < AllLibrarians.Count; i++)
+            {
+                Librarian librarian = AllLibrarians[i];
+                if (librarian.LibraryId == libraryId)
+                {
+                    allLibrans++;
+                }
+            }
+            return allLibrans;
+        }
+
+        internal int GetNumberOfEvents(int libraryId, DateTime? selectedDate1, DateTime? selectedDate2)
+        {
+            if (selectedDate1 == null) selectedDate1 = DateTime.MinValue;
+            if (selectedDate2 == null) selectedDate2 = DateTime.Now;
+            AuthorsEvenings evenings = new();
+            List<AuthorsEvening> AuthorEvenings = evenings.GetEventList();
+            int AllAuthorEvenings = 0;
+            for (int i = 0; i < AuthorEvenings.Count; i++)
+            {
+                AuthorsEvening f = AuthorEvenings[i];
+                if (f.LibraryID == libraryId && f.Date >= selectedDate1 && f.Date <= selectedDate2)
+                {
+                    AllAuthorEvenings++;
+                }
+
+            }
+            return AllAuthorEvenings;
+        }
+
+        internal int GetNumberOfActiveUsers(int libraryId, DateTime? selectedDate1, DateTime? selectedDate2)
+        {
+            if (selectedDate1 == null) selectedDate1 = DateTime.MinValue;
+            if (selectedDate2 == null) selectedDate2 = DateTime.Now;
+            List<string> list = accountModel.GetListOfDataBaseLines("BookHistory");
+            List<string> userList = new();
+            userList.Add("");
+            int AllActiveClients = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                string line = list[i];
+                string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                int libId = int.Parse(splitted[1]);
+                string user = splitted[4];
+                DateTime rentalDate = DateTime.Parse(splitted[5]);
+                if (libId == libraryId && rentalDate >= selectedDate1 && rentalDate <= selectedDate2)
+                {
+                    for (int j = 0; j < userList.Count; j++)
+                    {
+                        if (userList[j].CompareTo(user) != 0)
+                        {
+                            AllActiveClients++;
+                            userList.Add(user);
+                        }
+                    }
+                }
+
+            }
+            return AllActiveClients;
         }
     }
 }
