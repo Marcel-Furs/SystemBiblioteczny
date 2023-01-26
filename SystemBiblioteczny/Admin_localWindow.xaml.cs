@@ -673,34 +673,7 @@ namespace SystemBiblioteczny
             doc.Add(new iTextSharp.text.Paragraph("Aktywnych uzytkownikow: " + activeUsers));
             doc.Add(new iTextSharp.text.Paragraph("Ksiazek w bibliotece na dzien dzisiejszy: " + numberOfBooksInLibrary));
             doc.Add(new iTextSharp.text.Paragraph("Zatrudnionych bibliotekarzy w bibliotece na dzien dzisiejszy: " + numberOfLibrarians));
-            //if (activeCustomers != 0)
-            //{
-            //    PdfPTable tablee = new PdfPTable(1);
-            //    tablee.WidthPercentage = 100;
-            //    tablee.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów w zakresie: " + chosenStartDate + " - " + chosenEndDate + ": ")));
-            //    tablee.AddCell(new iTextSharp.text.Paragraph(activeCustomers.ToString()));
-            //    doc.Add(tablee);
-            //    doc.Close();
-            //}
-            //else
-            //{
-            //    PdfPTable table = new PdfPTable(6);
-            //    table.AddCell(new PdfPCell(new Phrase("Liczba ksiazek")));
-            //    table.AddCell(new PdfPCell(new Phrase("Liczba wypozyczonych ksiazek")));
-            //    table.AddCell(new PdfPCell(new Phrase("Liczba klientów")));
-            //    table.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów")));
-            //    table.AddCell(new PdfPCell(new Phrase("Liczba bibliotekarzy")));
-            //    table.AddCell(new PdfPCell(new Phrase("Liczba wieczorków autorskich")));
-
-            //    table.AddCell(new iTextSharp.text.Paragraph(BooksCount.ToString()));
-            //    table.AddCell(new iTextSharp.text.Paragraph(ReservedBooksCount.ToString()));
-            //    table.AddCell(new iTextSharp.text.Paragraph(AllClients.ToString()));
-            //    table.AddCell(new iTextSharp.text.Paragraph(AllActiveClients.ToString()));
-            //    table.AddCell(new iTextSharp.text.Paragraph(allLibrans.ToString()));
-            //    table.AddCell(new iTextSharp.text.Paragraph(AllAuthorEvenings.ToString()));
-            //    doc.Add(table);
-            //    doc.Close();
-            //}
+            
             doc.Close();
             MessageBox.Show("Utworzono raport w folderze raporty na pulpicie.");
         }

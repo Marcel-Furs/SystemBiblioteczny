@@ -96,7 +96,7 @@
                     <Label Content="Data początkowa:" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top"/>
                     <Label Content="Data końcowa:" HorizontalAlignment="Left" Margin="67,133,0,0" VerticalAlignment="Top"/>
                     <Label Content="Jeśli pozostawisz puste daty raport będzie obejmował wszystkie statystyki" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top"/>
-                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="67,260,0,0" VerticalAlignment="Top" Height="54" Width="90" Click="Button_Click"/>
+                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="67,260,0,0" VerticalAlignment="Top" Height="54" Width="90" Click="GenerateRaport"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Ustawienia">
