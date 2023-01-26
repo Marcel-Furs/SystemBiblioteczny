@@ -19,6 +19,10 @@ namespace SystemBiblioteczny.Models
             this.Phone = Phone;
         }
 
+        public NetworkAdmin()
+        {
+        }
+
         public void AddLibrary(Library library) {
             Libraries lib = new Libraries();
             lib.AddLibraryToDB(library);

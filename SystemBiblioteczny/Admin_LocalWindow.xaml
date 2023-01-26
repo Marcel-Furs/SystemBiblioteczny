@@ -11,7 +11,11 @@
         <TabControl>
             <TabItem Header="Wieczorki Autorskie">
                 <Grid Background="#FFF5EBD8">
-                    <DataGrid x:Name="AuthorsEvnings" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="574" Height="387" Margin="7,5,0,0" IsReadOnly="true">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="82*"/>
+                        <ColumnDefinition Width="77*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="AuthorsEvnings" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="574" Height="387" Margin="7,5,0,0" IsReadOnly="true" Grid.ColumnSpan="2">
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="Background" Value="#FFCCA2DC"/>
@@ -29,8 +33,8 @@
                             <DataGridTextColumn Header ="Numer Telefonu" Binding="{Binding PhoneNumber}" Width="90"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Content="Zatwierdź" HorizontalAlignment="Left" Margin="630,47,0,0" VerticalAlignment="Top" Height="42" Width="105" Click="Approve_button"/>
-                    <Button Content="Odrzuć" HorizontalAlignment="Left" Margin="630,119,0,0" VerticalAlignment="Top" Height="42" Width="105" Click="Reject_button"/>
+                    <Button Content="Zatwierdź" HorizontalAlignment="Left" Margin="220,47,0,0" VerticalAlignment="Top" Height="42" Width="105" Click="Approve_button" Grid.Column="1"/>
+                    <Button Content="Odrzuć" HorizontalAlignment="Left" Margin="220,119,0,0" VerticalAlignment="Top" Height="42" Width="105" Click="Reject_button" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Nowe książki">
@@ -110,7 +114,12 @@
             </TabItem>
             <TabItem Header="Wygeneruj raport">
                 <Grid Background="#FFF5EBD8">
-                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="75,129,0,0" VerticalAlignment="Top" Height="54" Width="89" Click="Button_Click"/>
+                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="67,260,0,0" VerticalAlignment="Top" Height="54" Width="90" Click="Button_Click"/>
+                    <DatePicker x:Name="startDatePicker" HorizontalAlignment="Left" Margin="67,83,0,0" VerticalAlignment="Top"/>
+                    <DatePicker x:Name="endDatePicker" HorizontalAlignment="Left" Margin="67,186,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Data początkowa:" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Data końcowa:" HorizontalAlignment="Left" Margin="67,133,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Jeśli pozostawisz puste daty raport będzie obejmował wszystkie statystyki" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Zarządzaj uprawnieniami">

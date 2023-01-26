@@ -9,6 +9,10 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Reflection.Metadata;
 using Org.BouncyCastle.Asn1.X509.SigI;
+using MahApps.Metro.Controls;
+using System.Globalization;
+using System.Windows.Documents;
+using iTextSharp.text.xml;
 
 namespace SystemBiblioteczny
 {
@@ -30,6 +34,7 @@ namespace SystemBiblioteczny
         private string titleFromGui = "";
         public Admin_LocalWindow(LocalAdmin userData)
         {
+            
             InitializeComponent();
 
             base.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -555,9 +560,39 @@ namespace SystemBiblioteczny
             }
         }
 
+
+
+        
+
+
+
+
+
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // ilosc ksiazek w bibliotece
+            DateTime? chosenStartDate = startDatePicker.SelectedDate;
+            DateTime? chosenEndDate = endDatePicker.SelectedDate;
+            int activeCustomers = 0;
+            using (StreamReader reader = new StreamReader("../../../DataBases/BookHistory.txt"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(' ');
+                    DateTime startDate = DateTime.ParseExact(parts[3], "MM.dd.yyyy", CultureInfo.InvariantCulture);
+                    DateTime endDate = DateTime.ParseExact(parts[4], "MM.dd.yyyy", CultureInfo.InvariantCulture);
+                    if (chosenStartDate != null && chosenEndDate != null || (startDate >= chosenStartDate && endDate <= chosenEndDate))
+                    {
+                        activeCustomers++;
+                    }
+                }
+            
+            }
+
+
+            // ilosc ksiazek w danej bibliotece 
             Books a = new();
             List<Book> AllBooksList = a.GetBooksList();
             int BooksCount = 0;
@@ -569,23 +604,30 @@ namespace SystemBiblioteczny
                 }
             }
 
-            // ilosc wypozyczen
+            // ilosc wypozyczen w danej bibliotece
+            AccountBase history = new();
             BooksReserved b = new();
             List<BookReserved> AllBooksReservedList = b.GetReservedBooksList();
+            List<string> listHistory = history.GetListOfDataBaseLines("BookHistory");
             int ReservedBooksCount = 0;
             for(int i=0; i < AllBooksReservedList.Count; i++)
             {
-                if (AllBooksReservedList[i].Availability == true || AllBooksList[i].Availability == true)
+                if (AllBooksReservedList[i].Availability == true)
                 {
                     ReservedBooksCount++;
                 }
             }
+            for (int j = 0; j < listHistory.Count; j++)
+            {
+                ReservedBooksCount++;
+            }
+
 
             // ilosc zarejestrowanych klientow
             AccountBase c = new();
             int AllClients = c.GetClientList().Count;
 
-            // ilosc aktywnych klientow
+            // ilosc aktywnych klientow w danej bibliotece
             List<string> list = c.GetListOfDataBaseLines("BookHistory");
             List<string> userList = new();
             userList.Add("");
@@ -611,7 +653,7 @@ namespace SystemBiblioteczny
             }
 
 
-            // ilosc bibliotekarzy
+            // ilosc bibliotekarzy w danej bibliotece
             List<Librarian> AllLibrarians= c.GetLibrarianList();
             int allLibrans = 0;
             for(int i=0;i<AllLibrarians.Count;i++)
@@ -624,31 +666,74 @@ namespace SystemBiblioteczny
             }
 
 
-            // ilosc wieczorkow autorskich
+            // ilosc wieczorkow autorskich w danej bibliotece
             AuthorsEvenings evenings = new();
             List<AuthorsEvening> AuthorEvenings = evenings.GetEventList();
             int AllAuthorEvenings = 0;
             for(int i = 0; i < AuthorEvenings.Count; i++)
             {
                 AuthorsEvening f = AuthorEvenings[i];
-                if (f.LibraryID == localAdmin.LibraryId) AllAuthorEvenings++;
+                if (f.LibraryID == localAdmin.LibraryId)
+                {
+                    AllAuthorEvenings++;
+                }
                 
             }
 
+            
 
 
 
-            using (FileStream fs = new FileStream(@"../../../DataBases/Raport.pdf", FileMode.Create))
+            string currentDateTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            string fileName = "raport-id-" + localAdmin.LibraryId + "-" + localAdmin.UserName + "-" + currentDateTime + ".pdf";
+            string path = @"../../../Raporty/" + fileName;
+
+            if(!Directory.Exists("../../../Raporty/"))
             {
-                iTextSharp.text.Document doc = new iTextSharp.text.Document();
-                PdfWriter.GetInstance(doc, fs);
+                Directory.CreateDirectory("../../../Raporty/");
+            }
+
+            iTextSharp.text.Document doc = new iTextSharp.text.Document();
+            PdfWriter.GetInstance(doc, new FileStream(path,FileMode.Create));
+
                 doc.Open();
-                doc.Add(new Paragraph(BooksCount.ToString()));
-                doc.Add(new Paragraph(ReservedBooksCount.ToString()));
-                doc.Add(new Paragraph(AllClients.ToString()));
-                doc.Add(new Paragraph(AllActiveClients.ToString()));
-                doc.Add(new Paragraph(allLibrans.ToString()));
-                doc.Add(new Paragraph(AllAuthorEvenings.ToString()));
+
+            string textFile = "ListofBookstxt.png";
+            string textFilePath = Path.Combine(@"../../../DataBases/", textFile);
+            if (activeCustomers != 0)
+            {
+                PdfPTable tablee = new PdfPTable(1);
+                tablee.WidthPercentage = 100;
+                tablee.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów w zakresie: " + chosenStartDate + " - " + chosenEndDate + ": ")));
+                tablee.AddCell(new iTextSharp.text.Paragraph(activeCustomers.ToString()));
+                doc.Add(tablee);
+                iTextSharp.text.Image tXt = iTextSharp.text.Image.GetInstance(textFilePath);
+                tXt.SetAbsolutePosition(0, 0);
+                tXt.ScaleToFit(13, 13);
+                doc.Add(tXt);
+                doc.Close();
+            }
+            else
+            {
+                PdfPTable table = new PdfPTable(6);
+                table.AddCell(new PdfPCell(new Phrase("Liczba ksiazek")));
+                table.AddCell(new PdfPCell(new Phrase("Liczba wyporzyczonych ksiazek")));
+                table.AddCell(new PdfPCell(new Phrase("Liczba klientów")));
+                table.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów")));
+                table.AddCell(new PdfPCell(new Phrase("Liczba bibliotekarzy")));
+                table.AddCell(new PdfPCell(new Phrase("Liczba wieczorków autorskich")));
+
+                table.AddCell(new iTextSharp.text.Paragraph(BooksCount.ToString()));
+                table.AddCell(new iTextSharp.text.Paragraph(ReservedBooksCount.ToString()));
+                table.AddCell(new iTextSharp.text.Paragraph(AllClients.ToString()));
+                table.AddCell(new iTextSharp.text.Paragraph(AllActiveClients.ToString()));
+                table.AddCell(new iTextSharp.text.Paragraph(allLibrans.ToString()));
+                table.AddCell(new iTextSharp.text.Paragraph(AllAuthorEvenings.ToString()));
+                doc.Add(table);
+                iTextSharp.text.Image tXt = iTextSharp.text.Image.GetInstance(textFilePath);
+                tXt.SetAbsolutePosition(0, 0);
+                tXt.ScaleToFit(13, 13);
+                doc.Add(tXt);
                 doc.Close();
             }
             MessageBox.Show("Utworzono raport.");
