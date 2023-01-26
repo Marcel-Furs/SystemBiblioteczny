@@ -1,4 +1,6 @@
-﻿namespace SystemBiblioteczny
+﻿using System;
+
+namespace SystemBiblioteczny
 {
     public class Book
     {
@@ -15,6 +17,28 @@
             Title = title;
             Availability = availability;
             Id_Library = id_Library;
+        }
+        public Book(Book book)
+        {
+            string newTitle = "";
+            string newAuthor = "";
+            string[] splittedTitle = book.Title.Split("_", StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < splittedTitle.Length; i++)
+            {
+                newTitle = newTitle + splittedTitle[i] + " ";
+            }
+            string[] splittedAuthor = book.Author.Split("_", StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < splittedAuthor.Length; i++)
+            {
+                newAuthor = newAuthor + splittedAuthor[i] + " ";
+            }
+
+            Id_Book = book.Id_Book;
+            Author = newAuthor;
+            Title = newTitle;
+            Availability = book.Availability;
+            Id_Library = book.Id_Library;
+
         }
 
         public Book()

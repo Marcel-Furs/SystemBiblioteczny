@@ -69,7 +69,8 @@ namespace SystemBiblioteczny
         private void OptAvailability_Checked(object sender, RoutedEventArgs e)
         {
             Books books = new();
-            List<Book> listofBooks = books.GetBooksList();
+            List<Book> listofBooks = new();
+            foreach (Book b in books.GetBooksList()) listofBooks.Add(new(b));
             TableBooks.Items.Clear();
             if (OptAvailability.IsChecked == true)
             {
@@ -83,7 +84,8 @@ namespace SystemBiblioteczny
         private void OptAll_Checked(object sender, RoutedEventArgs e)
         {
             Books books = new();
-            List<Book> listofBooks = books.GetBooksList();
+            List<Book> listofBooks = new();
+            foreach (Book b in books.GetBooksList()) listofBooks.Add(new(b));
             TableBooks.Items.Clear();
             if (OptAll.IsChecked == true)
             {
@@ -103,7 +105,7 @@ namespace SystemBiblioteczny
             Books books = new();
             List<Book> listofBooks = books.GetBooksList();
             bool info = false;
-
+            Find1.Text = Find1.Text.Replace(" ", "_");
             for (int i = 0; i < listofBooks.Count; i++)
             {
                 if (listofBooks[i].Author == Find1.Text)
@@ -113,6 +115,20 @@ namespace SystemBiblioteczny
                     var find = listofBooks.Where(x => x.Author == Find1.Text).ToList();
                     find.ForEach(x =>
                     {
+                        string newTitle = "";
+                        string newAuthor = "";
+                        string[] splittedTitle = x.Title.Split("_");
+                        for (int i = 0; i < splittedTitle.Length; i++)
+                        {
+                            newTitle = newTitle + splittedTitle[i] + " ";
+                        }
+                        string[] splittedAuthor = x.Author.Split("_");
+                        for (int i = 0; i < splittedAuthor.Length; i++)
+                        {
+                            newAuthor = newAuthor + splittedAuthor[i] + " ";
+                        }
+                        x.Author = newAuthor;
+                        x.Title = newTitle;
                         TableBooks.Items.Add(x);
 
                     });
@@ -124,10 +140,25 @@ namespace SystemBiblioteczny
                     var find1 = listofBooks.Where(x => x.Title == Find1.Text).ToList();
                     find1.ForEach(x =>
                     {
+                        string newTitle = "";
+                        string newAuthor = "";
+                        string[] splittedTitle = x.Title.Split("_");
+                        for (int i = 0; i < splittedTitle.Length; i++)
+                        {
+                            newTitle = newTitle + splittedTitle[i] + " ";
+                        }
+                        string[] splittedAuthor = x.Author.Split("_");
+                        for (int i = 0; i < splittedAuthor.Length; i++)
+                        {
+                            newAuthor = newAuthor + splittedAuthor[i] + " ";
+                        }
+                        x.Author = newAuthor;
+                        x.Title = newTitle;
                         TableBooks.Items.Add(x);
                     });
                 }
             }
+            Find1.Text = Find1.Text.Replace("_", " ");
             if (info == false) { MessageBox.Show("Nie istnieje taki autor bądź tytuł w bazie danych"); }
         }
 
@@ -212,7 +243,7 @@ namespace SystemBiblioteczny
             BookReserved bookRe = new();
             BooksReserved booksR = new();
 
-            string czas= DateTime.Now.ToString("dd/MM/yyyy");
+            string czas = DateTime.Now.ToString("dd/MM/yyyy");
 
             //Book book = new();
             // book = (Book)TableBooks.SelectedItem;
@@ -272,7 +303,8 @@ namespace SystemBiblioteczny
         {
             TableBooks.Items.Clear();
             Books books = new();
-            List<Book> listofBooks = books.GetBooksList();
+            List<Book> listofBooks = new();
+            foreach (Book b in books.GetBooksList()) listofBooks.Add(new(b));
             var listOfBooks1 = listofBooks.Where(x => x.Id_Library != 0).ToList();
             listOfBooks1.ForEach(x =>
             {
@@ -281,7 +313,8 @@ namespace SystemBiblioteczny
 
             TableBooks1.Items.Clear();
             BooksReserved booksR = new();
-            List<BookReserved> listofBooksR = booksR.GetReservedBooksList();
+            List<BookReserved> listofBooksR = new();
+            foreach (BookReserved b in booksR.GetReservedBooksList()) listofBooksR.Add(new(b));
             var listofBooksRAccepted = listofBooksR.Where(x => x.Availability == true && loggedUser.UserName == x.UserName).ToList();
             listofBooksRAccepted.ForEach(x =>
             {
@@ -315,7 +348,8 @@ namespace SystemBiblioteczny
         {
             userNameClient.Content = name;
             BooksHistory bookH = new();
-            List<BookHistory> list = bookH.GetHistoredBooksList();
+            List<BookHistory> list = new();
+            foreach (BookHistory b in bookH.GetHistoredBooksList()) list.Add(new(b));
             List<BookHistory> listHistoryBook = list.Where(x => x.UserName == name).ToList();
             listHistoryBook.ForEach(x =>
             {

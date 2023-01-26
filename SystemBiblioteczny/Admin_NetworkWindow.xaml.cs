@@ -1,8 +1,6 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Net.Mail;
 using System.Windows;
@@ -349,7 +347,8 @@ namespace SystemBiblioteczny
             doc.Add(new iTextSharp.text.Paragraph("Ksiazek na dzien dzisiejszy: " + listOfBooks.Count));
             doc.Add(new iTextSharp.text.Paragraph("Zatrudnionych bibliotekarzy na dzien dzisiejszy: " + listOfLibrarians.Count));
 
-            for (int i = 0; i < list.Count; i++) {
+            for (int i = 0; i < list.Count; i++)
+            {
                 int numberOfRentals = loginMethod.GetNumberOfRentals(i, startDatePicker.SelectedDate, endDatePicker.SelectedDate);
                 int numberOfBooksInLibrary = loginMethod.GetNumberOfBooksInLibrary(i);
                 int numberOfLibrarians = loginMethod.GetNumberOfLibrarians(i);

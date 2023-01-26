@@ -82,7 +82,8 @@ namespace SystemBiblioteczny
 
         void RefreshTableApprovedApplicationsData()
         {
-            List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
+            List<ApplicationBook> listofApplicationBooks = new();
+            foreach (ApplicationBook b in applicationBookModel.GetApplicationBooksList()) listofApplicationBooks.Add(new(b));
 
             ApprovedApplicationsTable.Items.Clear();
             for (int i = 0; i < listofApplicationBooks.Count; i++)
@@ -247,7 +248,8 @@ namespace SystemBiblioteczny
         {
             TableRentBook.Items.Clear();
             BooksReserved books = new();
-            List<BookReserved> listofBooks = books.GetReservedBooksList();
+            List<BookReserved> listofBooks = new();
+            foreach (BookReserved b in books.GetReservedBooksList()) listofBooks.Add(new(b));
             var listofBooksR = listofBooks.Where(x => x.Id_Library == librarianModel.LibraryId && x.Availability == false).ToList();
             var listofBooksSort = listofBooksR.OrderBy(x => x.Id_Book).ToList();
             listofBooksSort.ForEach(x =>

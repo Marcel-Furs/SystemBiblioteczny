@@ -23,6 +23,28 @@ namespace SystemBiblioteczny.Models
             this.Approved = approved;
 
         }
+        public ApplicationBook(ApplicationBook book)
+        {
+            string newTitle = "";
+            string newAuthor = "";
+            string[] splittedTitle = book.Title.Split("_", StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < splittedTitle.Length; i++)
+            {
+                newTitle = newTitle + splittedTitle[i] + " ";
+            }
+            string[] splittedAuthor = book.Author.Split("_", StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < splittedAuthor.Length; i++)
+            {
+                newAuthor = newAuthor + splittedAuthor[i] + " ";
+            }
+            Quantity = book.Quantity;
+            Librarian = book.Librarian;
+            Approved = book.Approved;
+            ID = book.ID;
+            Author = newAuthor;
+            Title = newTitle;
+
+        }
 
         public ApplicationBook()
         {

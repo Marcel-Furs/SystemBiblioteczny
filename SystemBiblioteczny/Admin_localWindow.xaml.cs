@@ -1,25 +1,12 @@
-﻿using iTextSharp.text;
-using iTextSharp.text.pdf;
+﻿using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using SystemBiblioteczny.Methods;
 using SystemBiblioteczny.Models;
-
-using iTextSharp.text; 
-using iTextSharp.text.pdf;
-using System.Reflection.Metadata;
-using Org.BouncyCastle.Asn1.X509.SigI;
-using MahApps.Metro.Controls;
-using System.Globalization;
-using System.Windows.Documents;
-using iTextSharp.text.xml;
-using System.Net.Mail;
-using SystemBiblioteczny.Methods;
 
 namespace SystemBiblioteczny
 {
@@ -200,9 +187,10 @@ namespace SystemBiblioteczny
         }
         void RefreshTableData()
         {
-            List<BookExchange> listofExchangeBooks = bookExchangeModel.GetExchangeBooksList();
-            List<Book> listofBooks = bookModel.GetBooksList();
-
+            List<BookExchange> listofExchangeBooks = new();
+            foreach (BookExchange b in bookExchangeModel.GetExchangeBooksList()) listofExchangeBooks.Add(new(b));
+            List<Book> listofBooks = new();
+            foreach (Book b in bookModel.GetBooksList()) listofBooks.Add(new(b));
             TableExchangeBooks.Items.Clear();
             TableBooks.Items.Clear();
 
@@ -222,8 +210,8 @@ namespace SystemBiblioteczny
 
         void RefreshTableApplicationsData()
         {
-
-            List<ApplicationBook> listofApplicationBooks = applicationBookModel.GetApplicationBooksList();
+            List<ApplicationBook> listofApplicationBooks = new();
+            foreach (ApplicationBook b in applicationBookModel.GetApplicationBooksList()) listofApplicationBooks.Add(new(b));
             int libID = 0;
             NewApplicationsData.Items.Clear();
             for (int i = 0; i < listofApplicationBooks.Count; i++)
@@ -232,14 +220,14 @@ namespace SystemBiblioteczny
                 if (book.Approved.CompareTo(false) == 0)
                 {
                     List<Librarian> librarians = accountModel.GetLibrarianList();
-                    for(int j = 0; j<librarians.Count;j++)
+                    for (int j = 0; j < librarians.Count; j++)
                     {
-                        if (librarians[j].UserName!.CompareTo(listofApplicationBooks[i].Librarian) == 0) libID = librarians[j].LibraryId ;
+                        if (librarians[j].UserName!.CompareTo(listofApplicationBooks[i].Librarian) == 0) libID = librarians[j].LibraryId;
                     }
-                    
-                    if(libID.CompareTo(localAdmin.LibraryId) == 0) NewApplicationsData.Items.Add(book);
+
+                    if (libID.CompareTo(localAdmin.LibraryId) == 0) NewApplicationsData.Items.Add(book);
                 }
-                
+
             }
 
             NewApplicationsData.IsReadOnly = true;
@@ -646,7 +634,7 @@ namespace SystemBiblioteczny
             int AllClients = c.GetClientList().Count;
 
             // ilosc aktywnych klientow w danej bibliotece
-            
+
 
 
 
@@ -669,7 +657,7 @@ namespace SystemBiblioteczny
             PdfWriter.GetInstance(doc, new FileStream(path1, FileMode.Create));
 
             doc.Open();
-            doc.Add(new iTextSharp.text.Paragraph("Autor: " + localAdmin.FirstName + " " + localAdmin.LastName)); 
+            doc.Add(new iTextSharp.text.Paragraph("Autor: " + localAdmin.FirstName + " " + localAdmin.LastName));
             doc.Add(new iTextSharp.text.Paragraph("Biblioteka: " + localAdmin.LibraryId));
             doc.Add(new iTextSharp.text.Paragraph("Data utworzenia: " + DateTime.Now.ToString("yyyy-MM-dd")));
             doc.Add(new iTextSharp.text.Paragraph("Zakres raportu od: " + dateFrom));
@@ -680,7 +668,7 @@ namespace SystemBiblioteczny
             doc.Add(new iTextSharp.text.Paragraph("Aktywnych uzytkownikow: " + activeUsers));
             doc.Add(new iTextSharp.text.Paragraph("Ksiazek w bibliotece na dzien dzisiejszy: " + numberOfBooksInLibrary));
             doc.Add(new iTextSharp.text.Paragraph("Zatrudnionych bibliotekarzy w bibliotece na dzien dzisiejszy: " + numberOfLibrarians));
-            
+
             doc.Close();
             MessageBox.Show("Utworzono raport w folderze raporty na pulpicie.");
         }

@@ -15,7 +15,6 @@ namespace SystemBiblioteczny
             for (int i = 0; i < lines.Count; i++)
             {
                 string line = lines[i];
-
                 string[] splitted = line.Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
 
                 int newId = int.Parse(splitted[0]);

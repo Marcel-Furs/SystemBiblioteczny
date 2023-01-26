@@ -19,6 +19,28 @@ namespace SystemBiblioteczny.Models
             Title = title;
             Id_Library = id_Library;
         }
+        public BookExchange(BookExchange book)
+        {
+            string newTitle = "";
+            string newAuthor = "";
+            string[] splittedTitle = book.Title.Split("_", StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < splittedTitle.Length; i++)
+            {
+                newTitle = newTitle + splittedTitle[i] + " ";
+            }
+            string[] splittedAuthor = book.Author.Split("_", StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < splittedAuthor.Length; i++)
+            {
+                newAuthor = newAuthor + splittedAuthor[i] + " ";
+            }
+            ExchangeId = book.ExchangeId;
+            RequestorUsername = book.RequestorUsername;
+            Id_Book = book.Id_Book;
+            Author = newAuthor;
+            Title = newTitle;
+            Id_Library = book.Id_Library;
+
+        }
         public BookExchange()
         {
 
