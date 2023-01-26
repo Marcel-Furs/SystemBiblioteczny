@@ -2,8 +2,6 @@ macibol 1234 Maci Bol macibol@polsl.pl 997
 zawada 1234 Toma Zaw tomazaw@brak.zasad 999
 ptasniemiec 1234 Wojt Pta wojtpta@polsl.de 112
 klient klient test test test@test 555
-admin admin admin admin admin@admin 7776
-szczurwysyn szczuras1 Grzesiu Kolędra szczurwysyn@gmail.com 213742069
 jankoc 1234 Jan Koc jankoc@polsl.pl 998
 porada porada Marcel Porada porada@op.pl 223
 kamper kamper Kuba Kamper kamper@gmail.com 556
