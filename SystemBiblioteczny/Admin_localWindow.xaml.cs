@@ -517,6 +517,7 @@ namespace SystemBiblioteczny
             List<Librarian> librarians = accountModel.GetLibrarianList();
             foreach (Librarian l in librarians)
             {
+                if (l.LibraryId == localAdmin.LibraryId)
                 Person_Table.Items.Add(l);
             }
             Person_Table.IsReadOnly = true;
@@ -547,15 +548,11 @@ namespace SystemBiblioteczny
                 if (list[i].UserName!.CompareTo(UserNameTextBox.Text) == 0)
                 {
                     info = true;
-                    if (IdLibraryLabel.Text == "") MessageBox.Show("Proszę wpisać poprawne id");
-                    else
-                    {
-                        int newLibId = int.Parse(IdLibraryLabel.Text);
+                        int newLibId = localAdmin.LibraryId;
                         Librarian librarian = new(list[i].UserName!, list[i].Password!, list[i].FirstName!, list[i].LastName!, list[i].Email!, newLibId, list[i].Phone!);
                         accountModel.AddLibrarianToListAndDeleteFromClients(librarian);
                         MessageBox.Show("Nadano uprawnienia");
                         ShowLibrarianListMethod();
-                    }
 
                 }
             }
@@ -603,15 +600,6 @@ namespace SystemBiblioteczny
 
             if (info == false) MessageBox.Show("Nie istnieje osoba o podanej nazwie");
 
-        }
-
-        private void IdLibraryLabel_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(IdLibraryLabel.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Proszę wpisać numer.");
-                IdLibraryLabel.Text = IdLibraryLabel.Text.Remove(IdLibraryLabel.Text.Length - 1);
-            }
         }
 
         private void GenerateRaport(object sender, RoutedEventArgs e)

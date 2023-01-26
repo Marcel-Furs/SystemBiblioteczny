@@ -6,3 +6,4 @@
 6 Fale_Ciemności Aaron_Rosenberg 4 enpecet True
 7 Krew_elfów Andrzej_Sapkowski 4 ptasniemiec3 False
 8 Władca_Pierścieni Tolkien 3 macibol2 False
+9 test test 12 biblio False

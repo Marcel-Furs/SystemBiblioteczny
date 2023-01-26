@@ -339,8 +339,8 @@ namespace SystemBiblioteczny
             AuthorsEvening evening = new();
             evening = (AuthorsEvening)AuthorsEvenings.SelectedItem;
             AuthorsEvenings evenings = new();
-            //List<AuthorsEvening> list = evenings.GetEventList();
-            // if(evening != null) evenings.RemoveFromList(evening);
+            List<AuthorsEvening> list = evenings.GetEventList();
+            if(evening != null) evenings.RemoveFromList(evening);
             LoadEventData();
         }
 

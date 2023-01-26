@@ -15,7 +15,7 @@
                         <ColumnDefinition Width="82*"/>
                         <ColumnDefinition Width="77*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="AuthorsEvnings" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="574" Height="382" Margin="7,10,0,0" IsReadOnly="true" Grid.ColumnSpan="2">
+                    <DataGrid x:Name="AuthorsEvnings" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="574" Height="361" Margin="7,10,0,0" IsReadOnly="true" Grid.ColumnSpan="2">
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="Background" Value="#FFCCA2DC"/>
@@ -40,11 +40,11 @@
             <TabItem Header="Nowe książki">
                 <Grid Background="#FFF5EBD8">
                     <Grid>
-                        <DataGrid x:Name="NewApplicationsData" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="784" Height="295" Margin="0,9,0,0" >
+                        <DataGrid x:Name="NewApplicationsData" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="660" Height="295" Margin="0,9,0,0" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="160"/>
-                                <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="160"/>
-                                <DataGridTextColumn Header ="Ilość" Binding="{Binding Quantity}" Width="180"/>
+                                <DataGridTextColumn Header ="Tytuł" Binding="{Binding Title}" Width="170"/>
+                                <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="170"/>
+                                <DataGridTextColumn Header ="Ilość" Binding="{Binding Quantity}" Width="160"/>
                                 <DataGridTextColumn Header ="Bibliotekarz zamawiający" Binding="{Binding Librarian}" Width="150"/>
                             </DataGrid.Columns>
                             <DataGrid.Resources>
@@ -81,7 +81,7 @@
                             </Style>
                         </DataGrid.Resources>
                     </DataGrid>
-                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="317" Height="169" Margin="26,227,0,0" SelectionChanged="TableBooks_SelectionChanged" >
+                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="317" Height="160" Margin="26,227,0,0" SelectionChanged="TableBooks_SelectionChanged" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="20"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="80"/>
@@ -114,12 +114,12 @@
             </TabItem>
             <TabItem Header="Wygeneruj raport">
                 <Grid Background="#FFF5EBD8">
-                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="67,260,0,0" VerticalAlignment="Top" Height="54" Width="90" Click="GenerateRaport"/>
-                    <DatePicker x:Name="startDatePicker" HorizontalAlignment="Left" Margin="67,83,0,0" VerticalAlignment="Top"/>
-                    <DatePicker x:Name="endDatePicker" HorizontalAlignment="Left" Margin="67,186,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Data początkowa:" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Data końcowa:" HorizontalAlignment="Left" Margin="67,133,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Jeśli pozostawisz puste daty raport będzie obejmował wszystkie statystyki" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Generuj" HorizontalAlignment="Center" Margin="0,291,0,0" VerticalAlignment="Top" Height="39" Width="236" Click="GenerateRaport"/>
+                    <DatePicker x:Name="startDatePicker" HorizontalAlignment="Left" Margin="156,167,0,0" VerticalAlignment="Top" Height="33" Width="185" FontSize="18"/>
+                    <DatePicker x:Name="endDatePicker" HorizontalAlignment="Left" Margin="480,167,0,0" VerticalAlignment="Top" Height="33" Width="185" FontSize="18"/>
+                    <Label Content="Data początkowa:" HorizontalAlignment="Left" Margin="186,129,0,0" VerticalAlignment="Top" Height="36" Width="184" FontSize="16"/>
+                    <Label Content="Data końcowa:" HorizontalAlignment="Left" Margin="519,129,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <Label Content="Jeśli pozostawisz puste daty raport będzie obejmował wszystkie statystyki" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top" FontSize="16"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Zarządzaj uprawnieniami">
@@ -143,15 +143,13 @@
                             <DataGridTextColumn Header ="Nazwa użytkownika" Binding="{Binding UserName}" Width="140" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Imię" Binding="{Binding FirstName}" Width="110" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Nazwisko" Binding="{Binding LastName}" Width="110" IsReadOnly="True"/>
-                            <DataGridTextColumn Header ="Email" Binding="{Binding Email}" Width="120" IsReadOnly="True"/>
+                            <DataGridTextColumn Header ="Email" Binding="{Binding Email}" Width="110" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <TextBox x:Name="UserNameTextBox" HorizontalAlignment="Left" Margin="15,181,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" Height="24"/>
                     <Label Content="Podaj nazwę użytkownika" HorizontalAlignment="Left" Margin="62,156,0,0" VerticalAlignment="Top" Width="147" Height="26"/>
                     <Button Content="Nadaj uprawnienia bibliotekarza" HorizontalAlignment="Left" Margin="15,270,0,0" VerticalAlignment="Top" Height="35" Width="240" Click="MakeClientAnLibrarian"/>
                     <Button Content="Odbierz uprawnienia bibliotekarza" HorizontalAlignment="Left" Margin="15,320,0,0" VerticalAlignment="Top" Height="35" Width="240" Click="MakePersonAnClient"/>
-                    <Label Content="Podaj ID biblioteki" HorizontalAlignment="Left" Margin="83,206,0,0" VerticalAlignment="Top" Width="134" Height="26"/>
-                    <TextBox x:Name="IdLibraryLabel" HorizontalAlignment="Left" Margin="15,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" TextChanged="IdLibraryLabel_TextChanged" Height="24"/>
                     <Label x:Name="TabelaName" Content="" HorizontalAlignment="Left" Margin="271,5,0,0" VerticalAlignment="Top" Width="513"/>
 
                 </Grid>

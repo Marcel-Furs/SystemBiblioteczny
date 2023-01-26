@@ -35,7 +35,7 @@
 29 George_R.R_Martin Gra_o_Tron False 5
 30 George_R.R_Martin Gra_o_Tron False 3
 31 Agatha_Christie Morderstwo_w_Orient_Expressie True 4
-32 Agatha_Christie Morderstwo_w_Orient_Expressie False 4
+32 Agatha_Christie Morderstwo_w_Orient_Expressie True 4
 33 Agatha_Christie Morderstwo_w_Orient_Expressie True 5
 34 Dan_Brown Inferno False 5
 35 Dan_Brown Inferno False 5
@@ -80,7 +80,7 @@
 74 Michael_Crichton Jurassic_Park False 4
 75 Tom_Wolfe Electric_Kool-Aid_Acid_Test False 1
 76 Maya_Angelou I_Know_Why_the_Caged_Bird_Sings False 2
-77 Gabriel_Garcia_Marquez Love_in_the_Time_of_Cholera False 3
+77 Gabriel_Garcia_Marquez Love_in_the_Time_of_Cholera True 3
 78 Jack_Kerouac On_the_Road False 4
 79 Albert_Camus Człowiek_rewolwer True 1
 80 Chinua_Achebe Dzień_dobry,_dawno_nie_widzieliśmy_się False 2
@@ -114,7 +114,7 @@
 108 J_R_R_Tolkien The_Silmarillion False 5
 109 F_Scott_Fitzgerald Tender_is_the_Night True 3
 110 John_Steinbeck Of_Mice_and_Men False 5
-111 E_L_James Fifty_Shades_of_Grey True 1
+111 E_L_James Fifty_Shades_of_Grey False 1
 112 J_R_R_Tolkien The_Silmarillion False 2
 113 F_Scott_Fitzgerald Tender_is_the_Night True 3
 114 John_Steinbeck Of_Mice_and_Men False 4

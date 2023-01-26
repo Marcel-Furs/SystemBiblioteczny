@@ -13,7 +13,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="418" Height="376" SelectionChanged="TableBooks_SelectionChanged" Margin="10,0,0,0" >
+                    <DataGrid x:Name="TableBooks" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="418" Height="344" SelectionChanged="TableBooks_SelectionChanged" Margin="10,0,0,0" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header ="Id" Binding="{Binding Id_Book}" Width="40" IsReadOnly="True"/>
                             <DataGridTextColumn Header ="Autor" Binding="{Binding Author}" Width="120" IsReadOnly="True"/>
@@ -30,16 +30,16 @@
                         </DataGrid.Resources>
                     </DataGrid>
 
-                    <Label Content="Pokaż dostępne książki" HorizontalAlignment="Left" Margin="467,56,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="22"/>
+                    <Label Content="Pokaż dostępne książki" HorizontalAlignment="Left" Margin="534,65,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="16"/>
                     <RadioButton x:Name="OptAvailability" Content="" HorizontalAlignment="Left" Margin="734,73,0,0" VerticalAlignment="Top" Checked="OptAvailability_Checked"/>
-                    <Label Content="Pokaż wszystkie książki" HorizontalAlignment="Left" Margin="467,15,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="22" />
+                    <Label Content="Pokaż wszystkie książki" HorizontalAlignment="Left" Margin="535,24,0,0" VerticalAlignment="Top" Height="48" Width="241" FontSize="16" />
                     <RadioButton x:Name="OptAll" Content="" HorizontalAlignment="Left" Margin="734,32,0,0" VerticalAlignment="Top" Checked="OptAll_Checked"/>
-                    <TextBox x:Name="Find1" HorizontalAlignment="Left" Margin="558,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Find_TextChanged"/>
-                    <Label Content="Wyszukaj po tytule lub autorze:" HorizontalAlignment="Left" Margin="463,103,0,0" VerticalAlignment="Top" FontSize="20"/>
-                    <Button Content="Wyszukaj" HorizontalAlignment="Left" Margin="585,183,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.13" Width="66" FontSize="14" Click="Find"/>
-                    <Button Content="Zarezerwuj" HorizontalAlignment="Left" Margin="524,297,0,0" VerticalAlignment="Top" Height="53" Width="134" FontSize="20" Click="Book"/>
-                    <TextBox x:Name="RequestBookLabel"  HorizontalAlignment="Left" Margin="598,261,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" TextChanged="RequestBookLabel_TextChanged"/>
-                    <Label Content="Id ksiązki:" HorizontalAlignment="Left" Margin="524,257,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="Find1" HorizontalAlignment="Left" Margin="501,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Find_TextChanged"/>
+                    <Label Content="Wyszukaj po tytule lub autorze:" HorizontalAlignment="Left" Margin="498,110,0,0" VerticalAlignment="Top" FontSize="16"/>
+                    <Button Content="Wyszukaj" HorizontalAlignment="Left" Margin="649,151,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.13" Width="80" FontSize="14" Click="Find" Height="23"/>
+                    <Button Content="Zarezerwuj" HorizontalAlignment="Left" Margin="649,262,0,0" VerticalAlignment="Top" Height="23" Width="80" FontSize="14" Click="Book"/>
+                    <TextBox x:Name="RequestBookLabel"  HorizontalAlignment="Left" Margin="502,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="RequestBookLabel_TextChanged"/>
+                    <Label Content="Zarezerwój ksiązkę po ID:" HorizontalAlignment="Left" Margin="528,223,0,0" VerticalAlignment="Top" FontSize="16"/>
 
                 </Grid>
             </TabItem>
