@@ -1,5 +1,5 @@
 1 Adam_Mickiewicz Dziady_3 True 1
-2 Henryk_Sienkiewicz Potop False 2
+2 Henryk_Sienkiewicz Potop True 2
 3 Bolesław_Prus Kamizelka True 3
 4 Juliusz_Słowacki Kordian True 2
 5 Henryk_Sienkiewicz Krzyżacy True 2

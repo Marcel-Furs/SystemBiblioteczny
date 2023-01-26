@@ -560,17 +560,7 @@ namespace SystemBiblioteczny
             }
         }
 
-
-
-        
-
-
-
-
-
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void GenerateRaport(object sender, RoutedEventArgs e)
         {
             DateTime? chosenStartDate = startDatePicker.SelectedDate;
             DateTime? chosenEndDate = endDatePicker.SelectedDate;
@@ -612,7 +602,7 @@ namespace SystemBiblioteczny
             int ReservedBooksCount = 0;
             for(int i=0; i < AllBooksReservedList.Count; i++)
             {
-                if (AllBooksReservedList[i].Availability == true)
+                if (AllBooksReservedList[i].Availability == true && AllBooksReservedList[i].Id_Library == localAdmin.LibraryId)
                 {
                     ReservedBooksCount++;
                 }
@@ -698,8 +688,6 @@ namespace SystemBiblioteczny
 
                 doc.Open();
 
-            string textFile = "ListofBookstxt.png";
-            string textFilePath = Path.Combine(@"../../../DataBases/", textFile);
             if (activeCustomers != 0)
             {
                 PdfPTable tablee = new PdfPTable(1);
@@ -707,17 +695,13 @@ namespace SystemBiblioteczny
                 tablee.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów w zakresie: " + chosenStartDate + " - " + chosenEndDate + ": ")));
                 tablee.AddCell(new iTextSharp.text.Paragraph(activeCustomers.ToString()));
                 doc.Add(tablee);
-                iTextSharp.text.Image tXt = iTextSharp.text.Image.GetInstance(textFilePath);
-                tXt.SetAbsolutePosition(0, 0);
-                tXt.ScaleToFit(13, 13);
-                doc.Add(tXt);
                 doc.Close();
             }
             else
             {
                 PdfPTable table = new PdfPTable(6);
                 table.AddCell(new PdfPCell(new Phrase("Liczba ksiazek")));
-                table.AddCell(new PdfPCell(new Phrase("Liczba wyporzyczonych ksiazek")));
+                table.AddCell(new PdfPCell(new Phrase("Liczba wypozyczonych ksiazek")));
                 table.AddCell(new PdfPCell(new Phrase("Liczba klientów")));
                 table.AddCell(new PdfPCell(new Phrase("Liczba aktywnych klientów")));
                 table.AddCell(new PdfPCell(new Phrase("Liczba bibliotekarzy")));
@@ -730,10 +714,6 @@ namespace SystemBiblioteczny
                 table.AddCell(new iTextSharp.text.Paragraph(allLibrans.ToString()));
                 table.AddCell(new iTextSharp.text.Paragraph(AllAuthorEvenings.ToString()));
                 doc.Add(table);
-                iTextSharp.text.Image tXt = iTextSharp.text.Image.GetInstance(textFilePath);
-                tXt.SetAbsolutePosition(0, 0);
-                tXt.ScaleToFit(13, 13);
-                doc.Add(tXt);
                 doc.Close();
             }
             MessageBox.Show("Utworzono raport.");

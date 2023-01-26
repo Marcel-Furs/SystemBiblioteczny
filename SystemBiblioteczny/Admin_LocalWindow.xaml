@@ -114,7 +114,7 @@
             </TabItem>
             <TabItem Header="Wygeneruj raport">
                 <Grid Background="#FFF5EBD8">
-                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="67,260,0,0" VerticalAlignment="Top" Height="54" Width="90" Click="Button_Click"/>
+                    <Button Content="Generuj" HorizontalAlignment="Left" Margin="67,260,0,0" VerticalAlignment="Top" Height="54" Width="90" Click="GenerateRaport"/>
                     <DatePicker x:Name="startDatePicker" HorizontalAlignment="Left" Margin="67,83,0,0" VerticalAlignment="Top"/>
                     <DatePicker x:Name="endDatePicker" HorizontalAlignment="Left" Margin="67,186,0,0" VerticalAlignment="Top"/>
                     <Label Content="Data początkowa:" HorizontalAlignment="Left" Margin="67,36,0,0" VerticalAlignment="Top"/>
